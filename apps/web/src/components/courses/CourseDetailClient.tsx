@@ -331,7 +331,7 @@ export function CourseDetailClient({
                 <Link
                   key={rc.slug}
                   href={`/courses/${rc.slug}`}
-                  className="bg-white border border-[#DFE5EE] p-6 hover:border-[#1746A2] transition-colors"
+                  className="mc-card-hover bg-white border border-[#DFE5EE] p-6 hover:border-[#1746A2]"
                 >
                   <span className="font-nav text-[10px] font-bold uppercase tracking-wider text-[#1746A2]">
                     {rc.categoryName}

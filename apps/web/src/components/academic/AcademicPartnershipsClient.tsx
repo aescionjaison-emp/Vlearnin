@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef, useState } from "react";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -21,8 +20,6 @@ import {
   OFFICIAL_COURSES,
 } from "@vlearnin/shared";
 import { getApiUrl } from "@/lib/api";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const PORTFOLIO_ROWS = [
   {
@@ -145,27 +142,7 @@ export function AcademicPartnershipsClient() {
     setValue("interestedProgrammes", updated, { shouldValidate: true });
   };
 
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced || !timelineRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(".timeline-step", {
-        y: 24,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    }, timelineRef);
-
-    return () => ctx.revert();
-  }, []);
+  useStaggerReveal(timelineRef, ".timeline-step", "cardReveal", 0.08);
 
   const onSubmit = async (data: InstitutionalEnquiryInput) => {
     setServerError(null);

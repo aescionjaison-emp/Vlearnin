@@ -1,25 +1,26 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
-  Award,
+  BookOpen,
   Briefcase,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   Download,
   FileCheck2,
   GraduationCap,
   Layers,
+  MapPin,
+  Phone,
   ShieldCheck,
-  Users,
-  BookOpen,
   Sparkles,
+  Users,
 } from "lucide-react";
 import {
   BRAND,
@@ -28,36 +29,42 @@ import {
   OfficialCourseSeed,
 } from "@vlearnin/shared";
 import { useLeadModal } from "@/components/LeadModalProvider";
-
-gsap.registerPlugin(ScrollTrigger);
+import { AnimatedHeading } from "@/components/animation/AnimatedHeading";
+import { AnimatedImage } from "@/components/animation/AnimatedImage";
+import { Reveal } from "@/components/animation/Reveal";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 
 const FILTER_TABS = [
   { id: "all", label: "All Programmes" },
-  { id: "ai-business-intelligence", label: "AI & Analytics" },
-  { id: "corporate-finance-capital-markets", label: "Finance & IB" },
-  { id: "digital-marketing-creative-media", label: "Digital & Media" },
+  { id: "ai-business-intelligence", label: "AI & Business Intelligence" },
+  { id: "corporate-finance-capital-markets", label: "Finance & Investment Banking" },
+  { id: "digital-marketing-creative-media", label: "Digital Marketing & Media" },
 ];
 
 const ADVANTAGES = [
   {
+    num: "01",
     icon: Sparkles,
     title: "100% Practical Pedagogy",
     description:
       "Every module is driven by live business datasets, real financial models, AI workflows and hands-on capstone projects.",
   },
   {
+    num: "02",
     icon: Users,
     title: "Small-Batch Mentorship",
     description:
       "Focused batch sizes ensure personalized guidance, doubt resolution and portfolio building.",
   },
   {
+    num: "03",
     icon: ShieldCheck,
     title: "QR-Verified Credentials",
     description:
       "VLEARNIN certificates are verifiable online by employers and institutions.",
   },
   {
+    num: "04",
     icon: Clock,
     title: "Flexible Batch Timings",
     description:
@@ -67,28 +74,56 @@ const ADVANTAGES = [
 
 const PLACEMENT_STAGES = [
   {
-    stage: "Stage 01",
+    step: "Step 01",
     title: "Live Capstone Portfolio",
     desc: "Graduate with real Power BI dashboards, Excel valuation models, AI workflows or practical marketing campaigns.",
     icon: Layers,
   },
   {
-    stage: "Stage 02",
+    step: "Step 02",
     title: "ATS Resume & LinkedIn Makeover",
     desc: "Personalized profile optimization tailored to finance, analytics and digital roles.",
     icon: FileCheck2,
   },
   {
-    stage: "Stage 03",
+    step: "Step 03",
     title: "Mock Interviews & Domain Prep",
     desc: "Practice technical and HR interview rounds with personalized feedback.",
     icon: GraduationCap,
   },
   {
-    stage: "Stage 04",
+    step: "Step 04",
     title: "Curated Hiring Network",
     desc: "Access to available internship and full-time opportunities through verified employer connections.",
     icon: Briefcase,
+  },
+];
+
+const CAMPUS_GALLERY = [
+  {
+    src: "/images/hero-1.jpg",
+    title: "Instructor-Led Practical Sessions",
+    alt: "Instructor guiding students during practical session",
+  },
+  {
+    src: "/images/hero-2.jpg",
+    title: "Computer-Based Analytics Labs",
+    alt: "Students working on Power BI and AI dashboards",
+  },
+  {
+    src: "/images/hero-3.jpg",
+    title: "Financial Modelling Mentorship",
+    alt: "Mentor reviewing financial models with learners",
+  },
+  {
+    src: "/images/hero-4.jpg",
+    title: "Creative Studio & Editing Workstations",
+    alt: "Video editing and digital production studio",
+  },
+  {
+    src: "/images/domain-creative.jpg",
+    title: "Collaborative Capstone Development",
+    alt: "Learners collaborating on campaign capstone project",
   },
 ];
 
@@ -103,129 +138,117 @@ export function HomeCatalogSections({
 }) {
   const { openDemoModal, openBrochureModal } = useLeadModal();
   const [activeFilter, setActiveFilter] = useState("all");
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const domainsRef = useRef<HTMLDivElement>(null);
+  const combosRef = useRef<HTMLDivElement>(null);
+  const placementRef = useRef<HTMLDivElement>(null);
+  const campusRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced || !wrapperRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>(".gsap-stagger-group").forEach((group) => {
-        const items = group.querySelectorAll(".gsap-stagger-item");
-        if (items.length === 0) return;
-        gsap.from(items, {
-          y: 26,
-          opacity: 0,
-          duration: 0.65,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: group,
-            start: "top 80%",
-            once: true,
-          },
-        });
-      });
-
-      gsap.fromTo(
-        ".placement-progress-line",
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".placement-progress-line",
-            start: "top 85%",
-            once: true,
-          },
-        },
-      );
-    }, wrapperRef);
-
-    return () => ctx.revert();
-  }, []);
+  useStaggerReveal(domainsRef, ".domain-panel", "fadeUp", 0.12);
+  useStaggerReveal(combosRef, ".combo-card", "cardReveal", 0.08);
+  useStaggerReveal(placementRef, ".placement-stage", "fadeUp", 0.1);
+  useStaggerReveal(campusRef, ".campus-tile", "cardReveal", 0.06);
 
   const filteredCourses =
     activeFilter === "all"
       ? courses
       : courses.filter((c) => c.categorySlug === activeFilter);
 
+  const scrollCarousel = (dir: "left" | "right") => {
+    if (!carouselRef.current) return;
+    const offset = dir === "left" ? -380 : 380;
+    carouselRef.current.scrollBy({ left: offset, behavior: "smooth" });
+  };
+
   return (
-    <div ref={wrapperRef}>
-      {/* 11 — CORE LEARNING DOMAINS */}
-      <section className="py-20 bg-[#F4F7FC] border-y border-[#DFE5EE]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div>
+      {/* 13 — EXPLORE OUR LEARNING DOMAINS (Large Image-Led Showcases) */}
+      <section className="py-16 lg:py-24 bg-[#F5F7FA] border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="max-w-3xl mb-12">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
-              CORE LEARNING DOMAINS
+            <p className="mc-eyebrow text-[#16529A]">
+              EXPLORE OUR LEARNING DOMAINS
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#071B3D] mt-2">
+            <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#082F62] mt-2 leading-tight">
               Industry-Aligned Certification Programmes
-            </h2>
-            <p className="text-base text-[#667085] mt-3">
-              Structured, hands-on tracks designed around real workplace tools, live datasets,
-              and practical assessments.
+            </AnimatedHeading>
+            <p className="mc-lead text-[#5C6672] mt-3">
+              Structured, hands-on tracks designed around real workplace tools, live datasets and
+              practical assessments.
             </p>
           </div>
 
-          <div className="gsap-stagger-group grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {categories.map((cat) => {
+          <div ref={domainsRef} className="space-y-8">
+            {categories.map((cat, idx) => {
               const domainCourses = courses.filter((c) => c.categorySlug === cat.slug);
               const ctaLabel =
                 cat.slug === "ai-business-intelligence"
-                  ? "View AI & Analytics"
+                  ? "Explore AI & Analytics"
                   : cat.slug === "corporate-finance-capital-markets"
-                    ? "View Finance & IB"
-                    : "View Digital & Media";
+                    ? "Explore Finance & Investment Banking"
+                    : "Explore Digital & Media";
+              const reverse = idx % 2 === 1;
 
               return (
                 <article
                   key={cat.slug}
-                  className="gsap-stagger-item group bg-white border border-[#DFE5EE] hover:border-[#D4A54A] transition-all duration-300 flex flex-col overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1"
+                  className="domain-panel mc-card-hover bg-white border border-[#E2E8F0] shadow-xs grid grid-cols-1 lg:grid-cols-12 overflow-hidden group"
                 >
-                  <div className="relative h-56 w-full overflow-hidden">
+                  <div
+                    className={`lg:col-span-6 relative min-h-[260px] lg:min-h-[360px] overflow-hidden ${
+                      reverse ? "lg:order-2" : ""
+                    }`}
+                  >
                     <Image
                       src={cat.image}
                       alt={cat.name}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#071B3D]/80 via-[#071B3D]/20 to-transparent" />
-                    <span className="absolute bottom-4 left-5 font-nav text-[11px] font-bold uppercase tracking-[0.16em] text-[#E6C47A]">
-                      {cat.shortName}
-                    </span>
                   </div>
 
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-bold text-[#071B3D] leading-snug">
+                  <div
+                    className={`lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-5 ${
+                      reverse ? "lg:order-1" : ""
+                    }`}
+                  >
+                    <div>
+                      <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#F58220]">
+                        Domain 0{idx + 1}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-[#082F62] mt-1">
                         {cat.name}
                       </h3>
-                      <ul className="space-y-1.5 border-t border-[#DFE5EE] pt-3">
-                        {domainCourses.map((dc) => (
-                          <li
-                            key={dc.slug}
-                            className="text-xs font-nav font-semibold text-[#1746A2] flex items-start gap-2"
-                          >
-                            <span className="w-1.5 h-1.5 bg-[#D4A54A] mt-1.5 shrink-0" />
-                            <span>{dc.title}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="text-sm text-[#667085] leading-relaxed pt-1">
-                        {cat.outcomeSummary}
-                      </p>
                     </div>
 
-                    <Link
-                      href={`/courses?category=${cat.slug}`}
-                      className="inline-flex items-center justify-between pt-4 border-t border-[#DFE5EE] font-nav text-xs font-bold uppercase tracking-wider text-[#071B3D] group-hover:text-[#1746A2]"
-                    >
-                      <span>{ctaLabel}</span>
-                      <ArrowRight className="w-4 h-4 text-[#D4A54A] transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    <p className="text-base text-[#5C6672] leading-relaxed">
+                      {cat.outcomeSummary}
+                    </p>
+
+                    <ul className="space-y-2 border-y border-[#E2E8F0] py-4">
+                      {domainCourses.map((dc) => (
+                        <li key={dc.slug}>
+                          <Link
+                            href={`/courses/${dc.slug}`}
+                            className="inline-flex items-center gap-2.5 text-[15px] font-nav font-semibold text-[#16529A] hover:text-[#082F62] transition-colors"
+                          >
+                            <ArrowRight className="w-4 h-4 text-[#F58220] shrink-0" />
+                            <span>{dc.title}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div>
+                      <Link
+                        href={`/courses?category=${cat.slug}`}
+                        className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
+                      >
+                        <span>{ctaLabel}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
                   </div>
                 </article>
               );
@@ -234,202 +257,236 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 12 — FEATURED CERTIFICATION PROGRAMMES (ALL 7 WITH ANIMATED FILTERING) */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 14 — CERTIFICATION PROGRAMME DISCOVERY (Tabs + Horizontal Carousel) */}
+      <section className="py-16 lg:py-24 bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
-                CERTIFICATION CATALOGUE
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#16529A]">
+                PROGRAMME DISCOVERY
               </p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#071B3D] mt-2">
-                All Seven Official Programmes
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] mt-2">
+                Discover Programmes That Shape Your Future
               </h2>
             </div>
 
-            <div
-              role="tablist"
-              aria-label="Filter certification programmes by domain"
-              className="flex flex-wrap gap-2"
-            >
-              {FILTER_TABS.map((tab) => {
-                const active = activeFilter === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={active}
-                    onClick={() => setActiveFilter(tab.id)}
-                    className={`font-nav text-xs font-semibold px-4 py-2.5 border transition-all cursor-pointer ${
-                      active
-                        ? "bg-[#071B3D] text-white border-[#071B3D] shadow-xs"
-                        : "bg-white text-[#101828] border-[#DFE5EE] hover:border-[#071B3D]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => scrollCarousel("left")}
+                aria-label="Scroll programmes left"
+                className="w-10 h-10 border border-[#E2E8F0] hover:border-[#082F62] text-[#082F62] flex items-center justify-center cursor-pointer transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollCarousel("right")}
+                aria-label="Scroll programmes right"
+                className="w-10 h-10 border border-[#E2E8F0] hover:border-[#082F62] text-[#082F62] flex items-center justify-center cursor-pointer transition-colors"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              <Link
+                href="/courses"
+                className="btn-primary-amber px-5 py-2.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
+              >
+                <span>Explore All Programmes</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
 
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {/* Category Tabs */}
+          <div
+            role="tablist"
+            aria-label="Filter certification programmes"
+            className="flex flex-wrap gap-2 mb-8 border-b border-[#E2E8F0] pb-4"
+          >
+            {FILTER_TABS.map((tab) => {
+              const active = activeFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveFilter(tab.id)}
+                  className={`font-nav text-xs sm:text-sm font-semibold px-5 py-2.5 transition-colors cursor-pointer ${
+                    active
+                      ? "bg-[#082F62] text-white"
+                      : "bg-[#F5F7FA] text-[#212529] hover:bg-[#E2E8F0]"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Accessible Horizontal Programme Carousel with Smooth Category Filter Transitions */}
+          <div
+            ref={carouselRef}
+            className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth"
+          >
             <AnimatePresence mode="popLayout">
               {filteredCourses.map((course) => (
                 <motion.article
                   key={course.slug}
                   layout
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  initial={{ opacity: 0.4, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.28 }}
-                  className="group border border-[#DFE5EE] bg-white hover:border-[#1746A2] transition-all duration-300 flex flex-col shadow-xs hover:shadow-lg"
+                  exit={{ opacity: 0.4, scale: 0.98 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="mc-card-hover snap-start shrink-0 w-[300px] sm:w-[360px] border border-[#E2E8F0] bg-white flex flex-col justify-between group hover:border-[#16529A]"
                 >
-                  <div className="relative h-48 w-full overflow-hidden">
+                <div>
+                  <div className="relative h-52 w-full overflow-hidden">
                     <Image
                       src={course.image}
                       alt={course.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="360px"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute top-3 left-3 bg-[#071B3D]/90 text-[#E6C47A] font-nav text-[10px] font-bold uppercase tracking-[0.14em] px-2.5 py-1">
+                  </div>
+                  <div className="p-6 space-y-3">
+                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#16529A]">
                       {course.categoryName}
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
-                    <div className="space-y-3">
-                      <h3 className="text-lg font-bold text-[#071B3D] leading-snug">
-                        {course.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-3 text-xs font-nav text-[#667085]">
-                        <span className="inline-flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-[#D4A54A]" />
-                          {course.durationHours} Hours
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <BookOpen className="w-3.5 h-3.5 text-[#1746A2]" />
-                          5 Modules
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <Award className="w-3.5 h-3.5 text-[#D4A54A]" />
-                          Capstone Project
-                        </span>
-                      </div>
-                      <p className="text-sm text-[#667085] leading-relaxed">
-                        {course.summary}
-                      </p>
-                      <p className="text-xs font-nav text-[#101828] bg-[#F4F7FC] px-3 py-2 border-l-2 border-[#1746A2]">
-                        <strong>Modes:</strong> {course.learningModes.join(" • ")}
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#DFE5EE]">
-                      <Link
-                        href={`/courses/${course.slug}`}
-                        className="btn-outline-navy py-2.5 text-xs text-center"
-                      >
-                        View Course
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          openDemoModal({
-                            preselectedProgramme: course.title,
-                            sourcePage: "homepage-course-card",
-                          })
-                        }
-                        className="btn-gold py-2.5 text-xs"
-                      >
-                        Enquire Now
-                      </button>
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 13 — HIGH-DEMAND CAREER COMBOS */}
-      <section className="py-20 bg-[#071B3D] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-            <div className="max-w-2xl">
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
-                CAREER ACCELERATOR TRACKS
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">
-                Dual-Skill Career Accelerator Combos
-              </h2>
-              <p className="text-base text-white/75 mt-3">
-                Combine complementary skills to build a stronger portfolio and stand out in
-                campus placements and corporate interviews.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => openBrochureModal({ brochureType: "complete" })}
-              className="btn-gold px-6 py-3.5 text-xs uppercase tracking-wider inline-flex items-center gap-2 shrink-0 self-start lg:self-auto"
-            >
-              <Download className="w-4 h-4" />
-              Download Complete Course Brochure
-            </button>
-          </div>
-
-          <div className="gsap-stagger-group grid grid-cols-1 md:grid-cols-2 gap-7">
-            {combos.map((combo, index) => (
-              <article
-                key={combo.slug}
-                className="gsap-stagger-item bg-[#0B234D] border border-white/15 hover:border-[#D4A54A] transition-all duration-300 hover:-translate-y-1 p-7 flex flex-col justify-between space-y-6"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="font-nav text-[11px] font-bold uppercase tracking-[0.18em] text-[#D4A54A]">
-                      Combo 0{index + 1}
                     </span>
-                    <span className="font-nav text-xs font-bold bg-white/10 text-white px-3 py-1 border border-white/15">
-                      {combo.durationLabel}
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-white">{combo.title}</h3>
-                  <p className="text-sm font-nav font-semibold text-[#E6C47A]">
-                    {combo.includedLabel}
-                  </p>
-                  <p className="text-sm text-white/75 leading-relaxed">{combo.summary}</p>
-
-                  <div className="pt-2 space-y-1.5">
-                    <p className="text-xs font-nav uppercase tracking-wider text-white/60">
-                      Ideal For
+                    <h3 className="text-xl font-bold text-[#082F62] leading-snug">
+                      {course.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-3 text-xs font-nav text-[#5C6672]">
+                      <span className="inline-flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-[#F58220]" />
+                        {course.durationHours} Hours
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <BookOpen className="w-3.5 h-3.5 text-[#16529A]" />
+                        5 Modules + Capstone
+                      </span>
+                    </div>
+                    <p className="text-sm text-[#5C6672] leading-relaxed">{course.summary}</p>
+                    <p className="text-xs font-nav text-[#212529]">
+                      <strong>Modes:</strong> {course.learningModes.join(" • ")}
                     </p>
-                    <p className="text-sm text-white/90">{combo.idealFor}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/15">
+                <div className="px-6 pb-6 pt-3 border-t border-[#E2E8F0] grid grid-cols-2 gap-3">
                   <Link
-                    href={`/career-combos/${combo.slug}`}
-                    className="font-nav text-xs font-bold uppercase tracking-wider text-[#D4A54A] hover:text-white inline-flex items-center gap-2 transition-colors"
+                    href={`/courses/${course.slug}`}
+                    className="btn-outline-navy py-2.5 text-xs text-center"
                   >
-                    <span>Explore Track Details</span>
-                    <ArrowRight className="w-4 h-4" />
+                    View Programme
                   </Link>
                   <button
                     type="button"
                     onClick={() =>
                       openDemoModal({
-                        preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
-                        sourcePage: "homepage-combo-card",
+                        preselectedProgramme: course.title,
+                        sourcePage: "homepage-programme-carousel",
                       })
                     }
-                    className="border border-white/40 hover:bg-white hover:text-[#071B3D] text-white font-nav text-xs font-semibold px-4 py-2 transition-colors"
+                    className="btn-primary-amber py-2.5 text-xs cursor-pointer"
                   >
-                    Book Free Demo
+                    Enquire Now
                   </button>
+                </div>
+              </motion.article>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+
+      {/* 15 — CAREER ACCELERATOR COMBOS */}
+      <section className="py-16 lg:py-24 bg-[#F5F7FA] border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#16529A]">
+                CAREER ACCELERATOR TRACKS
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] mt-2">
+                Dual-Skill Career Accelerator Combos
+              </h2>
+              <p className="text-base text-[#5C6672] mt-2">
+                Combine complementary certifications into a single structured portfolio pathway.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/career-combos"
+                className="btn-navy px-5 py-3 text-xs sm:text-sm uppercase tracking-wider"
+              >
+                Explore Career Combos
+              </Link>
+              <button
+                type="button"
+                onClick={() => openBrochureModal({ brochureType: "complete" })}
+                className="btn-primary-amber px-5 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                Download Complete Course Brochure
+              </button>
+            </div>
+          </div>
+
+          <div ref={combosRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {combos.map((combo, idx) => (
+              <article
+                key={combo.slug}
+                className="combo-card mc-card-hover bg-white border border-[#E2E8F0] grid grid-cols-1 sm:grid-cols-12 overflow-hidden hover:border-[#16529A]"
+              >
+                <div className="sm:col-span-5 relative min-h-[220px]">
+                  <Image
+                    src={combo.image}
+                    alt={combo.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 260px"
+                    className="object-cover"
+                  />
+                  <span className="absolute top-3 left-3 bg-[#082F62] text-[#F4C430] font-nav text-xs font-bold px-3 py-1">
+                    {combo.durationLabel}
+                  </span>
+                </div>
+                <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
+                  <div className="space-y-2">
+                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#F58220]">
+                      Pathway 0{idx + 1}
+                    </span>
+                    <h3 className="text-xl font-bold text-[#082F62]">{combo.title}</h3>
+                    <p className="text-xs font-nav font-semibold text-[#16529A]">
+                      {combo.includedLabel}
+                    </p>
+                    <p className="text-sm text-[#5C6672]">{combo.summary}</p>
+                    <p className="text-xs text-[#212529]">
+                      <strong>Ideal For:</strong> {combo.idealFor}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-3 border-t border-[#E2E8F0]">
+                    <Link
+                      href={`/career-combos/${combo.slug}`}
+                      className="font-nav text-xs font-bold uppercase tracking-wider text-[#16529A] hover:text-[#082F62] inline-flex items-center gap-1"
+                    >
+                      <span>View Track</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openDemoModal({
+                          preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
+                          sourcePage: "homepage-combo",
+                        })
+                      }
+                      className="font-nav text-xs font-bold text-[#F58220] hover:underline cursor-pointer"
+                    >
+                      Book Free Demo →
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
@@ -437,129 +494,251 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 14 — THE VLEARNIN ADVANTAGE */}
-      <section className="py-20 bg-[#F4F7FC] border-b border-[#DFE5EE]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
-              THE VLEARNIN ADVANTAGE
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#071B3D] mt-2">
-              Why Learners Choose The V-Way
-            </h2>
-          </div>
-
-          <div className="gsap-stagger-group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ADVANTAGES.map((adv) => {
-              const Icon = adv.icon;
-              return (
-                <div
-                  key={adv.title}
-                  className="gsap-stagger-item bg-white border border-[#DFE5EE] p-7 hover:border-[#D4A54A] hover:-translate-y-1 transition-all duration-300 shadow-xs hover:shadow-md"
-                >
-                  <div className="w-11 h-11 bg-[#071B3D] text-[#D4A54A] flex items-center justify-center mb-5">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#071B3D] mb-2">{adv.title}</h3>
-                  <p className="text-sm text-[#667085] leading-relaxed">{adv.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 15 — CAREER AND PLACEMENT ASSISTANCE WITH ANIMATED PROGRESS LINE */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-            <div className="max-w-3xl">
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
-                CAREER &amp; PLACEMENT ASSISTANCE
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#071B3D] mt-2">
-                Structured Placement Assistance — From Classroom to Corporate
-              </h2>
-              <p className="text-base text-[#667085] mt-3">
-                We bridge the gap between certification and employment through portfolio building
-                and employer connections.
-              </p>
-            </div>
-            <Link
-              href="/placement-assistance"
-              className="btn-navy px-6 py-3.5 text-xs uppercase tracking-wider inline-flex items-center gap-2 shrink-0 self-start lg:self-auto"
-            >
-              <span>Learn More About Career Support</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              className="hidden lg:block placement-progress-line origin-left absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#071B3D] via-[#1746A2] to-[#D4A54A]"
+      {/* 16 — WHY LEARNERS CHOOSE THE V-WAY (Large Photo + 4 Editorial Benefits) */}
+      <section className="py-16 lg:py-24 bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E2E8F0] overflow-hidden">
+            <Image
+              src="/images/hero-1.jpg"
+              alt="Small-batch practical mentorship at VLEARNIN"
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover"
             />
-            <div className="gsap-stagger-group grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-0 lg:pt-4">
-              {PLACEMENT_STAGES.map((item) => {
-                const Icon = item.icon;
+          </div>
+
+          <div className="lg:col-span-7 space-y-8">
+            <div>
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#16529A]">
+                THE VLEARNIN ADVANTAGE
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] mt-2">
+                Why Learners Choose The V-Way
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {ADVANTAGES.map((adv) => {
+                const Icon = adv.icon;
                 return (
                   <div
-                    key={item.stage}
-                    className="gsap-stagger-item border border-[#DFE5EE] bg-[#F4F7FC] p-6 relative hover:border-[#1746A2] transition-colors"
+                    key={adv.title}
+                    className="p-6 bg-[#F5F7FA] border-l-4 border-[#16529A] space-y-2.5"
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#1746A2]">
-                        {item.stage}
+                    <div className="flex items-center justify-between">
+                      <Icon className="w-5 h-5 text-[#F58220]" />
+                      <span className="font-editorial text-2xl font-bold text-[#082F62]/40">
+                        {adv.num}
                       </span>
-                      <Icon className="w-5 h-5 text-[#D4A54A]" />
                     </div>
-                    <h3 className="text-lg font-bold text-[#071B3D] mb-2">{item.title}</h3>
-                    <p className="text-sm text-[#667085] leading-relaxed">{item.desc}</p>
+                    <h3 className="text-lg font-bold text-[#082F62]">{adv.title}</h3>
+                    <p className="text-sm text-[#5C6672] leading-relaxed">{adv.description}</p>
                   </div>
                 );
               })}
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 p-4 bg-[#F4F7FC] border-l-4 border-[#071B3D] text-xs text-[#667085] flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#071B3D] shrink-0 mt-0.5" />
-            <p>{BRAND.placementDisclaimer}</p>
+      {/* 17 — PLACEMENT ASSISTANCE (Connected Pathway) */}
+      <section className="py-16 lg:py-24 bg-[#082F62] text-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-12">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#F4C430]">
+                STRUCTURED PLACEMENT ASSISTANCE
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold mt-2">
+                From Classroom to Corporate
+              </h2>
+            </div>
+            <Link
+              href="/placement-assistance"
+              className="btn-gold px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 self-start lg:self-auto"
+            >
+              <span>Explore Career Support</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div ref={placementRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PLACEMENT_STAGES.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.step}
+                  className="placement-stage bg-white/10 border border-white/15 border-t-4 border-t-[#F4C430] p-6 space-y-3 hover:bg-white/15 transition-colors duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-nav text-xs font-bold uppercase tracking-wider text-[#F4C430]">
+                      {item.step}
+                    </span>
+                    <Icon className="w-5 h-5 text-white/80" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                  <p className="text-sm text-white/80 leading-relaxed">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="text-xs text-white/70 border-t border-white/15 pt-5">
+            {BRAND.placementDisclaimer}
+          </p>
+        </div>
+      </section>
+
+      {/* 18 — ACADEMIC PARTNERSHIPS */}
+      <section className="py-16 lg:py-24 bg-white border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 space-y-5">
+            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#16529A]">
+              INSTITUTIONAL COLLABORATIONS
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] leading-tight">
+              Partnering with Colleges &amp; Educational Institutions
+            </h2>
+            <p className="text-base text-[#5C6672] leading-relaxed">
+              VLEARNIN collaborates with degree colleges across Bengaluru and Karnataka to deliver
+              structured value-added certification programmes tailored to B.Com, BBA, BCA, and MBA
+              students.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              {[
+                "30-hour value-added certification programmes",
+                "On-campus practical training",
+                "Workshops & orientation seminars",
+                "Capstone assessments",
+                "Curriculum-aligned learning",
+                "Career readiness & portfolios",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2 text-sm text-[#212529]">
+                  <CheckCircle2 className="w-4 h-4 text-[#16529A] shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3.5 pt-3">
+              <Link
+                href="/academic-partnerships"
+                className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider"
+              >
+                Explore Academic Partnerships
+              </Link>
+              <Link
+                href="/academic-partnerships#institutional-form"
+                className="btn-outline-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider"
+              >
+                Request Institutional Proposal
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 relative aspect-[16/10] border border-[#E2E8F0] overflow-hidden shadow-md">
+            <Image
+              src="/images/academic-partnership.jpg"
+              alt="Illustrative college seminar and faculty workshop"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
 
-      {/* 16 — HOMEPAGE ACADEMIC PARTNERSHIP BANNER */}
-      <section className="relative py-24 bg-[#071B3D] overflow-hidden">
-        <Image
-          src="/images/academic-partnership.jpg"
-          alt="Illustrative college workshop and academic training seminar"
-          fill
-          sizes="100vw"
-          className="object-cover opacity-30 scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#071B3D] via-[#071B3D]/90 to-[#071B3D]/70" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="gsap-stagger-group max-w-3xl space-y-5 border-l-4 border-[#D4A54A] pl-6 sm:pl-8">
-            <p className="gsap-stagger-item font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
-              INSTITUTIONAL COLLABORATIONS
-            </p>
-            <h2 className="gsap-stagger-item text-3xl sm:text-4xl font-bold text-white leading-tight">
-              Partnering with Colleges &amp; Educational Institutions
-            </h2>
-            <p className="gsap-stagger-item text-base text-white/85 leading-relaxed">
-              VLEARNIN collaborates with degree colleges across Bengaluru and Karnataka to deliver
-              structured 30-hour value-added certification programmes, workshops, and capstone
-              assessments tailored to B.Com, BBA, BCA, and MBA students.
-            </p>
-            <div className="gsap-stagger-item pt-2">
+      {/* 19 — CAMPUS AND LEARNING EXPERIENCE */}
+      <section className="py-16 lg:py-24 bg-[#F5F7FA] border-b border-[#E2E8F0]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div>
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#16529A]">
+                LEARNING ENVIRONMENT
+              </p>
+              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] mt-2">
+                Experience Practical Learning at VLEARNIN
+              </h2>
+              <p className="text-base text-[#5C6672] mt-2">
+                Illustrative classroom, analytics lab, studio, and mentorship environments.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
               <Link
-                href="/academic-partnerships"
-                className="btn-gold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
+                href="/contact"
+                className="btn-outline-navy px-5 py-2.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
               >
-                <span>Explore Academic Partnerships</span>
-                <ArrowRight className="w-4 h-4" />
+                <MapPin className="w-4 h-4" />
+                Visit Our Rajajinagar Center
               </Link>
+              <button
+                type="button"
+                onClick={() => openDemoModal({ sourcePage: "campus-experience" })}
+                className="btn-primary-amber px-5 py-2.5 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+              >
+                Book Free Demo
+              </button>
+            </div>
+          </div>
+
+          <div ref={campusRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {CAMPUS_GALLERY.map((item) => (
+              <div
+                key={item.title}
+                className="campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E2E8F0] bg-[#082F62]"
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 280px"
+                  className="object-cover mc-image-zoom"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#082F62]/90 via-transparent to-transparent flex items-end p-4">
+                  <p className="font-nav text-xs sm:text-sm font-bold text-white leading-snug">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 20 — FINAL HOMEPAGE ADMISSIONS ENQUIRY BANNER */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="bg-[#082F62] text-white p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border-l-8 border-[#F58220]">
+            <div className="space-y-3 max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl font-bold">
+                Your Next Career Chapter Begins Here.
+              </h2>
+              <p className="text-base text-white/85 leading-relaxed">
+                Explore practical certification programmes, connect with our academic team and
+                discover the right learning pathway for your goals.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => openDemoModal({ sourcePage: "homepage-final-cta" })}
+                className="btn-gold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
+              >
+                Book a Free Demo Class
+              </button>
+              <Link
+                href="/contact"
+                className="border border-white/70 hover:bg-white hover:text-[#082F62] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider transition-colors"
+              >
+                Talk to Our Team
+              </Link>
+              <a
+                href={BRAND.phoneHref}
+                className="inline-flex items-center gap-2 font-nav text-sm font-bold text-[#F4C430] hover:underline px-2"
+              >
+                <Phone className="w-4 h-4" />
+                <span>{BRAND.phoneDisplay}</span>
+              </a>
             </div>
           </div>
         </div>

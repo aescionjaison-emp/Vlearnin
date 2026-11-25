@@ -1,179 +1,140 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { AnimatedHeading } from "@/components/animation/AnimatedHeading";
+import { AnimatedImage } from "@/components/animation/AnimatedImage";
+import { AnimatedCounter } from "@/components/animation/AnimatedCounter";
+import { Reveal } from "@/components/animation/Reveal";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 
 const PILLARS = [
   {
+    step: "01",
     title: "LEARN",
-    desc: "Master industry tools and essential concepts.",
+    desc: "Master relevant industry tools and essential concepts.",
   },
   {
+    step: "02",
     title: "BUILD",
     desc: "Apply knowledge through practical projects and real business scenarios.",
   },
   {
+    step: "03",
     title: "LEAD",
-    desc: "Develop the confidence and professional skills to advance your career.",
+    desc: "Develop professional confidence and career readiness.",
   },
 ];
 
 const HIGHLIGHTS = [
-  { target: 7, label: "Certification Programmes" },
-  { target: 3, label: "Core Learning Domains" },
-  { target: 30, label: "Hours Per Standalone Programme" },
-  { target: 4, label: "Career Accelerator Combos" },
+  { value: 7, padZero: true, label: "Certification Programmes", sub: "30-Hour Practical Tracks" },
+  { value: 3, padZero: true, label: "Core Learning Domains", sub: "AI/BI, Finance & Digital Media" },
+  { value: 30, padZero: false, label: "Hours Per Standalone Programme", sub: "5 Modules × 6 Hours" },
+  { value: 4, padZero: true, label: "Career Accelerator Combos", sub: "45 to 90 Hours Dual-Skill" },
 ];
 
 export function BrandIntroSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(".intro-reveal", {
-        y: 28,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 78%",
-          once: true,
-        },
-      });
-
-      gsap.fromTo(
-        ".intro-image-clip",
-        { clipPath: "inset(0 100% 0 0)" },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          duration: 1.0,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-
-      gsap.utils.toArray<HTMLElement>(".stat-counter").forEach((el) => {
-        const endVal = Number(el.dataset.target || "0");
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: endVal,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            once: true,
-          },
-          onUpdate: () => {
-            el.textContent = String(Math.round(obj.val));
-          },
-        });
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const pillarsRef = useRef<HTMLDivElement>(null);
+  useStaggerReveal(pillarsRef, ".pillar-item", "fadeUp", 0.08);
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Editorial Column */}
-          <div className="lg:col-span-6 space-y-6">
-            <p className="intro-reveal font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
-              WELCOME TO VLEARNIN
-            </p>
-            <h2 className="intro-reveal text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#071B3D] leading-[1.15]">
-              Learn With Purpose. Build With Confidence. Lead With Skill.
-            </h2>
-            <p className="intro-reveal text-base text-[#667085] leading-relaxed">
-              VLEARNIN bridges the gap between academic knowledge and real-world professional
-              capabilities through practical certification programmes, personalized mentorship and
-              career-oriented learning.
-            </p>
-
-            {/* Three-step philosophy */}
-            <div className="intro-reveal space-y-4 pt-2">
-              {PILLARS.map((p) => (
-                <div
-                  key={p.title}
-                  className="flex items-start gap-4 p-4 bg-[#F4F7FC] border-l-4 border-[#D4A54A] hover:bg-[#EDF2FA] transition-colors"
-                >
-                  <span className="font-nav text-xs font-extrabold tracking-[0.16em] text-[#071B3D] bg-white px-2.5 py-1 border border-[#DFE5EE] shrink-0">
-                    {p.title}
-                  </span>
-                  <p className="text-sm text-[#101828] leading-relaxed">{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Layered Campus Photography + Clip-Path Reveal + V Motif */}
-          <div className="lg:col-span-6 relative">
-            <div className="intro-image-clip relative aspect-[4/3] w-full overflow-hidden border border-[#DFE5EE] shadow-lg">
+    <>
+      {/* 11 — WELCOME TO VLEARNIN (JAIN-style framed editorial introduction) */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="border border-[#E2E8F0] bg-white shadow-sm grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            {/* Large Campus Photograph */}
+            <AnimatedImage className="lg:col-span-5 relative min-h-[300px] lg:min-h-[440px]">
               <Image
                 src="/images/about-campus.jpg"
-                alt="Practical small-batch classroom mentorship at VLEARNIN"
+                alt="Practical instructor-led mentorship at VLEARNIN Academy"
                 fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover mc-image-zoom"
               />
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 120 120"
-                className="absolute -bottom-6 -right-6 w-32 h-32 text-[#D4A54A]/25 pointer-events-none"
-                fill="none"
-              >
-                <path
-                  d="M15 20L60 100L105 20"
-                  stroke="currentColor"
-                  strokeWidth="12"
-                  strokeLinecap="square"
-                />
-              </svg>
-            </div>
-            <div className="intro-reveal hidden sm:block absolute -bottom-5 -left-5 bg-[#071B3D] text-white px-6 py-4 border-t-2 border-[#D4A54A] shadow-xl">
-              <p className="font-nav text-[11px] uppercase tracking-[0.16em] text-[#D4A54A] font-semibold">
-                Bengaluru Campus
-              </p>
-              <p className="text-sm font-medium mt-0.5">6th Block, Rajajinagar</p>
+            </AnimatedImage>
+
+            {/* Editorial Narrative & Connected LEARN-BUILD-LEAD Journey */}
+            <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
+              <div>
+                <p className="mc-eyebrow text-[#16529A]">
+                  WELCOME TO VLEARNIN
+                </p>
+                <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#082F62] mt-2 leading-tight">
+                  Learn With Purpose. Build With Confidence. Lead With Skill.
+                </AnimatedHeading>
+                <p className="font-nav text-sm font-semibold text-[#F58220] mt-2">
+                  The V-Way to Learn, Build &amp; Lead.
+                </p>
+              </div>
+
+              <Reveal preset="fadeUp">
+                <p className="mc-lead text-[#5C6672]">
+                  VLEARNIN bridges the gap between academic knowledge and real-world professional
+                  capabilities through practical certification programmes, personalized mentorship and
+                  career-oriented learning.
+                </p>
+              </Reveal>
+
+              {/* Connected 3-Step Educational Journey */}
+              <div ref={pillarsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E2E8F0]">
+                {PILLARS.map((p) => (
+                  <div key={p.title} className="pillar-item pt-3 space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-editorial text-xl font-bold text-[#F58220]">
+                        {p.step}
+                      </span>
+                      <span className="font-nav text-sm font-bold tracking-wider text-[#082F62]">
+                        {p.title}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[#5C6672] leading-snug">{p.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-5 pt-2">
+                <Link
+                  href="/about"
+                  className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
+                >
+                  <span>Know More About VLEARNIN</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/courses"
+                  className="font-nav text-sm font-semibold text-[#16529A] hover:text-[#082F62] underline underline-offset-4"
+                >
+                  Explore Our Learning Methodology
+                </Link>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Four Factual Highlights with Animated Count-Up */}
-        <div className="intro-reveal mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-[#DFE5EE]">
-          {HIGHLIGHTS.map((h) => (
-            <div
-              key={h.label}
-              className="p-6 bg-[#F4F7FC] border border-[#DFE5EE] hover:border-[#D4A54A] transition-colors text-center"
-            >
-              <p
-                data-target={h.target}
-                className="stat-counter font-editorial text-3xl sm:text-4xl font-bold text-[#071B3D]"
-              >
-                {h.target}
-              </p>
-              <p className="font-nav text-xs sm:text-sm font-semibold text-[#667085] mt-2">
-                {h.label}
-              </p>
-            </div>
-          ))}
+      {/* 12 — FACTUAL INSTITUTIONAL HIGHLIGHTS (CHRIST-style metrics bar) */}
+      <section aria-label="Factual Programme Highlights" className="bg-[#082F62] text-white py-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
+            {HIGHLIGHTS.map((h) => (
+              <div key={h.label} className="pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left">
+                <AnimatedCounter
+                  value={h.value}
+                  padZero={h.padZero}
+                  className="font-editorial text-4xl sm:text-5xl font-bold text-[#F4C430] leading-none"
+                />
+                <p className="font-nav text-sm sm:text-base font-bold text-white mt-2">
+                  {h.label}
+                </p>
+                <p className="text-xs sm:text-sm text-white/70 mt-0.5">{h.sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

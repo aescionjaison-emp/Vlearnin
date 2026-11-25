@@ -1,0 +1,70 @@
+/* ==========================================================================
+   VLEARNIN Motion & Microinteraction System
+   Inspired by https://mountcarmeluniversity.edu.in/ (300ms UI transitions,
+   smooth crossfade carousels, restrained progressive scroll reveals)
+   ========================================================================== */
+
+:root {
+  --motion-fast: 180ms;
+  --motion-standard: 300ms;
+  --motion-entrance: 650ms;
+  --motion-image: 750ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Smooth link underline expansion */
+.mc-underline-link {
+  position: relative;
+}
+.mc-underline-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--motion-standard) var(--ease-standard);
+}
+.mc-underline-link:hover::after,
+.mc-underline-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Controlled image hover zoom inside overflow-hidden containers */
+.mc-image-zoom {
+  transition: transform var(--motion-image) var(--ease-standard);
+  will-change: transform;
+}
+.group:hover .mc-image-zoom {
+  transform: scale(1.045);
+}
+
+/* Restrained card elevation & border shift */
+.mc-card-hover {
+  transition:
+    transform var(--motion-standard) var(--ease-standard),
+    border-color var(--motion-standard) ease,
+    box-shadow var(--motion-standard) ease;
+}
+.mc-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(8, 47, 98, 0.08);
+}
+
+/* Global Reduced Motion & Debugging Override */
+@media (prefers-reduced-motion: reduce) {
+  .mc-underline-link::after,
+  .mc-image-zoom,
+  .mc-card-hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+[data-animations="disabled"] * {
+  animation: none !important;
+  transition: none !important;
+}

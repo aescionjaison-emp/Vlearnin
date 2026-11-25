@@ -20,13 +20,13 @@ export function GlobalFooter() {
 
   return (
     <>
-      <footer className="bg-[#071B3D] text-white border-t-4 border-[#D4A54A] pb-20 md:pb-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <footer className="bg-[#082F62] text-white border-t-4 border-[#F58220] pb-20 md:pb-0">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Column 1 — Brand */}
             <div className="space-y-4">
               <VlearninLogo variant="light" />
-              <p className="text-sm text-white/75 leading-relaxed">
+              <p className="text-sm text-white/80 leading-relaxed">
                 Practical certification training in Artificial Intelligence, Business Intelligence,
                 Corporate Finance, and Digital Media—built around live datasets, real tools, and
                 dedicated placement assistance.
@@ -35,7 +35,7 @@ export function GlobalFooter() {
                 <button
                   type="button"
                   onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-                  className="btn-gold px-5 py-2.5 text-xs uppercase tracking-wider"
+                  className="btn-gold px-5 py-2.5 text-xs uppercase tracking-wider cursor-pointer"
                 >
                   Book Free Demo Class
                 </button>
@@ -44,10 +44,10 @@ export function GlobalFooter() {
 
             {/* Column 2 — Programmes */}
             <div>
-              <h3 className="font-nav text-xs font-bold uppercase tracking-[0.16em] text-[#D4A54A] mb-4">
+              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
                 Programmes
               </h3>
-              <ul className="space-y-2.5 text-sm text-white/80">
+              <ul className="space-y-2.5 text-[15px] text-white/85">
                 <li>
                   <Link href="/courses?category=ai-business-intelligence" className="hover:text-white transition-colors">
                     AI &amp; Business Intelligence
@@ -81,12 +81,12 @@ export function GlobalFooter() {
               </ul>
             </div>
 
-            {/* Column 3 — Quick Links */}
+            {/* Column 3 — Institutional Links */}
             <div>
-              <h3 className="font-nav text-xs font-bold uppercase tracking-[0.16em] text-[#D4A54A] mb-4">
+              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
                 Quick Links
               </h3>
-              <ul className="space-y-2.5 text-sm text-white/80">
+              <ul className="space-y-2.5 text-[15px] text-white/85">
                 <li>
                   <Link href="/about" className="hover:text-white transition-colors">
                     About Us
@@ -122,12 +122,12 @@ export function GlobalFooter() {
 
             {/* Column 4 — Contact */}
             <div>
-              <h3 className="font-nav text-xs font-bold uppercase tracking-[0.16em] text-[#D4A54A] mb-4">
+              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
                 Visit &amp; Contact
               </h3>
-              <ul className="space-y-3 text-sm text-white/80">
+              <ul className="space-y-3 text-[15px] text-white/85">
                 <li className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#D4A54A] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#F4C430] shrink-0 mt-1" />
                   <span>
                     {BRAND.legalName}, {BRAND.address}
                   </span>
@@ -137,7 +137,7 @@ export function GlobalFooter() {
                     href={BRAND.phoneHref}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-[#D4A54A] shrink-0" />
+                    <Phone className="w-4 h-4 text-[#F4C430] shrink-0" />
                     <span>{BRAND.phoneDisplay}</span>
                   </a>
                 </li>
@@ -146,12 +146,12 @@ export function GlobalFooter() {
                     href={`mailto:${BRAND.email}`}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
-                    <Mail className="w-4 h-4 text-[#D4A54A] shrink-0" />
+                    <Mail className="w-4 h-4 text-[#F4C430] shrink-0" />
                     <span>{BRAND.email}</span>
                   </a>
                 </li>
-                <li className="flex items-start gap-2.5 text-xs text-white/70">
-                  <Clock className="w-4 h-4 text-[#D4A54A] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5 text-sm text-white/75">
+                  <Clock className="w-4 h-4 text-[#F4C430] shrink-0 mt-1" />
                   <div>
                     <p>{BRAND.timings.weekdays}</p>
                     <p className="mt-0.5">{BRAND.timings.sunday}</p>
@@ -161,13 +161,12 @@ export function GlobalFooter() {
             </div>
           </div>
 
-          {/* Placement Disclaimer & Bottom Bar */}
           <div className="mt-12 pt-8 border-t border-white/15 space-y-4">
-            <p className="text-xs text-white/60 leading-relaxed">
-              <strong className="text-white/80">Placement Assistance Disclaimer:</strong>{" "}
+            <p className="text-xs text-white/70 leading-relaxed">
+              <strong className="text-white/90">Placement Assistance Disclaimer:</strong>{" "}
               {BRAND.placementDisclaimer}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/70">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/80">
               <p>© {currentYear} {BRAND.legalName}. All rights reserved.</p>
               <div className="flex items-center gap-6">
                 <Link href="/privacy-policy" className="hover:text-white transition-colors">
@@ -182,21 +181,21 @@ export function GlobalFooter() {
         </div>
       </footer>
 
-      {/* Desktop Floating WhatsApp Contact Button */}
+      {/* Desktop Floating WhatsApp Button */}
       <a
         href={buildWhatsAppUrl("Hello VLEARNIN Academy, I would like to know more about your certification programmes.")}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with VLEARNIN on WhatsApp"
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#071B3D] text-white border border-[#D4A54A] px-4 py-3 shadow-xl hover:bg-[#1746A2] transition-colors font-nav text-xs font-semibold uppercase tracking-wider"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#082F62] text-white border border-[#F4C430] px-4 py-3 shadow-xl hover:bg-[#16529A] transition-colors font-nav text-xs font-semibold uppercase tracking-wider"
       >
-        <MessageCircle className="w-4 h-4 text-[#D4A54A]" />
+        <MessageCircle className="w-4 h-4 text-[#F4C430]" />
         <span>WhatsApp Us</span>
       </a>
 
       {/* Mobile Fixed Bottom Action Bar */}
       <div
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#071B3D] text-white border-t border-[#D4A54A] grid grid-cols-3 divide-x divide-white/15"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#082F62] text-white border-t border-[#F4C430] grid grid-cols-3 divide-x divide-white/15"
         role="region"
         aria-label="Quick Contact Actions"
       >
@@ -204,7 +203,7 @@ export function GlobalFooter() {
           href={BRAND.phoneHref}
           className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold hover:bg-white/10"
         >
-          <Phone className="w-4 h-4 text-[#D4A54A] mb-0.5" />
+          <Phone className="w-4 h-4 text-[#F4C430] mb-0.5" />
           <span>Call Now</span>
         </a>
         <a
@@ -213,13 +212,13 @@ export function GlobalFooter() {
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold hover:bg-white/10"
         >
-          <MessageCircle className="w-4 h-4 text-[#D4A54A] mb-0.5" />
+          <MessageCircle className="w-4 h-4 text-[#F4C430] mb-0.5" />
           <span>WhatsApp Us</span>
         </a>
         <button
           type="button"
           onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-          className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold bg-[#D4A54A] text-[#071B3D]"
+          className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold bg-[#F58220] text-white"
         >
           <Calendar className="w-4 h-4 mb-0.5" />
           <span>Book Demo</span>
