@@ -34,14 +34,5 @@ jobs:
           pnpm --filter @vlearnin/shared build
           pnpm --filter @vlearnin/web build
 
-      - name: Deploy to Firebase Hosting using Service Account
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: |
-          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
-            echo "Missing FIREBASE_SERVICE_ACCOUNT secret in GitHub repository settings."
-            exit 1
-          fi
-          echo "$FIREBASE_SERVICE_ACCOUNT" > "${{ runner.temp }}/firebase-sa.json"
-          export GOOGLE_APPLICATION_CREDENTIALS="${{ runner.temp }}/firebase-sa.json"
-          npx firebase-tools deploy --only hosting --project vlearnin --non-interactive
+      - name: Deploy to Firebase Hosting using FIREBASE_TOKEN
+        run: npx firebase-tools deploy --only hosting --project vlearnin --non-interactive --token "${{ secrets.FIREBASE_TOKEN }}"
