@@ -44,13 +44,13 @@ h1, h2, h3, .font-heading {
   font-family: var(--font-roboto), system-ui, sans-serif;
 }
 
-/* Reference-aligned institutional buttons */
+/* Reference-aligned institutional buttons (300ms ease, Source Sans 3 600) */
 .btn-primary-amber {
   background-color: #F58220;
   color: #FFFFFF;
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 300ms ease, transform 300ms ease;
 }
 .btn-primary-amber:hover {
   background-color: #DC6D0E;
@@ -60,9 +60,9 @@ h1, h2, h3, .font-heading {
 .btn-gold {
   background-color: #F4C430;
   color: #082F62;
-  font-family: var(--font-roboto), system-ui, sans-serif;
-  font-weight: 700;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-family: var(--font-button);
+  font-weight: 600;
+  transition: background-color 300ms ease, transform 300ms ease;
 }
 .btn-gold:hover {
   background-color: #E0B01E;
@@ -72,9 +72,9 @@ h1, h2, h3, .font-heading {
 .btn-navy {
   background-color: #16529A;
   color: #FFFFFF;
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 300ms ease, transform 300ms ease;
 }
 .btn-navy:hover {
   background-color: #082F62;
@@ -84,9 +84,9 @@ h1, h2, h3, .font-heading {
 .btn-outline-navy {
   border: 1.5px solid #16529A;
   color: #16529A;
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 300ms ease, color 300ms ease;
 }
 .btn-outline-navy:hover {
   background-color: #16529A;

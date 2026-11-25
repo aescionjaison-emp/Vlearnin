@@ -1,0 +1,214 @@
+{
+  "desktop": {
+    "utilityNav": {
+      "selector": "header .elementor-icon-list-text, header a",
+      "text": "",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "mainNav": {
+      "selector": ".elementor-nav-menu a, nav a",
+      "text": "IQAC",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "heroHeading": {
+      "selector": "h1",
+      "text": "Mount Carmel University",
+      "fontFamily": "\"Cormorant Garamond\", sans-serif",
+      "fontSize": "56px",
+      "fontWeight": "700",
+      "lineHeight": "56px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "heroEyebrow": {
+      "selector": "h2",
+      "text": "Admissions Open for 2027-28",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "uppercase",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "heroDesc": {
+      "selector": "main p, .elementor-widget-text-editor p",
+      "text": "Discover your potential through transformative education, di",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "19.2px",
+      "fontWeight": "400",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "sectionHeading": {
+      "selector": "h3",
+      "text": "Students",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "36.8px",
+      "fontWeight": "400",
+      "lineHeight": "36.8px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "cardHeading": {
+      "selector": "h4",
+      "text": "School of Biological Sciences",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "24px",
+      "fontWeight": "600",
+      "lineHeight": "31.2px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "button": {
+      "selector": ".elementor-button",
+      "text": "View Centre",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "600",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0.3s",
+      "transitionTimingFunction": "ease"
+    },
+    "footerHeading": {
+      "selector": "footer h4, footer h3, footer h2",
+      "text": "Quick Links",
+      "fontFamily": "\"Cormorant Garamond\", sans-serif",
+      "fontSize": "27.2px",
+      "fontWeight": "700",
+      "lineHeight": "27.2px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    },
+    "footerLink": {
+      "selector": "footer a",
+      "text": "School of Biological Sciences",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "lineHeight": "22.4px",
+      "letterSpacing": "normal",
+      "fontStyle": "normal",
+      "textTransform": "none",
+      "transitionDuration": "0s",
+      "transitionTimingFunction": "ease"
+    }
+  },
+  "loadedFonts": [
+    {
+      "family": "eicons",
+      "weight": "400",
+      "style": "normal"
+    },
+    {
+      "family": "Font Awesome 5 Brands",
+      "weight": "400",
+      "style": "normal"
+    },
+    {
+      "family": "Font Awesome 5 Free",
+      "weight": "400",
+      "style": "normal"
+    },
+    {
+      "family": "Font Awesome 5 Free",
+      "weight": "900",
+      "style": "normal"
+    },
+    {
+      "family": "Cormorant Garamond",
+      "weight": "600",
+      "style": "normal"
+    },
+    {
+      "family": "Cormorant Garamond",
+      "weight": "700",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "400",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "400",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "500",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "500",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "600",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "600",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "700",
+      "style": "normal"
+    },
+    {
+      "family": "Source Sans 3",
+      "weight": "700",
+      "style": "normal"
+    }
+  ],
+  "mobile": {
+    "h1Size": "36.8px",
+    "h1LineHeight": "36.8px",
+    "h2Size": "14.4px",
+    "h3Size": "24px",
+    "pSize": "16px",
+    "bodySize": "16px"
+  }
+}

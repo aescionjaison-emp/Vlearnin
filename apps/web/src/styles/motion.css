@@ -1,18 +1,23 @@
 /* ==========================================================================
    VLEARNIN Motion & Microinteraction System
-   Inspired by https://mountcarmeluniversity.edu.in/ (300ms UI transitions,
-   smooth crossfade carousels, restrained progressive scroll reveals)
+   Measured from https://mountcarmeluniversity.edu.in/:
+   - Button & link transitions: 300ms ease
+   - Hero background crossfade: 500ms
+   - Stagger interval: 50ms
+   - Icon rotate/nudge on button hover (.icon-rotate-btn)
    ========================================================================== */
 
 :root {
-  --motion-fast: 180ms;
-  --motion-standard: 300ms;
-  --motion-entrance: 650ms;
-  --motion-image: 750ms;
-  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 150ms;
+  --motion-hover: 300ms;
+  --motion-dropdown: 220ms;
+  --motion-entrance: 550ms;
+  --motion-carousel: 500ms;
+  --motion-counter: 1000ms;
+  --ease-default: ease;
+  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Smooth link underline expansion */
 .mc-underline-link {
   position: relative;
 }
@@ -26,39 +31,45 @@
   background-color: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--motion-standard) var(--ease-standard);
+  transition: transform var(--motion-hover) var(--ease-default);
 }
 .mc-underline-link:hover::after,
 .mc-underline-link:focus-visible::after {
   transform: scaleX(1);
 }
 
-/* Controlled image hover zoom inside overflow-hidden containers */
 .mc-image-zoom {
-  transition: transform var(--motion-image) var(--ease-standard);
+  transition: transform 600ms var(--ease-entrance);
   will-change: transform;
 }
 .group:hover .mc-image-zoom {
-  transform: scale(1.045);
+  transform: scale(1.04);
 }
 
-/* Restrained card elevation & border shift */
 .mc-card-hover {
   transition:
-    transform var(--motion-standard) var(--ease-standard),
-    border-color var(--motion-standard) ease,
-    box-shadow var(--motion-standard) ease;
+    transform var(--motion-hover) var(--ease-default),
+    border-color var(--motion-hover) var(--ease-default),
+    box-shadow var(--motion-hover) var(--ease-default);
 }
 .mc-card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(8, 47, 98, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(8, 47, 98, 0.08);
 }
 
-/* Global Reduced Motion & Debugging Override */
+/* MCU .icon-rotate-btn microinteraction */
+.mc-icon-btn svg {
+  transition: transform var(--motion-hover) var(--ease-default);
+}
+.mc-icon-btn:hover svg {
+  transform: translateX(3px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mc-underline-link::after,
   .mc-image-zoom,
-  .mc-card-hover {
+  .mc-card-hover,
+  .mc-icon-btn svg {
     transition: none !important;
     transform: none !important;
   }

@@ -124,7 +124,7 @@ export function BrandIntroSection() {
                 <AnimatedCounter
                   value={h.value}
                   padZero={h.padZero}
-                  className="font-editorial text-4xl sm:text-5xl font-bold text-[#F4C430] leading-none"
+                  className="mc-counter text-[#F4C430]"
                 />
                 <p className="font-nav text-sm sm:text-base font-bold text-white mt-2">
                   {h.label}

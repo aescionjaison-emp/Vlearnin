@@ -1,0 +1,310 @@
+{
+  "scrollBehavior": "smooth",
+  "hasLenis": false,
+  "animNodes": [
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-807a7dc e-con-full e-fle",
+      "animation": null,
+      "delay": null,
+      "backgroundSlideshow": "fade",
+      "backgroundDuration": 500,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-2fe1ad8 elementor-widget",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4bb2b1c elementor-widget",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-2eaade0 elementor-widget",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-9317274 mb-0 elementor-w",
+      "animation": "fadeInUp",
+      "delay": 50,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-9e465f8 icon-rotate-btn ",
+      "animation": "fadeInUp",
+      "delay": 100,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-6c1f3a2 icon-rotate-btn ",
+      "animation": "fadeInUp",
+      "delay": 150,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-091d113 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-14368b1 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4eeba43 mb-0 elementor-i",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-f029b24 elementor-flip-b",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-618baaf elementor-flip-b",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-117728f elementor-flip-b",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-6b987ba elementor-flip-b",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4431558 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-26e8c72 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4f51f8b e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4de5cf1 e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-d03c5d3 e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-0bfffb7 e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-67922f4 e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-e7104f4 e-con-full progr",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-4b8a203 elementor-align-",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-bc6d604 e-con-full e-fle",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-9468871 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-a4248e0 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-6b7e818 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-27eace7 elementor-align-",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-e98c901 elementor-align-",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    },
+    {
+      "tag": "DIV",
+      "cls": "elementor-element elementor-element-f4f8768 elementor-invisi",
+      "animation": "fadeInUp",
+      "delay": null,
+      "backgroundSlideshow": null,
+      "backgroundDuration": null,
+      "kenBurns": null
+    }
+  ],
+  "counters": [
+    {
+      "toValue": "95",
+      "duration": "1000",
+      "text": "0",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "56px",
+      "fontWeight": "700"
+    },
+    {
+      "toValue": "25",
+      "duration": "1000",
+      "text": "0",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "56px",
+      "fontWeight": "700"
+    },
+    {
+      "toValue": "12",
+      "duration": "1000",
+      "text": "0",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "56px",
+      "fontWeight": "700"
+    },
+    {
+      "toValue": "130",
+      "duration": "1000",
+      "text": "0",
+      "fontFamily": "\"Source Sans 3\", sans-serif",
+      "fontSize": "56px",
+      "fontWeight": "700"
+    }
+  ]
+}

@@ -154,7 +154,7 @@ export function HeroCarousel() {
               {banner.badge}
             </span>
 
-            <h1 className="font-editorial text-[38px] sm:text-[48px] lg:text-[56px] font-bold leading-[1.08] tracking-tight">
+            <h1 className="font-editorial text-[36.8px] sm:text-[46px] lg:text-[56px] font-bold leading-[1.04] tracking-normal">
               <span className={isDarkTheme ? "text-white" : "text-[#082F62]"}>
                 {banner.headlineWhite}{" "}
               </span>
@@ -164,7 +164,7 @@ export function HeroCarousel() {
             </h1>
 
             <p
-              className={`text-base sm:text-[17px] leading-relaxed max-w-xl ${
+              className={`mc-lead max-w-xl ${
                 isDarkTheme ? "text-white/90" : "text-[#5C6672]"
               }`}
             >
@@ -192,7 +192,7 @@ export function HeroCarousel() {
                 href={banner.primaryCta.href}
                 className={`${
                   isDarkTheme ? "btn-gold" : "btn-primary-amber"
-                } px-6 py-3.5 text-sm uppercase tracking-wider inline-flex items-center gap-2`}
+                } mc-icon-btn px-6 py-3.5 text-sm uppercase tracking-wider inline-flex items-center gap-2`}
               >
                 <span>{banner.primaryCta.label}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -240,10 +240,10 @@ export function HeroCarousel() {
           <AnimatePresence mode="wait">
             <motion.div
               key={banner.id}
-              initial={{ opacity: 0.35, scale: 1.03 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0.35 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0.45 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0.45 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               className="absolute inset-0 jain-slant-photo-lg"
             >
               <Image

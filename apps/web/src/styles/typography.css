@@ -1,69 +1,92 @@
 /* ==========================================================================
    VLEARNIN Typography Design System
-   Derived from live browser audit of https://mountcarmeluniversity.edu.in/
-   - Primary Heading / Display: Cormorant Garamond (600, 700)
-   - Body / Nav / UI / Buttons: Source Sans 3 (400, 500, 600, 700)
+   Exact values derived from https://mountcarmeluniversity.edu.in/
    ========================================================================== */
 
 :root {
-  --font-display: var(--font-cormorant), Georgia, serif;
-  --font-body: var(--font-source-sans), system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-cormorant), Georgia, serif;
+  --font-secondary: var(--font-source-sans), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-primary);
+  --font-body: var(--font-secondary);
+  --font-navigation: var(--font-secondary);
+  --font-button: var(--font-secondary);
 
-  /* Fluid & Reference-Matched Type Scale */
-  --text-hero: clamp(2.25rem, 4vw, 3.5rem); /* 36px -> 56px (Mount Carmel H1 = 56px) */
-  --text-h1: clamp(2rem, 3.5vw, 3.25rem);   /* 32px -> 52px */
-  --text-h2: clamp(1.75rem, 2.5vw, 2.5rem); /* 28px -> 40px */
-  --text-h3: clamp(1.375rem, 1.8vw, 1.875rem); /* 22px -> 30px */
-  --text-h4: 1.5rem;                        /* 24px (Mount Carmel H4 = 24px) */
-  --text-lead: 1.2rem;                      /* 19.2px (Mount Carmel lead p = 19.2px) */
-  --text-body: 1rem;                        /* 16px (Mount Carmel body = 16px) */
-  --text-nav: 0.9375rem;                    /* 15px */
-  --text-small: 0.875rem;                   /* 14px */
-  --text-caption: 0.75rem;                  /* 12px */
+  /* Fluid Responsive Type Scale (Mobile 390px -> Desktop 1440px) */
+  --text-hero: clamp(2.3rem, 3.8vw, 3.5rem);      /* 36.8px -> 56px */
+  --text-h1: clamp(2.1rem, 3.5vw, 3.25rem);       /* 33.6px -> 52px */
+  --text-h2: clamp(1.75rem, 2.5vw, 2.3rem);       /* 28px -> 36.8px */
+  --text-h3: clamp(1.5rem, 1.8vw, 1.75rem);       /* 24px -> 28px */
+  --text-h4: 1.5rem;                              /* 24px */
+  --text-lead: clamp(1rem, 1.35vw, 1.2rem);       /* 16px -> 19.2px */
+  --text-body: 1rem;                              /* 16px */
+  --text-small: 0.875rem;                         /* 14px */
+  --text-caption: 0.75rem;                        /* 12px */
 
-  /* Line Heights */
-  --lh-hero: 1.08;
-  --lh-heading: 1.15;
-  --lh-h4: 1.3;
-  --lh-body: 1.5;
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
 
-  /* Letter Spacing */
-  --ls-heading: -0.01em;
-  --ls-eyebrow: 0.16em;
-  --ls-button: 0.08em;
+  /* Line Heights & Tracking */
+  --leading-heading: 1.08;
+  --leading-body: 1.5;
+  --tracking-heading: 0;
+  --tracking-body: 0;
 }
 
 body {
   font-family: var(--font-body);
   font-size: var(--text-body);
-  font-weight: 400;
-  line-height: var(--lh-body);
-  letter-spacing: 0;
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
   font-synthesis-weight: none;
 }
 
 h1, h2, .font-editorial {
-  font-family: var(--font-display);
-  letter-spacing: var(--ls-heading);
-  line-height: var(--lh-heading);
+  font-family: var(--font-heading);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
 }
 
 h3, h4, .font-nav {
-  font-family: var(--font-body);
+  font-family: var(--font-navigation);
 }
 
 .mc-eyebrow {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: var(--ls-eyebrow);
+  font-family: var(--font-secondary);
+  font-size: clamp(0.9rem, 1vw, 1rem); /* 14.4px mobile -> 16px desktop */
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .mc-lead {
-  font-family: var(--font-body);
+  font-family: var(--font-secondary);
   font-size: var(--text-lead);
-  font-weight: 400;
+  font-weight: var(--weight-regular);
   line-height: 1.5;
+}
+
+.mc-counter {
+  font-family: var(--font-secondary);
+  font-size: clamp(2.5rem, 4vw, 3.5rem); /* 40px -> 56px */
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.mc-footer-heading {
+  font-family: var(--font-primary);
+  font-size: 1.7rem; /* 27.2px */
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.mc-footer-link {
+  font-family: var(--font-secondary);
+  font-size: 1rem; /* 16px */
+  font-weight: var(--weight-medium);
+  line-height: 1.4; /* 22.4px */
 }

@@ -44,10 +44,10 @@ export function GlobalFooter() {
 
             {/* Column 2 — Programmes */}
             <div>
-              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
+              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
                 Programmes
               </h3>
-              <ul className="space-y-2.5 text-[15px] text-white/85">
+              <ul className="space-y-2.5 mc-footer-link text-white/85">
                 <li>
                   <Link href="/courses?category=ai-business-intelligence" className="hover:text-white transition-colors">
                     AI &amp; Business Intelligence
@@ -83,10 +83,10 @@ export function GlobalFooter() {
 
             {/* Column 3 — Institutional Links */}
             <div>
-              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
+              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
                 Quick Links
               </h3>
-              <ul className="space-y-2.5 text-[15px] text-white/85">
+              <ul className="space-y-2.5 mc-footer-link text-white/85">
                 <li>
                   <Link href="/about" className="hover:text-white transition-colors">
                     About Us
@@ -122,10 +122,10 @@ export function GlobalFooter() {
 
             {/* Column 4 — Contact */}
             <div>
-              <h3 className="font-nav text-sm font-bold uppercase tracking-wider text-[#F4C430] mb-4">
-                Visit &amp; Contact
+              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
+                Contact Us
               </h3>
-              <ul className="space-y-3 text-[15px] text-white/85">
+              <ul className="space-y-3 mc-footer-link text-white/85">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-[#F4C430] shrink-0 mt-1" />
                   <span>
