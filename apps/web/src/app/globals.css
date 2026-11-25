@@ -1,0 +1,118 @@
+@import "tailwindcss";
+@source "../";
+
+@theme {
+  --color-navy: #071B3D;
+  --color-navy-900: #05132C;
+  --color-royal: #1746A2;
+  --color-gold: #D4A54A;
+  --color-gold-light: #E6C47A;
+  --color-ink: #101828;
+  --color-muted: #667085;
+  --color-surface: #F4F7FC;
+  --color-border: #DFE5EE;
+
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-nav: var(--font-jakarta), system-ui, sans-serif;
+  --font-sans: var(--font-plex), system-ui, sans-serif;
+}
+
+:root {
+  --bg-page: #ffffff;
+  --bg-surface: #f4f7fc;
+  --text-primary: #101828;
+  --text-secondary: #667085;
+  --navy: #071b3d;
+  --royal: #1746a2;
+  --gold: #d4a54a;
+  --border-subtle: #dfe5ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-plex), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-editorial {
+  font-family: var(--font-newsreader), Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.font-nav {
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* Academic editorial utility classes */
+.btn-gold {
+  background-color: #D4A54A;
+  color: #071B3D;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-gold:hover {
+  background-color: #C39337;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(212, 165, 74, 0.25);
+}
+
+.btn-navy {
+  background-color: #071B3D;
+  color: #FFFFFF;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.btn-navy:hover {
+  background-color: #1746A2;
+  transform: translateY(-1px);
+}
+
+.btn-outline-navy {
+  border: 1.5px solid #071B3D;
+  color: #071B3D;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline-navy:hover {
+  background-color: #071B3D;
+  color: #FFFFFF;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

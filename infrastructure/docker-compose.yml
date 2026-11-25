@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vlearnin_v2_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vlearnin_dev_password
+      POSTGRES_DB: vlearnin_v2
+    ports:
+      - "5432:5432"
+    volumes:
+      - vlearnin_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d vlearnin_v2"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  vlearnin_pgdata:

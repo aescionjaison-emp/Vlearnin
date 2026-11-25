@@ -1,0 +1,573 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  ACADEMIC_COORDINATOR
+  EDITOR
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  DEMO_SCHEDULED
+  FOLLOW_UP
+  ENROLLED
+  CLOSED
+}
+
+enum CertificateStatus {
+  ACTIVE
+  REVOKED
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  DROPPED
+}
+
+model AdminUser {
+  id           String         @id @default(uuid())
+  email        String         @unique
+  name         String
+  passwordHash String
+  role         Role           @default(ADMIN)
+  isActive     Boolean        @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  deletedAt    DateTime?
+
+  sessions     AdminSession[]
+  auditLogs    AuditLog[]
+  enquiryNotes EnquiryNote[]
+  issuedCerts  Certificate[]  @relation("IssuedBy")
+  revokedCerts Certificate[]  @relation("RevokedBy")
+  certLogs     CertificateAuditLog[]
+
+  @@index([email])
+  @@map("admin_users")
+}
+
+model AdminSession {
+  id          String    @id @default(uuid())
+  adminUserId String
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  tokenHash   String    @unique
+  csrfToken   String
+  ipAddress   String?
+  userAgent   String?
+  expiresAt   DateTime
+  revokedAt   DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([adminUserId])
+  @@index([expiresAt])
+  @@map("admin_sessions")
+}
+
+model CourseCategory {
+  id             String        @id @default(uuid())
+  slug           String        @unique
+  name           String        @unique
+  shortName      String
+  description    String
+  outcomeSummary String
+  imageUrl       String?
+  displayOrder   Int           @default(0)
+  status         PublishStatus @default(PUBLISHED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  deletedAt      DateTime?
+
+  courses        Course[]
+
+  @@index([slug])
+  @@index([status, displayOrder])
+  @@map("course_categories")
+}
+
+model Course {
+  id                 String        @id @default(uuid())
+  slug               String        @unique
+  title              String
+  categoryId         String
+  category           CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  durationHours      Int           @default(30)
+  durationLabel      String        @default("30 Hours (5 Modules × 6 Hours)")
+  idealFor           String
+  summary            String
+  overview           String
+  capstoneTitle      String
+  capstoneDescription String
+  careerPathways     String[]
+  learningModes      String[]
+  imageUrl           String?
+  syllabusPdfUrl     String?
+  feeDisplay         String?       // null => "Request Fee Details"
+  batchDetails       String?
+  status             PublishStatus @default(PUBLISHED)
+  isFeatured         Boolean       @default(true)
+  displayOrder       Int           @default(0)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  deletedAt          DateTime?
+
+  modules            CourseModule[]
+  tools              CourseTool[]
+  outcomes           CourseOutcome[]
+  comboCourses       ComboCourse[]
+  enrollments        Enrollment[]
+  certificates       Certificate[]
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([status, displayOrder])
+  @@map("courses")
+}
+
+model CourseModule {
+  id            String   @id @default(uuid())
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  moduleNumber  Int
+  title         String
+  durationHours Int      @default(6)
+  summary       String
+  topics        String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([courseId, moduleNumber])
+  @@index([courseId])
+  @@map("course_modules")
+}
+
+model CourseTool {
+  id           String   @id @default(uuid())
+  courseId     String
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  name         String
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([courseId, displayOrder])
+  @@map("course_tools")
+}
+
+model CourseOutcome {
+  id           String   @id @default(uuid())
+  courseId     String
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  description  String
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([courseId, displayOrder])
+  @@map("course_outcomes")
+}
+
+model CareerCombo {
+  id            String        @id @default(uuid())
+  slug          String        @unique
+  title         String
+  durationHours Int
+  durationLabel String
+  includedLabel String
+  idealFor      String
+  summary       String
+  outcomes      String[]
+  imageUrl      String?
+  brochurePdfUrl String?
+  feeDisplay    String?
+  status        PublishStatus @default(PUBLISHED)
+  displayOrder  Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?
+
+  courses       ComboCourse[]
+
+  @@index([slug])
+  @@index([status, displayOrder])
+  @@map("career_combos")
+}
+
+model ComboCourse {
+  id           String      @id @default(uuid())
+  comboId      String
+  combo        CareerCombo @relation(fields: [comboId], references: [id], onDelete: Cascade)
+  courseId     String
+  course       Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  displayOrder Int         @default(0)
+
+  @@unique([comboId, courseId])
+  @@map("combo_courses")
+}
+
+model Student {
+  id            String       @id @default(uuid())
+  studentCode   String       @unique
+  fullName      String
+  displayName   String?
+  email         String?
+  phone         String?
+  qualification String?
+  collegeName   String?
+  consentGiven  Boolean      @default(true)
+  isMinor       Boolean      @default(false)
+  guardianName  String?
+  guardianPhone String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  enrollments   Enrollment[]
+  certificates  Certificate[]
+
+  @@index([studentCode])
+  @@map("students")
+}
+
+model Enrollment {
+  id           String           @id @default(uuid())
+  studentId    String
+  student      Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  courseId     String
+  course       Course           @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  batchCode    String?
+  learningMode String           @default("Classroom (Rajajinagar)")
+  status       EnrollmentStatus @default(ACTIVE)
+  enrolledAt   DateTime         @default(now())
+  completedAt  DateTime?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@index([studentId])
+  @@index([courseId])
+  @@map("enrollments")
+}
+
+model Certificate {
+  id                 String            @id @default(uuid())
+  certificateId      String            @unique // e.g., VLN-2026-0001
+  verificationToken  String            @unique // unguessable public token for QR URL
+  studentId          String
+  student            Student           @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  courseId           String
+  course             Course            @relation(fields: [courseId], references: [id], onDelete: Restrict)
+  recipientName      String            // approved display name on certificate
+  programmeTitle     String
+  programmeDuration  String
+  capstoneStatus     String            @default("Completed & Evaluated")
+  grade              String?
+  issueDate          DateTime
+  issuingAuthority   String            @default("VLEARNIN Academy, Bengaluru")
+  status             CertificateStatus @default(ACTIVE)
+  revokedAt          DateTime?
+  revocationReason   String?
+  issuedById         String?
+  issuedBy           AdminUser?        @relation("IssuedBy", fields: [issuedById], references: [id], onDelete: SetNull)
+  revokedById        String?
+  revokedBy          AdminUser?        @relation("RevokedBy", fields: [revokedById], references: [id], onDelete: SetNull)
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  auditLogs          CertificateAuditLog[]
+
+  @@index([certificateId])
+  @@index([verificationToken])
+  @@index([status])
+  @@map("certificates")
+}
+
+model CertificateAuditLog {
+  id            String      @id @default(uuid())
+  certificateId String
+  certificate   Certificate @relation(fields: [certificateId], references: [id], onDelete: Cascade)
+  action        String      // ISSUED | VERIFIED | REVOKED | PDF_DOWNLOADED | IMPORTED
+  actorId       String?
+  actor         AdminUser?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  ipAddress     String?
+  details       String?
+  createdAt     DateTime    @default(now())
+
+  @@index([certificateId])
+  @@index([createdAt])
+  @@map("certificate_audit_logs")
+}
+
+model StudentEnquiry {
+  id                  String        @id @default(uuid())
+  referenceCode       String        @unique
+  fullName            String
+  phone               String
+  email               String?
+  qualification       String
+  interestedProgramme String?
+  preferredBatch      String?
+  message             String?
+  sourcePage          String?
+  status              EnquiryStatus @default(NEW)
+  assignedToId        String?
+  retentionUntil      DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  deletedAt           DateTime?
+
+  notes               EnquiryNote[]
+  consentRecords      ConsentRecord[]
+
+  @@index([status, createdAt])
+  @@index([phone])
+  @@map("student_enquiries")
+}
+
+model DemoBooking {
+  id                  String        @id @default(uuid())
+  referenceCode       String        @unique
+  fullName            String
+  phone               String
+  email               String?
+  qualification       String
+  interestedProgramme String
+  preferredBatch      String
+  sourcePage          String?
+  status              EnquiryStatus @default(DEMO_SCHEDULED)
+  assignedToId        String?
+  scheduledSlot       DateTime?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  deletedAt           DateTime?
+
+  notes               EnquiryNote[]
+  consentRecords      ConsentRecord[]
+
+  @@index([status, createdAt])
+  @@map("demo_bookings")
+}
+
+model BrochureRequest {
+  id                  String        @id @default(uuid())
+  referenceCode       String        @unique
+  fullName            String
+  phone               String
+  qualification       String
+  interestedProgramme String?
+  brochureType        String        @default("complete")
+  brochureSlug        String?
+  status              EnquiryStatus @default(NEW)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  consentRecords      ConsentRecord[]
+
+  @@index([createdAt])
+  @@map("brochure_requests")
+}
+
+model InstitutionalEnquiry {
+  id                   String        @id @default(uuid())
+  referenceCode        String        @unique
+  fullName             String
+  designation          String
+  institutionName      String
+  cityArea             String?
+  officialEmail        String
+  phone                String
+  interestedProgrammes String[]
+  estimatedBatchSize   String
+  message              String?
+  status               EnquiryStatus @default(NEW)
+  assignedToId         String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+  deletedAt            DateTime?
+
+  notes                EnquiryNote[]
+  consentRecords       ConsentRecord[]
+
+  @@index([status, createdAt])
+  @@map("institutional_enquiries")
+}
+
+model EmployerRequest {
+  id                String        @id @default(uuid())
+  referenceCode     String        @unique
+  contactPersonName String
+  companyName       String
+  officialEmail     String
+  phone             String
+  roleCategories    String[]
+  opportunityType   String
+  jobLocation       String
+  jobDescription    String?
+  status            EnquiryStatus @default(NEW)
+  assignedToId      String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+
+  notes             EnquiryNote[]
+  consentRecords    ConsentRecord[]
+
+  @@index([status, createdAt])
+  @@map("employer_requests")
+}
+
+model EnquiryNote {
+  id                     String                @id @default(uuid())
+  authorId               String
+  author                 AdminUser             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  note                   String
+  studentEnquiryId       String?
+  studentEnquiry         StudentEnquiry?       @relation(fields: [studentEnquiryId], references: [id], onDelete: Cascade)
+  demoBookingId          String?
+  demoBooking            DemoBooking?          @relation(fields: [demoBookingId], references: [id], onDelete: Cascade)
+  institutionalEnquiryId String?
+  institutionalEnquiry   InstitutionalEnquiry? @relation(fields: [institutionalEnquiryId], references: [id], onDelete: Cascade)
+  employerRequestId      String?
+  employerRequest        EmployerRequest?      @relation(fields: [employerRequestId], references: [id], onDelete: Cascade)
+  createdAt              DateTime              @default(now())
+
+  @@index([createdAt])
+  @@map("enquiry_notes")
+}
+
+model MediaAsset {
+  id           String   @id @default(uuid())
+  fileName     String
+  originalName String
+  mimeType     String
+  sizeBytes    Int
+  storageKey   String   @unique
+  publicUrl    String
+  category     String   @default("general") // image | brochure | syllabus | certificate
+  altText      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@map("media_assets")
+}
+
+model SiteContent {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  section     String
+  title       String?
+  content     Json
+  isVisible   Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  @@index([key])
+  @@map("site_content")
+}
+
+model HeroBanner {
+  id               String        @id @default(uuid())
+  slideOrder       Int           @default(0)
+  badge            String?
+  headline         String
+  description      String
+  primaryCtaLabel  String
+  primaryCtaHref   String
+  secondaryCtaLabel String?
+  secondaryCtaHref String?
+  imageUrl         String
+  mobileImageUrl   String?
+  status           PublishStatus @default(PUBLISHED)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([status, slideOrder])
+  @@map("hero_banners")
+}
+
+model SiteSettings {
+  id                         String   @id @default(uuid())
+  key                        String   @unique @default("default")
+  institutionName            String   @default("VLEARNIN Academy")
+  tagline                    String   @default("The V-Way to Learn, Build & Lead.")
+  address                    String
+  phone                      String
+  whatsappNumber             String
+  email                      String
+  weekdayTimings             String
+  sundayTimings              String
+  showEmployerTurnaroundClaim Boolean @default(false)
+  showZeroFeeClaim           Boolean @default(true)
+  completeBrochureUrl        String?
+  academicBrochureUrl        String?
+  updatedAt                  DateTime @updatedAt
+  createdAt                  DateTime @default(now())
+
+  @@map("site_settings")
+}
+
+model SeoMetadata {
+  id          String   @id @default(uuid())
+  routePath   String   @unique
+  title       String
+  description String
+  ogImageUrl  String?
+  noIndex     Boolean  @default(false)
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  @@map("seo_metadata")
+}
+
+model AuditLog {
+  id         String     @id @default(uuid())
+  actorId    String?
+  actor      AdminUser? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  ipAddress  String?
+  createdAt  DateTime   @default(now())
+
+  @@index([entityType, createdAt])
+  @@map("audit_logs")
+}
+
+model ConsentRecord {
+  id                     String                @id @default(uuid())
+  purpose                String
+  consented              Boolean               @default(true)
+  ipAddress              String?
+  userAgent              String?
+  studentEnquiryId       String?
+  studentEnquiry         StudentEnquiry?       @relation(fields: [studentEnquiryId], references: [id], onDelete: Cascade)
+  demoBookingId          String?
+  demoBooking            DemoBooking?          @relation(fields: [demoBookingId], references: [id], onDelete: Cascade)
+  brochureRequestId      String?
+  brochureRequest        BrochureRequest?      @relation(fields: [brochureRequestId], references: [id], onDelete: Cascade)
+  institutionalEnquiryId String?
+  institutionalEnquiry   InstitutionalEnquiry? @relation(fields: [institutionalEnquiryId], references: [id], onDelete: Cascade)
+  employerRequestId      String?
+  employerRequest        EmployerRequest?      @relation(fields: [employerRequestId], references: [id], onDelete: Cascade)
+  createdAt              DateTime              @default(now())
+
+  @@index([createdAt])
+  @@map("consent_records")
+}
