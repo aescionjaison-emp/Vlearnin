@@ -4,14 +4,14 @@
 @import "../styles/motion.css";
 
 @theme {
-  --color-jain-navy: #082F62;
-  --color-jain-blue: #16529A;
-  --color-jain-amber: #F58220;
-  --color-jain-yellow: #F4C430;
-  --color-ink: #212529;
-  --color-muted: #5C6672;
-  --color-surface: #F5F7FA;
-  --color-border: #E2E8F0;
+  --color-jain-navy: #1E3A8A;
+  --color-jain-blue: #1D4ED8;
+  --color-jain-amber: #EA580C;
+  --color-jain-yellow: #DBEAFE;
+  --color-ink: #111827;
+  --color-muted: #4B5563;
+  --color-surface: #F8FAFC;
+  --color-border: #E5E7EB;
 
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-nav: var(--font-source-sans), system-ui, sans-serif;
@@ -24,7 +24,7 @@ html {
 
 body {
   background-color: #ffffff;
-  color: #212529;
+  color: #111827;
   font-family: var(--font-source-sans), system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -32,8 +32,8 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, .font-heading {
-  font-family: var(--font-roboto), system-ui, sans-serif;
+h1, h2, .font-heading {
+  font-family: var(--font-cormorant), Georgia, serif;
 }
 
 .font-editorial {
@@ -41,59 +41,70 @@ h1, h2, h3, .font-heading {
 }
 
 .font-nav {
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-source-sans), system-ui, sans-serif;
 }
 
-/* Reference-aligned institutional buttons (300ms ease, Source Sans 3 600) */
+/* Clean, High-Trust Academic Royal Blue & Crisp Coral Buttons with 15px curve */
 .btn-primary-amber {
-  background-color: #F58220;
+  background-color: #1D4ED8;
   color: #FFFFFF;
+  border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, transform 300ms ease;
+  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
 }
 .btn-primary-amber:hover {
-  background-color: #DC6D0E;
+  background-color: #1E40AF;
   transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(29, 78, 216, 0.22);
 }
 
 .btn-gold {
-  background-color: #F4C430;
-  color: #082F62;
+  background-color: #FFFFFF;
+  color: #1E3A8A;
+  border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, transform 300ms ease;
+  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
 }
 .btn-gold:hover {
-  background-color: #E0B01E;
+  background-color: #EFF6FF;
   transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .btn-navy {
-  background-color: #16529A;
+  background-color: #1E3A8A;
   color: #FFFFFF;
+  border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
   transition: background-color 300ms ease, transform 300ms ease;
 }
 .btn-navy:hover {
-  background-color: #082F62;
+  background-color: #1D4ED8;
   transform: translateY(-1px);
 }
 
 .btn-outline-navy {
-  border: 1.5px solid #16529A;
-  color: #16529A;
+  border: 1.5px solid #1E3A8A;
+  color: #1E3A8A;
+  border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
   transition: background-color 300ms ease, color 300ms ease;
 }
 .btn-outline-navy:hover {
-  background-color: #16529A;
+  background-color: #1E3A8A;
   color: #FFFFFF;
 }
 
-/* JAIN diagonal split utility */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+select,
+textarea {
+  border-radius: 15px;
+}
+
 .jain-slant-left {
   clip-path: polygon(0 0, 100% 0, 88% 100%, 0% 100%);
 }
@@ -115,4 +126,23 @@ h1, h2, h3, .font-heading {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

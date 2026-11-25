@@ -95,7 +95,7 @@ export function GlobalHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E2E8F0] shadow-xs">
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E5E7EB] shadow-xs">
       {/* Desktop Two-Level JAIN-Inspired Institutional Header */}
       <div className="hidden xl:flex max-w-[1440px] mx-auto items-stretch">
         {/* Left Brand Logo Block */}
@@ -108,7 +108,7 @@ export function GlobalHeader() {
         {/* Right Two-Tier Navigation Stack */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Tier 1: Diagonal-Slanted Deep Blue Utility Bar */}
-          <div className="relative bg-[#082F62] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
+          <div className="relative bg-[#1E3A8A] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
             {/* Diagonal white slant matching JAIN header */}
             <div
               aria-hidden="true"
@@ -118,45 +118,45 @@ export function GlobalHeader() {
 
             <div className="flex items-center gap-4 text-white/90">
               <span className="inline-flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#F4C430]" />
+                <MapPin className="w-3.5 h-3.5 text-[#93C5FD]" />
                 <span>{BRAND.shortLocation}</span>
               </span>
               <span className="text-white/30">|</span>
               <a
                 href={BRAND.phoneHref}
-                className="inline-flex items-center gap-1.5 hover:text-[#F4C430] transition-colors font-medium"
+                className="inline-flex items-center gap-1.5 hover:text-[#93C5FD] transition-colors font-medium"
               >
-                <Phone className="w-3.5 h-3.5 text-[#F4C430]" />
+                <Phone className="w-3.5 h-3.5 text-[#93C5FD]" />
                 <span>{BRAND.phoneDisplay}</span>
               </a>
             </div>
 
             <nav aria-label="Institutional Utility Links" className="flex items-center gap-4 text-white/90">
-              <Link href="/contact" className="hover:text-[#F4C430] transition-colors">
+              <Link href="/contact" className="hover:text-[#93C5FD] transition-colors">
                 Student Enquiries
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/academic-partnerships"
-                className="hover:text-[#F4C430] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
               >
-                <Building2 className="w-3.5 h-3.5 text-[#F4C430]" />
+                <Building2 className="w-3.5 h-3.5 text-[#93C5FD]" />
                 <span>Academic Partnerships</span>
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/verify-certificate"
-                className="hover:text-[#F4C430] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#F4C430]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#93C5FD]" />
                 <span>Verify Certificate</span>
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/hire-from-vlearnin"
-                className="hover:text-[#F4C430] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
               >
-                <Briefcase className="w-3.5 h-3.5 text-[#F4C430]" />
+                <Briefcase className="w-3.5 h-3.5 text-[#93C5FD]" />
                 <span>Hire From VLEARNIN</span>
               </Link>
             </nav>
@@ -169,7 +169,7 @@ export function GlobalHeader() {
                 href="/"
                 aria-label="Home"
                 className={`p-1.5 transition-colors ${
-                  pathname === "/" ? "text-[#16529A]" : "text-[#212529] hover:text-[#16529A]"
+                  pathname === "/" ? "text-[#1D4ED8]" : "text-[#111827] hover:text-[#1D4ED8]"
                 }`}
               >
                 <Home className="w-4 h-4" />
@@ -192,7 +192,7 @@ export function GlobalHeader() {
                         aria-expanded={megaOpen}
                         aria-haspopup="true"
                         className={`font-nav text-[14px] font-medium uppercase tracking-wide py-2 inline-flex items-center gap-1 transition-colors relative cursor-pointer ${
-                          isActive ? "text-[#16529A] font-bold" : "text-[#212529] hover:text-[#16529A]"
+                          isActive ? "text-[#1D4ED8] font-bold" : "text-[#111827] hover:text-[#1D4ED8]"
                         }`}
                       >
                         <span>{item.label}</span>
@@ -202,7 +202,7 @@ export function GlobalHeader() {
                           }`}
                         />
                         {isActive && (
-                          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#16529A]" />
+                          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1D4ED8]" />
                         )}
                       </button>
                     </div>
@@ -214,7 +214,7 @@ export function GlobalHeader() {
                     key={item.href}
                     href={item.href}
                     className={`mc-underline-link font-nav text-[15px] font-medium tracking-wide py-2 transition-colors duration-300 relative whitespace-nowrap ${
-                      isActive ? "text-[#16529A] font-semibold" : "text-[#212529] hover:text-[#16529A]"
+                      isActive ? "text-[#1D4ED8] font-semibold" : "text-[#111827] hover:text-[#1D4ED8]"
                     }`}
                   >
                     {item.label}
@@ -236,9 +236,9 @@ export function GlobalHeader() {
 
       {/* Tablet & Mobile Header */}
       <div className="xl:hidden">
-        <div className="bg-[#082F62] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
+        <div className="bg-[#1E3A8A] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
           <span>{BRAND.shortLocation}</span>
-          <a href={BRAND.phoneHref} className="font-semibold text-[#F4C430]">
+          <a href={BRAND.phoneHref} className="font-semibold text-[#93C5FD]">
             {BRAND.phoneDisplay}
           </a>
         </div>
@@ -258,7 +258,7 @@ export function GlobalHeader() {
             <Link
               href="/verify-certificate"
               aria-label="Verify Certificate"
-              className="p-2 border border-[#E2E8F0] text-[#16529A]"
+              className="p-2 border border-[#E5E7EB] text-[#1D4ED8] rounded-[15px]"
             >
               <ShieldCheck className="w-5 h-5" />
             </Link>
@@ -267,7 +267,7 @@ export function GlobalHeader() {
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="p-2 border border-[#E2E8F0] text-[#082F62]"
+              className="p-2 border border-[#E5E7EB] text-[#1E3A8A] rounded-[15px]"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -285,13 +285,13 @@ export function GlobalHeader() {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={handleMegaEnter}
             onMouseLeave={handleMegaLeave}
-            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E2E8F0] border-b-4 border-b-[#082F62] shadow-2xl z-50"
+            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E5E7EB] border-b-4 border-b-[#1E3A8A] shadow-2xl z-50"
           >
           <div className="max-w-[1440px] mx-auto px-10 py-8">
             <div className="grid grid-cols-3 gap-8">
               {MEGA_COLUMNS.map((col) => (
                 <div key={col.categorySlug} className="space-y-4">
-                  <div className="relative h-32 w-full overflow-hidden border border-[#E2E8F0]">
+                  <div className="relative h-32 w-full overflow-hidden border border-[#E5E7EB] rounded-[15px]">
                     <Image
                       src={col.image}
                       alt={col.title}
@@ -299,7 +299,7 @@ export function GlobalHeader() {
                       className="object-cover"
                       sizes="400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#082F62]/90 via-[#082F62]/30 to-transparent flex items-end p-3.5">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/90 via-[#1E3A8A]/30 to-transparent flex items-end p-3.5">
                       <span className="font-nav text-xs font-bold uppercase tracking-wider text-white">
                         {col.title}
                       </span>
@@ -311,10 +311,10 @@ export function GlobalHeader() {
                         <Link
                           href={`/courses/${course.slug}`}
                           onClick={() => setMegaOpen(false)}
-                          className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#212529] hover:text-[#16529A] transition-colors"
+                          className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#111827] hover:text-[#1D4ED8] transition-colors"
                         >
                           <span className="font-medium leading-snug">{course.title}</span>
-                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#F58220] opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#EA580C] opacity-0 group-hover:opacity-100 transition-opacity" />
                         </Link>
                       </li>
                     ))}
@@ -323,8 +323,8 @@ export function GlobalHeader() {
               ))}
             </div>
 
-            <div className="mt-6 pt-5 border-t border-[#E2E8F0] flex items-center justify-between">
-              <p className="text-sm text-[#5C6672]">
+            <div className="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
+              <p className="text-sm text-[#4B5563]">
                 All 7 standalone certifications run 30 hours (5 modules × 6 hours) with live capstone evaluation.
               </p>
               <div className="flex items-center gap-3">
@@ -355,11 +355,11 @@ export function GlobalHeader() {
 
       {/* Mobile Navigation Drawer with Expandable Programme Categories */}
       {mobileOpen && (
-        <div className="xl:hidden bg-white border-b border-[#E2E8F0] max-h-[82vh] overflow-y-auto">
+        <div className="xl:hidden bg-white border-b border-[#E5E7EB] max-h-[82vh] overflow-y-auto">
           <nav aria-label="Mobile Navigation" className="px-4 py-4 space-y-1">
             <Link
               href="/"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#212529] hover:bg-[#F5F7FA]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
             >
               Home
             </Link>
@@ -368,7 +368,7 @@ export function GlobalHeader() {
               type="button"
               onClick={() => setMobileProgOpen((v) => !v)}
               aria-expanded={mobileProgOpen}
-              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#082F62] bg-[#F5F7FA]"
+              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#1E3A8A] bg-[#F8FAFC]"
             >
               <span>Programmes (7 Courses)</span>
               <ChevronDown
@@ -376,17 +376,17 @@ export function GlobalHeader() {
               />
             </button>
             {mobileProgOpen && (
-              <div className="pl-4 py-2 space-y-3 border-l-2 border-[#16529A] ml-3">
+              <div className="pl-4 py-2 space-y-3 border-l-2 border-[#1D4ED8] ml-3">
                 {MEGA_COLUMNS.map((col) => (
                   <div key={col.categorySlug} className="space-y-1">
-                    <p className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#16529A]">
+                    <p className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
                       {col.title}
                     </p>
                     {col.courses.map((c) => (
                       <Link
                         key={c.slug}
                         href={`/courses/${c.slug}`}
-                        className="block py-1 text-sm text-[#212529]"
+                        className="block py-1 text-sm text-[#111827]"
                       >
                         {c.title}
                       </Link>
@@ -395,7 +395,7 @@ export function GlobalHeader() {
                 ))}
                 <Link
                   href="/courses"
-                  className="inline-block font-nav text-xs font-bold text-[#F58220] uppercase pt-1"
+                  className="inline-block font-nav text-xs font-bold text-[#EA580C] uppercase pt-1"
                 >
                   View All Programmes →
                 </Link>
@@ -406,25 +406,25 @@ export function GlobalHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#212529] hover:bg-[#F5F7FA]"
+                className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/verify-certificate"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#212529] hover:bg-[#F5F7FA]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
             >
               Verify Certificate
             </Link>
             <Link
               href="/hire-from-vlearnin"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#212529] hover:bg-[#F5F7FA]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
             >
               Hire From VLEARNIN
             </Link>
 
-            <div className="pt-3 border-t border-[#E2E8F0] flex flex-col gap-2">
+            <div className="pt-3 border-t border-[#E5E7EB] flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => {

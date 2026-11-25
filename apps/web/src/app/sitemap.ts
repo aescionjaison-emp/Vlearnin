@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { OFFICIAL_COMBOS, OFFICIAL_COURSES } from "@vlearnin/shared";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vlearnin.com";
   const now = new Date();

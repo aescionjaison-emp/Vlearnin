@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Pause, Play, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useLeadModal } from "@/components/LeadModalProvider";
+import { runHeroTimeline } from "@/lib/motion/timelines";
 
 interface HeroBanner {
   id: string;
@@ -91,6 +92,11 @@ export function HeroCarousel() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    return runHeroTimeline(heroTextRef.current);
+  }, [activeIdx]);
 
   const nextSlide = useCallback(() => {
     setActiveIdx((prev) => (prev + 1) % BANNERS.length);
@@ -114,10 +120,10 @@ export function HeroCarousel() {
       aria-label="VLEARNIN Institutional Campaign Showcase"
       className={`relative w-full overflow-hidden transition-colors duration-500 ${
         banner.theme === "jain-blue"
-          ? "bg-gradient-to-r from-[#082F62] via-[#0B3C7A] to-[#0E4A94] text-white"
+          ? "bg-gradient-to-r from-[#1E3A8A] via-[#1E40AF] to-[#1D4ED8] text-white"
           : banner.theme === "deep-navy"
-            ? "bg-[#071B3D] text-white"
-            : "bg-[#F5F7FA] text-[#212529] border-b border-[#E2E8F0]"
+            ? "bg-[#1E3A8A] text-white"
+            : "bg-[#F8FAFC] text-[#111827] border-b border-[#E5E7EB]"
       }`}
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
@@ -141,31 +147,34 @@ export function HeroCarousel() {
       )}
 
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[520px] lg:min-h-[580px] items-stretch">
-        {/* Left Typography & CTA Column */}
-        <div className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 py-12 lg:py-16 flex flex-col justify-center z-10">
+        {/* Left Typography & CTA Column (MCU-04 Coordinated 50ms Stagger Timeline) */}
+        <div
+          ref={heroTextRef}
+          className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 py-12 lg:py-16 flex flex-col justify-center z-10"
+        >
           <div className="space-y-5">
             <span
-              className={`inline-block font-nav text-xs font-bold uppercase tracking-[0.16em] px-4 py-1.5 ${
+              className={`hero-eyebrow inline-block font-nav text-xs font-bold uppercase tracking-[0.16em] px-4 py-1.5 ${
                 isDarkTheme
-                  ? "bg-white text-[#082F62]"
-                  : "bg-[#082F62] text-white"
+                  ? "bg-white text-[#1E3A8A]"
+                  : "bg-[#1E3A8A] text-white"
               }`}
             >
               {banner.badge}
             </span>
 
-            <h1 className="font-editorial text-[36.8px] sm:text-[46px] lg:text-[56px] font-bold leading-[1.04] tracking-normal">
-              <span className={isDarkTheme ? "text-white" : "text-[#082F62]"}>
+            <h1 className="hero-headline font-editorial text-[36.8px] sm:text-[46px] lg:text-[56px] font-bold leading-[1.04] tracking-normal">
+              <span className={isDarkTheme ? "text-white" : "text-[#1E3A8A]"}>
                 {banner.headlineWhite}{" "}
               </span>
-              <span className={isDarkTheme ? "text-[#F4C430]" : "text-[#16529A]"}>
+              <span className={isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"}>
                 {banner.headlineAccent}
               </span>
             </h1>
 
             <p
-              className={`mc-lead max-w-xl ${
-                isDarkTheme ? "text-white/90" : "text-[#5C6672]"
+              className={`hero-desc mc-lead max-w-xl ${
+                isDarkTheme ? "text-white/90" : "text-[#4B5563]"
               }`}
             >
               {banner.description}
@@ -177,7 +186,7 @@ export function HeroCarousel() {
                   <li
                     key={f}
                     className={`text-sm font-nav font-semibold flex items-center gap-2 ${
-                      isDarkTheme ? "text-[#F4C430]" : "text-[#082F62]"
+                      isDarkTheme ? "text-[#93C5FD]" : "text-[#1E3A8A]"
                     }`}
                   >
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -187,7 +196,7 @@ export function HeroCarousel() {
               </ul>
             )}
 
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="hero-ctas flex flex-wrap items-center gap-3.5 pt-2">
               <Link
                 href={banner.primaryCta.href}
                 className={`${
@@ -204,8 +213,8 @@ export function HeroCarousel() {
                     href={banner.secondaryCta.href}
                     className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors ${
                       isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#082F62]"
-                        : "border-[#082F62] text-[#082F62] hover:bg-[#082F62] hover:text-white"
+                        ? "border-white text-white hover:bg-white hover:text-[#1E3A8A]"
+                        : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
                     }`}
                   >
                     {banner.secondaryCta.label}
@@ -224,8 +233,8 @@ export function HeroCarousel() {
                     }}
                     className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                       isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#082F62]"
-                        : "border-[#082F62] text-[#082F62] hover:bg-[#082F62] hover:text-white"
+                        ? "border-white text-white hover:bg-white hover:text-[#1E3A8A]"
+                        : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
                     }`}
                   >
                     {banner.secondaryCta.label}
@@ -265,7 +274,7 @@ export function HeroCarousel() {
           type="button"
           onClick={prevSlide}
           aria-label="Previous campaign banner"
-          className="w-9 h-9 rounded-full bg-[#F58220] hover:bg-[#DC6D0E] text-white flex items-center justify-center shadow-md cursor-pointer transition-colors"
+          className="w-9 h-9 rounded-full bg-[#EA580C] hover:bg-[#C2410C] text-white flex items-center justify-center shadow-md cursor-pointer transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -273,7 +282,7 @@ export function HeroCarousel() {
           type="button"
           onClick={nextSlide}
           aria-label="Next campaign banner"
-          className="w-9 h-9 rounded-full bg-[#F58220] hover:bg-[#DC6D0E] text-white flex items-center justify-center shadow-md cursor-pointer transition-colors"
+          className="w-9 h-9 rounded-full bg-[#EA580C] hover:bg-[#C2410C] text-white flex items-center justify-center shadow-md cursor-pointer transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -292,10 +301,10 @@ export function HeroCarousel() {
               onClick={() => setActiveIdx(idx)}
               className={`h-2 transition-all duration-300 cursor-pointer ${
                 idx === activeIdx
-                  ? "w-8 bg-[#F58220]"
+                  ? "w-8 bg-[#EA580C]"
                   : isDarkTheme
                     ? "w-3 bg-white/40 hover:bg-white/75"
-                    : "w-3 bg-[#082F62]/30 hover:bg-[#082F62]/60"
+                    : "w-3 bg-[#1E3A8A]/30 hover:bg-[#1E3A8A]/60"
               }`}
             />
           ))}
@@ -306,8 +315,8 @@ export function HeroCarousel() {
           aria-label={isPaused ? "Resume banner rotation" : "Pause banner rotation"}
           className={`p-1.5 border text-xs cursor-pointer ${
             isDarkTheme
-              ? "border-white/40 text-white bg-[#082F62]/60"
-              : "border-[#082F62]/30 text-[#082F62] bg-white/80"
+              ? "border-white/40 text-white bg-[#1E3A8A]/60"
+              : "border-[#1E3A8A]/30 text-[#1E3A8A] bg-white/80"
           }`}
         >
           {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}

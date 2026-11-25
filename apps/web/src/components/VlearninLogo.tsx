@@ -11,8 +11,8 @@ export function VlearninLogo({
   compact = false,
   showTagline = true,
 }: VlearninLogoProps) {
-  const textColor = variant === "light" ? "text-white" : "text-[#071B3D]";
-  const taglineColor = variant === "light" ? "text-[#E6C47A]" : "text-[#667085]";
+  const textColor = variant === "light" ? "text-white" : "text-[#1E3A8A]";
+  const taglineColor = variant === "light" ? "text-[#93C5FD]" : "text-[#4B5563]";
 
   return (
     <div className="inline-flex items-center gap-3 select-none">
@@ -32,8 +32,8 @@ export function VlearninLogo({
           width="44"
           height="44"
           rx="4"
-          fill={variant === "light" ? "#0E2954" : "#071B3D"}
-          stroke="#D4A54A"
+          fill={variant === "light" ? "#0E2954" : "#1E3A8A"}
+          stroke="#EA580C"
           strokeWidth="1.5"
         />
         <path
@@ -45,7 +45,7 @@ export function VlearninLogo({
         />
         <path
           d="M18.5 14L24 24.5L29.5 14"
-          stroke="#D4A54A"
+          stroke="#EA580C"
           strokeWidth="2.4"
           strokeLinecap="square"
           strokeLinejoin="miter"

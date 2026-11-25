@@ -26,53 +26,53 @@ export interface MotionPresetConfig {
  */
 export const MOTION_PRESETS: Record<MotionPresetName, MotionPresetConfig> = {
   fadeIn: {
-    from: { opacity: 0.92 },
-    to: { opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.standard },
+    from: { opacity: 0.72 },
+    to: { opacity: 1, duration: 0.7, ease: MOTION_EASING.entrance },
   },
   fadeUp: {
-    from: { y: MOTION_TIMINGS.distanceStandard, opacity: 0.94 },
-    to: { y: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { y: 42, opacity: 0.85 },
+    to: { y: 0, opacity: 1, duration: 0.75, ease: MOTION_EASING.entrance },
   },
   fadeDown: {
-    from: { y: -MOTION_TIMINGS.distanceSmall, opacity: 0.94 },
-    to: { y: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { y: -28, opacity: 0.88 },
+    to: { y: 0, opacity: 1, duration: 0.7, ease: MOTION_EASING.entrance },
   },
   revealLeft: {
-    from: { x: -MOTION_TIMINGS.distanceStandard, opacity: 0.94 },
-    to: { x: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { x: -44, opacity: 0.88 },
+    to: { x: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
   },
   revealRight: {
-    from: { x: MOTION_TIMINGS.distanceStandard, opacity: 0.94 },
-    to: { x: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { x: 44, opacity: 0.88 },
+    to: { x: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
   },
   revealFromBottom: {
-    from: { y: MOTION_TIMINGS.distanceStandard, opacity: 0.94 },
-    to: { y: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { y: 48, opacity: 0.85 },
+    to: { y: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
   },
   headingReveal: {
-    from: { y: MOTION_TIMINGS.distanceSmall, opacity: 0.95 },
-    to: { y: 0, opacity: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.entrance },
+    from: { y: 28, opacity: 0.88 },
+    to: { y: 0, opacity: 1, duration: 0.72, ease: MOTION_EASING.entrance },
   },
   imageMaskReveal: {
-    from: { clipPath: "inset(0 0 8% 0)", scale: 1.03 },
+    from: { clipPath: "inset(0 0 14% 0)", scale: 1.07 },
     to: {
       clipPath: "inset(0 0 0% 0)",
       scale: 1,
-      duration: MOTION_TIMINGS.imageReveal,
+      duration: 0.88,
       ease: MOTION_EASING.entrance,
     },
   },
   imageScaleReveal: {
-    from: { scale: 1.04 },
-    to: { scale: 1, duration: MOTION_TIMINGS.imageReveal, ease: MOTION_EASING.standard },
+    from: { scale: 1.08 },
+    to: { scale: 1, duration: 0.85, ease: MOTION_EASING.entrance },
   },
   cardReveal: {
-    from: { y: MOTION_TIMINGS.distanceSmall, scale: 0.985 },
-    to: { y: 0, scale: 1, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.standard },
+    from: { y: 36, scale: 0.94, opacity: 0.88 },
+    to: { y: 0, scale: 1, opacity: 1, duration: 0.72, ease: MOTION_EASING.entrance },
   },
   sectionReveal: {
-    from: { y: MOTION_TIMINGS.distanceSmall },
-    to: { y: 0, duration: MOTION_TIMINGS.entrance, ease: MOTION_EASING.standard },
+    from: { y: 32 },
+    to: { y: 0, duration: 0.75, ease: MOTION_EASING.entrance },
   },
 };
 

@@ -21,20 +21,28 @@ interface VerifyResult {
 }
 
 export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId?: string }) {
-  const [certInput, setCertInput] = useState(initialTokenOrId || "");
+  const [resolvedInitial] = useState(() => {
+    if (initialTokenOrId && initialTokenOrId !== "sample") return initialTokenOrId;
+    if (typeof window !== "undefined") {
+      const match = window.location.pathname.match(/^\/verify-certificate\/([^/]+)/);
+      if (match?.[1] && match[1] !== "sample") return decodeURIComponent(match[1]);
+    }
+    return "";
+  });
+  const [certInput, setCertInput] = useState(resolvedInitial);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<VerifyResult | null>(null);
 
   useEffect(() => {
-    if (!initialTokenOrId) return;
+    if (!resolvedInitial) return;
     let active = true;
     (async () => {
       setLoading(true);
       setError(null);
       try {
         const res = await fetch(
-          getApiUrl(`/certificates/public/${encodeURIComponent(initialTokenOrId)}`),
+          getApiUrl(`/certificates/public/${encodeURIComponent(resolvedInitial)}`),
         );
         const json = await res.json();
         if (!active) return;
@@ -83,9 +91,9 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
   return (
     <div className="bg-white min-h-[70vh]">
-      <section className="bg-[#071B3D] text-white py-16 border-b-4 border-[#D4A54A]">
+      <section className="bg-[#1E3A8A] text-white py-16 border-b-4 border-[#EA580C]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
+          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
             CREDENTIAL AUTHENTICATION
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
@@ -102,17 +110,17 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <form
             onSubmit={handleVerify}
-            className="bg-[#F4F7FC] border border-[#DFE5EE] p-6 sm:p-8 space-y-4 shadow-xs"
+            className="bg-[#F8FAFC] border border-[#E5E7EB] p-6 sm:p-8 space-y-4 shadow-xs rounded-[15px]"
           >
             <label
               htmlFor="certificate-id-input"
-              className="block font-nav text-xs font-bold uppercase tracking-wider text-[#071B3D]"
+              className="block font-nav text-xs font-bold uppercase tracking-wider text-[#1E3A8A]"
             >
               Enter Certificate ID
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 text-[#667085] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-[#4B5563] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   id="certificate-id-input"
                   type="text"
@@ -120,7 +128,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                   onChange={(e) => setCertInput(e.target.value)}
                   placeholder="Example: VLN-2026-XXXX"
                   required
-                  className="w-full bg-white border border-[#DFE5EE] pl-10 pr-4 py-3 text-sm uppercase tracking-wider focus:outline-none focus:border-[#1746A2]"
+                  className="w-full bg-white border border-[#E5E7EB] pl-10 pr-4 py-3 text-sm uppercase tracking-wider focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 />
               </div>
               <button
@@ -132,7 +140,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                 {loading ? "Verifying..." : "Verify Credential"}
               </button>
             </div>
-            <p className="text-xs text-[#667085]">
+            <p className="text-xs text-[#4B5563]">
               Public verification displays only credential status and programme completion details.
               Private learner records are never exposed.
             </p>
@@ -146,14 +154,14 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
           )}
 
           {result?.status === "VALID" && result.certificate && (
-            <div className="border-2 border-emerald-600 bg-white p-7 shadow-md space-y-5">
-              <div className="flex items-center gap-3 pb-4 border-b border-[#DFE5EE]">
+            <div className="border-2 border-emerald-600 bg-white p-7 shadow-md space-y-5 rounded-[15px]">
+              <div className="flex items-center gap-3 pb-4 border-b border-[#E5E7EB]">
                 <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0" />
                 <div>
                   <span className="font-nav text-xs font-bold uppercase tracking-widest text-emerald-700">
                     Status: Verified Authentic Credential
                   </span>
-                  <h2 className="text-2xl font-bold text-[#071B3D] mt-0.5">
+                  <h2 className="text-2xl font-bold text-[#1E3A8A] mt-0.5">
                     {result.certificate.recipientName}
                   </h2>
                 </div>
@@ -161,41 +169,41 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Certificate ID
                   </dt>
-                  <dd className="font-bold text-[#071B3D] mt-0.5">
+                  <dd className="font-bold text-[#1E3A8A] mt-0.5">
                     {result.certificate.certificateId}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Programme Completed
                   </dt>
-                  <dd className="font-bold text-[#1746A2] mt-0.5">
+                  <dd className="font-bold text-[#1D4ED8] mt-0.5">
                     {result.certificate.programmeTitle}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Programme Duration
                   </dt>
-                  <dd className="text-[#101828] mt-0.5">{result.certificate.programmeDuration}</dd>
+                  <dd className="text-[#111827] mt-0.5">{result.certificate.programmeDuration}</dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Capstone / Grade
                   </dt>
-                  <dd className="text-[#101828] mt-0.5">
+                  <dd className="text-[#111827] mt-0.5">
                     {result.certificate.capstoneStatus}
                     {result.certificate.grade ? ` • ${result.certificate.grade}` : ""}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Issue Date
                   </dt>
-                  <dd className="text-[#101828] mt-0.5">
+                  <dd className="text-[#111827] mt-0.5">
                     {result.certificate.issueDate
                       ? new Date(result.certificate.issueDate).toLocaleDateString("en-IN", {
                           year: "numeric",
@@ -206,11 +214,11 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#667085]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
                     Issuing Authority
                   </dt>
-                  <dd className="text-[#101828] mt-0.5 flex items-center gap-1.5">
-                    <Award className="w-4 h-4 text-[#D4A54A]" />
+                  <dd className="text-[#111827] mt-0.5 flex items-center gap-1.5">
+                    <Award className="w-4 h-4 text-[#EA580C]" />
                     <span>{result.certificate.issuingAuthority}</span>
                   </dd>
                 </div>
@@ -219,7 +227,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
           )}
 
           {result?.status === "INVALID" && (
-            <div className="border-2 border-red-300 bg-red-50 p-6 flex items-start gap-3 text-red-900">
+            <div className="border-2 border-red-300 bg-red-50 p-6 flex items-start gap-3 text-red-900 rounded-[15px]">
               <XCircle className="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
               <div>
                 <h2 className="font-bold text-base">Credential Not Found</h2>
@@ -229,7 +237,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
           )}
 
           {result?.status === "REVOKED" && (
-            <div className="border-2 border-amber-400 bg-amber-50 p-6 flex items-start gap-3 text-amber-950">
+            <div className="border-2 border-amber-400 bg-amber-50 p-6 flex items-start gap-3 text-amber-950 rounded-[15px]">
               <AlertTriangle className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <h2 className="font-bold text-base">Revoked Credential</h2>

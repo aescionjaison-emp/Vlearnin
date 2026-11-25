@@ -5,6 +5,7 @@ import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { GlobalFooter } from "@/components/GlobalFooter";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -75,12 +76,13 @@ export default function RootLayout({
       lang="en"
       className={`${sourceSans.variable} ${cormorant.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-white text-[#212529]">
+      <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
         <SmoothScrollProvider>
+          <FirebaseAnalytics />
           <LeadModalProvider>
             <GlobalHeader />
             <main className="flex-1">{children}</main>

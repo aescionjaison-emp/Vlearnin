@@ -48,13 +48,13 @@
 
 .mc-card-hover {
   transition:
-    transform var(--motion-hover) var(--ease-default),
+    transform 360ms var(--ease-entrance),
     border-color var(--motion-hover) var(--ease-default),
-    box-shadow var(--motion-hover) var(--ease-default);
+    box-shadow 360ms var(--ease-entrance);
 }
 .mc-card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(8, 47, 98, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(30, 58, 138, 0.12);
 }
 
 /* MCU .icon-rotate-btn microinteraction */
@@ -62,14 +62,38 @@
   transition: transform var(--motion-hover) var(--ease-default);
 }
 .mc-icon-btn:hover svg {
-  transform: translateX(3px);
+  transform: translateX(4px);
+}
+
+/* MCU .elementor-flip-box 3D perspective card flip */
+.mc-flip-perspective {
+  perspective: 1200px;
+  cursor: pointer;
+}
+.mc-flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 600ms var(--ease-entrance);
+}
+.mc-flip-perspective:hover .mc-flip-inner,
+.mc-flip-perspective.is-flipped .mc-flip-inner {
+  transform: rotateY(180deg);
+}
+.mc-flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.mc-flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mc-underline-link::after,
   .mc-image-zoom,
   .mc-card-hover,
-  .mc-icon-btn svg {
+  .mc-icon-btn svg,
+  .mc-flip-inner {
     transition: none !important;
     transform: none !important;
   }

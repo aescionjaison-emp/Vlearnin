@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export function generateStaticParams() {
+  return [{ certificateId: "sample" }];
+}
+
 export default async function VerifyCertificateTokenPage({
   params,
 }: {

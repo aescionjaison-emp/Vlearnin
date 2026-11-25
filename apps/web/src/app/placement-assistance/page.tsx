@@ -72,9 +72,9 @@ const STAGES = [
 export default function PlacementAssistancePage() {
   return (
     <div className="bg-white">
-      <section className="bg-[#071B3D] text-white py-16 lg:py-20 border-b-4 border-[#D4A54A]">
+      <section className="bg-[#1E3A8A] text-white py-16 lg:py-20 border-b-4 border-[#EA580C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
+          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
             CAREER &amp; PLACEMENT ASSISTANCE
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl">
@@ -95,20 +95,20 @@ export default function PlacementAssistancePage() {
               return (
                 <article
                   key={stage.number}
-                  className="border border-[#DFE5EE] bg-[#F4F7FC] p-8 space-y-4"
+                  className="border border-[#E5E7EB] bg-[#F8FAFC] p-8 space-y-4 rounded-[15px]"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#1746A2]">
+                    <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#1D4ED8]">
                       Stage {stage.number}
                     </span>
-                    <Icon className="w-6 h-6 text-[#D4A54A]" />
+                    <Icon className="w-6 h-6 text-[#EA580C]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#071B3D]">{stage.title}</h2>
-                  <p className="text-sm text-[#667085]">{stage.summary}</p>
+                  <h2 className="text-2xl font-bold text-[#1E3A8A]">{stage.title}</h2>
+                  <p className="text-sm text-[#4B5563]">{stage.summary}</p>
                   <ul className="space-y-2 pt-2">
                     {stage.details.map((d) => (
-                      <li key={d} className="text-sm text-[#101828] flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#1746A2] shrink-0 mt-0.5" />
+                      <li key={d} className="text-sm text-[#111827] flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
                         <span>{d}</span>
                       </li>
                     ))}
@@ -119,15 +119,15 @@ export default function PlacementAssistancePage() {
           </div>
 
           {/* Potential Career Pathways */}
-          <div className="border border-[#DFE5EE] p-8 bg-white space-y-6">
+          <div className="border border-[#E5E7EB] p-8 bg-white space-y-6 rounded-[15px]">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 POTENTIAL CAREER PATHWAYS
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#071B3D] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
                 Roles Our Graduates Prepare For
               </h2>
-              <p className="text-sm text-[#667085] mt-2">
+              <p className="text-sm text-[#4B5563] mt-2">
                 Depending on your chosen certification or career combo, you build job-ready
                 capabilities aligned with these roles:
               </p>
@@ -137,20 +137,20 @@ export default function PlacementAssistancePage() {
               {CAREER_PATHWAYS.map((role) => (
                 <span
                   key={role}
-                  className="font-nav text-xs font-bold text-[#071B3D] bg-[#F4F7FC] border border-[#DFE5EE] px-4 py-2.5"
+                  className="font-nav text-xs font-bold text-[#1E3A8A] bg-[#F8FAFC] border border-[#E5E7EB] px-4 py-2.5 rounded-[15px]"
                 >
                   {role}
                 </span>
               ))}
             </div>
 
-            <div className="p-4 bg-[#F4F7FC] border-l-4 border-[#071B3D] text-xs text-[#667085]">
-              <strong className="text-[#071B3D]">Mandatory Placement Disclaimer:</strong>{" "}
+            <div className="p-4 bg-[#F8FAFC] border-l-4 border-[#1E3A8A] text-xs text-[#4B5563] rounded-[15px]">
+              <strong className="text-[#1E3A8A]">Mandatory Placement Disclaimer:</strong>{" "}
               {BRAND.placementDisclaimer}
             </div>
           </div>
 
-          <div className="bg-[#071B3D] text-white p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="bg-[#1E3A8A] text-white p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 rounded-[15px]">
             <div>
               <h3 className="text-2xl font-bold">Looking to Hire VLEARNIN Graduates?</h3>
               <p className="text-sm text-white/75 mt-1">

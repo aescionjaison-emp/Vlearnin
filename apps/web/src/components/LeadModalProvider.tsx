@@ -148,15 +148,15 @@ function DemoModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#071B3D]/70 backdrop-blur-xs p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E3A8A]/70 backdrop-blur-xs p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="demo-modal-title"
     >
-      <div className="relative w-full max-w-lg bg-white border border-[#DFE5EE] shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto">
-        <div className="bg-[#071B3D] text-white px-6 py-5 border-b-2 border-[#D4A54A] flex items-start justify-between gap-4">
+      <div className="relative w-full max-w-lg bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto rounded-[15px]">
+        <div className="bg-[#1E3A8A] text-white px-6 py-5 border-b-2 border-[#EA580C] flex items-start justify-between gap-4">
           <div>
-            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#D4A54A] font-semibold">
+            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#EA580C] font-semibold">
               VLEARNIN Academy • Rajajinagar
             </p>
             <h2 id="demo-modal-title" className="text-xl sm:text-2xl font-bold mt-1">
@@ -177,9 +177,9 @@ function DemoModal({
           {successRef ? (
             <div className="text-center py-4 space-y-4">
               <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-              <h3 className="text-xl font-bold text-[#071B3D]">Demo Request Confirmed</h3>
-              <p className="text-sm text-[#667085]">
-                Reference ID: <strong className="text-[#071B3D]">{successRef}</strong>. Our
+              <h3 className="text-xl font-bold text-[#1E3A8A]">Demo Request Confirmed</h3>
+              <p className="text-sm text-[#4B5563]">
+                Reference ID: <strong className="text-[#1E3A8A]">{successRef}</strong>. Our
                 admissions counselor will contact you shortly to confirm your slot.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
@@ -215,7 +215,7 @@ function DemoModal({
               )}
 
               <div>
-                <label htmlFor="demo-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="demo-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Full Name *
                 </label>
                 <input
@@ -223,14 +223,14 @@ function DemoModal({
                   type="text"
                   {...register("fullName")}
                   placeholder="Enter your full name"
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 />
                 {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="demo-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Phone / WhatsApp *
                   </label>
                   <input
@@ -238,19 +238,19 @@ function DemoModal({
                     type="tel"
                     {...register("phone")}
                     placeholder="+91 98XXXXXXXX"
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   />
                   {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="demo-qualification" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="demo-qualification" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Qualification *
                   </label>
                   <select
                     id="demo-qualification"
                     {...register("qualification")}
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] bg-white focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   >
                     <option value="">Select qualification</option>
                     {QUALIFICATION_OPTIONS.map((q) => (
@@ -264,13 +264,13 @@ function DemoModal({
               </div>
 
               <div>
-                <label htmlFor="demo-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="demo-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Course or Combo Interested In *
                 </label>
                 <select
                   id="demo-programme"
                   {...register("interestedProgramme")}
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] bg-white focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 >
                   {ALL_PROGRAMME_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
@@ -282,13 +282,13 @@ function DemoModal({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="demo-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Preferred Batch Timing *
                   </label>
                   <select
                     id="demo-batch"
                     {...register("preferredBatch")}
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] bg-white focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   >
                     {BATCH_TIMING_OPTIONS.map((b) => (
                       <option key={b} value={b}>
@@ -298,7 +298,7 @@ function DemoModal({
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="demo-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="demo-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Email (Optional)
                   </label>
                   <input
@@ -306,17 +306,17 @@ function DemoModal({
                     type="email"
                     {...register("email")}
                     placeholder="you@example.com"
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm text-[#101828] focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm text-[#111827] focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   />
                   {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
                 </div>
               </div>
 
-              <label className="flex items-start gap-2.5 text-xs text-[#667085] cursor-pointer">
+              <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
                 <input
                   type="checkbox"
                   {...register("consent")}
-                  className="mt-0.5 accent-[#071B3D]"
+                  className="mt-0.5 accent-[#1E3A8A]"
                 />
                 <span>
                   I consent to VLEARNIN Academy contacting me via phone, WhatsApp, or email regarding demo sessions, fee details, and programme updates.
@@ -395,15 +395,15 @@ function BrochureModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#071B3D]/70 backdrop-blur-xs p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E3A8A]/70 backdrop-blur-xs p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="brochure-modal-title"
     >
-      <div className="relative w-full max-w-md bg-white border border-[#DFE5EE] shadow-2xl overflow-hidden">
-        <div className="bg-[#071B3D] text-white px-6 py-5 border-b-2 border-[#D4A54A] flex items-start justify-between gap-4">
+      <div className="relative w-full max-w-md bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden rounded-[15px]">
+        <div className="bg-[#1E3A8A] text-white px-6 py-5 border-b-2 border-[#EA580C] flex items-start justify-between gap-4">
           <div>
-            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#D4A54A] font-semibold">
+            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#EA580C] font-semibold">
               Official PDF Brochure
             </p>
             <h2 id="brochure-modal-title" className="text-xl font-bold mt-1">
@@ -424,8 +424,8 @@ function BrochureModal({
           {downloadUrl ? (
             <div className="text-center py-3 space-y-4">
               <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-              <h3 className="text-lg font-bold text-[#071B3D]">Your Brochure Is Ready</h3>
-              <p className="text-sm text-[#667085]">
+              <h3 className="text-lg font-bold text-[#1E3A8A]">Your Brochure Is Ready</h3>
+              <p className="text-sm text-[#4B5563]">
                 Click below to download the official VLEARNIN PDF brochure.
               </p>
               <a
@@ -456,7 +456,7 @@ function BrochureModal({
               )}
 
               <div>
-                <label htmlFor="bro-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="bro-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Full Name *
                 </label>
                 <input
@@ -464,13 +464,13 @@ function BrochureModal({
                   type="text"
                   {...register("fullName")}
                   placeholder="Enter your full name"
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 />
                 {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
               </div>
 
               <div>
-                <label htmlFor="bro-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="bro-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Phone / WhatsApp *
                 </label>
                 <input
@@ -478,19 +478,19 @@ function BrochureModal({
                   type="tel"
                   {...register("phone")}
                   placeholder="+91 98XXXXXXXX"
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 />
                 {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>}
               </div>
 
               <div>
-                <label htmlFor="bro-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="bro-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Qualification *
                 </label>
                 <select
                   id="bro-qual"
                   {...register("qualification")}
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 >
                   <option value="">Select qualification</option>
                   {QUALIFICATION_OPTIONS.map((q) => (
@@ -503,13 +503,13 @@ function BrochureModal({
               </div>
 
               <div>
-                <label htmlFor="bro-prog" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                <label htmlFor="bro-prog" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                   Interested Programme (Optional)
                 </label>
                 <select
                   id="bro-prog"
                   {...register("interestedProgramme")}
-                  className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1746A2]"
+                  className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                 >
                   <option value="">All Programmes</option>
                   {ALL_PROGRAMME_OPTIONS.map((opt) => (
@@ -520,8 +520,8 @@ function BrochureModal({
                 </select>
               </div>
 
-              <label className="flex items-start gap-2.5 text-xs text-[#667085] cursor-pointer">
-                <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#071B3D]" />
+              <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
+                <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1E3A8A]" />
                 <span>
                   I consent to receive the requested VLEARNIN brochure PDF and admissions follow-up via phone or WhatsApp.
                 </span>

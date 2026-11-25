@@ -1,16 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail, MapPin, MessageCircle, Phone, Clock, Calendar } from "lucide-react";
 import { BRAND, buildWhatsAppUrl } from "@vlearnin/shared";
 import { VlearninLogo } from "./VlearninLogo";
 import { useLeadModal } from "./LeadModalProvider";
+import { runSectionCascadeTimeline } from "@/lib/motion/timelines";
 
 export function GlobalFooter() {
   const pathname = usePathname();
   const { openDemoModal } = useLeadModal();
+  const footerGridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    return runSectionCascadeTimeline(footerGridRef.current, ".footer-col");
+  }, []);
 
   if (pathname?.startsWith("/admin")) {
     return null;
@@ -20,11 +26,11 @@ export function GlobalFooter() {
 
   return (
     <>
-      <footer className="bg-[#082F62] text-white border-t-4 border-[#F58220] pb-20 md:pb-0">
+      <footer className="bg-[#1E3A8A] text-white border-t-4 border-[#EA580C] pb-20 md:pb-0 rounded-[15px]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div ref={footerGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Column 1 — Brand */}
-            <div className="space-y-4">
+            <div className="footer-col space-y-4">
               <VlearninLogo variant="light" />
               <p className="text-sm text-white/80 leading-relaxed">
                 Practical certification training in Artificial Intelligence, Business Intelligence,
@@ -43,8 +49,8 @@ export function GlobalFooter() {
             </div>
 
             {/* Column 2 — Programmes */}
-            <div>
-              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
+            <div className="footer-col">
+              <h3 className="mc-footer-heading text-[#93C5FD] mb-5">
                 Programmes
               </h3>
               <ul className="space-y-2.5 mc-footer-link text-white/85">
@@ -82,8 +88,8 @@ export function GlobalFooter() {
             </div>
 
             {/* Column 3 — Institutional Links */}
-            <div>
-              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
+            <div className="footer-col">
+              <h3 className="mc-footer-heading text-[#93C5FD] mb-5">
                 Quick Links
               </h3>
               <ul className="space-y-2.5 mc-footer-link text-white/85">
@@ -121,13 +127,13 @@ export function GlobalFooter() {
             </div>
 
             {/* Column 4 — Contact */}
-            <div>
-              <h3 className="mc-footer-heading text-[#F4C430] mb-5">
+            <div className="footer-col">
+              <h3 className="mc-footer-heading text-[#93C5FD] mb-5">
                 Contact Us
               </h3>
               <ul className="space-y-3 mc-footer-link text-white/85">
                 <li className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#F4C430] shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-[#93C5FD] shrink-0 mt-1" />
                   <span>
                     {BRAND.legalName}, {BRAND.address}
                   </span>
@@ -137,7 +143,7 @@ export function GlobalFooter() {
                     href={BRAND.phoneHref}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-[#F4C430] shrink-0" />
+                    <Phone className="w-4 h-4 text-[#93C5FD] shrink-0" />
                     <span>{BRAND.phoneDisplay}</span>
                   </a>
                 </li>
@@ -146,12 +152,12 @@ export function GlobalFooter() {
                     href={`mailto:${BRAND.email}`}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
-                    <Mail className="w-4 h-4 text-[#F4C430] shrink-0" />
+                    <Mail className="w-4 h-4 text-[#93C5FD] shrink-0" />
                     <span>{BRAND.email}</span>
                   </a>
                 </li>
                 <li className="flex items-start gap-2.5 text-sm text-white/75">
-                  <Clock className="w-4 h-4 text-[#F4C430] shrink-0 mt-1" />
+                  <Clock className="w-4 h-4 text-[#93C5FD] shrink-0 mt-1" />
                   <div>
                     <p>{BRAND.timings.weekdays}</p>
                     <p className="mt-0.5">{BRAND.timings.sunday}</p>
@@ -187,15 +193,15 @@ export function GlobalFooter() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with VLEARNIN on WhatsApp"
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#082F62] text-white border border-[#F4C430] px-4 py-3 shadow-xl hover:bg-[#16529A] transition-colors font-nav text-xs font-semibold uppercase tracking-wider"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#1E3A8A] text-white border border-[#93C5FD] px-4 py-3 shadow-xl hover:bg-[#1D4ED8] transition-colors font-nav text-xs font-semibold uppercase tracking-wider rounded-[15px]"
       >
-        <MessageCircle className="w-4 h-4 text-[#F4C430]" />
+        <MessageCircle className="w-4 h-4 text-[#93C5FD]" />
         <span>WhatsApp Us</span>
       </a>
 
       {/* Mobile Fixed Bottom Action Bar */}
       <div
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#082F62] text-white border-t border-[#F4C430] grid grid-cols-3 divide-x divide-white/15"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1E3A8A] text-white border-t border-[#93C5FD] grid grid-cols-3 divide-x divide-white/15 rounded-[15px]"
         role="region"
         aria-label="Quick Contact Actions"
       >
@@ -203,7 +209,7 @@ export function GlobalFooter() {
           href={BRAND.phoneHref}
           className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold hover:bg-white/10"
         >
-          <Phone className="w-4 h-4 text-[#F4C430] mb-0.5" />
+          <Phone className="w-4 h-4 text-[#93C5FD] mb-0.5" />
           <span>Call Now</span>
         </a>
         <a
@@ -212,13 +218,13 @@ export function GlobalFooter() {
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold hover:bg-white/10"
         >
-          <MessageCircle className="w-4 h-4 text-[#F4C430] mb-0.5" />
+          <MessageCircle className="w-4 h-4 text-[#93C5FD] mb-0.5" />
           <span>WhatsApp Us</span>
         </a>
         <button
           type="button"
           onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-          className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold bg-[#F58220] text-white"
+          className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold bg-[#EA580C] text-white"
         >
           <Calendar className="w-4 h-4 mb-0.5" />
           <span>Book Demo</span>

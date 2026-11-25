@@ -13,7 +13,7 @@ export default async function CoursesPage() {
   const [courses, combos] = await Promise.all([fetchCourses(), fetchCombos()]);
 
   return (
-    <Suspense fallback={<div className="py-20 text-center text-[#667085]">Loading programmes...</div>}>
+    <Suspense fallback={<div className="py-20 text-center text-[#4B5563]">Loading programmes...</div>}>
       <CoursesCatalogClient courses={courses} combos={combos} />
     </Suspense>
   );

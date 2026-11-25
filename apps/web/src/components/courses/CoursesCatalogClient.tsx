@@ -70,18 +70,18 @@ export function CoursesCatalogClient({
   return (
     <div className="bg-white">
       {/* JAIN Programs Inspired Diagonal-Split Page Banner */}
-      <section className="bg-white border-b border-[#E2E8F0] overflow-hidden">
+      <section className="bg-white border-b border-[#E5E7EB] overflow-hidden">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 items-stretch">
           <div className="lg:col-span-6 px-6 sm:px-10 lg:pl-16 lg:pr-8 py-12 lg:py-16 flex flex-col justify-center space-y-4">
-            <nav aria-label="Breadcrumb" className="text-xs font-nav text-[#5C6672] flex items-center gap-2">
-              <Link href="/" className="text-[#16529A] hover:underline">Home</Link>
+            <nav aria-label="Breadcrumb" className="text-xs font-nav text-[#4B5563] flex items-center gap-2">
+              <Link href="/" className="text-[#1D4ED8] hover:underline">Home</Link>
               <span>/</span>
               <span>Programmes</span>
             </nav>
-            <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#16529A] leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1D4ED8] leading-tight">
               Industry-Oriented Certification Programmes
             </h1>
-            <p className="text-base sm:text-[17px] text-[#5C6672] leading-relaxed">
+            <p className="text-base sm:text-[17px] text-[#4B5563] leading-relaxed">
               Every programme follows The V-Way to Learn, Build &amp; Lead—combining 30 hours of
               hands-on instruction, industry tools, real case studies, and a capstone portfolio
               project.
@@ -121,7 +121,7 @@ export function CoursesCatalogClient({
       </section>
 
       {/* Filter & Search Bar */}
-      <section className="bg-[#F5F7FA] border-b border-[#E2E8F0] py-5">
+      <section className="bg-[#F8FAFC] border-b border-[#E5E7EB] py-5">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Course Categories">
             {TABS.map((tab) => {
@@ -135,8 +135,8 @@ export function CoursesCatalogClient({
                   onClick={() => setActiveTab(tab.id)}
                   className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2.5 border transition-colors cursor-pointer ${
                     active
-                      ? "bg-[#082F62] text-white border-[#082F62]"
-                      : "bg-white text-[#212529] border-[#E2E8F0] hover:border-[#16529A]"
+                      ? "bg-[#1E3A8A] text-white border-[#1E3A8A]"
+                      : "bg-white text-[#111827] border-[#E5E7EB] hover:border-[#1D4ED8]"
                   }`}
                 >
                   {tab.label}
@@ -146,14 +146,14 @@ export function CoursesCatalogClient({
           </div>
 
           <div className="relative w-full lg:w-72">
-            <Search className="w-4 h-4 text-[#5C6672] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#4B5563] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search programmes or tools..."
               aria-label="Search certification programmes"
-              className="w-full bg-white border border-[#E2E8F0] pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#16529A]"
+              className="w-full bg-white border border-[#E5E7EB] pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
             />
           </div>
         </div>
@@ -164,12 +164,12 @@ export function CoursesCatalogClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-16">
           {activeTab !== "combos" && (
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#082F62] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mb-6">
                 Standalone Certification Programmes ({filteredCourses.length})
               </h2>
 
               {filteredCourses.length === 0 ? (
-                <p className="text-[#5C6672] py-8 border border-[#E2E8F0] text-center">
+                <p className="text-[#4B5563] py-8 border border-[#E5E7EB] text-center rounded-[15px]">
                   No programmes matched your search. Clear filters to view all 7 certifications.
                 </p>
               ) : (
@@ -177,7 +177,7 @@ export function CoursesCatalogClient({
                   {filteredCourses.map((course) => (
                     <article
                       key={course.slug}
-                      className="mc-card-hover group border border-[#E2E8F0] bg-white hover:border-[#16529A] flex flex-col shadow-xs"
+                      className="mc-card-hover group border border-[#E5E7EB] bg-white hover:border-[#1D4ED8] flex flex-col shadow-xs rounded-[15px]"
                     >
                       <div className="relative h-52 w-full overflow-hidden">
                         <Image
@@ -187,36 +187,36 @@ export function CoursesCatalogClient({
                           sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover mc-image-zoom"
                         />
-                        <div className="absolute top-3 left-3 bg-[#082F62]/90 text-[#F4C430] font-nav text-[11px] font-bold uppercase tracking-wider px-2.5 py-1">
+                        <div className="absolute top-3 left-3 bg-[#1E3A8A]/90 text-[#93C5FD] font-nav text-[11px] font-bold uppercase tracking-wider px-2.5 py-1">
                           {course.categoryName}
                         </div>
                       </div>
                       <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
                         <div className="space-y-3">
-                          <h3 className="text-xl font-bold text-[#082F62]">{course.title}</h3>
-                          <div className="flex flex-wrap gap-3 text-xs font-nav text-[#5C6672]">
+                          <h3 className="text-xl font-bold text-[#1E3A8A]">{course.title}</h3>
+                          <div className="flex flex-wrap gap-3 text-xs font-nav text-[#4B5563]">
                             <span className="inline-flex items-center gap-1">
-                              <Clock className="w-3.5 h-3.5 text-[#F58220]" />
+                              <Clock className="w-3.5 h-3.5 text-[#EA580C]" />
                               {course.durationHours} Hours
                             </span>
                             <span className="inline-flex items-center gap-1">
-                              <BookOpen className="w-3.5 h-3.5 text-[#16529A]" />5 Modules
+                              <BookOpen className="w-3.5 h-3.5 text-[#1D4ED8]" />5 Modules
                             </span>
                             <span className="inline-flex items-center gap-1">
-                              <Award className="w-3.5 h-3.5 text-[#F58220]" />
+                              <Award className="w-3.5 h-3.5 text-[#EA580C]" />
                               Capstone
                             </span>
                           </div>
-                          <p className="text-sm text-[#5C6672] leading-relaxed">{course.summary}</p>
-                          <p className="text-xs text-[#212529]">
+                          <p className="text-sm text-[#4B5563] leading-relaxed">{course.summary}</p>
+                          <p className="text-xs text-[#111827]">
                             <strong className="font-nav">Ideal For:</strong> {course.idealFor}
                           </p>
-                          <p className="text-xs font-nav font-semibold text-[#16529A]">
+                          <p className="text-xs font-nav font-semibold text-[#1D4ED8]">
                             Fee: Request Fee Details
                           </p>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#E2E8F0]">
+                        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#E5E7EB]">
                           <Link
                             href={`/courses/${course.slug}`}
                             className="btn-navy py-2.5 text-xs text-center"
@@ -246,32 +246,32 @@ export function CoursesCatalogClient({
 
           {filteredCombos.length > 0 && (
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#082F62] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mb-6">
                 Dual-Skill Career Accelerator Combos ({filteredCombos.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                 {filteredCombos.map((combo) => (
                   <article
                     key={combo.slug}
-                    className="border border-[#E2E8F0] bg-[#F5F7FA] p-7 flex flex-col justify-between space-y-5 hover:border-[#16529A] transition-colors"
+                    className="border border-[#E5E7EB] bg-[#F8FAFC] p-7 flex flex-col justify-between space-y-5 hover:border-[#1D4ED8] transition-colors rounded-[15px]"
                   >
                     <div className="space-y-3">
-                      <span className="inline-block font-nav text-xs font-bold bg-[#082F62] text-[#F4C430] px-3 py-1">
+                      <span className="inline-block font-nav text-xs font-bold bg-[#1E3A8A] text-[#93C5FD] px-3 py-1">
                         {combo.durationLabel}
                       </span>
-                      <h3 className="text-xl font-bold text-[#082F62]">{combo.title}</h3>
-                      <p className="text-sm font-nav font-semibold text-[#16529A]">
+                      <h3 className="text-xl font-bold text-[#1E3A8A]">{combo.title}</h3>
+                      <p className="text-sm font-nav font-semibold text-[#1D4ED8]">
                         {combo.includedLabel}
                       </p>
-                      <p className="text-sm text-[#5C6672]">{combo.summary}</p>
+                      <p className="text-sm text-[#4B5563]">{combo.summary}</p>
                     </div>
-                    <div className="flex items-center justify-between pt-4 border-t border-[#E2E8F0]">
+                    <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                       <Link
                         href={`/career-combos/${combo.slug}`}
-                        className="font-nav text-xs font-bold uppercase tracking-wider text-[#16529A] hover:text-[#082F62] inline-flex items-center gap-1.5"
+                        className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1E3A8A] inline-flex items-center gap-1.5"
                       >
                         <span>View Track</span>
-                        <ArrowRight className="w-4 h-4 text-[#F58220]" />
+                        <ArrowRight className="w-4 h-4 text-[#EA580C]" />
                       </Link>
                       <button
                         type="button"
@@ -295,7 +295,7 @@ export function CoursesCatalogClient({
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-[#082F62] text-white py-16 border-t-4 border-[#F58220]">
+      <section className="bg-[#1E3A8A] text-white py-16 border-t-4 border-[#EA580C]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
           <h2 className="text-3xl sm:text-4xl font-bold">
             Not Sure Which Track Fits Your Career Goal?
@@ -318,9 +318,9 @@ export function CoursesCatalogClient({
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/60 hover:bg-white hover:text-[#082F62] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors"
+              className="border border-white/60 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
             >
-              <MessageCircle className="w-4 h-4 text-[#F4C430]" />
+              <MessageCircle className="w-4 h-4 text-[#93C5FD]" />
               Chat on WhatsApp ({BRAND.phoneDisplay})
             </a>
           </div>

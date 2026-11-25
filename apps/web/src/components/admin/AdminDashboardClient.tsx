@@ -209,7 +209,7 @@ export function AdminDashboardClient() {
 
   if (loading && !user) {
     return (
-      <div className="min-h-screen bg-[#F4F7FC] flex items-center justify-center text-sm text-[#667085]">
+      <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center text-sm text-[#4B5563]">
         Loading VLEARNIN Administrator Dashboard...
       </div>
     );
@@ -228,13 +228,13 @@ export function AdminDashboardClient() {
   const apiRoot = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api").replace(/\/api$/, "");
 
   return (
-    <div className="min-h-screen bg-[#F4F7FC] flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col lg:flex-row">
       {/* Sidebar */}
-      <aside className="w-full lg:w-64 bg-[#071B3D] text-white shrink-0 flex flex-col justify-between">
+      <aside className="w-full lg:w-64 bg-[#1E3A8A] text-white shrink-0 flex flex-col justify-between">
         <div>
           <div className="p-5 border-b border-white/15">
             <VlearninLogo variant="light" compact showTagline={false} />
-            <p className="font-nav text-[10px] uppercase tracking-[0.18em] text-[#D4A54A] mt-2">
+            <p className="font-nav text-[10px] uppercase tracking-[0.18em] text-[#EA580C] mt-2">
               Admin Console
             </p>
           </div>
@@ -249,7 +249,7 @@ export function AdminDashboardClient() {
                   onClick={() => setActiveTab(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 text-xs font-nav font-semibold transition-colors ${
                     active
-                      ? "bg-[#D4A54A] text-[#071B3D]"
+                      ? "bg-[#EA580C] text-[#1E3A8A]"
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
                 >
@@ -271,7 +271,7 @@ export function AdminDashboardClient() {
           <div className="flex gap-2">
             <Link
               href="/"
-              className="flex-1 text-center border border-white/30 py-2 text-xs font-nav hover:bg-white/10"
+              className="flex-1 text-center border border-white/30 py-2 text-xs font-nav hover:bg-white/10 rounded-[15px]"
             >
               Public Site
             </Link>
@@ -290,7 +290,7 @@ export function AdminDashboardClient() {
       {/* Main Content */}
       <main className="flex-1 p-6 lg:p-10 space-y-6 overflow-x-hidden">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#071B3D] capitalize">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] capitalize">
             {activeTab}
           </h1>
           <button
@@ -327,14 +327,14 @@ export function AdminDashboardClient() {
             ].map((m) => {
               const Icon = m.icon;
               return (
-                <div key={m.label} className="bg-white border border-[#DFE5EE] p-5">
-                  <div className="flex items-center justify-between text-[#667085] mb-2">
+                <div key={m.label} className="bg-white border border-[#E5E7EB] p-5 rounded-[15px]">
+                  <div className="flex items-center justify-between text-[#4B5563] mb-2">
                     <span className="font-nav text-xs font-semibold uppercase tracking-wider">
                       {m.label}
                     </span>
-                    <Icon className="w-4 h-4 text-[#D4A54A]" />
+                    <Icon className="w-4 h-4 text-[#EA580C]" />
                   </div>
-                  <p className="font-editorial text-3xl font-bold text-[#071B3D]">{m.val}</p>
+                  <p className="font-editorial text-3xl font-bold text-[#1E3A8A]">{m.val}</p>
                 </div>
               );
             })}
@@ -343,9 +343,9 @@ export function AdminDashboardClient() {
 
         {/* COURSES */}
         {activeTab === "courses" && (
-          <div className="bg-white border border-[#DFE5EE] overflow-x-auto">
+          <div className="bg-white border border-[#E5E7EB] overflow-x-auto rounded-[15px]">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#071B3D] text-white font-nav text-xs uppercase">
+              <thead className="bg-[#1E3A8A] text-white font-nav text-xs uppercase">
                 <tr>
                   <th className="p-4">Programme</th>
                   <th className="p-4">Domain</th>
@@ -354,14 +354,14 @@ export function AdminDashboardClient() {
                   <th className="p-4">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DFE5EE]">
+              <tbody className="divide-y divide-[#E5E7EB]">
                 {courses.map((c) => (
                   <tr key={c.id}>
-                    <td className="p-4 font-bold text-[#071B3D]">{c.title}</td>
-                    <td className="p-4 text-[#667085]">{c.category?.shortName}</td>
+                    <td className="p-4 font-bold text-[#1E3A8A]">{c.title}</td>
+                    <td className="p-4 text-[#4B5563]">{c.category?.shortName}</td>
                     <td className="p-4">{c.modules?.length ?? 5}</td>
                     <td className="p-4">
-                      <span className="font-nav text-xs font-bold px-2.5 py-1 bg-[#F4F7FC] border border-[#DFE5EE]">
+                      <span className="font-nav text-xs font-bold px-2.5 py-1 bg-[#F8FAFC] border border-[#E5E7EB] rounded-[15px]">
                         {c.status}
                       </span>
                     </td>
@@ -403,8 +403,8 @@ export function AdminDashboardClient() {
                     onClick={() => setEnquiryType(t)}
                     className={`font-nav text-xs font-semibold px-4 py-2 border capitalize ${
                       enquiryType === t
-                        ? "bg-[#071B3D] text-white border-[#071B3D]"
-                        : "bg-white text-[#101828] border-[#DFE5EE]"
+                        ? "bg-[#1E3A8A] text-white border-[#1E3A8A]"
+                        : "bg-white text-[#111827] border-[#E5E7EB]"
                     }`}
                   >
                     {t}
@@ -420,9 +420,9 @@ export function AdminDashboardClient() {
               </a>
             </div>
 
-            <div className="bg-white border border-[#DFE5EE] overflow-x-auto">
+            <div className="bg-white border border-[#E5E7EB] overflow-x-auto rounded-[15px]">
               <table className="w-full text-left text-sm">
-                <thead className="bg-[#071B3D] text-white font-nav text-xs uppercase">
+                <thead className="bg-[#1E3A8A] text-white font-nav text-xs uppercase">
                   <tr>
                     <th className="p-4">Reference</th>
                     <th className="p-4">Name / Org</th>
@@ -431,29 +431,29 @@ export function AdminDashboardClient() {
                     <th className="p-4">Update</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#DFE5EE]">
+                <tbody className="divide-y divide-[#E5E7EB]">
                   {enquiries.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="p-6 text-center text-[#667085]">
+                      <td colSpan={5} className="p-6 text-center text-[#4B5563]">
                         No records found.
                       </td>
                     </tr>
                   ) : (
                     enquiries.map((e) => (
                       <tr key={e.id}>
-                        <td className="p-4 font-nav text-xs font-bold text-[#1746A2]">
+                        <td className="p-4 font-nav text-xs font-bold text-[#1D4ED8]">
                           {e.referenceCode}
                         </td>
-                        <td className="p-4 font-semibold text-[#071B3D]">
+                        <td className="p-4 font-semibold text-[#1E3A8A]">
                           {e.fullName || e.institutionName || e.companyName}
                         </td>
-                        <td className="p-4 text-[#667085]">{e.phone || e.officialEmail}</td>
+                        <td className="p-4 text-[#4B5563]">{e.phone || e.officialEmail}</td>
                         <td className="p-4 font-nav text-xs font-bold">{e.status}</td>
                         <td className="p-4">
                           <select
                             value={e.status}
                             onChange={(ev) => handleUpdateEnquiryStatus(e.id, ev.target.value)}
-                            className="border border-[#DFE5EE] px-2 py-1 text-xs bg-white"
+                            className="border border-[#E5E7EB] px-2 py-1 text-xs bg-white rounded-[15px]"
                           >
                             {["NEW", "CONTACTED", "DEMO_SCHEDULED", "FOLLOW_UP", "ENROLLED", "CLOSED"].map((st) => (
                               <option key={st} value={st}>{st}</option>
@@ -472,14 +472,14 @@ export function AdminDashboardClient() {
         {/* STUDENTS */}
         {activeTab === "students" && (
           <div className="space-y-6">
-            <form onSubmit={handleCreateStudent} className="bg-white border border-[#DFE5EE] p-6 grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+            <form onSubmit={handleCreateStudent} className="bg-white border border-[#E5E7EB] p-6 grid grid-cols-1 sm:grid-cols-4 gap-4 items-end rounded-[15px]">
               <div>
                 <label className="block text-xs font-nav font-semibold uppercase mb-1">Full Name *</label>
                 <input
                   required
                   value={newStudentName}
                   onChange={(e) => setNewStudentName(e.target.value)}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
               <div>
@@ -488,7 +488,7 @@ export function AdminDashboardClient() {
                   type="email"
                   value={newStudentEmail}
                   onChange={(e) => setNewStudentEmail(e.target.value)}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
               <div>
@@ -496,7 +496,7 @@ export function AdminDashboardClient() {
                 <input
                   value={newStudentPhone}
                   onChange={(e) => setNewStudentPhone(e.target.value)}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
               <button type="submit" className="btn-gold py-2.5 px-4 text-xs inline-flex items-center justify-center gap-1.5">
@@ -504,9 +504,9 @@ export function AdminDashboardClient() {
               </button>
             </form>
 
-            <div className="bg-white border border-[#DFE5EE] overflow-x-auto">
+            <div className="bg-white border border-[#E5E7EB] overflow-x-auto rounded-[15px]">
               <table className="w-full text-left text-sm">
-                <thead className="bg-[#071B3D] text-white font-nav text-xs uppercase">
+                <thead className="bg-[#1E3A8A] text-white font-nav text-xs uppercase">
                   <tr>
                     <th className="p-4">Student Code</th>
                     <th className="p-4">Name</th>
@@ -514,13 +514,13 @@ export function AdminDashboardClient() {
                     <th className="p-4">Phone</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#DFE5EE]">
+                <tbody className="divide-y divide-[#E5E7EB]">
                   {students.map((s) => (
                     <tr key={s.id}>
-                      <td className="p-4 font-nav text-xs font-bold text-[#1746A2]">{s.studentCode}</td>
+                      <td className="p-4 font-nav text-xs font-bold text-[#1D4ED8]">{s.studentCode}</td>
                       <td className="p-4 font-semibold">{s.fullName}</td>
-                      <td className="p-4 text-[#667085]">{s.email || "—"}</td>
-                      <td className="p-4 text-[#667085]">{s.phone || "—"}</td>
+                      <td className="p-4 text-[#4B5563]">{s.email || "—"}</td>
+                      <td className="p-4 text-[#4B5563]">{s.phone || "—"}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -532,14 +532,14 @@ export function AdminDashboardClient() {
         {/* CERTIFICATES */}
         {activeTab === "certificates" && (
           <div className="space-y-6">
-            <form onSubmit={handleIssueCertificate} className="bg-white border border-[#DFE5EE] p-6 grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+            <form onSubmit={handleIssueCertificate} className="bg-white border border-[#E5E7EB] p-6 grid grid-cols-1 sm:grid-cols-4 gap-4 items-end rounded-[15px]">
               <div>
                 <label className="block text-xs font-nav font-semibold uppercase mb-1">Student *</label>
                 <select
                   required
                   value={certStudentId}
                   onChange={(e) => setCertStudentId(e.target.value)}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm bg-white"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm bg-white rounded-[15px]"
                 >
                   <option value="">Select student</option>
                   {students.map((s) => (
@@ -553,7 +553,7 @@ export function AdminDashboardClient() {
                   required
                   value={certCourseId}
                   onChange={(e) => setCertCourseId(e.target.value)}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm bg-white"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm bg-white rounded-[15px]"
                 >
                   <option value="">Select course</option>
                   {courses.map((c) => (
@@ -567,7 +567,7 @@ export function AdminDashboardClient() {
                   value={certGrade}
                   onChange={(e) => setCertGrade(e.target.value)}
                   placeholder="e.g., Distinction"
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
               <button type="submit" className="btn-gold py-2.5 px-4 text-xs">
@@ -575,9 +575,9 @@ export function AdminDashboardClient() {
               </button>
             </form>
 
-            <div className="bg-white border border-[#DFE5EE] overflow-x-auto">
+            <div className="bg-white border border-[#E5E7EB] overflow-x-auto rounded-[15px]">
               <table className="w-full text-left text-sm">
-                <thead className="bg-[#071B3D] text-white font-nav text-xs uppercase">
+                <thead className="bg-[#1E3A8A] text-white font-nav text-xs uppercase">
                   <tr>
                     <th className="p-4">Certificate ID</th>
                     <th className="p-4">Recipient</th>
@@ -586,12 +586,12 @@ export function AdminDashboardClient() {
                     <th className="p-4">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#DFE5EE]">
+                <tbody className="divide-y divide-[#E5E7EB]">
                   {certificates.map((cert) => (
                     <tr key={cert.id}>
-                      <td className="p-4 font-nav text-xs font-bold text-[#1746A2]">{cert.certificateId}</td>
+                      <td className="p-4 font-nav text-xs font-bold text-[#1D4ED8]">{cert.certificateId}</td>
                       <td className="p-4 font-semibold">{cert.recipientName}</td>
-                      <td className="p-4 text-[#667085]">{cert.programmeTitle}</td>
+                      <td className="p-4 text-[#4B5563]">{cert.programmeTitle}</td>
                       <td className="p-4 font-nav text-xs font-bold">{cert.status}</td>
                       <td className="p-4 flex flex-wrap gap-2">
                         <a
@@ -629,13 +629,13 @@ export function AdminDashboardClient() {
 
         {/* SETTINGS */}
         {activeTab === "settings" && settings && (
-          <form onSubmit={handleSaveSettings} className="bg-white border border-[#DFE5EE] p-6 space-y-4 max-w-2xl">
+          <form onSubmit={handleSaveSettings} className="bg-white border border-[#E5E7EB] p-6 space-y-4 max-w-2xl rounded-[15px]">
             <div>
               <label className="block text-xs font-nav font-semibold uppercase mb-1">Institution Name</label>
               <input
                 value={settings.institutionName || ""}
                 onChange={(e) => setSettings({ ...settings, institutionName: e.target.value })}
-                className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
               />
             </div>
             <div>
@@ -643,7 +643,7 @@ export function AdminDashboardClient() {
               <input
                 value={settings.address || ""}
                 onChange={(e) => setSettings({ ...settings, address: e.target.value })}
-                className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -652,7 +652,7 @@ export function AdminDashboardClient() {
                 <input
                   value={settings.phone || ""}
                   onChange={(e) => setSettings({ ...settings, phone: e.target.value })}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
               <div>
@@ -660,7 +660,7 @@ export function AdminDashboardClient() {
                 <input
                   value={settings.email || ""}
                   onChange={(e) => setSettings({ ...settings, email: e.target.value })}
-                  className="w-full border border-[#DFE5EE] px-3 py-2 text-sm"
+                  className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
                 />
               </div>
             </div>
@@ -680,9 +680,9 @@ export function AdminDashboardClient() {
 
         {/* AUDIT LOGS */}
         {activeTab === "audit" && (
-          <div className="bg-white border border-[#DFE5EE] overflow-x-auto">
+          <div className="bg-white border border-[#E5E7EB] overflow-x-auto rounded-[15px]">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#071B3D] text-white font-nav text-xs uppercase">
+              <thead className="bg-[#1E3A8A] text-white font-nav text-xs uppercase">
                 <tr>
                   <th className="p-4">Timestamp</th>
                   <th className="p-4">Actor</th>
@@ -690,14 +690,14 @@ export function AdminDashboardClient() {
                   <th className="p-4">Entity</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DFE5EE]">
+              <tbody className="divide-y divide-[#E5E7EB]">
                 {auditLogs.map((log) => (
                   <tr key={log.id}>
-                    <td className="p-4 text-xs text-[#667085]">
+                    <td className="p-4 text-xs text-[#4B5563]">
                       {new Date(log.createdAt).toLocaleString("en-IN")}
                     </td>
                     <td className="p-4 font-semibold">{log.actor?.email || "System"}</td>
-                    <td className="p-4 font-nav text-xs font-bold text-[#1746A2]">{log.action}</td>
+                    <td className="p-4 font-nav text-xs font-bold text-[#1D4ED8]">{log.action}</td>
                     <td className="p-4 text-xs">{log.entityType}</td>
                   </tr>
                 ))}

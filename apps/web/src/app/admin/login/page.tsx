@@ -38,14 +38,14 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#071B3D] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white border-t-4 border-[#D4A54A] shadow-2xl p-8 space-y-6">
+    <div className="min-h-screen bg-[#1E3A8A] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white border-t-4 border-[#EA580C] shadow-2xl p-8 space-y-6">
         <div className="flex flex-col items-center text-center space-y-2">
           <VlearninLogo variant="dark" showTagline={false} />
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2] pt-2">
+          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8] pt-2">
             ADMINISTRATOR PORTAL
           </p>
-          <h1 className="text-2xl font-bold text-[#071B3D]">Sign In to Dashboard</h1>
+          <h1 className="text-2xl font-bold text-[#1E3A8A]">Sign In to Dashboard</h1>
         </div>
 
         {error && (
@@ -57,7 +57,7 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="admin-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+            <label htmlFor="admin-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
               Administrator Email
             </label>
             <input
@@ -67,12 +67,12 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@vlearnin.com"
-              className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+              className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
             />
           </div>
 
           <div>
-            <label htmlFor="admin-password" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+            <label htmlFor="admin-password" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
               Password
             </label>
             <input
@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+              className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
             />
           </div>
 
@@ -95,8 +95,8 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div className="pt-3 border-t border-[#DFE5EE] flex items-center justify-center gap-2 text-xs text-[#667085]">
-          <ShieldCheck className="w-4 h-4 text-[#1746A2]" />
+        <div className="pt-3 border-t border-[#E5E7EB] flex items-center justify-center gap-2 text-xs text-[#4B5563]">
+          <ShieldCheck className="w-4 h-4 text-[#1D4ED8]" />
           <span>Protected with Argon2 &amp; HTTP-Only Sessions</span>
         </div>
       </div>

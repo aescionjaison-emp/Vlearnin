@@ -168,9 +168,9 @@ export function AcademicPartnershipsClient() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#071B3D] text-white py-16 lg:py-22 border-b-4 border-[#D4A54A]">
+      <section className="bg-[#1E3A8A] text-white py-16 lg:py-22 border-b-4 border-[#EA580C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
+          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
             INSTITUTIONAL &amp; ACADEMIC PARTNERSHIPS
           </p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl leading-tight">
@@ -193,7 +193,7 @@ export function AcademicPartnershipsClient() {
               href={`${apiRoot}/api/brochures/academic`}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/60 hover:bg-white hover:text-[#071B3D] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors"
+              className="border border-white/60 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
             >
               <Download className="w-4 h-4" />
               Download Academic Brochure PDF
@@ -203,13 +203,13 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 1: Bridging the Campus-to-Corporate Gap */}
-      <section className="py-16 bg-[#F4F7FC] border-b border-[#DFE5EE]">
+      <section className="py-16 bg-[#F8FAFC] border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-3xl space-y-4">
-            <h2 className="text-3xl font-bold text-[#071B3D]">
+            <h2 className="text-3xl font-bold text-[#1E3A8A]">
               Bridging the Campus-to-Corporate Gap
             </h2>
-            <p className="text-base text-[#667085] leading-relaxed">
+            <p className="text-base text-[#4B5563] leading-relaxed">
               Academic degrees build strong theoretical foundations, yet recruiters increasingly
               evaluate graduates on practical tool mastery, analytical thinking, and project
               portfolios. Through The V-Way to Learn, Build &amp; Lead, VLEARNIN collaborates with
@@ -237,10 +237,10 @@ export function AcademicPartnershipsClient() {
                 desc: "Verifiable certificates upon meeting attendance and assessment criteria, with dual branding where agreed by the institution.",
               },
             ].map((benefit) => (
-              <div key={benefit.title} className="bg-white border border-[#DFE5EE] p-6 border-t-4 border-t-[#1746A2]">
-                <GraduationCap className="w-6 h-6 text-[#D4A54A] mb-3" />
-                <h3 className="text-lg font-bold text-[#071B3D] mb-2">{benefit.title}</h3>
-                <p className="text-sm text-[#667085] leading-relaxed">{benefit.desc}</p>
+              <div key={benefit.title} className="bg-white border border-[#E5E7EB] p-6 border-t-4 border-t-[#1D4ED8] rounded-[15px]">
+                <GraduationCap className="w-6 h-6 text-[#EA580C] mb-3" />
+                <h3 className="text-lg font-bold text-[#1E3A8A] mb-2">{benefit.title}</h3>
+                <p className="text-sm text-[#4B5563] leading-relaxed">{benefit.desc}</p>
               </div>
             ))}
           </div>
@@ -251,37 +251,37 @@ export function AcademicPartnershipsClient() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
+            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
               CURRICULUM MATRIX
             </p>
-            <h2 className="text-3xl font-bold text-[#071B3D] mt-1">
+            <h2 className="text-3xl font-bold text-[#1E3A8A] mt-1">
               Institutional Certification Portfolio
             </h2>
           </div>
 
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto border border-[#DFE5EE]">
+          <div className="hidden md:block overflow-x-auto border border-[#E5E7EB] rounded-[15px]">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#071B3D] text-white font-nav text-xs uppercase tracking-wider">
+                <tr className="bg-[#1E3A8A] text-white font-nav text-xs uppercase tracking-wider">
                   <th className="py-4 px-5">Programme</th>
                   <th className="py-4 px-5">Duration</th>
                   <th className="py-4 px-5">Target Student Streams</th>
                   <th className="py-4 px-5">Core Industry Skill Area</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DFE5EE] text-sm">
+              <tbody className="divide-y divide-[#E5E7EB] text-sm">
                 {PORTFOLIO_ROWS.map((row, idx) => (
                   <tr
                     key={row.programme}
-                    className={idx % 2 === 0 ? "bg-white" : "bg-[#F4F7FC]/60"}
+                    className={idx % 2 === 0 ? "bg-white" : "bg-[#F8FAFC]/60"}
                   >
-                    <td className="py-4 px-5 font-bold text-[#071B3D]">{row.programme}</td>
-                    <td className="py-4 px-5 font-nav font-semibold text-[#1746A2] whitespace-nowrap">
+                    <td className="py-4 px-5 font-bold text-[#1E3A8A]">{row.programme}</td>
+                    <td className="py-4 px-5 font-nav font-semibold text-[#1D4ED8] whitespace-nowrap">
                       {row.duration}
                     </td>
-                    <td className="py-4 px-5 text-[#101828]">{row.streams}</td>
-                    <td className="py-4 px-5 text-[#667085]">{row.skillArea}</td>
+                    <td className="py-4 px-5 text-[#111827]">{row.streams}</td>
+                    <td className="py-4 px-5 text-[#4B5563]">{row.skillArea}</td>
                   </tr>
                 ))}
               </tbody>
@@ -291,17 +291,17 @@ export function AcademicPartnershipsClient() {
           {/* Mobile Stacked Cards */}
           <div className="md:hidden space-y-4">
             {PORTFOLIO_ROWS.map((row) => (
-              <div key={row.programme} className="border border-[#DFE5EE] p-5 bg-[#F4F7FC] space-y-2">
+              <div key={row.programme} className="border border-[#E5E7EB] p-5 bg-[#F8FAFC] space-y-2 rounded-[15px]">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-bold text-[#071B3D] text-base">{row.programme}</h3>
-                  <span className="font-nav text-xs font-bold bg-[#071B3D] text-[#D4A54A] px-2.5 py-1 shrink-0">
+                  <h3 className="font-bold text-[#1E3A8A] text-base">{row.programme}</h3>
+                  <span className="font-nav text-xs font-bold bg-[#1E3A8A] text-[#EA580C] px-2.5 py-1 shrink-0">
                     {row.duration}
                   </span>
                 </div>
-                <p className="text-xs text-[#101828]">
+                <p className="text-xs text-[#111827]">
                   <strong>Streams:</strong> {row.streams}
                 </p>
-                <p className="text-xs text-[#667085]">
+                <p className="text-xs text-[#4B5563]">
                   <strong>Skill Area:</strong> {row.skillArea}
                 </p>
               </div>
@@ -311,10 +311,10 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 3: Six-Step Academic Delivery Framework */}
-      <section ref={timelineRef} className="py-16 bg-[#071B3D] text-white">
+      <section ref={timelineRef} className="py-16 bg-[#1E3A8A] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#D4A54A]">
+            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
               IMPLEMENTATION TIMELINE
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold mt-2">
@@ -326,9 +326,9 @@ export function AcademicPartnershipsClient() {
             {DELIVERY_STEPS.map((s) => (
               <div
                 key={s.step}
-                className="timeline-step bg-[#0B234D] border border-white/15 border-t-4 border-t-[#D4A54A] p-6 space-y-2.5"
+                className="timeline-step bg-[#0B234D] border border-white/15 border-t-4 border-t-[#EA580C] p-6 space-y-2.5 rounded-[15px]"
               >
-                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#D4A54A]">
+                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#EA580C]">
                   {s.step}
                 </span>
                 <h3 className="text-lg font-bold text-white">{s.title}</h3>
@@ -340,30 +340,30 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 4: Institutional Partnership Inquiry Form */}
-      <section id="institutional-form" className="py-16 bg-[#F4F7FC]">
+      <section id="institutional-form" className="py-16 bg-[#F8FAFC]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white border border-[#DFE5EE] shadow-md p-6 sm:p-10">
+          <div className="bg-white border border-[#E5E7EB] shadow-md p-6 sm:p-10 rounded-[15px]">
             <div className="mb-8">
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1746A2]">
+              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 CAMPUS COLLABORATION
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#071B3D] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
                 Invite VLEARNIN for an Institutional Presentation
               </h2>
-              <p className="text-sm text-[#667085] mt-2">
+              <p className="text-sm text-[#4B5563] mt-2">
                 Share your institution&apos;s details below, and our Academic Partnerships team will
                 connect with you to customize a programme proposal.
               </p>
             </div>
 
             {successRef ? (
-              <div className="p-8 bg-[#F4F7FC] border border-emerald-200 text-center space-y-3">
+              <div className="p-8 bg-[#F8FAFC] border border-emerald-200 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h3 className="text-xl font-bold text-[#071B3D]">
+                <h3 className="text-xl font-bold text-[#1E3A8A]">
                   Institutional Proposal Request Received
                 </h3>
-                <p className="text-sm text-[#667085]">
-                  Reference ID: <strong className="text-[#071B3D]">{successRef}</strong>. Our
+                <p className="text-sm text-[#4B5563]">
+                  Reference ID: <strong className="text-[#1E3A8A]">{successRef}</strong>. Our
                   Academic Partnerships team will contact you shortly.
                 </p>
               </div>
@@ -380,26 +380,26 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       Full Name *
                     </label>
                     <input
                       id="inst-fullName"
                       type="text"
                       {...register("fullName")}
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     />
                     {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       Designation *
                     </label>
                     <select
                       id="inst-designation"
                       {...register("designation")}
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     >
                       <option value="">Select designation</option>
                       {INSTITUTIONAL_DESIGNATIONS.map((d) => (
@@ -412,20 +412,20 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       College / Institution Name *
                     </label>
                     <input
                       id="inst-name"
                       type="text"
                       {...register("institutionName")}
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     />
                     {errors.institutionName && <p className="text-xs text-red-600 mt-1">{errors.institutionName.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       City / Area
                     </label>
                     <input
@@ -433,41 +433,41 @@ export function AcademicPartnershipsClient() {
                       type="text"
                       {...register("cityArea")}
                       placeholder="e.g., Bengaluru / Mysuru / Tumakuru"
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       Official Email *
                     </label>
                     <input
                       id="inst-email"
                       type="email"
                       {...register("officialEmail")}
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     />
                     {errors.officialEmail && <p className="text-xs text-red-600 mt-1">{errors.officialEmail.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                       Phone / WhatsApp *
                     </label>
                     <input
                       id="inst-phone"
                       type="tel"
                       {...register("phone")}
-                      className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                     />
                     {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-2">
+                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-2">
                     Interested Programmes * (Select all that apply)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -478,15 +478,15 @@ export function AcademicPartnershipsClient() {
                           key={prog}
                           className={`flex items-start gap-2.5 p-3 border text-xs cursor-pointer transition-colors ${
                             checked
-                              ? "border-[#071B3D] bg-[#F4F7FC] font-semibold text-[#071B3D]"
-                              : "border-[#DFE5EE] bg-white text-[#101828]"
+                              ? "border-[#1E3A8A] bg-[#F8FAFC] font-semibold text-[#1E3A8A]"
+                              : "border-[#E5E7EB] bg-white text-[#111827]"
                           }`}
                         >
                           <input
                             type="checkbox"
                             checked={checked}
                             onChange={() => toggleProgramme(prog)}
-                            className="mt-0.5 accent-[#071B3D]"
+                            className="mt-0.5 accent-[#1E3A8A]"
                           />
                           <span>{prog}</span>
                         </label>
@@ -499,13 +499,13 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Estimated Student Batch Size *
                   </label>
                   <select
                     id="inst-batchSize"
                     {...register("estimatedBatchSize")}
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   >
                     {BATCH_SIZE_OPTIONS.map((b) => (
                       <option key={b} value={b}>{b}</option>
@@ -514,7 +514,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#071B3D] mb-1">
+                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
                     Message / Preferred Timeline
                   </label>
                   <textarea
@@ -522,12 +522,12 @@ export function AcademicPartnershipsClient() {
                     rows={3}
                     {...register("message")}
                     placeholder="Share preferred semester dates, student streams, or lab availability..."
-                    className="w-full border border-[#DFE5EE] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1746A2]"
+                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
                   />
                 </div>
 
-                <label className="flex items-start gap-2.5 text-xs text-[#667085] cursor-pointer">
-                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#071B3D]" />
+                <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
+                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1E3A8A]" />
                   <span>
                     I authorize VLEARNIN Academy to contact our institution regarding this academic
                     partnership proposal.
