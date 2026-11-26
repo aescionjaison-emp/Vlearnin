@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Manrope, Newsreader } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,17 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-jakarta",
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["600", "700"],
-  variable: "--font-fraunces",
+  variable: "--font-newsreader",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${fraunces.variable}`}
+      className={`${manrope.variable} ${newsreader.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script

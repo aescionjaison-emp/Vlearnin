@@ -4,8 +4,8 @@
    ========================================================================== */
 
 :root {
-  --font-primary: var(--font-fraunces), Georgia, serif;
-  --font-secondary: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-newsreader), Georgia, serif;
+  --font-secondary: var(--font-manrope), system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-primary);
   --font-body: var(--font-secondary);
   --font-navigation: var(--font-secondary);
