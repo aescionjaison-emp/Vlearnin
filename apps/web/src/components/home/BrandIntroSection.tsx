@@ -10,33 +10,12 @@ import {
   runSectionCascadeTimeline,
   runSplitEditorialTimeline,
 } from "@/lib/motion/timelines";
-
-const PILLARS = [
-  {
-    step: "01",
-    title: "LEARN",
-    desc: "Master relevant industry tools and essential concepts.",
-  },
-  {
-    step: "02",
-    title: "BUILD",
-    desc: "Apply knowledge through practical projects and real business scenarios.",
-  },
-  {
-    step: "03",
-    title: "LEAD",
-    desc: "Develop professional confidence and career readiness.",
-  },
-];
-
-const HIGHLIGHTS = [
-  { value: 7, padZero: true, label: "Certification Programmes", sub: "30-Hour Practical Tracks" },
-  { value: 3, padZero: true, label: "Core Learning Domains", sub: "AI/BI, Finance & Digital Media" },
-  { value: 30, padZero: false, label: "Hours Per Standalone Programme", sub: "5 Modules × 6 Hours" },
-  { value: 4, padZero: true, label: "Career Accelerator Combos", sub: "45 to 90 Hours Dual-Skill" },
-];
+import { useSiteContent } from "@/components/SiteContentProvider";
+import { EditableImageTrigger, EditableText } from "@/components/EditableText";
 
 export function BrandIntroSection() {
+  const { content } = useSiteContent();
+  const bi = content.brandIntro;
   const splitRef = useRef<HTMLDivElement>(null);
   const splitImgRef = useRef<HTMLImageElement>(null);
   const highlightsRef = useRef<HTMLDivElement>(null);
@@ -65,47 +44,72 @@ export function BrandIntroSection() {
             <div className="split-image lg:col-span-5 relative min-h-[300px] lg:min-h-[440px] overflow-hidden">
               <Image
                 ref={splitImgRef}
-                src="/images/about-campus.jpg"
-                alt="Practical instructor-led mentorship at VLEARNIN Academy"
+                src={bi.image}
+                alt={bi.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover mc-image-zoom scale-105"
+              />
+              <EditableImageTrigger
+                path="brandIntro.image"
+                currentSrc={bi.image}
+                altPath="brandIntro.imageAlt"
+                currentAlt={bi.imageAlt}
               />
             </div>
 
             {/* Editorial Narrative & Connected LEARN-BUILD-LEAD Journey */}
             <div className="split-content lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
               <div>
-                <p className="mc-eyebrow text-[#1D4ED8]">
-                  WELCOME TO VLEARNIN
-                </p>
-                <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2 leading-tight">
-                  Learn With Purpose. Build With Confidence. Lead With Skill.
-                </h2>
-                <p className="font-nav text-sm font-semibold text-[#EA580C] mt-2">
-                  The V-Way to Learn, Build &amp; Lead.
-                </p>
+                <EditableText
+                  as="p"
+                  path="brandIntro.eyebrow"
+                  value={bi.eyebrow}
+                  className="mc-eyebrow text-[#1D4ED8]"
+                />
+                <EditableText
+                  as="h2"
+                  path="brandIntro.heading"
+                  value={bi.heading}
+                  className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2 leading-tight"
+                />
+                <EditableText
+                  as="p"
+                  path="brandIntro.subTagline"
+                  value={bi.subTagline}
+                  className="font-nav text-sm font-semibold text-[#EA580C] mt-2"
+                />
               </div>
 
-              <p className="mc-lead text-[#4B5563]">
-                VLEARNIN bridges the gap between academic knowledge and real-world professional
-                capabilities through practical certification programmes, personalized mentorship and
-                career-oriented learning.
-              </p>
+              <EditableText
+                as="p"
+                path="brandIntro.description"
+                value={bi.description}
+                className="mc-lead text-[#4B5563]"
+              />
 
               {/* Connected 3-Step Educational Journey */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E5E7EB]">
-                {PILLARS.map((p) => (
-                  <div key={p.title} className="split-stagger-item pt-3 space-y-1.5">
+                {bi.pillars.map((p, idx) => (
+                  <div key={idx} className="split-stagger-item pt-3 space-y-1.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-editorial text-xl font-bold text-[#EA580C]">
-                        {p.step}
-                      </span>
-                      <span className="font-nav text-sm font-bold tracking-wider text-[#1E3A8A]">
-                        {p.title}
-                      </span>
+                      <EditableText
+                        path={`brandIntro.pillars.${idx}.step`}
+                        value={p.step}
+                        className="font-editorial text-xl font-bold text-[#EA580C]"
+                      />
+                      <EditableText
+                        path={`brandIntro.pillars.${idx}.title`}
+                        value={p.title}
+                        className="font-nav text-sm font-bold tracking-wider text-[#1E3A8A]"
+                      />
                     </div>
-                    <p className="text-sm text-[#4B5563] leading-snug">{p.desc}</p>
+                    <EditableText
+                      as="p"
+                      path={`brandIntro.pillars.${idx}.desc`}
+                      value={p.desc}
+                      className="text-sm text-[#4B5563] leading-snug"
+                    />
                   </div>
                 ))}
               </div>
@@ -115,14 +119,14 @@ export function BrandIntroSection() {
                   href="/about"
                   className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
                 >
-                  <span>Know More About VLEARNIN</span>
+                  <EditableText path="brandIntro.ctaLabel" value={bi.ctaLabel} />
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/courses"
                   className="font-nav text-sm font-semibold text-[#1D4ED8] hover:text-[#1E3A8A] underline underline-offset-4"
                 >
-                  Explore Our Learning Methodology
+                  <EditableText path="brandIntro.secondaryLinkLabel" value={bi.secondaryLinkLabel} />
                 </Link>
               </div>
             </div>
@@ -134,17 +138,25 @@ export function BrandIntroSection() {
       <section aria-label="Factual Programme Highlights" className="bg-[#1E3A8A] text-white py-12">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div ref={highlightsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
-            {HIGHLIGHTS.map((h) => (
-              <div key={h.label} className="highlight-stat pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left">
+            {bi.highlights.map((h, idx) => (
+              <div key={idx} className="highlight-stat pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left">
                 <AnimatedCounter
                   value={h.value}
                   padZero={h.padZero}
                   className="mc-counter text-[#93C5FD]"
                 />
-                <p className="font-nav text-sm sm:text-base font-bold text-white mt-2">
-                  {h.label}
-                </p>
-                <p className="text-xs sm:text-sm text-white/70 mt-0.5">{h.sub}</p>
+                <EditableText
+                  as="p"
+                  path={`brandIntro.highlights.${idx}.label`}
+                  value={h.label}
+                  className="font-nav text-sm sm:text-base font-bold text-white mt-2"
+                />
+                <EditableText
+                  as="p"
+                  path={`brandIntro.highlights.${idx}.sub`}
+                  value={h.sub}
+                  className="text-xs sm:text-sm text-white/70 mt-0.5"
+                />
               </div>
             ))}
           </div>

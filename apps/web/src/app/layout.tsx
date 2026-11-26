@@ -6,6 +6,7 @@ import { GlobalHeader } from "@/components/GlobalHeader";
 import { GlobalFooter } from "@/components/GlobalFooter";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
+import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -83,11 +84,13 @@ export default function RootLayout({
         />
         <SmoothScrollProvider>
           <FirebaseAnalytics />
-          <LeadModalProvider>
-            <GlobalHeader />
-            <main className="flex-1">{children}</main>
-            <GlobalFooter />
-          </LeadModalProvider>
+          <SiteContentProvider>
+            <LeadModalProvider>
+              <GlobalHeader />
+              <main className="flex-1">{children}</main>
+              <GlobalFooter />
+            </LeadModalProvider>
+          </SiteContentProvider>
         </SmoothScrollProvider>
       </body>
     </html>

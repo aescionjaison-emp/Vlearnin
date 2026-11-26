@@ -20,50 +20,45 @@ import {
 import { BRAND, OFFICIAL_COURSES } from "@vlearnin/shared";
 import { VlearninLogo } from "./VlearninLogo";
 import { useLeadModal } from "./LeadModalProvider";
+import { useSiteContent } from "./SiteContentProvider";
+import { EditableText } from "./EditableText";
 
-const MEGA_COLUMNS = [
-  {
-    title: "AI & Business Intelligence",
-    categorySlug: "ai-business-intelligence",
-    image: "/images/domain-analytics.jpg",
-    courses: OFFICIAL_COURSES.filter(
-      (c) => c.categorySlug === "ai-business-intelligence",
-    ),
-  },
-  {
-    title: "Corporate Finance & Capital Markets",
-    categorySlug: "corporate-finance-capital-markets",
-    image: "/images/hero-3.jpg",
-    courses: OFFICIAL_COURSES.filter(
-      (c) => c.categorySlug === "corporate-finance-capital-markets",
-    ),
-  },
-  {
-    title: "Digital Marketing & Creative Media",
-    categorySlug: "digital-marketing-creative-media",
-    image: "/images/domain-creative.jpg",
-    courses: OFFICIAL_COURSES.filter(
-      (c) => c.categorySlug === "digital-marketing-creative-media",
-    ),
-  },
-];
-
-const NAV_LINKS = [
-  { label: "About Us", href: "/about" },
-  { label: "Programmes", href: "/courses", hasMega: true },
-  { label: "Career Combos", href: "/career-combos" },
-  { label: "Placement Assistance", href: "/placement-assistance" },
-  { label: "Academic Partnerships", href: "/academic-partnerships" },
-  { label: "Contact", href: "/contact" },
-];
-
-export function GlobalHeader() {
+export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
   const pathname = usePathname();
   const { openDemoModal } = useLeadModal();
+  const { content } = useSiteContent();
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProgOpen, setMobileProgOpen] = useState(false);
   const megaTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const MEGA_COLUMNS = [
+    {
+      title: content.categories[0]?.name || "AI & Business Intelligence",
+      categorySlug: "ai-business-intelligence",
+      image: content.categories[0]?.image || "/images/domain-analytics.jpg",
+      courses: content.courses.filter(
+        (c) => c.categorySlug === "ai-business-intelligence",
+      ),
+    },
+    {
+      title: content.categories[1]?.name || "Corporate Finance & Capital Markets",
+      categorySlug: "corporate-finance-capital-markets",
+      image: content.categories[1]?.image || "/images/hero-3.jpg",
+      courses: content.courses.filter(
+        (c) => c.categorySlug === "corporate-finance-capital-markets",
+      ),
+    },
+    {
+      title: content.categories[2]?.name || "Digital Marketing & Creative Media",
+      categorySlug: "digital-marketing-creative-media",
+      image: content.categories[2]?.image || "/images/domain-creative.jpg",
+      courses: content.courses.filter(
+        (c) => c.categorySlug === "digital-marketing-creative-media",
+      ),
+    },
+  ];
+  const NAV_LINKS = content.header.navLinks;
 
   useEffect(() => {
     setMegaOpen(false);
@@ -81,7 +76,7 @@ export function GlobalHeader() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  if (pathname?.startsWith("/admin")) {
+  if (!forceShow && pathname?.startsWith("/admin")) {
     return null;
   }
 

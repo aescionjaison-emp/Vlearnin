@@ -7,88 +7,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Pause, Play, ArrowRight, CheckCircle2 } from "lucide-react";
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { runHeroTimeline } from "@/lib/motion/timelines";
-
-interface HeroBanner {
-  id: string;
-  theme: "jain-blue" | "light-split" | "deep-navy" | "studio-light";
-  badge: string;
-  headlineWhite: string;
-  headlineAccent: string;
-  description: string;
-  features?: string[];
-  image: string;
-  imageAlt: string;
-  primaryCta: { label: string; href: string };
-  secondaryCta?: { label: string; action: "demo" | "brochure" } | { label: string; href: string };
-}
-
-const BANNERS: HeroBanner[] = [
-  {
-    id: "brand-campaign",
-    theme: "jain-blue",
-    badge: "THE V-WAY TO LEARN, BUILD & LEAD.",
-    headlineWhite: "Shaping Future-Ready Talent Through",
-    headlineAccent: "Practical, Industry-Aligned Education",
-    description:
-      "Master high-demand skills in Artificial Intelligence, Business Intelligence, Corporate Finance, and Digital Media through practical, 30-hour certification programmes.",
-    image: "/images/hero-1.jpg",
-    imageAlt: "Confident Indian learners in an instructor-led practical training session at VLEARNIN",
-    primaryCta: { label: "Explore All Programmes", href: "/courses" },
-    secondaryCta: { label: "Book Free Demo", action: "demo" },
-  },
-  {
-    id: "ai-bi",
-    theme: "light-split",
-    badge: "AI & BUSINESS INTELLIGENCE",
-    headlineWhite: "Learn AI. Master Data.",
-    headlineAccent: "Lead Business Transformation.",
-    description:
-      "Hands-on 30-hour certifications in generative AI workplace automation, Power Query data cleaning, DAX modeling, and executive Power BI dashboards.",
-    features: [
-      "Certified AI Tools for Commerce & Business",
-      "Certified Data Visualization Using Power BI",
-    ],
-    image: "/images/hero-2.jpg",
-    imageAlt: "Students analyzing business intelligence dashboards and AI tools in a bright computer lab",
-    primaryCta: { label: "Explore AI & Analytics", href: "/courses?category=ai-business-intelligence" },
-    secondaryCta: { label: "Book Free Demo", action: "demo" },
-  },
-  {
-    id: "corporate-finance",
-    theme: "deep-navy",
-    badge: "CORPORATE FINANCE & CAPITAL MARKETS",
-    headlineWhite: "Build the Financial Expertise",
-    headlineAccent: "Tomorrow's Businesses Need.",
-    description:
-      "Construct dynamic 3-statement Excel forecasts, DCF company valuations, M&A deal structures, and investment banking pitchbooks through live case studies.",
-    features: ["Financial Modelling", "Investment Banking"],
-    image: "/images/hero-3.jpg",
-    imageAlt: "Corporate finance training classroom featuring financial models and mentor guidance",
-    primaryCta: { label: "Explore Finance Programmes", href: "/courses?category=corporate-finance-capital-markets" },
-    secondaryCta: { label: "View Career Combos", href: "/career-combos" },
-  },
-  {
-    id: "digital-media",
-    theme: "studio-light",
-    badge: "DIGITAL MARKETING & CREATIVE MEDIA",
-    headlineWhite: "Create. Connect. Grow.",
-    headlineAccent: "Lead the Digital Future.",
-    description:
-      "Launch performance ad campaigns, build 30-day multi-platform content engines, and produce high-retention commercial Reels and YouTube edits.",
-    features: [
-      "Digital Marketing",
-      "Social Media Marketing",
-      "Video Editing & Reels Production",
-    ],
-    image: "/images/hero-4.jpg",
-    imageAlt: "Modern creative media studio with video editing workstation and digital production",
-    primaryCta: { label: "Explore Digital & Media", href: "/courses?category=digital-marketing-creative-media" },
-    secondaryCta: { label: "Download Brochure", action: "brochure" },
-  },
-];
+import { useSiteContent } from "@/components/SiteContentProvider";
+import { EditableImageTrigger, EditableText } from "@/components/EditableText";
 
 export function HeroCarousel() {
   const { openDemoModal, openBrochureModal } = useLeadModal();
+  const { content, isEditMode } = useSiteContent();
+  const banners = content.heroBanners;
   const [activeIdx, setActiveIdx] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -99,20 +24,20 @@ export function HeroCarousel() {
   }, [activeIdx]);
 
   const nextSlide = useCallback(() => {
-    setActiveIdx((prev) => (prev + 1) % BANNERS.length);
-  }, []);
+    setActiveIdx((prev) => (prev + 1) % banners.length);
+  }, [banners.length]);
 
   const prevSlide = useCallback(() => {
-    setActiveIdx((prev) => (prev - 1 + BANNERS.length) % BANNERS.length);
-  }, []);
+    setActiveIdx((prev) => (prev - 1 + banners.length) % banners.length);
+  }, [banners.length]);
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || isEditMode) return;
     const timer = setInterval(nextSlide, 7000);
     return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+  }, [isPaused, isEditMode, nextSlide]);
 
-  const banner = BANNERS[activeIdx];
+  const banner = banners[activeIdx] || banners[0];
   const isDarkTheme = banner.theme === "jain-blue" || banner.theme === "deep-navy";
 
   return (
@@ -160,37 +85,42 @@ export function HeroCarousel() {
                   : "bg-[#1E3A8A] text-white"
               }`}
             >
-              {banner.badge}
+              <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
             </span>
 
             <h1 className="hero-headline font-editorial text-[36.8px] sm:text-[46px] lg:text-[56px] font-bold leading-[1.04] tracking-normal">
-              <span className={isDarkTheme ? "text-white" : "text-[#1E3A8A]"}>
-                {banner.headlineWhite}{" "}
-              </span>
-              <span className={isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"}>
-                {banner.headlineAccent}
-              </span>
+              <EditableText
+                path={`heroBanners.${activeIdx}.headlineWhite`}
+                value={banner.headlineWhite}
+                className={isDarkTheme ? "text-white" : "text-[#1E3A8A]"}
+              />{" "}
+              <EditableText
+                path={`heroBanners.${activeIdx}.headlineAccent`}
+                value={banner.headlineAccent}
+                className={isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"}
+              />
             </h1>
 
-            <p
+            <EditableText
+              as="p"
+              path={`heroBanners.${activeIdx}.description`}
+              value={banner.description}
               className={`hero-desc mc-lead max-w-xl ${
                 isDarkTheme ? "text-white/90" : "text-[#4B5563]"
               }`}
-            >
-              {banner.description}
-            </p>
+            />
 
             {banner.features && (
               <ul className="space-y-1.5 pt-1">
-                {banner.features.map((f) => (
+                {banner.features.map((f, fIdx) => (
                   <li
-                    key={f}
+                    key={fIdx}
                     className={`text-sm font-nav font-semibold flex items-center gap-2 ${
                       isDarkTheme ? "text-[#93C5FD]" : "text-[#1E3A8A]"
                     }`}
                   >
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>{f}</span>
+                    <EditableText path={`heroBanners.${activeIdx}.features.${fIdx}`} value={f} />
                   </li>
                 ))}
               </ul>
@@ -203,7 +133,7 @@ export function HeroCarousel() {
                   isDarkTheme ? "btn-gold" : "btn-primary-amber"
                 } mc-icon-btn px-6 py-3.5 text-sm uppercase tracking-wider inline-flex items-center gap-2`}
               >
-                <span>{banner.primaryCta.label}</span>
+                <EditableText path={`heroBanners.${activeIdx}.primaryCta.label`} value={banner.primaryCta.label} />
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
@@ -217,7 +147,7 @@ export function HeroCarousel() {
                         : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
                     }`}
                   >
-                    {banner.secondaryCta.label}
+                    <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
                   </Link>
                 ) : (
                   <button
@@ -237,7 +167,7 @@ export function HeroCarousel() {
                         : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
                     }`}
                   >
-                    {banner.secondaryCta.label}
+                    <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
                   </button>
                 ))}
             </div>
@@ -265,6 +195,12 @@ export function HeroCarousel() {
               />
             </motion.div>
           </AnimatePresence>
+          <EditableImageTrigger
+            path={`heroBanners.${activeIdx}.image`}
+            currentSrc={banner.image}
+            altPath={`heroBanners.${activeIdx}.imageAlt`}
+            currentAlt={banner.imageAlt}
+          />
         </div>
       </div>
 
@@ -291,7 +227,7 @@ export function HeroCarousel() {
       {/* Bottom Slide Indicators & Pause Control */}
       <div className="absolute bottom-4 left-6 sm:left-20 z-20 flex items-center gap-3">
         <div className="flex items-center gap-2" role="tablist" aria-label="Hero banner slides">
-          {BANNERS.map((b, idx) => (
+          {banners.map((b, idx) => (
             <button
               key={b.id}
               type="button"

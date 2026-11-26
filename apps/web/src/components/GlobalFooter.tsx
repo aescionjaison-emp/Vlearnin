@@ -8,17 +8,20 @@ import { BRAND, buildWhatsAppUrl } from "@vlearnin/shared";
 import { VlearninLogo } from "./VlearninLogo";
 import { useLeadModal } from "./LeadModalProvider";
 import { runSectionCascadeTimeline } from "@/lib/motion/timelines";
+import { useSiteContent } from "./SiteContentProvider";
+import { EditableText } from "./EditableText";
 
-export function GlobalFooter() {
+export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
   const pathname = usePathname();
   const { openDemoModal } = useLeadModal();
+  const { content } = useSiteContent();
   const footerGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return runSectionCascadeTimeline(footerGridRef.current, ".footer-col");
   }, []);
 
-  if (pathname?.startsWith("/admin")) {
+  if (!forceShow && pathname?.startsWith("/admin")) {
     return null;
   }
 
@@ -32,27 +35,31 @@ export function GlobalFooter() {
             {/* Column 1 — Brand */}
             <div className="footer-col space-y-4">
               <VlearninLogo variant="light" />
-              <p className="text-sm text-white/80 leading-relaxed">
-                Practical certification training in Artificial Intelligence, Business Intelligence,
-                Corporate Finance, and Digital Media—built around live datasets, real tools, and
-                dedicated placement assistance.
-              </p>
+              <EditableText
+                as="p"
+                path="footer.description"
+                value={content.footer.description}
+                className="text-sm text-white/80 leading-relaxed"
+              />
               <div className="pt-2">
                 <button
                   type="button"
                   onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
                   className="btn-gold px-5 py-2.5 text-xs uppercase tracking-wider cursor-pointer"
                 >
-                  Book Free Demo Class
+                  <EditableText path="footer.demoButtonLabel" value={content.footer.demoButtonLabel} />
                 </button>
               </div>
             </div>
 
             {/* Column 2 — Programmes */}
             <div className="footer-col">
-              <h3 className="mc-footer-heading text-[#93C5FD] mb-5">
-                Programmes
-              </h3>
+              <EditableText
+                as="h3"
+                path="footer.programmesHeading"
+                value={content.footer.programmesHeading}
+                className="mc-footer-heading text-[#93C5FD] mb-5"
+              />
               <ul className="space-y-2.5 mc-footer-link text-white/85">
                 <li>
                   <Link href="/courses?category=ai-business-intelligence" className="hover:text-white transition-colors">
@@ -128,39 +135,43 @@ export function GlobalFooter() {
 
             {/* Column 4 — Contact */}
             <div className="footer-col">
-              <h3 className="mc-footer-heading text-[#93C5FD] mb-5">
-                Contact Us
-              </h3>
+              <EditableText
+                as="h3"
+                path="footer.contactHeading"
+                value={content.footer.contactHeading}
+                className="mc-footer-heading text-[#93C5FD] mb-5"
+              />
               <ul className="space-y-3 mc-footer-link text-white/85">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 text-[#93C5FD] shrink-0 mt-1" />
                   <span>
-                    {BRAND.legalName}, {BRAND.address}
+                    <EditableText path="brand.legalName" value={content.brand.legalName} />,{" "}
+                    <EditableText path="brand.address" value={content.brand.address} />
                   </span>
                 </li>
                 <li>
                   <a
-                    href={BRAND.phoneHref}
+                    href={content.brand.phoneHref}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
                     <Phone className="w-4 h-4 text-[#93C5FD] shrink-0" />
-                    <span>{BRAND.phoneDisplay}</span>
+                    <EditableText path="brand.phoneDisplay" value={content.brand.phoneDisplay} />
                   </a>
                 </li>
                 <li>
                   <a
-                    href={`mailto:${BRAND.email}`}
+                    href={`mailto:${content.brand.email}`}
                     className="flex items-center gap-2.5 hover:text-white transition-colors"
                   >
                     <Mail className="w-4 h-4 text-[#93C5FD] shrink-0" />
-                    <span>{BRAND.email}</span>
+                    <EditableText path="brand.email" value={content.brand.email} />
                   </a>
                 </li>
                 <li className="flex items-start gap-2.5 text-sm text-white/75">
                   <Clock className="w-4 h-4 text-[#93C5FD] shrink-0 mt-1" />
                   <div>
-                    <p>{BRAND.timings.weekdays}</p>
-                    <p className="mt-0.5">{BRAND.timings.sunday}</p>
+                    <EditableText as="p" path="brand.weekdaysTiming" value={content.brand.weekdaysTiming} />
+                    <EditableText as="p" path="brand.sundayTiming" value={content.brand.sundayTiming} className="mt-0.5" />
                   </div>
                 </li>
               </ul>
@@ -170,10 +181,14 @@ export function GlobalFooter() {
           <div className="mt-12 pt-8 border-t border-white/15 space-y-4">
             <p className="text-xs text-white/70 leading-relaxed">
               <strong className="text-white/90">Placement Assistance Disclaimer:</strong>{" "}
-              {BRAND.placementDisclaimer}
+              <EditableText path="brand.placementDisclaimer" value={content.brand.placementDisclaimer} />
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/80">
-              <p>© {currentYear} {BRAND.legalName}. All rights reserved.</p>
+              <p>
+                © {currentYear}{" "}
+                <EditableText path="brand.legalName" value={content.brand.legalName} />.{" "}
+                <EditableText path="footer.copyrightSuffix" value={content.footer.copyrightSuffix} />
+              </p>
               <div className="flex items-center gap-6">
                 <Link href="/privacy-policy" className="hover:text-white transition-colors">
                   Privacy Policy

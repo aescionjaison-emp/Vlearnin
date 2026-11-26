@@ -41,6 +41,8 @@ import {
   runSectionCascadeTimeline,
   runSplitEditorialTimeline,
 } from "@/lib/motion/timelines";
+import { useSiteContent } from "@/components/SiteContentProvider";
+import { EditableImageTrigger, EditableText } from "@/components/EditableText";
 
 const FILTER_TABS = [
   { id: "all", label: "All Programmes" },
@@ -49,102 +51,23 @@ const FILTER_TABS = [
   { id: "digital-marketing-creative-media", label: "Digital Marketing & Media" },
 ];
 
-const ADVANTAGES = [
-  {
-    num: "01",
-    icon: Sparkles,
-    title: "100% Practical Pedagogy",
-    description:
-      "Every module is driven by live business datasets, real financial models, AI workflows and hands-on capstone projects.",
-  },
-  {
-    num: "02",
-    icon: Users,
-    title: "Small-Batch Mentorship",
-    description:
-      "Focused batch sizes ensure personalized guidance, doubt resolution and portfolio building.",
-  },
-  {
-    num: "03",
-    icon: ShieldCheck,
-    title: "QR-Verified Credentials",
-    description:
-      "VLEARNIN certificates are verifiable online by employers and institutions.",
-  },
-  {
-    num: "04",
-    icon: Clock,
-    title: "Flexible Batch Timings",
-    description:
-      "Weekday, evening and weekend batches at our Rajajinagar center, plus on-campus college programmes.",
-  },
-];
-
-const PLACEMENT_STAGES = [
-  {
-    step: "Step 01",
-    title: "Live Capstone Portfolio",
-    desc: "Graduate with real Power BI dashboards, Excel valuation models, AI workflows or practical marketing campaigns.",
-    icon: Layers,
-  },
-  {
-    step: "Step 02",
-    title: "ATS Resume & LinkedIn Makeover",
-    desc: "Personalized profile optimization tailored to finance, analytics and digital roles.",
-    icon: FileCheck2,
-  },
-  {
-    step: "Step 03",
-    title: "Mock Interviews & Domain Prep",
-    desc: "Practice technical and HR interview rounds with personalized feedback.",
-    icon: GraduationCap,
-  },
-  {
-    step: "Step 04",
-    title: "Curated Hiring Network",
-    desc: "Access to available internship and full-time opportunities through verified employer connections.",
-    icon: Briefcase,
-  },
-];
-
-const CAMPUS_GALLERY = [
-  {
-    src: "/images/hero-1.jpg",
-    title: "Instructor-Led Practical Sessions",
-    alt: "Instructor guiding students during practical session",
-  },
-  {
-    src: "/images/hero-2.jpg",
-    title: "Computer-Based Analytics Labs",
-    alt: "Students working on Power BI and AI dashboards",
-  },
-  {
-    src: "/images/hero-3.jpg",
-    title: "Financial Modelling Mentorship",
-    alt: "Mentor reviewing financial models with learners",
-  },
-  {
-    src: "/images/hero-4.jpg",
-    title: "Creative Studio & Editing Workstations",
-    alt: "Video editing and digital production studio",
-  },
-  {
-    src: "/images/domain-creative.jpg",
-    title: "Collaborative Capstone Development",
-    alt: "Learners collaborating on campaign capstone project",
-  },
-];
+const ADVANTAGE_ICONS = [Sparkles, Users, ShieldCheck, Clock] as const;
+const PLACEMENT_ICONS = [Layers, FileCheck2, GraduationCap, Briefcase] as const;
 
 export function HomeCatalogSections({
-  categories,
-  courses,
-  combos,
+  categories: propCategories,
+  courses: propCourses,
+  combos: propCombos,
 }: {
-  categories: OfficialCategorySeed[];
-  courses: OfficialCourseSeed[];
-  combos: OfficialComboSeed[];
+  categories?: OfficialCategorySeed[];
+  courses?: OfficialCourseSeed[];
+  combos?: OfficialComboSeed[];
 }) {
   const { openDemoModal, openBrochureModal } = useLeadModal();
+  const { content } = useSiteContent();
+  const categories = content.categories.length > 0 ? content.categories : (propCategories || []);
+  const courses = content.courses.length > 0 ? content.courses : (propCourses || []);
+  const combos = content.combos.length > 0 ? content.combos : (propCombos || []);
   const [activeFilter, setActiveFilter] = useState("all");
   const carouselRef = useRef<HTMLDivElement>(null);
   const domainsRef = useRef<HTMLDivElement>(null);
@@ -196,16 +119,21 @@ export function HomeCatalogSections({
       <section className="py-16 lg:py-24 bg-[#F8FAFC] border-b border-[#E5E7EB]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="max-w-3xl mb-12">
-            <p className="mc-eyebrow text-[#1D4ED8]">
-              EXPLORE OUR LEARNING DOMAINS
-            </p>
+            <EditableText
+              as="p"
+              path="domainsSection.eyebrow"
+              value={content.domainsSection.eyebrow}
+              className="mc-eyebrow text-[#1D4ED8]"
+            />
             <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1E3A8A] mt-2 leading-tight">
-              Industry-Aligned Certification Programmes
+              <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
             </AnimatedHeading>
-            <p className="mc-lead text-[#4B5563] mt-3">
-              Structured, hands-on tracks designed around real workplace tools, live datasets and
-              practical assessments.
-            </p>
+            <EditableText
+              as="p"
+              path="domainsSection.description"
+              value={content.domainsSection.description}
+              className="mc-lead text-[#4B5563] mt-3"
+            />
           </div>
 
           <div ref={domainsRef} className="space-y-8">
@@ -236,6 +164,10 @@ export function HomeCatalogSections({
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105 scale-105"
                     />
+                    <EditableImageTrigger
+                      path={`categories.${idx}.image`}
+                      currentSrc={cat.image}
+                    />
                   </div>
 
                   <div
@@ -247,14 +179,20 @@ export function HomeCatalogSections({
                       <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C]">
                         Domain 0{idx + 1}
                       </span>
-                      <h3 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
-                        {cat.name}
-                      </h3>
+                      <EditableText
+                        as="h3"
+                        path={`categories.${idx}.name`}
+                        value={cat.name}
+                        className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1"
+                      />
                     </div>
 
-                    <p className="text-base text-[#4B5563] leading-relaxed">
-                      {cat.outcomeSummary}
-                    </p>
+                    <EditableText
+                      as="p"
+                      path={`categories.${idx}.outcomeSummary`}
+                      value={cat.outcomeSummary}
+                      className="text-base text-[#4B5563] leading-relaxed"
+                    />
 
                     <ul className="space-y-2 border-y border-[#E5E7EB] py-4">
                       {domainCourses.map((dc) => (
@@ -292,12 +230,18 @@ export function HomeCatalogSections({
         <div ref={discoveryRef} className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="discovery-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                PROGRAMME DISCOVERY
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2">
-                Discover Programmes That Shape Your Future
-              </h2>
+              <EditableText
+                as="p"
+                path="discoverySection.eyebrow"
+                value={content.discoverySection.eyebrow}
+                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
+              />
+              <EditableText
+                as="h2"
+                path="discoverySection.heading"
+                value={content.discoverySection.heading}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+              />
             </div>
 
             <div className="flex items-center gap-3">
@@ -360,7 +304,9 @@ export function HomeCatalogSections({
             className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth"
           >
             <AnimatePresence mode="popLayout">
-              {filteredCourses.map((course) => (
+              {filteredCourses.map((course) => {
+                const cIdx = courses.findIndex((c) => c.slug === course.slug);
+                return (
                 <motion.article
                   key={course.slug}
                   layout
@@ -379,14 +325,22 @@ export function HomeCatalogSections({
                       sizes="360px"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+                    {cIdx >= 0 && (
+                      <EditableImageTrigger path={`courses.${cIdx}.image`} currentSrc={course.image} />
+                    )}
                   </div>
                   <div className="p-6 space-y-3">
-                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
-                      {course.categoryName}
-                    </span>
-                    <h3 className="text-xl font-bold text-[#1E3A8A] leading-snug">
-                      {course.title}
-                    </h3>
+                    <EditableText
+                      path={cIdx >= 0 ? `courses.${cIdx}.categoryName` : "discoverySection.eyebrow"}
+                      value={course.categoryName}
+                      className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]"
+                    />
+                    <EditableText
+                      as="h3"
+                      path={cIdx >= 0 ? `courses.${cIdx}.title` : "discoverySection.heading"}
+                      value={course.title}
+                      className="text-xl font-bold text-[#1E3A8A] leading-snug"
+                    />
                     <div className="flex flex-wrap gap-3 text-xs font-nav text-[#4B5563]">
                       <span className="inline-flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5 text-[#EA580C]" />
@@ -397,7 +351,12 @@ export function HomeCatalogSections({
                         5 Modules + Capstone
                       </span>
                     </div>
-                    <p className="text-sm text-[#4B5563] leading-relaxed">{course.summary}</p>
+                    <EditableText
+                      as="p"
+                      path={cIdx >= 0 ? `courses.${cIdx}.summary` : "discoverySection.heading"}
+                      value={course.summary}
+                      className="text-sm text-[#4B5563] leading-relaxed"
+                    />
                     <p className="text-xs font-nav text-[#111827]">
                       <strong>Modes:</strong> {course.learningModes.join(" • ")}
                     </p>
@@ -425,7 +384,8 @@ export function HomeCatalogSections({
                   </button>
                 </div>
               </motion.article>
-              ))}
+                );
+              })}
             </AnimatePresence>
           </div>
         </div>
@@ -436,15 +396,24 @@ export function HomeCatalogSections({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                CAREER ACCELERATOR TRACKS
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2">
-                Dual-Skill Career Accelerator Combos
-              </h2>
-              <p className="text-base text-[#4B5563] mt-2">
-                Combine complementary certifications into a single structured portfolio pathway.
-              </p>
+              <EditableText
+                as="p"
+                path="combosSection.eyebrow"
+                value={content.combosSection.eyebrow}
+                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
+              />
+              <EditableText
+                as="h2"
+                path="combosSection.heading"
+                value={content.combosSection.heading}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+              />
+              <EditableText
+                as="p"
+                path="combosSection.description"
+                value={content.combosSection.description}
+                className="text-base text-[#4B5563] mt-2"
+              />
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -478,22 +447,39 @@ export function HomeCatalogSections({
                     sizes="(max-width: 640px) 100vw, 260px"
                     className="object-cover"
                   />
-                  <span className="absolute top-3 left-3 bg-[#1E3A8A] text-[#93C5FD] font-nav text-xs font-bold px-3 py-1">
-                    {combo.durationLabel}
-                  </span>
+                  <EditableImageTrigger path={`combos.${idx}.image`} currentSrc={combo.image} />
+                  <EditableText
+                    path={`combos.${idx}.durationLabel`}
+                    value={combo.durationLabel}
+                    className="absolute top-3 left-3 bg-[#1E3A8A] text-[#93C5FD] font-nav text-xs font-bold px-3 py-1"
+                  />
                 </div>
                 <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
                     <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#EA580C]">
                       Pathway 0{idx + 1}
                     </span>
-                    <h3 className="text-xl font-bold text-[#1E3A8A]">{combo.title}</h3>
-                    <p className="text-xs font-nav font-semibold text-[#1D4ED8]">
-                      {combo.includedLabel}
-                    </p>
-                    <p className="text-sm text-[#4B5563]">{combo.summary}</p>
+                    <EditableText
+                      as="h3"
+                      path={`combos.${idx}.title`}
+                      value={combo.title}
+                      className="text-xl font-bold text-[#1E3A8A]"
+                    />
+                    <EditableText
+                      as="p"
+                      path={`combos.${idx}.includedLabel`}
+                      value={combo.includedLabel}
+                      className="text-xs font-nav font-semibold text-[#1D4ED8]"
+                    />
+                    <EditableText
+                      as="p"
+                      path={`combos.${idx}.summary`}
+                      value={combo.summary}
+                      className="text-sm text-[#4B5563]"
+                    />
                     <p className="text-xs text-[#111827]">
-                      <strong>Ideal For:</strong> {combo.idealFor}
+                      <strong>Ideal For:</strong>{" "}
+                      <EditableText path={`combos.${idx}.idealFor`} value={combo.idealFor} />
                     </p>
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-[#E5E7EB]">
@@ -529,41 +515,60 @@ export function HomeCatalogSections({
         <div ref={advantagesRef} className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="vway-portrait lg:col-span-5 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E5E7EB] overflow-hidden rounded-[15px]">
             <Image
-              src="/images/hero-1.jpg"
-              alt="Small-batch practical mentorship at VLEARNIN"
+              src={content.advantagesSection.image}
+              alt={content.advantagesSection.imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover scale-105"
+            />
+            <EditableImageTrigger
+              path="advantagesSection.image"
+              currentSrc={content.advantagesSection.image}
+              altPath="advantagesSection.imageAlt"
+              currentAlt={content.advantagesSection.imageAlt}
             />
           </div>
 
           <div className="lg:col-span-7 space-y-8">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                THE VLEARNIN ADVANTAGE
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2">
-                Why Learners Choose The V-Way
-              </h2>
+              <EditableText
+                as="p"
+                path="advantagesSection.eyebrow"
+                value={content.advantagesSection.eyebrow}
+                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
+              />
+              <EditableText
+                as="h2"
+                path="advantagesSection.heading"
+                value={content.advantagesSection.heading}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {ADVANTAGES.map((adv) => {
-                const Icon = adv.icon;
+              {content.advantagesSection.items.map((adv, advIdx) => {
+                const Icon = ADVANTAGE_ICONS[advIdx % ADVANTAGE_ICONS.length];
                 return (
-                  <div key={adv.title} className="vway-flip-item">
+                  <div key={advIdx} className="vway-flip-item">
                     <FlipCard
                       className="h-52"
                       front={
                         <div className="h-full p-6 bg-[#F8FAFC] border-l-4 border-[#1D4ED8] flex flex-col justify-between rounded-[15px]">
                           <div className="flex items-center justify-between">
                             <Icon className="w-6 h-6 text-[#EA580C]" />
-                            <span className="font-editorial text-3xl font-bold text-[#1E3A8A]/35">
-                              {adv.num}
-                            </span>
+                            <EditableText
+                              path={`advantagesSection.items.${advIdx}.num`}
+                              value={adv.num}
+                              className="font-editorial text-3xl font-bold text-[#1E3A8A]/35"
+                            />
                           </div>
                           <div>
-                            <h3 className="text-xl font-bold text-[#1E3A8A]">{adv.title}</h3>
+                            <EditableText
+                              as="h3"
+                              path={`advantagesSection.items.${advIdx}.title`}
+                              value={adv.title}
+                              className="text-xl font-bold text-[#1E3A8A]"
+                            />
                             <p className="font-nav text-xs font-semibold text-[#1D4ED8] mt-2">
                               Hover or tap for details →
                             </p>
@@ -576,7 +581,12 @@ export function HomeCatalogSections({
                             Advantage {adv.num}
                           </span>
                           <h4 className="text-lg font-bold text-white">{adv.title}</h4>
-                          <p className="text-sm text-white/85 leading-relaxed">{adv.description}</p>
+                          <EditableText
+                            as="p"
+                            path={`advantagesSection.items.${advIdx}.description`}
+                            value={adv.description}
+                            className="text-sm text-white/85 leading-relaxed"
+                          />
                         </div>
                       }
                     />
@@ -593,18 +603,24 @@ export function HomeCatalogSections({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#93C5FD]">
-                STRUCTURED PLACEMENT ASSISTANCE
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold mt-2">
-                From Classroom to Corporate
-              </h2>
+              <EditableText
+                as="p"
+                path="placementSection.eyebrow"
+                value={content.placementSection.eyebrow}
+                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#93C5FD]"
+              />
+              <EditableText
+                as="h2"
+                path="placementSection.heading"
+                value={content.placementSection.heading}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold mt-2"
+              />
             </div>
             <Link
               href="/placement-assistance"
               className="btn-gold px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 self-start lg:self-auto"
             >
-              <span>Explore Career Support</span>
+              <EditableText path="placementSection.ctaLabel" value={content.placementSection.ctaLabel} />
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -614,30 +630,45 @@ export function HomeCatalogSections({
               <div className="pathway-progress-bar h-full bg-[#93C5FD] origin-left" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {PLACEMENT_STAGES.map((item) => {
-                const Icon = item.icon;
+              {content.placementSection.stages.map((item, sIdx) => {
+                const Icon = PLACEMENT_ICONS[sIdx % PLACEMENT_ICONS.length];
                 return (
                   <div
-                    key={item.step}
+                    key={sIdx}
                     className="pathway-stage-card bg-white/10 border border-white/15 border-t-4 border-t-[#93C5FD] p-6 space-y-3 hover:bg-white/15 transition-colors duration-300 rounded-[15px]"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-nav text-xs font-bold uppercase tracking-wider text-[#93C5FD]">
-                        {item.step}
-                      </span>
+                      <EditableText
+                        path={`placementSection.stages.${sIdx}.step`}
+                        value={item.step}
+                        className="font-nav text-xs font-bold uppercase tracking-wider text-[#93C5FD]"
+                      />
                       <Icon className="w-5 h-5 text-white/80" />
                     </div>
-                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                    <p className="text-sm text-white/80 leading-relaxed">{item.desc}</p>
+                    <EditableText
+                      as="h3"
+                      path={`placementSection.stages.${sIdx}.title`}
+                      value={item.title}
+                      className="text-xl font-bold text-white"
+                    />
+                    <EditableText
+                      as="p"
+                      path={`placementSection.stages.${sIdx}.desc`}
+                      value={item.desc}
+                      className="text-sm text-white/80 leading-relaxed"
+                    />
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <p className="text-xs text-white/70 border-t border-white/15 pt-5">
-            {BRAND.placementDisclaimer}
-          </p>
+          <EditableText
+            as="p"
+            path="brand.placementDisclaimer"
+            value={content.brand.placementDisclaimer}
+            className="text-xs text-white/70 border-t border-white/15 pt-5"
+          />
         </div>
       </section>
 
@@ -648,29 +679,29 @@ export function HomeCatalogSections({
           className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center overflow-hidden"
         >
           <div className="split-content lg:col-span-6 space-y-5">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-              INSTITUTIONAL COLLABORATIONS
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] leading-tight">
-              Partnering with Colleges &amp; Educational Institutions
-            </h2>
-            <p className="text-base text-[#4B5563] leading-relaxed">
-              VLEARNIN collaborates with degree colleges across Bengaluru and Karnataka to deliver
-              structured value-added certification programmes tailored to B.Com, BBA, BCA, and MBA
-              students.
-            </p>
+            <EditableText
+              as="p"
+              path="academicSection.eyebrow"
+              value={content.academicSection.eyebrow}
+              className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
+            />
+            <EditableText
+              as="h2"
+              path="academicSection.heading"
+              value={content.academicSection.heading}
+              className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] leading-tight"
+            />
+            <EditableText
+              as="p"
+              path="academicSection.description"
+              value={content.academicSection.description}
+              className="text-base text-[#4B5563] leading-relaxed"
+            />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              {[
-                "30-hour value-added certification programmes",
-                "On-campus practical training",
-                "Workshops & orientation seminars",
-                "Capstone assessments",
-                "Curriculum-aligned learning",
-                "Career readiness & portfolios",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-2 text-sm text-[#111827]">
+              {content.academicSection.bullets.map((item, bIdx) => (
+                <div key={bIdx} className="flex items-start gap-2 text-sm text-[#111827]">
                   <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
-                  <span>{item}</span>
+                  <EditableText path={`academicSection.bullets.${bIdx}`} value={item} />
                 </div>
               ))}
             </div>
@@ -679,13 +710,13 @@ export function HomeCatalogSections({
                 href="/academic-partnerships"
                 className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider"
               >
-                Explore Academic Partnerships
+                <EditableText path="academicSection.primaryCtaLabel" value={content.academicSection.primaryCtaLabel} />
               </Link>
               <Link
                 href="/academic-partnerships#institutional-form"
                 className="btn-outline-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider"
               >
-                Request Institutional Proposal
+                <EditableText path="academicSection.secondaryCtaLabel" value={content.academicSection.secondaryCtaLabel} />
               </Link>
             </div>
           </div>
@@ -693,11 +724,17 @@ export function HomeCatalogSections({
           <div className="split-image lg:col-span-6 relative aspect-[16/10] border border-[#E5E7EB] overflow-hidden shadow-md rounded-[15px]">
             <Image
               ref={academicImgRef}
-              src="/images/academic-partnership.jpg"
-              alt="Illustrative college seminar and faculty workshop"
+              src={content.academicSection.image}
+              alt={content.academicSection.imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover mc-image-zoom scale-105"
+            />
+            <EditableImageTrigger
+              path="academicSection.image"
+              currentSrc={content.academicSection.image}
+              altPath="academicSection.imageAlt"
+              currentAlt={content.academicSection.imageAlt}
             />
           </div>
         </div>
@@ -708,15 +745,24 @@ export function HomeCatalogSections({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                LEARNING ENVIRONMENT
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2">
-                Experience Practical Learning at VLEARNIN
-              </h2>
-              <p className="text-base text-[#4B5563] mt-2">
-                Illustrative classroom, analytics lab, studio, and mentorship environments.
-              </p>
+              <EditableText
+                as="p"
+                path="campusSection.eyebrow"
+                value={content.campusSection.eyebrow}
+                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
+              />
+              <EditableText
+                as="h2"
+                path="campusSection.heading"
+                value={content.campusSection.heading}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+              />
+              <EditableText
+                as="p"
+                path="campusSection.description"
+                value={content.campusSection.description}
+                className="text-base text-[#4B5563] mt-2"
+              />
             </div>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -724,22 +770,22 @@ export function HomeCatalogSections({
                 className="btn-outline-navy px-5 py-2.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
               >
                 <MapPin className="w-4 h-4" />
-                Visit Our Rajajinagar Center
+                <EditableText path="campusSection.visitLabel" value={content.campusSection.visitLabel} />
               </Link>
               <button
                 type="button"
                 onClick={() => openDemoModal({ sourcePage: "campus-experience" })}
                 className="btn-primary-amber px-5 py-2.5 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
               >
-                Book Free Demo
+                <EditableText path="campusSection.demoLabel" value={content.campusSection.demoLabel} />
               </button>
             </div>
           </div>
 
           <div ref={campusRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {CAMPUS_GALLERY.map((item) => (
+            {content.campusSection.gallery.map((item, gIdx) => (
               <div
-                key={item.title}
+                key={gIdx}
                 className="campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E5E7EB] bg-[#1E3A8A] rounded-[15px]"
               >
                 <Image
@@ -749,10 +795,19 @@ export function HomeCatalogSections({
                   sizes="(max-width: 640px) 100vw, 280px"
                   className="object-cover mc-image-zoom"
                 />
+                <EditableImageTrigger
+                  path={`campusSection.gallery.${gIdx}.src`}
+                  currentSrc={item.src}
+                  altPath={`campusSection.gallery.${gIdx}.alt`}
+                  currentAlt={item.alt}
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/90 via-transparent to-transparent flex items-end p-4">
-                  <p className="font-nav text-xs sm:text-sm font-bold text-white leading-snug">
-                    {item.title}
-                  </p>
+                  <EditableText
+                    as="p"
+                    path={`campusSection.gallery.${gIdx}.title`}
+                    value={item.title}
+                    className="font-nav text-xs sm:text-sm font-bold text-white leading-snug"
+                  />
                 </div>
               </div>
             ))}
@@ -765,13 +820,18 @@ export function HomeCatalogSections({
         <div ref={finalCtaRef} className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="final-cta-card bg-[#1E3A8A] text-white p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border-l-8 border-[#EA580C] rounded-[15px]">
             <div className="space-y-3 max-w-2xl">
-              <h2 className="text-3xl sm:text-4xl font-bold">
-                Your Next Career Chapter Begins Here.
-              </h2>
-              <p className="text-base text-white/85 leading-relaxed">
-                Explore practical certification programmes, connect with our academic team and
-                discover the right learning pathway for your goals.
-              </p>
+              <EditableText
+                as="h2"
+                path="finalCtaSection.heading"
+                value={content.finalCtaSection.heading}
+                className="text-3xl sm:text-4xl font-bold"
+              />
+              <EditableText
+                as="p"
+                path="finalCtaSection.description"
+                value={content.finalCtaSection.description}
+                className="text-base text-white/85 leading-relaxed"
+              />
             </div>
 
             <div className="flex flex-wrap items-center gap-3.5 shrink-0">
@@ -780,20 +840,20 @@ export function HomeCatalogSections({
                 onClick={() => openDemoModal({ sourcePage: "homepage-final-cta" })}
                 className="btn-gold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
               >
-                Book a Free Demo Class
+                <EditableText path="finalCtaSection.demoLabel" value={content.finalCtaSection.demoLabel} />
               </button>
               <Link
                 href="/contact"
                 className="border border-white/70 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider transition-colors rounded-[15px]"
               >
-                Talk to Our Team
+                <EditableText path="finalCtaSection.contactLabel" value={content.finalCtaSection.contactLabel} />
               </Link>
               <a
-                href={BRAND.phoneHref}
+                href={content.brand.phoneHref}
                 className="inline-flex items-center gap-2 font-nav text-sm font-bold text-[#93C5FD] hover:underline px-2"
               >
                 <Phone className="w-4 h-4" />
-                <span>{BRAND.phoneDisplay}</span>
+                <EditableText path="brand.phoneDisplay" value={content.brand.phoneDisplay} />
               </a>
             </div>
           </div>
