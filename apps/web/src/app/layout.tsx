@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
+import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,17 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-source-sans",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["600", "700"],
-  variable: "--font-cormorant",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sourceSans.variable} ${cormorant.variable}`}
+      className={`${plusJakarta.variable} ${fraunces.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script
