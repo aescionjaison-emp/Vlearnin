@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Pencil, Image as ImageIcon, Plus, Trash2 } from "lucide-react";
 import { useSiteContent } from "./SiteContentProvider";
+import { ImageDropzoneInput } from "./ImageDropzoneInput";
 
 export function EditableText({
   path,
@@ -82,15 +83,17 @@ export function EditableImageTrigger({
       </button>
 
       {open && (
-        <div className="mt-2 w-72 bg-white text-[#111827] border border-[#E5E7EB] shadow-xl p-3 rounded-[15px] space-y-2">
+        <div className="mt-2 w-80 bg-white text-[#111827] border border-[#E5E7EB] shadow-xl p-3 rounded-[15px] space-y-2.5">
           <label className="block text-[11px] font-nav font-bold text-[#1E3A8A]">
-            Image URL / Path
+            Upload, Drag &amp; Drop, or Paste Image URL
           </label>
-          <input
-            type="text"
+          <ImageDropzoneInput
+            compact
             value={srcVal}
-            onChange={(e) => setSrcVal(e.target.value)}
-            className="w-full border border-[#E5E7EB] px-2.5 py-1.5 text-xs rounded-[10px]"
+            onChange={(next) => {
+              setSrcVal(next);
+              setByPath(path, next);
+            }}
           />
           {altPath && (
             <>
@@ -111,7 +114,7 @@ export function EditableImageTrigger({
               onClick={() => setOpen(false)}
               className="text-xs px-2.5 py-1 border border-[#E5E7EB] rounded-[8px] cursor-pointer"
             >
-              Cancel
+              Close
             </button>
             <button
               type="button"

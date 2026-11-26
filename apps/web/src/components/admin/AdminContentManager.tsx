@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { useSiteContent } from "@/components/SiteContentProvider";
+import { ImageDropzoneInput } from "@/components/ImageDropzoneInput";
 
 type SectionKey =
   | "heroBanners"
@@ -140,19 +141,19 @@ export function AdminContentManager() {
                       className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                     />
                     <input
-                      type="text"
-                      value={c.image}
-                      onChange={(e) => setByPath(`courses.${idx}.image`, e.target.value)}
-                      placeholder="Image Path (/images/...)"
-                      className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
-                    />
-                    <input
                       type="number"
                       value={c.durationHours}
                       onChange={(e) => setByPath(`courses.${idx}.durationHours`, Number(e.target.value))}
                       placeholder="Hours"
                       className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                     />
+                    <div className="sm:col-span-2">
+                      <ImageDropzoneInput
+                        compact
+                        value={c.image}
+                        onChange={(next) => setByPath(`courses.${idx}.image`, next)}
+                      />
+                    </div>
                   </div>
                   <textarea
                     rows={2}
@@ -218,12 +219,13 @@ export function AdminContentManager() {
                       onChange={(e) => setByPath(`combos.${idx}.includedLabel`, e.target.value)}
                       className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                     />
-                    <input
-                      type="text"
-                      value={combo.image}
-                      onChange={(e) => setByPath(`combos.${idx}.image`, e.target.value)}
-                      className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
-                    />
+                    <div className="sm:col-span-2">
+                      <ImageDropzoneInput
+                        compact
+                        value={combo.image}
+                        onChange={(next) => setByPath(`combos.${idx}.image`, next)}
+                      />
+                    </div>
                   </div>
                   <textarea
                     rows={2}
@@ -266,18 +268,17 @@ export function AdminContentManager() {
                       <Trash2 className="w-3.5 h-3.5" /> Delete
                     </button>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 gap-3">
                     <input
                       type="text"
                       value={cat.name}
                       onChange={(e) => setByPath(`categories.${idx}.name`, e.target.value)}
                       className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                     />
-                    <input
-                      type="text"
+                    <ImageDropzoneInput
+                      compact
                       value={cat.image}
-                      onChange={(e) => setByPath(`categories.${idx}.image`, e.target.value)}
-                      className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
+                      onChange={(next) => setByPath(`categories.${idx}.image`, next)}
                     />
                   </div>
                   <textarea
@@ -336,13 +337,6 @@ export function AdminContentManager() {
                     />
                     <input
                       type="text"
-                      value={b.image}
-                      onChange={(e) => setByPath(`heroBanners.${idx}.image`, e.target.value)}
-                      placeholder="Image URL"
-                      className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
-                    />
-                    <input
-                      type="text"
                       value={b.headlineWhite}
                       onChange={(e) => setByPath(`heroBanners.${idx}.headlineWhite`, e.target.value)}
                       placeholder="Headline Part 1"
@@ -353,8 +347,15 @@ export function AdminContentManager() {
                       value={b.headlineAccent}
                       onChange={(e) => setByPath(`heroBanners.${idx}.headlineAccent`, e.target.value)}
                       placeholder="Headline Accent"
-                      className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
+                      className="sm:col-span-2 border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                     />
+                    <div className="sm:col-span-2">
+                      <ImageDropzoneInput
+                        compact
+                        value={b.image}
+                        onChange={(next) => setByPath(`heroBanners.${idx}.image`, next)}
+                      />
+                    </div>
                   </div>
                   <textarea
                     rows={2}
@@ -679,28 +680,28 @@ export function AdminContentManager() {
             )}
             <div className="space-y-3">
               {content.campusSection.gallery.map((g, idx) => (
-                <div key={idx} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center bg-[#F8FAFC] p-3 rounded-[15px] border border-[#E5E7EB]">
-                  <input
-                    type="text"
-                    value={g.title}
-                    onChange={(e) => setByPath(`campusSection.gallery.${idx}.title`, e.target.value)}
-                    placeholder="Title"
-                    className="sm:col-span-5 border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
-                  />
-                  <input
-                    type="text"
+                <div key={idx} className="bg-[#F8FAFC] p-4 rounded-[15px] border border-[#E5E7EB] space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <input
+                      type="text"
+                      value={g.title}
+                      onChange={(e) => setByPath(`campusSection.gallery.${idx}.title`, e.target.value)}
+                      placeholder="Title"
+                      className="flex-1 border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeItem("campusSection.gallery", idx)}
+                      className="text-xs font-nav font-bold text-red-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" /> Delete
+                    </button>
+                  </div>
+                  <ImageDropzoneInput
+                    compact
                     value={g.src}
-                    onChange={(e) => setByPath(`campusSection.gallery.${idx}.src`, e.target.value)}
-                    placeholder="Image Path"
-                    className="sm:col-span-5 border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
+                    onChange={(next) => setByPath(`campusSection.gallery.${idx}.src`, next)}
                   />
-                  <button
-                    type="button"
-                    onClick={() => removeItem("campusSection.gallery", idx)}
-                    className="sm:col-span-2 text-xs font-nav font-bold text-red-600 hover:underline inline-flex items-center justify-end gap-1 cursor-pointer"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" /> Delete
-                  </button>
                 </div>
               ))}
             </div>
@@ -770,15 +771,15 @@ export function AdminContentManager() {
                         value={sec.ctaLabel}
                         onChange={(e) => setByPath(`customSections.${idx}.ctaLabel`, e.target.value)}
                         placeholder="Button Label"
-                        className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
+                        className="sm:col-span-2 border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
                       />
-                      <input
-                        type="text"
-                        value={sec.image}
-                        onChange={(e) => setByPath(`customSections.${idx}.image`, e.target.value)}
-                        placeholder="Image Path"
-                        className="border border-[#E5E7EB] bg-white px-3 py-2 text-sm rounded-[15px]"
-                      />
+                      <div className="sm:col-span-2">
+                        <ImageDropzoneInput
+                          compact
+                          value={sec.image}
+                          onChange={(next) => setByPath(`customSections.${idx}.image`, next)}
+                        />
+                      </div>
                     </div>
                     <textarea
                       rows={2}
