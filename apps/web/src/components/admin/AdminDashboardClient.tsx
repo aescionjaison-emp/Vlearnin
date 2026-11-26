@@ -20,7 +20,7 @@ import {
   Upload,
 } from "lucide-react";
 import { getApiUrl } from "@/lib/api";
-import { fetchStoredEnquiries } from "@/lib/enquiry-store";
+import { fetchStoredEnquiries, loadLocalEnquiries } from "@/lib/enquiry-store";
 import {
   AdminSession,
   clearAdminSession,
@@ -128,17 +128,31 @@ export function AdminDashboardClient() {
   }, [activeTab, setEditMode]);
 
   const loadApiOperations = useCallback(async () => {
-    try {
-      const res = await fetch(getApiUrl("/admin/dashboard"), { credentials: "include" });
-      if (res.ok) {
-        const data = await res.json();
-        setApiConnected(true);
-        setMetrics(data.metrics || {});
-        setEnquiries(data.recentEnquiries || []);
-        return;
+    setEnquiries(loadLocalEnquiries());
+    if (
+      typeof window !== "undefined" &&
+      (process.env.NEXT_PUBLIC_API_URL ||
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1")
+    ) {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 2000);
+        const res = await fetch(getApiUrl("/admin/dashboard"), {
+          credentials: "include",
+          signal: controller.signal,
+        });
+        clearTimeout(timer);
+        if (res.ok) {
+          const data = await res.json();
+          setApiConnected(true);
+          setMetrics(data.metrics || {});
+          setEnquiries(data.recentEnquiries || []);
+          return;
+        }
+      } catch {
+        setApiConnected(false);
       }
-    } catch {
-      setApiConnected(false);
     }
     const localAndRemote = await fetchStoredEnquiries();
     setEnquiries(localAndRemote);
@@ -561,18 +575,24 @@ export function AdminDashboardClient() {
                 <table className="w-full text-sm text-left border-t border-[#E5E7EB]">
                   <thead>
                     <tr className="text-xs font-nav uppercase text-[#4B5563] border-b border-[#E5E7EB]">
+                      <th className="py-2 pr-4">Ref</th>
                       <th className="py-2 pr-4">Name</th>
-                      <th className="py-2 pr-4">Email</th>
                       <th className="py-2 pr-4">Phone</th>
+                      <th className="py-2 pr-4">Email</th>
+                      <th className="py-2 pr-4">Programme</th>
                       <th className="py-2">Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#E5E7EB]">
                     {enquiries.map((e) => (
                       <tr key={e.id}>
+                        <td className="py-2.5 pr-4 font-mono text-xs text-[#4B5563]">
+                          {e.referenceCode || e.id}
+                        </td>
                         <td className="py-2.5 pr-4 font-semibold text-[#1E3A8A]">{e.fullName}</td>
-                        <td className="py-2.5 pr-4">{e.email}</td>
                         <td className="py-2.5 pr-4">{e.phone}</td>
+                        <td className="py-2.5 pr-4">{e.email || "—"}</td>
+                        <td className="py-2.5 pr-4">{e.programme || e.type || "—"}</td>
                         <td className="py-2.5">{e.status}</td>
                       </tr>
                     ))}

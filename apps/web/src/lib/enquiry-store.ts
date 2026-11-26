@@ -17,7 +17,20 @@ export interface StoredEnquiry {
 
 const LOCAL_ENQUIRIES_KEY = "vlearnin_enquiries_v1";
 
-function loadLocalEnquiries(): StoredEnquiry[] {
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error("Timeout")), ms)),
+  ]);
+}
+
+function shouldTryBackendApi(): boolean {
+  if (typeof window === "undefined") return false;
+  if (process.env.NEXT_PUBLIC_API_URL) return true;
+  return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+}
+
+export function loadLocalEnquiries(): StoredEnquiry[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = window.localStorage.getItem(LOCAL_ENQUIRIES_KEY);
@@ -32,6 +45,7 @@ function saveLocalEnquiry(item: StoredEnquiry): void {
   try {
     const prev = loadLocalEnquiries();
     window.localStorage.setItem(LOCAL_ENQUIRIES_KEY, JSON.stringify([item, ...prev]));
+    window.dispatchEvent(new CustomEvent("vlearnin:enquiries-updated"));
   } catch {
     // ignore storage quota errors
   }
@@ -42,28 +56,30 @@ export async function submitEnquiryWithFallback(
   type: StoredEnquiry["type"],
   payload: Record<string, unknown>,
 ): Promise<{ ok: true; referenceCode: string; downloadUrl?: string } | { ok: false; error: string }> {
-  // 1. Try NestJS API first with a short timeout
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 3500);
-    const res = await fetch(getApiUrl(endpoint), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-    clearTimeout(timer);
-    const json = await res.json();
-    if (!res.ok) {
-      return { ok: false, error: json.message || "Unable to submit request. Please try again." };
+  // 1. Only try NestJS API when running locally or NEXT_PUBLIC_API_URL is configured
+  if (shouldTryBackendApi()) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 2500);
+      const res = await fetch(getApiUrl(endpoint), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      const json = await res.json();
+      if (!res.ok) {
+        return { ok: false, error: json.message || "Unable to submit request. Please try again." };
+      }
+      return {
+        ok: true,
+        referenceCode: json.referenceCode || "CONFIRMED",
+        downloadUrl: json.downloadUrl,
+      };
+    } catch {
+      // Fall through to local + Firestore persistence
     }
-    return {
-      ok: true,
-      referenceCode: json.referenceCode || "CONFIRMED",
-      downloadUrl: json.downloadUrl,
-    };
-  } catch {
-    // Backend API offline (static Firebase Hosting) -> save to Firestore + localStorage
   }
 
   const referenceCode = `VLN-${Date.now().toString().slice(-6)}`;
@@ -71,7 +87,9 @@ export async function submitEnquiryWithFallback(
     id: referenceCode,
     referenceCode,
     type,
-    fullName: String(payload.fullName || payload.contactName || payload.institutionName || payload.companyName || "Enquirer"),
+    fullName: String(
+      payload.fullName || payload.contactName || payload.institutionName || payload.companyName || "Enquirer",
+    ),
     phone: String(payload.phone || ""),
     email: payload.email ? String(payload.email) : undefined,
     programme: payload.interestedProgramme ? String(payload.interestedProgramme) : undefined,
@@ -80,13 +98,15 @@ export async function submitEnquiryWithFallback(
     payload,
   };
 
+  // Save immediately to localStorage so Admin sees it right away
   saveLocalEnquiry(entry);
 
+  // Best-effort sync to Firestore with a strict 1.5s timeout so UI never hangs
   try {
     const db = getFirestore(firebaseApp);
-    await addDoc(collection(db, "enquiries"), entry);
+    await withTimeout(addDoc(collection(db, "enquiries"), entry), 1500);
   } catch {
-    // Firestore rules or offline fallback already saved to localStorage
+    // Already saved to localStorage
   }
 
   return { ok: true, referenceCode };
@@ -96,7 +116,10 @@ export async function fetchStoredEnquiries(): Promise<StoredEnquiry[]> {
   const local = loadLocalEnquiries();
   try {
     const db = getFirestore(firebaseApp);
-    const snap = await getDocs(query(collection(db, "enquiries"), orderBy("createdAt", "desc")));
+    const snap = await withTimeout(
+      getDocs(query(collection(db, "enquiries"), orderBy("createdAt", "desc"))),
+      2000,
+    );
     const remote = snap.docs.map((d) => d.data() as StoredEnquiry);
     const byId = new Map<string, StoredEnquiry>();
     [...remote, ...local].forEach((item) => {
