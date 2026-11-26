@@ -9,6 +9,7 @@ import {
 } from "@vlearnin/shared";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { firebaseApp } from "./firebase";
+import { CATEGORY_IMAGE_MAP, COMBO_IMAGE_MAP, COURSE_IMAGE_MAP } from "./api";
 
 export interface HeroBannerContent {
   id: string;
@@ -415,9 +416,18 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     contactHeading: "Contact Us",
     copyrightSuffix: "All rights reserved.",
   },
-  categories: OFFICIAL_CATEGORIES,
-  courses: OFFICIAL_COURSES,
-  combos: OFFICIAL_COMBOS,
+  categories: OFFICIAL_CATEGORIES.map((c) => ({
+    ...c,
+    image: CATEGORY_IMAGE_MAP[c.slug] || "/images/hero-1.jpg",
+  })),
+  courses: OFFICIAL_COURSES.map((c) => ({
+    ...c,
+    image: COURSE_IMAGE_MAP[c.slug] || "/images/hero-1.jpg",
+  })),
+  combos: OFFICIAL_COMBOS.map((c) => ({
+    ...c,
+    image: COMBO_IMAGE_MAP[c.slug] || "/images/hero-1.jpg",
+  })),
 };
 
 const STORAGE_KEY = "vlearnin_site_content_v1";
