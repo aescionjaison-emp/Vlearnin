@@ -11,7 +11,12 @@ import {
   runSplitEditorialTimeline,
 } from "@/lib/motion/timelines";
 import { useSiteContent } from "@/components/SiteContentProvider";
-import { EditableImageTrigger, EditableText } from "@/components/EditableText";
+import {
+  EditableAddButton,
+  EditableDeleteButton,
+  EditableImageTrigger,
+  EditableText,
+} from "@/components/EditableText";
 
 export function BrandIntroSection() {
   const { content } = useSiteContent();
@@ -91,7 +96,13 @@ export function BrandIntroSection() {
               {/* Connected 3-Step Educational Journey */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E5E7EB]">
                 {bi.pillars.map((p, idx) => (
-                  <div key={idx} className="split-stagger-item pt-3 space-y-1.5">
+                  <div key={idx} className="split-stagger-item pt-3 space-y-1.5 relative">
+                    <EditableDeleteButton
+                      path="brandIntro.pillars"
+                      index={idx}
+                      label="×"
+                      className="absolute top-2 right-0 px-1.5 py-0.5 text-[10px]"
+                    />
                     <div className="flex items-center gap-2">
                       <EditableText
                         path={`brandIntro.pillars.${idx}.step`}
@@ -128,6 +139,15 @@ export function BrandIntroSection() {
                 >
                   <EditableText path="brandIntro.secondaryLinkLabel" value={bi.secondaryLinkLabel} />
                 </Link>
+                <EditableAddButton
+                  path="brandIntro.pillars"
+                  label="Add Pillar"
+                  createItem={() => ({
+                    step: `0${bi.pillars.length + 1}`,
+                    title: "NEW PILLAR",
+                    desc: "Describe this learning pillar.",
+                  })}
+                />
               </div>
             </div>
           </div>
@@ -139,7 +159,13 @@ export function BrandIntroSection() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div ref={highlightsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
             {bi.highlights.map((h, idx) => (
-              <div key={idx} className="highlight-stat pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left">
+              <div key={idx} className="highlight-stat pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left relative">
+                <EditableDeleteButton
+                  path="brandIntro.highlights"
+                  index={idx}
+                  label="×"
+                  className="absolute top-0 right-0 px-1.5 py-0.5 text-[10px]"
+                />
                 <AnimatedCounter
                   value={h.value}
                   padZero={h.padZero}
@@ -159,6 +185,18 @@ export function BrandIntroSection() {
                 />
               </div>
             ))}
+          </div>
+          <div className="mt-4 flex justify-end">
+            <EditableAddButton
+              path="brandIntro.highlights"
+              label="Add Counter"
+              createItem={() => ({
+                value: 10,
+                padZero: false,
+                label: "New Metric",
+                sub: "Metric subtitle",
+              })}
+            />
           </div>
         </div>
       </section>

@@ -8,7 +8,12 @@ import { ChevronLeft, ChevronRight, Pause, Play, ArrowRight, CheckCircle2 } from
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { runHeroTimeline } from "@/lib/motion/timelines";
 import { useSiteContent } from "@/components/SiteContentProvider";
-import { EditableImageTrigger, EditableText } from "@/components/EditableText";
+import {
+  EditableAddButton,
+  EditableDeleteButton,
+  EditableImageTrigger,
+  EditableText,
+} from "@/components/EditableText";
 
 export function HeroCarousel() {
   const { openDemoModal, openBrochureModal } = useLeadModal();
@@ -257,6 +262,31 @@ export function HeroCarousel() {
         >
           {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
         </button>
+
+        <EditableAddButton
+          path="heroBanners"
+          label="Add Slide"
+          createItem={() => ({
+            id: `slide-${Date.now()}`,
+            theme: "jain-blue",
+            badge: "NEW CAMPAIGN",
+            headlineWhite: "New Headline",
+            headlineAccent: "Highlight Text",
+            description: "Edit this slide description directly.",
+            image: "/images/hero-1.jpg",
+            imageAlt: "VLEARNIN campaign image",
+            primaryCta: { label: "Explore Programmes", href: "/courses" },
+            secondaryCta: { label: "Book Free Demo", action: "demo" },
+          })}
+        />
+        {banners.length > 1 && (
+          <EditableDeleteButton
+            path="heroBanners"
+            index={activeIdx}
+            label="Delete Slide"
+            onAfterDelete={() => setActiveIdx((prev) => Math.max(0, prev - 1))}
+          />
+        )}
       </div>
     </section>
   );

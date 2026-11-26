@@ -27,6 +27,17 @@ export interface HeroBannerContent {
     | { label: string; href: string };
 }
 
+export interface CustomSectionContent {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+  image: string;
+  theme: "light" | "blue";
+}
+
 export interface SiteContent {
   brand: {
     name: string;
@@ -131,6 +142,7 @@ export interface SiteContent {
   categories: OfficialCategorySeed[];
   courses: OfficialCourseSeed[];
   combos: OfficialComboSeed[];
+  customSections: CustomSectionContent[];
 }
 
 export const DEFAULT_SITE_CONTENT: SiteContent = {
@@ -428,6 +440,7 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     ...c,
     image: COMBO_IMAGE_MAP[c.slug] || "/images/hero-1.jpg",
   })),
+  customSections: [],
 };
 
 const STORAGE_KEY = "vlearnin_site_content_v1";
@@ -459,6 +472,7 @@ export function mergeSiteContent(
     categories: Array.isArray(override.categories) ? override.categories : base.categories,
     courses: Array.isArray(override.courses) ? override.courses : base.courses,
     combos: Array.isArray(override.combos) ? override.combos : base.combos,
+    customSections: Array.isArray(override.customSections) ? override.customSections : base.customSections,
   };
 }
 

@@ -20,6 +20,8 @@ interface SiteContentContextValue {
   saving: boolean;
   lastSavedAt: string | null;
   setByPath: (path: string, value: unknown) => void;
+  appendItem: (path: string, item: unknown) => void;
+  removeItem: (path: string, index: number) => void;
   getByPath: (path: string) => unknown;
   replaceContent: (next: SiteContent) => void;
   saveAndPublish: () => Promise<{ remoteSynced: boolean }>;
@@ -50,6 +52,25 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
 
   const setByPath = useCallback((path: string, value: unknown) => {
     setContent((prev) => setValueByPath(prev, path, value));
+    setHasUnsavedChanges(true);
+  }, []);
+
+  const appendItem = useCallback((path: string, item: unknown) => {
+    setContent((prev) => {
+      const current = getValueByPath(prev, path);
+      const nextArr = Array.isArray(current) ? [...current, item] : [item];
+      return setValueByPath(prev, path, nextArr);
+    });
+    setHasUnsavedChanges(true);
+  }, []);
+
+  const removeItem = useCallback((path: string, index: number) => {
+    setContent((prev) => {
+      const current = getValueByPath(prev, path);
+      if (!Array.isArray(current)) return prev;
+      const nextArr = current.filter((_, i) => i !== index);
+      return setValueByPath(prev, path, nextArr);
+    });
     setHasUnsavedChanges(true);
   }, []);
 
@@ -97,6 +118,8 @@ export function SiteContentProvider({ children }: { children: React.ReactNode })
         saving,
         lastSavedAt,
         setByPath,
+        appendItem,
+        removeItem,
         getByPath,
         replaceContent,
         saveAndPublish,
@@ -119,6 +142,8 @@ export function useSiteContent() {
       saving: false,
       lastSavedAt: null,
       setByPath: () => {},
+      appendItem: () => {},
+      removeItem: () => {},
       getByPath: (path: string) => getValueByPath(DEFAULT_SITE_CONTENT, path),
       replaceContent: () => {},
       saveAndPublish: async () => ({ remoteSynced: false }),

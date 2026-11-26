@@ -13,7 +13,11 @@ import {
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 import { useSiteContent } from "@/components/SiteContentProvider";
-import { EditableText } from "@/components/EditableText";
+import {
+  EditableAddButton,
+  EditableDeleteButton,
+  EditableText,
+} from "@/components/EditableText";
 
 const QUICK_ICONS = [BookOpen, Layers, Briefcase, Building2, ShieldCheck] as const;
 
@@ -34,10 +38,16 @@ export function QuickAccessStrip() {
             const Icon = QUICK_ICONS[idx % QUICK_ICONS.length];
             return (
               <Link
-                key={item.href}
+                key={`${item.href}-${idx}`}
                 href={item.href}
                 className="quick-item mc-card-hover group bg-white border border-[#E5E7EB] hover:border-[#1D4ED8] py-4 px-3 flex flex-col items-center text-center gap-2 relative rounded-[15px]"
               >
+                <EditableDeleteButton
+                  path="quickAccess.items"
+                  index={idx}
+                  label="×"
+                  className="absolute top-1.5 right-1.5 px-1.5 py-0.5 text-[10px]"
+                />
                 <Icon className="w-5 h-5 text-[#1D4ED8] group-hover:text-[#EA580C] transition-colors" />
                 <EditableText
                   path={`quickAccess.items.${idx}.label`}
@@ -61,6 +71,13 @@ export function QuickAccessStrip() {
               className="font-nav text-[13px] font-semibold leading-snug"
             />
           </button>
+        </div>
+        <div className="mt-3 flex justify-end">
+          <EditableAddButton
+            path="quickAccess.items"
+            label="Add Quick Link"
+            createItem={() => ({ label: "New Link", href: "/courses" })}
+          />
         </div>
       </div>
     </section>

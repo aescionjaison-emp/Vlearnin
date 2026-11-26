@@ -42,7 +42,12 @@ import {
   runSplitEditorialTimeline,
 } from "@/lib/motion/timelines";
 import { useSiteContent } from "@/components/SiteContentProvider";
-import { EditableImageTrigger, EditableText } from "@/components/EditableText";
+import {
+  EditableAddButton,
+  EditableDeleteButton,
+  EditableImageTrigger,
+  EditableText,
+} from "@/components/EditableText";
 
 const FILTER_TABS = [
   { id: "all", label: "All Programmes" },
@@ -150,8 +155,14 @@ export function HomeCatalogSections({
               return (
                 <article
                   key={cat.slug}
-                  className="domain-panel mc-card-hover bg-white border border-[#E5E7EB] shadow-xs grid grid-cols-1 lg:grid-cols-12 overflow-hidden group rounded-[15px]"
+                  className="domain-panel mc-card-hover bg-white border border-[#E5E7EB] shadow-xs grid grid-cols-1 lg:grid-cols-12 overflow-hidden group rounded-[15px] relative"
                 >
+                  <EditableDeleteButton
+                    path="categories"
+                    index={idx}
+                    label="Delete Domain"
+                    className="absolute top-3 left-3 z-30"
+                  />
                   <div
                     className={`domain-media lg:col-span-6 relative min-h-[260px] lg:min-h-[360px] overflow-hidden ${
                       reverse ? "lg:order-2" : ""
@@ -221,6 +232,21 @@ export function HomeCatalogSections({
                 </article>
               );
             })}
+          </div>
+          <div className="mt-6 flex justify-end">
+            <EditableAddButton
+              path="categories"
+              label="Add Domain"
+              createItem={() => ({
+                slug: `domain-${Date.now()}`,
+                name: "New Learning Domain",
+                shortName: "New Domain",
+                description: "Domain description.",
+                outcomeSummary: "Describe what learners master in this domain.",
+                image: "/images/domain-analytics.jpg",
+                displayOrder: categories.length + 1,
+              })}
+            />
           </div>
         </div>
       </section>
@@ -314,10 +340,18 @@ export function HomeCatalogSections({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0.4, scale: 0.98 }}
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="mc-card-hover snap-start shrink-0 w-[300px] sm:w-[360px] border border-[#E5E7EB] bg-white flex flex-col justify-between group hover:border-[#1D4ED8] rounded-[15px]"
+                  className="mc-card-hover snap-start shrink-0 w-[300px] sm:w-[360px] border border-[#E5E7EB] bg-white flex flex-col justify-between group hover:border-[#1D4ED8] rounded-[15px] relative"
                 >
                 <div>
                   <div className="relative h-52 w-full overflow-hidden">
+                    {cIdx >= 0 && (
+                      <EditableDeleteButton
+                        path="courses"
+                        index={cIdx}
+                        label="Delete"
+                        className="absolute top-3 left-3 z-30"
+                      />
+                    )}
                     <Image
                       src={course.image}
                       alt={course.title}
@@ -388,6 +422,31 @@ export function HomeCatalogSections({
               })}
             </AnimatePresence>
           </div>
+          <div className="mt-4 flex justify-end">
+            <EditableAddButton
+              path="courses"
+              label="Add Programme"
+              createItem={() => ({
+                slug: `programme-${Date.now()}`,
+                title: "New Certification Programme",
+                categorySlug: categories[0]?.slug || "ai-business-intelligence",
+                categoryName: categories[0]?.name || "AI & Business Intelligence",
+                durationHours: 30,
+                durationLabel: "30 Hours (5 Modules × 6 Hours)",
+                idealFor: "Students and working professionals",
+                summary: "Hands-on 30-hour certification track with live projects.",
+                overview: "Practical instructor-led certification programme.",
+                capstoneTitle: "Live Capstone Project",
+                capstoneDescription: "Build a portfolio-ready capstone project.",
+                careerPathways: ["Analyst", "Specialist"],
+                learningModes: ["Classroom (Rajajinagar)", "Live Online"],
+                image: "/images/course-ai-commerce.jpg",
+                tools: ["AI Tools", "Excel"],
+                outcomes: ["Build real-world projects"],
+                modules: [],
+              })}
+            />
+          </div>
         </div>
       </section>
 
@@ -437,8 +496,14 @@ export function HomeCatalogSections({
             {combos.map((combo, idx) => (
               <article
                 key={combo.slug}
-                className="combo-card mc-card-hover bg-white border border-[#E5E7EB] grid grid-cols-1 sm:grid-cols-12 overflow-hidden hover:border-[#1D4ED8] rounded-[15px]"
+                className="combo-card mc-card-hover bg-white border border-[#E5E7EB] grid grid-cols-1 sm:grid-cols-12 overflow-hidden hover:border-[#1D4ED8] rounded-[15px] relative"
               >
+                <EditableDeleteButton
+                  path="combos"
+                  index={idx}
+                  label="Delete"
+                  className="absolute bottom-3 left-3 z-30"
+                />
                 <div className="sm:col-span-5 relative min-h-[220px]">
                   <Image
                     src={combo.image}
@@ -507,6 +572,25 @@ export function HomeCatalogSections({
               </article>
             ))}
           </div>
+          <div className="mt-6 flex justify-end">
+            <EditableAddButton
+              path="combos"
+              label="Add Career Combo"
+              createItem={() => ({
+                slug: `combo-${Date.now()}`,
+                title: "New Career Accelerator Combo",
+                durationHours: 60,
+                durationLabel: "60 Hours Dual-Skill",
+                includedLabel: "2 Integrated Certifications",
+                idealFor: "Graduates & job seekers",
+                summary: "Dual-skill career track combining practical tools and capstones.",
+                outcomes: ["Portfolio-ready capstone"],
+                courseSlugs: [],
+                image: "/images/hero-2.jpg",
+                displayOrder: combos.length + 1,
+              })}
+            />
+          </div>
         </div>
       </section>
 
@@ -549,7 +633,13 @@ export function HomeCatalogSections({
               {content.advantagesSection.items.map((adv, advIdx) => {
                 const Icon = ADVANTAGE_ICONS[advIdx % ADVANTAGE_ICONS.length];
                 return (
-                  <div key={advIdx} className="vway-flip-item">
+                  <div key={advIdx} className="vway-flip-item relative">
+                    <EditableDeleteButton
+                      path="advantagesSection.items"
+                      index={advIdx}
+                      label="×"
+                      className="absolute top-2 right-2 z-30 px-1.5 py-0.5 text-[10px]"
+                    />
                     <FlipCard
                       className="h-52"
                       front={
@@ -594,6 +684,17 @@ export function HomeCatalogSections({
                 );
               })}
             </div>
+            <div className="flex justify-end">
+              <EditableAddButton
+                path="advantagesSection.items"
+                label="Add Advantage Card"
+                createItem={() => ({
+                  num: `0${content.advantagesSection.items.length + 1}`,
+                  title: "New Advantage",
+                  description: "Describe this advantage.",
+                })}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -635,8 +736,14 @@ export function HomeCatalogSections({
                 return (
                   <div
                     key={sIdx}
-                    className="pathway-stage-card bg-white/10 border border-white/15 border-t-4 border-t-[#93C5FD] p-6 space-y-3 hover:bg-white/15 transition-colors duration-300 rounded-[15px]"
+                    className="pathway-stage-card bg-white/10 border border-white/15 border-t-4 border-t-[#93C5FD] p-6 space-y-3 hover:bg-white/15 transition-colors duration-300 rounded-[15px] relative"
                   >
+                    <EditableDeleteButton
+                      path="placementSection.stages"
+                      index={sIdx}
+                      label="×"
+                      className="absolute top-2 right-2 px-1.5 py-0.5 text-[10px]"
+                    />
                     <div className="flex items-center justify-between">
                       <EditableText
                         path={`placementSection.stages.${sIdx}.step`}
@@ -660,6 +767,17 @@ export function HomeCatalogSections({
                   </div>
                 );
               })}
+            </div>
+            <div className="flex justify-end">
+              <EditableAddButton
+                path="placementSection.stages"
+                label="Add Placement Stage"
+                createItem={() => ({
+                  step: `Step 0${content.placementSection.stages.length + 1}`,
+                  title: "New Stage",
+                  desc: "Describe this placement stage.",
+                })}
+              />
             </div>
           </div>
 
@@ -699,13 +817,26 @@ export function HomeCatalogSections({
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {content.academicSection.bullets.map((item, bIdx) => (
-                <div key={bIdx} className="flex items-start gap-2 text-sm text-[#111827]">
-                  <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
-                  <EditableText path={`academicSection.bullets.${bIdx}`} value={item} />
+                <div key={bIdx} className="flex items-start gap-2 text-sm text-[#111827] justify-between">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
+                    <EditableText path={`academicSection.bullets.${bIdx}`} value={item} />
+                  </div>
+                  <EditableDeleteButton
+                    path="academicSection.bullets"
+                    index={bIdx}
+                    label="×"
+                    className="px-1.5 py-0.5 text-[10px] shrink-0"
+                  />
                 </div>
               ))}
             </div>
-            <div className="flex flex-wrap gap-3.5 pt-3">
+            <div className="flex flex-wrap gap-3.5 pt-3 items-center">
+              <EditableAddButton
+                path="academicSection.bullets"
+                label="Add Bullet"
+                createItem={() => "New academic partnership highlight"}
+              />
               <Link
                 href="/academic-partnerships"
                 className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider"
@@ -788,6 +919,12 @@ export function HomeCatalogSections({
                 key={gIdx}
                 className="campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E5E7EB] bg-[#1E3A8A] rounded-[15px]"
               >
+                <EditableDeleteButton
+                  path="campusSection.gallery"
+                  index={gIdx}
+                  label="Delete"
+                  className="absolute top-3 left-3 z-30"
+                />
                 <Image
                   src={item.src}
                   alt={item.alt}
@@ -812,8 +949,110 @@ export function HomeCatalogSections({
               </div>
             ))}
           </div>
+          <div className="mt-6 flex justify-end">
+            <EditableAddButton
+              path="campusSection.gallery"
+              label="Add Gallery Photo"
+              createItem={() => ({
+                src: "/images/hero-1.jpg",
+                title: "New Campus Highlight",
+                alt: "VLEARNIN campus learning environment",
+              })}
+            />
+          </div>
         </div>
       </section>
+
+      {/* CUSTOM SECTIONS ADDED BY ADMIN */}
+      {content.customSections.map((sec, sIdx) => (
+        <section
+          key={sec.id || sIdx}
+          className={`py-16 lg:py-20 border-b border-[#E5E7EB] relative ${
+            sec.theme === "blue" ? "bg-[#1E3A8A] text-white" : "bg-white text-[#111827]"
+          }`}
+        >
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex items-center gap-3">
+                <EditableText
+                  as="p"
+                  path={`customSections.${sIdx}.eyebrow`}
+                  value={sec.eyebrow}
+                  className={`font-nav text-xs font-bold uppercase tracking-[0.2em] ${
+                    sec.theme === "blue" ? "text-[#93C5FD]" : "text-[#1D4ED8]"
+                  }`}
+                />
+                <EditableDeleteButton
+                  path="customSections"
+                  index={sIdx}
+                  label="Delete Section"
+                />
+              </div>
+              <EditableText
+                as="h2"
+                path={`customSections.${sIdx}.heading`}
+                value={sec.heading}
+                className={`text-3xl sm:text-4xl font-bold leading-tight ${
+                  sec.theme === "blue" ? "text-white" : "text-[#1E3A8A]"
+                }`}
+              />
+              <EditableText
+                as="p"
+                path={`customSections.${sIdx}.description`}
+                value={sec.description}
+                className={`text-base leading-relaxed ${
+                  sec.theme === "blue" ? "text-white/85" : "text-[#4B5563]"
+                }`}
+              />
+              {sec.ctaLabel && (
+                <div className="pt-2">
+                  <Link
+                    href={sec.ctaHref || "/contact"}
+                    className={`${
+                      sec.theme === "blue" ? "btn-gold" : "btn-navy"
+                    } px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2`}
+                  >
+                    <EditableText
+                      path={`customSections.${sIdx}.ctaLabel`}
+                      value={sec.ctaLabel}
+                    />
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div className="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-[15px] border border-[#E5E7EB]">
+              <Image
+                src={sec.image || "/images/hero-1.jpg"}
+                alt={sec.heading}
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+              />
+              <EditableImageTrigger
+                path={`customSections.${sIdx}.image`}
+                currentSrc={sec.image || "/images/hero-1.jpg"}
+              />
+            </div>
+          </div>
+        </section>
+      ))}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-4 flex justify-center">
+        <EditableAddButton
+          path="customSections"
+          label="Add New Custom Section"
+          createItem={() => ({
+            id: `custom-${Date.now()}`,
+            eyebrow: "NEW ANNOUNCEMENT",
+            heading: "New Custom Section Heading",
+            description: "Click here to write your custom section content.",
+            ctaLabel: "Learn More",
+            ctaHref: "/courses",
+            image: "/images/about-campus.jpg",
+            theme: "light",
+          })}
+        />
+      </div>
 
       {/* 20 — FINAL HOMEPAGE ADMISSIONS ENQUIRY BANNER */}
       <section className="py-16 lg:py-20 bg-white">

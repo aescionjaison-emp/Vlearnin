@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Pencil, Image as ImageIcon } from "lucide-react";
+import { Pencil, Image as ImageIcon, Plus, Trash2 } from "lucide-react";
 import { useSiteContent } from "./SiteContentProvider";
 
 export function EditableText({
@@ -129,5 +129,68 @@ export function EditableImageTrigger({
         </div>
       )}
     </div>
+  );
+}
+
+export function EditableAddButton({
+  path,
+  createItem,
+  label,
+  className = "",
+}: {
+  path: string;
+  createItem: () => unknown;
+  label: string;
+  className?: string;
+}) {
+  const { isEditMode, appendItem } = useSiteContent();
+  if (!isEditMode) return null;
+
+  return (
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        appendItem(path, createItem());
+      }}
+      className={`inline-flex items-center gap-1.5 bg-[#EA580C] hover:bg-[#C2410C] text-white font-nav text-xs font-bold px-3.5 py-2 rounded-[12px] shadow-sm cursor-pointer transition-colors ${className}`}
+    >
+      <Plus className="w-3.5 h-3.5" />
+      <span>{label}</span>
+    </button>
+  );
+}
+
+export function EditableDeleteButton({
+  path,
+  index,
+  label = "Delete",
+  className = "",
+  onAfterDelete,
+}: {
+  path: string;
+  index: number;
+  label?: string;
+  className?: string;
+  onAfterDelete?: () => void;
+}) {
+  const { isEditMode, removeItem } = useSiteContent();
+  if (!isEditMode) return null;
+
+  return (
+    <button
+      type="button"
+      title={label}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        removeItem(path, index);
+        onAfterDelete?.();
+      }}
+      className={`inline-flex items-center gap-1 bg-red-600/95 hover:bg-red-700 text-white font-nav text-[11px] font-bold px-2.5 py-1 rounded-[10px] shadow-sm cursor-pointer transition-colors ${className}`}
+    >
+      <Trash2 className="w-3 h-3" />
+      <span>{label}</span>
+    </button>
   );
 }

@@ -12,6 +12,7 @@ import {
   Layers,
   LogOut,
   Pencil,
+  PlusSquare,
   RotateCcw,
   Save,
   Search,
@@ -32,8 +33,9 @@ import { QuickAccessStrip } from "@/components/home/QuickAccessStrip";
 import { BrandIntroSection } from "@/components/home/BrandIntroSection";
 import { HomeCatalogSections } from "@/components/home/HomeCatalogSections";
 import { GlobalFooter } from "@/components/GlobalFooter";
+import { AdminContentManager } from "./AdminContentManager";
 
-type StudioTab = "visual" | "inspector" | "operations" | "credentials";
+type StudioTab = "visual" | "manager" | "inspector" | "operations" | "credentials";
 
 interface FlatField {
   path: string;
@@ -265,6 +267,18 @@ export function AdminDashboardClient() {
             </button>
             <button
               type="button"
+              onClick={() => setActiveTab("manager")}
+              className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
+                activeTab === "manager"
+                  ? "bg-white text-[#1E3A8A]"
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+            >
+              <PlusSquare className="w-3.5 h-3.5" />
+              Add / Delete Manager
+            </button>
+            <button
+              type="button"
               onClick={() => setActiveTab("inspector")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "inspector"
@@ -380,7 +394,10 @@ export function AdminDashboardClient() {
         </div>
       )}
 
-      {/* TAB 2: ALL CONTENT FIELDS (DOT-BY-DOT INSPECTOR) */}
+      {/* TAB 2: ADD / DELETE MANAGER */}
+      {activeTab === "manager" && <AdminContentManager />}
+
+      {/* TAB 3: ALL CONTENT FIELDS (DOT-BY-DOT INSPECTOR) */}
       {activeTab === "inspector" && (
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-10 space-y-6">
           <div className="bg-white border border-[#E5E7EB] rounded-[15px] p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
