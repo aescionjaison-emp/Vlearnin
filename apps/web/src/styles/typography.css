@@ -4,8 +4,8 @@
    ========================================================================== */
 
 :root {
-  --font-primary: var(--font-ibm-serif), Georgia, serif;
-  --font-secondary: var(--font-ibm-sans), system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
+  --font-secondary: var(--font-nunito-sans), system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-primary);
   --font-body: var(--font-secondary);
   --font-navigation: var(--font-secondary);
@@ -31,7 +31,7 @@
   /* Line Heights & Tracking */
   --leading-heading: 1.08;
   --leading-body: 1.5;
-  --tracking-heading: 0;
+  --tracking-heading: -0.025em;
   --tracking-body: 0;
 }
 

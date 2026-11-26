@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+import { Nunito_Sans, Space_Grotesk } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,17 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const ibmPlexSans = IBM_Plex_Sans({
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-ibm-sans",
+  variable: "--font-nunito-sans",
   display: "swap",
 });
 
-const ibmPlexSerif = IBM_Plex_Serif({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["600", "700"],
-  variable: "--font-ibm-serif",
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}
+      className={`${nunitoSans.variable} ${spaceGrotesk.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script
