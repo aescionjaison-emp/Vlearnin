@@ -11,7 +11,10 @@ import {
   KeyRound,
   Layers,
   LogOut,
+  Mail,
+  MessageCircle,
   Pencil,
+  Phone,
   PlusSquare,
   RotateCcw,
   Save,
@@ -570,34 +573,141 @@ export function AdminDashboardClient() {
               </p>
             )}
 
-            {enquiries.length > 0 && (
-              <div className="mt-6 overflow-x-auto">
-                <table className="w-full text-sm text-left border-t border-[#E5E7EB]">
-                  <thead>
-                    <tr className="text-xs font-nav uppercase text-[#4B5563] border-b border-[#E5E7EB]">
-                      <th className="py-2 pr-4">Ref</th>
-                      <th className="py-2 pr-4">Name</th>
-                      <th className="py-2 pr-4">Phone</th>
-                      <th className="py-2 pr-4">Email</th>
-                      <th className="py-2 pr-4">Programme</th>
-                      <th className="py-2">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#E5E7EB]">
-                    {enquiries.map((e) => (
-                      <tr key={e.id}>
-                        <td className="py-2.5 pr-4 font-mono text-xs text-[#4B5563]">
-                          {e.referenceCode || e.id}
-                        </td>
-                        <td className="py-2.5 pr-4 font-semibold text-[#1E3A8A]">{e.fullName}</td>
-                        <td className="py-2.5 pr-4">{e.phone}</td>
-                        <td className="py-2.5 pr-4">{e.email || "—"}</td>
-                        <td className="py-2.5 pr-4">{e.programme || e.type || "—"}</td>
-                        <td className="py-2.5">{e.status}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            {enquiries.length === 0 ? (
+              <p className="text-sm text-[#4B5563] mt-6 border-t border-[#E5E7EB] pt-4">
+                No enquiries received yet. Enquiries submitted via Demo, Brochure, Contact,
+                Academic Partnerships, or Hire From VLEARNIN forms will appear here with full
+                details and direct WhatsApp reply buttons.
+              </p>
+            ) : (
+              <div className="mt-6 space-y-4 border-t border-[#E5E7EB] pt-6">
+                {enquiries.map((e) => {
+                  const p = (e.payload || {}) as Record<string, unknown>;
+                  const rawDigits = String(e.phone || "").replace(/\D/g, "").replace(/^0+/, "");
+                  const waNumber =
+                    rawDigits.length === 10 ? `91${rawDigits}` : rawDigits;
+                  const programmeLabel =
+                    e.programme ||
+                    (p.interestedProgramme as string) ||
+                    (p.programmeInterest as string) ||
+                    "";
+                  const waMessage = `Hello ${e.fullName}, thank you for enquiring with VLEARNIN Academy${
+                    programmeLabel ? ` regarding ${programmeLabel}` : ""
+                  }. How can we assist you with batch timings, syllabus, or demo scheduling?`;
+                  const waUrl = waNumber
+                    ? `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`
+                    : null;
+
+                  const detailEntries: [string, string][] = [
+                    ["Type", String(e.type || "enquiry").toUpperCase()],
+                    ["Programme / Interest", programmeLabel],
+                    ["Qualification", String(p.qualification || e.qualification || "")],
+                    ["Preferred Batch", String(p.preferredBatch || e.preferredBatch || "")],
+                    ["Institution", String(p.institutionName || "")],
+                    ["Company", String(p.companyName || "")],
+                    ["Designation", String(p.designation || "")],
+                    ["City", String(p.city || "")],
+                    [
+                      "Roles",
+                      Array.isArray(p.roleCategories) ? p.roleCategories.join(", ") : "",
+                    ],
+                    ["Message / Notes", String(p.message || e.message || "")],
+                    ["Source Page", String(p.sourcePage || e.sourcePage || "")],
+                  ].filter(([, val]) => val && val.trim().length > 0) as [string, string][];
+
+                  return (
+                    <div
+                      key={e.id}
+                      className="border border-[#E5E7EB] bg-[#F8FAFC] rounded-[15px] p-5 space-y-4"
+                    >
+                      <div className="flex flex-wrap items-start justify-between gap-4">
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <span className="font-mono text-xs font-bold bg-[#1E3A8A] text-white px-2.5 py-0.5 rounded-[8px]">
+                              {e.referenceCode || e.id}
+                            </span>
+                            <span className="font-nav text-xs font-bold uppercase bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE] px-2.5 py-0.5 rounded-[8px]">
+                              {e.type || "ENQUIRY"}
+                            </span>
+                            <span className="font-nav text-xs font-semibold text-[#EA580C]">
+                              {e.status || "NEW"}
+                            </span>
+                            {e.createdAt && (
+                              <span className="text-xs text-[#4B5563]">
+                                {new Date(e.createdAt).toLocaleString()}
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="text-lg font-bold text-[#1E3A8A] mt-2">
+                            {e.fullName}
+                          </h3>
+                          <div className="flex flex-wrap items-center gap-4 text-sm text-[#4B5563] mt-1">
+                            {e.phone && (
+                              <span className="inline-flex items-center gap-1.5">
+                                <Phone className="w-3.5 h-3.5 text-[#1D4ED8]" />
+                                {e.phone}
+                              </span>
+                            )}
+                            {e.email && (
+                              <span className="inline-flex items-center gap-1.5">
+                                <Mail className="w-3.5 h-3.5 text-[#1D4ED8]" />
+                                {e.email}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2">
+                          {waUrl && (
+                            <a
+                              href={waUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-[#16A34A] hover:bg-[#15803D] text-white font-nav text-xs font-bold px-4 py-2 rounded-[12px] inline-flex items-center gap-1.5 transition-colors"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                              <span>Reply on WhatsApp</span>
+                            </a>
+                          )}
+                          {e.phone && (
+                            <a
+                              href={`tel:${e.phone}`}
+                              className="btn-outline-navy px-3.5 py-2 text-xs inline-flex items-center gap-1.5"
+                            >
+                              <Phone className="w-3.5 h-3.5" />
+                              <span>Call</span>
+                            </a>
+                          )}
+                          {e.email && (
+                            <a
+                              href={`mailto:${e.email}`}
+                              className="btn-outline-navy px-3.5 py-2 text-xs inline-flex items-center gap-1.5"
+                            >
+                              <Mail className="w-3.5 h-3.5" />
+                              <span>Email</span>
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      {detailEntries.length > 0 && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-3 border-t border-[#E5E7EB]">
+                          {detailEntries.map(([label, val]) => (
+                            <div
+                              key={label}
+                              className="bg-white border border-[#E5E7EB] rounded-[12px] px-3 py-2"
+                            >
+                              <p className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#4B5563]">
+                                {label}
+                              </p>
+                              <p className="text-sm text-[#111827] mt-0.5 break-words">{val}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
