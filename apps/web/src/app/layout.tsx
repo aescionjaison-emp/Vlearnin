@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Sora } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,17 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-dm-sans",
+  variable: "--font-ibm-sans",
   display: "swap",
 });
 
-const sora = Sora({
+const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["600", "700"],
-  variable: "--font-sora",
+  variable: "--font-ibm-serif",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${sora.variable}`}
+      className={`${ibmPlexSans.variable} ${ibmPlexSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script
