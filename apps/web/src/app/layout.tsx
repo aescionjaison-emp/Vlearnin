@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { DM_Sans, Sora } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,17 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const figtree = Figtree({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-figtree",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const bricolage = Bricolage_Grotesque({
+const sora = Sora({
   subsets: ["latin"],
   weight: ["600", "700"],
-  variable: "--font-bricolage",
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${figtree.variable} ${bricolage.variable}`}
+      className={`${dmSans.variable} ${sora.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script

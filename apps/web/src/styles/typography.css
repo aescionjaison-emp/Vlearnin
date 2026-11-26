@@ -4,8 +4,8 @@
    ========================================================================== */
 
 :root {
-  --font-primary: var(--font-bricolage), system-ui, -apple-system, sans-serif;
-  --font-secondary: var(--font-figtree), system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-sora), system-ui, -apple-system, sans-serif;
+  --font-secondary: var(--font-dm-sans), system-ui, -apple-system, sans-serif;
   --font-heading: var(--font-primary);
   --font-body: var(--font-secondary);
   --font-navigation: var(--font-secondary);
