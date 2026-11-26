@@ -20,10 +20,16 @@ import {
   Save,
   Search,
   SlidersHorizontal,
+  Trash2,
   Upload,
 } from "lucide-react";
 import { getApiUrl } from "@/lib/api";
-import { fetchStoredEnquiries, loadLocalEnquiries } from "@/lib/enquiry-store";
+import {
+  deleteStoredEnquiry,
+  fetchStoredEnquiries,
+  loadLocalEnquiries,
+  updateStoredEnquiryStatus,
+} from "@/lib/enquiry-store";
 import {
   AdminSession,
   clearAdminSession,
@@ -663,6 +669,12 @@ export function AdminDashboardClient() {
                               href={waUrl}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={async () => {
+                                await updateStoredEnquiryStatus(e.id, "REPLIED");
+                                setEnquiries((prev) =>
+                                  prev.map((x) => (x.id === e.id ? { ...x, status: "REPLIED" } : x)),
+                                );
+                              }}
                               className="bg-[#16A34A] hover:bg-[#15803D] text-white font-nav text-xs font-bold px-4 py-2 rounded-[12px] inline-flex items-center gap-1.5 transition-colors"
                             >
                               <MessageCircle className="w-4 h-4" />
@@ -687,6 +699,42 @@ export function AdminDashboardClient() {
                               <span>Email</span>
                             </a>
                           )}
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              await updateStoredEnquiryStatus(e.id, "SEEN");
+                              setEnquiries((prev) =>
+                                prev.map((x) => (x.id === e.id ? { ...x, status: "SEEN" } : x)),
+                              );
+                            }}
+                            className="border border-[#E5E7EB] bg-white hover:bg-[#EFF6FF] text-[#1E3A8A] font-nav text-xs font-semibold px-3 py-2 rounded-[12px] cursor-pointer"
+                          >
+                            Mark Seen
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              await updateStoredEnquiryStatus(e.id, "REPLIED");
+                              setEnquiries((prev) =>
+                                prev.map((x) => (x.id === e.id ? { ...x, status: "REPLIED" } : x)),
+                              );
+                            }}
+                            className="border border-[#E5E7EB] bg-white hover:bg-[#EFF6FF] text-[#1D4ED8] font-nav text-xs font-semibold px-3 py-2 rounded-[12px] cursor-pointer"
+                          >
+                            Mark Replied
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              await deleteStoredEnquiry(e.id);
+                              setEnquiries((prev) => prev.filter((x) => x.id !== e.id));
+                              setFeedback(`Deleted enquiry ${e.referenceCode || e.id}.`);
+                            }}
+                            className="bg-red-600 hover:bg-red-700 text-white font-nav text-xs font-bold px-3 py-2 rounded-[12px] inline-flex items-center gap-1 cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span>Delete</span>
+                          </button>
                         </div>
                       </div>
 

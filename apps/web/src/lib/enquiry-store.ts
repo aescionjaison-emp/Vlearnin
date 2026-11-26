@@ -1,4 +1,14 @@
-import { addDoc, collection, getDocs, getFirestore, orderBy, query } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  getFirestore,
+  orderBy,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getApiUrl } from "./api";
 import { firebaseApp } from "./firebase";
 
@@ -130,5 +140,43 @@ export async function fetchStoredEnquiries(): Promise<StoredEnquiry[]> {
     );
   } catch {
     return local;
+  }
+}
+
+export async function updateStoredEnquiryStatus(id: string, status: string): Promise<void> {
+  if (typeof window !== "undefined") {
+    const next = loadLocalEnquiries().map((item) =>
+      item.id === id || item.referenceCode === id ? { ...item, status } : item,
+    );
+    window.localStorage.setItem(LOCAL_ENQUIRIES_KEY, JSON.stringify(next));
+  }
+  try {
+    const db = getFirestore(firebaseApp);
+    const snap = await withTimeout(
+      getDocs(query(collection(db, "enquiries"), where("id", "==", id))),
+      1500,
+    );
+    await Promise.all(snap.docs.map((d) => withTimeout(updateDoc(d.ref, { status }), 1500)));
+  } catch {
+    // localStorage already updated
+  }
+}
+
+export async function deleteStoredEnquiry(id: string): Promise<void> {
+  if (typeof window !== "undefined") {
+    const next = loadLocalEnquiries().filter(
+      (item) => item.id !== id && item.referenceCode !== id,
+    );
+    window.localStorage.setItem(LOCAL_ENQUIRIES_KEY, JSON.stringify(next));
+  }
+  try {
+    const db = getFirestore(firebaseApp);
+    const snap = await withTimeout(
+      getDocs(query(collection(db, "enquiries"), where("id", "==", id))),
+      1500,
+    );
+    await Promise.all(snap.docs.map((d) => withTimeout(deleteDoc(d.ref), 1500)));
+  } catch {
+    // localStorage already updated
   }
 }
