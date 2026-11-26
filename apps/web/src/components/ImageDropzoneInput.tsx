@@ -27,8 +27,7 @@ function compressImageFile(file: File, maxWidth = 1200, quality = 0.8): Promise<
           return;
         }
         ctx.drawImage(img, 0, 0, w, h);
-        const dataUrl = canvas.toDataURL("image/jpeg", quality);
-        resolve(dataUrl);
+        resolve(canvas.toDataURL("image/jpeg", quality));
       };
       img.src = String(reader.result);
     };
@@ -36,32 +35,70 @@ function compressImageFile(file: File, maxWidth = 1200, quality = 0.8): Promise<
   });
 }
 
+function readVideoFile(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Failed to read video file"));
+    reader.onload = () => resolve(String(reader.result));
+    reader.readAsDataURL(file);
+  });
+}
+
+function isVideoSrc(src: string): boolean {
+  if (!src) return false;
+  return (
+    src.startsWith("data:video/") ||
+    /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(src)
+  );
+}
+
 export function ImageDropzoneInput({
   value,
   onChange,
   compact = false,
+  allowVideo = true,
+  label,
 }: {
   value: string;
   onChange: (nextSrc: string) => void;
   compact?: boolean;
+  allowVideo?: boolean;
+  label?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
   const [processing, setProcessing] = useState(false);
 
   const handleFile = async (file?: File | null) => {
-    if (!file || !file.type.startsWith("image/")) return;
+    if (!file) return;
+    const isImg = file.type.startsWith("image/");
+    const isVid = allowVideo && file.type.startsWith("video/");
+    if (!isImg && !isVid) return;
+
     setProcessing(true);
     try {
-      const compressed = await compressImageFile(file);
-      onChange(compressed);
+      if (isImg) {
+        const compressed = await compressImageFile(file);
+        onChange(compressed);
+      } else if (isVid) {
+        const dataUrl = await readVideoFile(file);
+        onChange(dataUrl);
+      }
     } finally {
       setProcessing(false);
     }
   };
 
+  const accept = allowVideo ? "image/*,video/*" : "image/*";
+  const showVideoPreview = isVideoSrc(value);
+
   return (
     <div className="space-y-2">
+      {label && (
+        <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A]">
+          {label}
+        </label>
+      )}
       <div
         onDragOver={(e) => {
           e.preventDefault();
@@ -92,7 +129,7 @@ export function ImageDropzoneInput({
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept={accept}
           onChange={(e) => {
             const file = e.target.files?.[0];
             handleFile(file);
@@ -101,22 +138,34 @@ export function ImageDropzoneInput({
           className="hidden"
         />
 
-        {value && (
-          <img
-            src={value}
-            alt="Preview"
-            className={`${compact ? "h-16" : "h-20"} w-full object-cover rounded-[10px] border border-[#E5E7EB]`}
-          />
-        )}
+        {value &&
+          (showVideoPreview ? (
+            <video
+              src={value}
+              controls
+              muted
+              className={`${compact ? "h-20" : "h-24"} w-full object-cover rounded-[10px] border border-[#E5E7EB] bg-black`}
+            />
+          ) : (
+            <img
+              src={value}
+              alt="Preview"
+              className={`${compact ? "h-16" : "h-20"} w-full object-cover rounded-[10px] border border-[#E5E7EB]`}
+            />
+          ))}
 
         <div className="flex items-center gap-1.5 text-xs font-nav font-semibold text-[#1E3A8A]">
           <UploadCloud className="w-4 h-4 text-[#EA580C]" />
           <span>
             {processing
-              ? "Processing image..."
+              ? "Processing media..."
               : dragging
-                ? "Drop image here"
-                : "Drag & drop image here"}
+                ? allowVideo
+                  ? "Drop image or video here"
+                  : "Drop image here"
+                : allowVideo
+                  ? "Drag & drop image or video here"
+                  : "Drag & drop image here"}
           </span>
         </div>
 
@@ -129,7 +178,7 @@ export function ImageDropzoneInput({
           className="inline-flex items-center gap-1.5 bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white font-nav text-[11px] font-semibold px-3 py-1 rounded-[10px] cursor-pointer"
         >
           <FolderOpen className="w-3.5 h-3.5" />
-          <span>Choose from Folder</span>
+          <span>Select from Folder</span>
         </button>
       </div>
 
@@ -137,7 +186,13 @@ export function ImageDropzoneInput({
         type="text"
         value={value.startsWith("data:") ? "" : value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={value.startsWith("data:") ? "Uploaded image (or paste URL to replace)" : "/images/hero-1.jpg or https://..."}
+        placeholder={
+          value.startsWith("data:")
+            ? "Uploaded file active (or paste URL to replace)"
+            : allowVideo
+              ? "/images/hero-1.jpg or video URL (.mp4 / https://...)"
+              : "/images/hero-1.jpg or https://..."
+        }
         className="w-full border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-xs rounded-[12px]"
       />
     </div>

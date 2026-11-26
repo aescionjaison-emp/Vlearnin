@@ -925,13 +925,24 @@ export function HomeCatalogSections({
                   label="Delete"
                   className="absolute top-3 left-3 z-30"
                 />
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 280px"
-                  className="object-cover mc-image-zoom"
-                />
+                {item.video || item.src.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(item.src) ? (
+                  <video
+                    src={item.video || item.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover mc-image-zoom"
+                  />
+                ) : (
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 280px"
+                    className="object-cover mc-image-zoom"
+                  />
+                )}
                 <EditableImageTrigger
                   path={`campusSection.gallery.${gIdx}.src`}
                   currentSrc={item.src}
@@ -1022,13 +1033,24 @@ export function HomeCatalogSections({
               )}
             </div>
             <div className="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-[15px] border border-[#E5E7EB]">
-              <Image
-                src={sec.image || "/images/hero-1.jpg"}
-                alt={sec.heading}
-                fill
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
-              />
+              {sec.video || (sec.image && (sec.image.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(sec.image))) ? (
+                <video
+                  src={sec.video || sec.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={sec.image || "/images/hero-1.jpg"}
+                  alt={sec.heading}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover"
+                />
+              )}
               <EditableImageTrigger
                 path={`customSections.${sIdx}.image`}
                 currentSrc={sec.image || "/images/hero-1.jpg"}

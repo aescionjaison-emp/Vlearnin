@@ -190,14 +190,25 @@ export function HeroCarousel() {
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="absolute inset-0 jain-slant-photo-lg"
             >
-              <Image
-                src={banner.image}
-                alt={banner.imageAlt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
-              />
+              {banner.video || banner.image.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(banner.image) ? (
+                <video
+                  src={banner.video || banner.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover object-center"
+                />
+              ) : (
+                <Image
+                  src={banner.image}
+                  alt={banner.imageAlt}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover object-center"
+                />
+              )}
             </motion.div>
           </AnimatePresence>
           <EditableImageTrigger

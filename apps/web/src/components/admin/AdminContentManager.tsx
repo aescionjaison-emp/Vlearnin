@@ -6,33 +6,41 @@ import { useSiteContent } from "@/components/SiteContentProvider";
 import { ImageDropzoneInput } from "@/components/ImageDropzoneInput";
 
 type SectionKey =
+  | "brand"
   | "heroBanners"
   | "courses"
   | "combos"
   | "categories"
   | "quickAccess"
   | "navLinks"
+  | "brandIntro"
   | "pillars"
   | "highlights"
   | "advantages"
   | "placement"
+  | "academic"
   | "bullets"
   | "gallery"
+  | "footer"
   | "customSections";
 
 const SECTION_TABS: { key: SectionKey; label: string }[] = [
-  { key: "courses", label: "Programmes (Courses)" },
-  { key: "combos", label: "Career Combos" },
-  { key: "categories", label: "Learning Domains" },
-  { key: "heroBanners", label: "Hero Slides" },
+  { key: "brand", label: "Brand & Contact" },
+  { key: "navLinks", label: "Header & Nav Links" },
+  { key: "heroBanners", label: "Hero Slides (Image/Video)" },
   { key: "quickAccess", label: "Quick Access" },
-  { key: "navLinks", label: "Header Nav Links" },
+  { key: "brandIntro", label: "Welcome & Campus Image" },
   { key: "pillars", label: "V-Way Pillars" },
   { key: "highlights", label: "Stat Counters" },
+  { key: "categories", label: "Learning Domains" },
+  { key: "courses", label: "Programmes (Courses)" },
+  { key: "combos", label: "Career Combos" },
   { key: "advantages", label: "V-Way Advantages" },
   { key: "placement", label: "Placement Stages" },
+  { key: "academic", label: "Academic Partnerships" },
   { key: "bullets", label: "Academic Bullets" },
-  { key: "gallery", label: "Campus Gallery" },
+  { key: "gallery", label: "Campus Gallery (Image/Video)" },
+  { key: "footer", label: "Final CTA & Footer" },
   { key: "customSections", label: "Custom Sections" },
 ];
 
@@ -84,6 +92,235 @@ export function AdminContentManager() {
 
       {/* Right CRUD Panel */}
       <div className="lg:col-span-9 bg-white border border-[#E5E7EB] rounded-[15px] p-6 sm:p-8 space-y-6">
+        {selected === "brand" && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+              Brand &amp; Contact Information
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {(
+                [
+                  ["brand.name", "Brand Name", content.brand.name],
+                  ["brand.legalName", "Legal Name", content.brand.legalName],
+                  ["brand.tagline", "Tagline", content.brand.tagline],
+                  ["brand.email", "Contact Email", content.brand.email],
+                  ["brand.phoneDisplay", "Phone Display", content.brand.phoneDisplay],
+                  ["brand.whatsappNumber", "WhatsApp Number", content.brand.whatsappNumber],
+                  ["brand.shortLocation", "Short Location", content.brand.shortLocation],
+                  ["brand.weekdaysTiming", "Weekdays Timing", content.brand.weekdaysTiming],
+                  ["brand.sundayTiming", "Sunday Timing", content.brand.sundayTiming],
+                ] as const
+              ).map(([path, lbl, val]) => (
+                <div key={path}>
+                  <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+                    {lbl}
+                  </label>
+                  <input
+                    type="text"
+                    value={val}
+                    onChange={(e) => setByPath(path, e.target.value)}
+                    className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+                  />
+                </div>
+              ))}
+            </div>
+            <div>
+              <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+                Full Address
+              </label>
+              <input
+                type="text"
+                value={content.brand.address}
+                onChange={(e) => setByPath("brand.address", e.target.value)}
+                className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+                Placement Assistance Disclaimer
+              </label>
+              <textarea
+                rows={3}
+                value={content.brand.placementDisclaimer}
+                onChange={(e) => setByPath("brand.placementDisclaimer", e.target.value)}
+                className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+          </div>
+        )}
+
+        {selected === "brandIntro" && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+              Welcome Section &amp; Campus Photo
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={content.brandIntro.eyebrow}
+                onChange={(e) => setByPath("brandIntro.eyebrow", e.target.value)}
+                placeholder="Eyebrow"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.brandIntro.subTagline}
+                onChange={(e) => setByPath("brandIntro.subTagline", e.target.value)}
+                placeholder="Sub-tagline"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.brandIntro.heading}
+                onChange={(e) => setByPath("brandIntro.heading", e.target.value)}
+                placeholder="Heading"
+                className="sm:col-span-2 border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.brandIntro.ctaLabel}
+                onChange={(e) => setByPath("brandIntro.ctaLabel", e.target.value)}
+                placeholder="Primary CTA Label"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.brandIntro.secondaryLinkLabel}
+                onChange={(e) => setByPath("brandIntro.secondaryLinkLabel", e.target.value)}
+                placeholder="Secondary Link Label"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+            <textarea
+              rows={3}
+              value={content.brandIntro.description}
+              onChange={(e) => setByPath("brandIntro.description", e.target.value)}
+              className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+            />
+            <ImageDropzoneInput
+              label="Welcome Section Campus Image"
+              allowVideo={false}
+              value={content.brandIntro.image}
+              onChange={(next) => setByPath("brandIntro.image", next)}
+            />
+          </div>
+        )}
+
+        {selected === "academic" && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+              Academic Partnerships Section
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={content.academicSection.eyebrow}
+                onChange={(e) => setByPath("academicSection.eyebrow", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.academicSection.heading}
+                onChange={(e) => setByPath("academicSection.heading", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.academicSection.primaryCtaLabel}
+                onChange={(e) => setByPath("academicSection.primaryCtaLabel", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.academicSection.secondaryCtaLabel}
+                onChange={(e) => setByPath("academicSection.secondaryCtaLabel", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+            <textarea
+              rows={3}
+              value={content.academicSection.description}
+              onChange={(e) => setByPath("academicSection.description", e.target.value)}
+              className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+            />
+            <ImageDropzoneInput
+              label="Academic Partnerships Image"
+              allowVideo={false}
+              value={content.academicSection.image}
+              onChange={(next) => setByPath("academicSection.image", next)}
+            />
+          </div>
+        )}
+
+        {selected === "footer" && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+              Final CTA Banner &amp; Footer
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={content.finalCtaSection.heading}
+                onChange={(e) => setByPath("finalCtaSection.heading", e.target.value)}
+                placeholder="Final CTA Heading"
+                className="sm:col-span-2 border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.finalCtaSection.demoLabel}
+                onChange={(e) => setByPath("finalCtaSection.demoLabel", e.target.value)}
+                placeholder="Demo Button Label"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.finalCtaSection.contactLabel}
+                onChange={(e) => setByPath("finalCtaSection.contactLabel", e.target.value)}
+                placeholder="Contact Button Label"
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+            <textarea
+              rows={2}
+              value={content.finalCtaSection.description}
+              onChange={(e) => setByPath("finalCtaSection.description", e.target.value)}
+              className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+            />
+            <div className="pt-4 border-t border-[#E5E7EB] grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                value={content.footer.programmesHeading}
+                onChange={(e) => setByPath("footer.programmesHeading", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.footer.quickLinksHeading}
+                onChange={(e) => setByPath("footer.quickLinksHeading", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.footer.contactHeading}
+                onChange={(e) => setByPath("footer.contactHeading", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+              <input
+                type="text"
+                value={content.footer.copyrightSuffix}
+                onChange={(e) => setByPath("footer.copyrightSuffix", e.target.value)}
+                className="border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+              />
+            </div>
+            <textarea
+              rows={3}
+              value={content.footer.description}
+              onChange={(e) => setByPath("footer.description", e.target.value)}
+              className="w-full border border-[#E5E7EB] px-3 py-2 text-sm rounded-[15px]"
+            />
+          </div>
+        )}
+
         {selected === "courses" && (
           <>
             {renderHeader(
@@ -546,6 +783,13 @@ export function AdminContentManager() {
               }),
               "Add Advantage",
             )}
+            <ImageDropzoneInput
+              label="V-Way Portrait Image"
+              allowVideo={false}
+              compact
+              value={content.advantagesSection.image}
+              onChange={(next) => setByPath("advantagesSection.image", next)}
+            />
             <div className="space-y-3">
               {content.advantagesSection.items.map((adv, idx) => (
                 <div key={idx} className="bg-[#F8FAFC] p-4 rounded-[15px] border border-[#E5E7EB] space-y-2">

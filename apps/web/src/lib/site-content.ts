@@ -20,6 +20,7 @@ export interface HeroBannerContent {
   description: string;
   features?: string[];
   image: string;
+  video?: string;
   imageAlt: string;
   primaryCta: { label: string; href: string };
   secondaryCta?:
@@ -35,6 +36,7 @@ export interface CustomSectionContent {
   ctaLabel: string;
   ctaHref: string;
   image: string;
+  video?: string;
   theme: "light" | "blue";
 }
 
@@ -123,7 +125,7 @@ export interface SiteContent {
     description: string;
     visitLabel: string;
     demoLabel: string;
-    gallery: { src: string; title: string; alt: string }[];
+    gallery: { src: string; video?: string; title: string; alt: string }[];
   };
   finalCtaSection: {
     heading: string;

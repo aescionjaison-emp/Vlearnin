@@ -263,7 +263,7 @@ export function AdminDashboardClient() {
               }`}
             >
               <Eye className="w-3.5 h-3.5" />
-              Live Visual Editor
+              Visual Editor
             </button>
             <button
               type="button"
@@ -275,7 +275,7 @@ export function AdminDashboardClient() {
               }`}
             >
               <PlusSquare className="w-3.5 h-3.5" />
-              Add / Delete Manager
+              Manual Editor (Add / Edit / Delete)
             </button>
             <button
               type="button"
