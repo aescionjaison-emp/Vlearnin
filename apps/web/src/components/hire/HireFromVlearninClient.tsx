@@ -17,7 +17,7 @@ import {
   EmployerRequestSchema,
   JOB_LOCATION_OPTIONS,
 } from "@vlearnin/shared";
-import { getApiUrl } from "@/lib/api";
+import { submitEnquiryWithFallback } from "@/lib/enquiry-store";
 
 export function HireFromVlearninClient() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -57,21 +57,12 @@ export function HireFromVlearninClient() {
 
   const onSubmit = async (data: EmployerRequestInput) => {
     setServerError(null);
-    try {
-      const res = await fetch(getApiUrl("/enquiries/employer"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setServerError(json.message || "Unable to submit hiring request.");
-        return;
-      }
-      setSuccessRef(json.referenceCode || "CONFIRMED");
-    } catch {
-      setServerError("Network error while connecting to server. Please try again.");
+    const res = await submitEnquiryWithFallback("/enquiries/employer", "employer", data as unknown as Record<string, unknown>);
+    if (!res.ok) {
+      setServerError(res.error);
+      return;
     }
+    setSuccessRef(res.referenceCode);
   };
 
   return (

@@ -16,7 +16,7 @@ import {
   QUALIFICATION_OPTIONS,
   buildWhatsAppUrl,
 } from "@vlearnin/shared";
-import { getApiUrl } from "@/lib/api";
+import { submitEnquiryWithFallback } from "@/lib/enquiry-store";
 
 type ModalMode = "demo" | "brochure" | null;
 
@@ -129,21 +129,12 @@ function DemoModal({
 
   const onSubmit = async (data: DemoBookingInput) => {
     setServerError(null);
-    try {
-      const res = await fetch(getApiUrl("/enquiries/demo"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setServerError(json.message || "Unable to submit request. Please try again.");
-        return;
-      }
-      setSuccessRef(json.referenceCode || "CONFIRMED");
-    } catch {
-      setServerError("Network error while connecting to server. You can also reach us directly on WhatsApp.");
+    const res = await submitEnquiryWithFallback("/enquiries/demo", "demo", data as unknown as Record<string, unknown>);
+    if (!res.ok) {
+      setServerError(res.error);
+      return;
     }
+    setSuccessRef(res.referenceCode);
   };
 
   return (
@@ -327,7 +318,7 @@ function DemoModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-gold w-full py-3 text-sm inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                className="btn-primary-amber w-full py-3 text-sm inline-flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
                 {isSubmitting ? "Submitting..." : "Confirm Free Demo Class"}
@@ -374,22 +365,16 @@ function BrochureModal({
 
   const onSubmit = async (data: BrochureRequestInput) => {
     setServerError(null);
-    try {
-      const res = await fetch(getApiUrl("/enquiries/brochure"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setServerError(json.message || "Unable to process brochure request.");
-        return;
-      }
+    const res = await submitEnquiryWithFallback("/enquiries/brochure", "brochure", data as unknown as Record<string, unknown>);
+    if (!res.ok) {
+      setServerError(res.error);
+      return;
+    }
+    if (res.downloadUrl) {
       const apiBase = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api").replace(/\/api$/, "");
-      const fullPdfUrl = `${apiBase}${json.downloadUrl}`;
-      setDownloadUrl(fullPdfUrl);
-    } catch {
-      setServerError("Network error while connecting to server. Please try again.");
+      setDownloadUrl(`${apiBase}${res.downloadUrl}`);
+    } else {
+      setDownloadUrl(buildWhatsAppUrl(`Hello VLEARNIN Academy, I have requested the brochure (${res.referenceCode}) for ${data.interestedProgramme || "All Programmes"}.`));
     }
   };
 
@@ -531,7 +516,7 @@ function BrochureModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-gold w-full py-3 text-sm inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                className="btn-primary-amber w-full py-3 text-sm inline-flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 {isSubmitting ? "Preparing PDF..." : "Unlock & Download Brochure"}

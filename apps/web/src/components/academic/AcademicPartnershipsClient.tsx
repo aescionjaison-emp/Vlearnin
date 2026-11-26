@@ -19,7 +19,7 @@ import {
   InstitutionalEnquirySchema,
   OFFICIAL_COURSES,
 } from "@vlearnin/shared";
-import { getApiUrl } from "@/lib/api";
+import { submitEnquiryWithFallback } from "@/lib/enquiry-store";
 
 const PORTFOLIO_ROWS = [
   {
@@ -146,21 +146,12 @@ export function AcademicPartnershipsClient() {
 
   const onSubmit = async (data: InstitutionalEnquiryInput) => {
     setServerError(null);
-    try {
-      const res = await fetch(getApiUrl("/enquiries/institutional"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setServerError(json.message || "Unable to submit institutional proposal request.");
-        return;
-      }
-      setSuccessRef(json.referenceCode || "CONFIRMED");
-    } catch {
-      setServerError("Network error while connecting to server. Please try again.");
+    const res = await submitEnquiryWithFallback("/enquiries/institutional", "institutional", data as unknown as Record<string, unknown>);
+    if (!res.ok) {
+      setServerError(res.error);
+      return;
     }
+    setSuccessRef(res.referenceCode);
   };
 
   const apiRoot = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api").replace(/\/api$/, "");

@@ -20,6 +20,7 @@ import {
   Upload,
 } from "lucide-react";
 import { getApiUrl } from "@/lib/api";
+import { fetchStoredEnquiries } from "@/lib/enquiry-store";
 import {
   AdminSession,
   clearAdminSession,
@@ -134,10 +135,13 @@ export function AdminDashboardClient() {
         setApiConnected(true);
         setMetrics(data.metrics || {});
         setEnquiries(data.recentEnquiries || []);
+        return;
       }
     } catch {
       setApiConnected(false);
     }
+    const localAndRemote = await fetchStoredEnquiries();
+    setEnquiries(localAndRemote);
   }, []);
 
   useEffect(() => {

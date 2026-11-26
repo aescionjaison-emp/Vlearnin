@@ -24,7 +24,7 @@ import {
   StudentEnquirySchema,
   buildWhatsAppUrl,
 } from "@vlearnin/shared";
-import { getApiUrl } from "@/lib/api";
+import { submitEnquiryWithFallback } from "@/lib/enquiry-store";
 
 const ALL_COURSE_COMBO_OPTIONS = [
   ...OFFICIAL_COURSES.map((c) => c.title),
@@ -56,21 +56,12 @@ export function ContactPageClient() {
 
   const onSubmit = async (data: StudentEnquiryInput) => {
     setServerError(null);
-    try {
-      const res = await fetch(getApiUrl("/enquiries/student"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setServerError(json.message || "Unable to submit enquiry. Please try again.");
-        return;
-      }
-      setSuccessRef(json.referenceCode || "CONFIRMED");
-    } catch {
-      setServerError("Network error while connecting to server. Please try WhatsApp.");
+    const res = await submitEnquiryWithFallback("/enquiries/student", "student", data as unknown as Record<string, unknown>);
+    if (!res.ok) {
+      setServerError(res.error);
+      return;
     }
+    setSuccessRef(res.referenceCode);
   };
 
   const mapsQuery = encodeURIComponent(
@@ -285,7 +276,7 @@ export function ContactPageClient() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="btn-gold w-full sm:w-auto px-8 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 disabled:opacity-60"
+                    className="btn-primary-amber w-full sm:w-auto px-8 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
                     {isSubmitting ? "Submitting..." : "Request Callback & Brochure"}
