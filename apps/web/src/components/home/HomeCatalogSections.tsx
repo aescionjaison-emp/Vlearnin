@@ -380,8 +380,8 @@ export function HomeCatalogSections({
       cards.forEach((card, idx) => {
         if (idx < cards.length - 1) {
           gsap.to(card, {
-            scale: 0.94,
-            opacity: 0.88,
+            scale: 0.95,
+            filter: "brightness(0.97)",
             ease: "none",
             scrollTrigger: {
               trigger: cards[idx + 1],
@@ -608,12 +608,15 @@ export function HomeCatalogSections({
                   <motion.article
                     key={course.slug}
                     layout
-                    initial={{ opacity: 0.7, y: 16 }}
+                    initial={{ opacity: 1, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.25 }}
-                    style={{ top: `${88 + Math.min(idx, 5) * 14}px` }}
-                    className="stacked-course-card lg:sticky bg-white border border-[#E5E7EB] hover:border-[#1D4ED8] shadow-md rounded-[15px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch group"
+                    style={{
+                      top: `${114 + Math.min(idx, 5) * 14}px`,
+                      zIndex: idx + 10,
+                    }}
+                    className="stacked-course-card lg:sticky bg-white border border-[#E5E7EB] hover:border-[#1D4ED8] shadow-[0_10px_28px_rgba(17,24,39,0.08)] rounded-[15px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch group"
                   >
                     <div className="stacked-course-photo lg:col-span-5 relative min-h-[220px] lg:min-h-[280px] overflow-hidden">
                       {cIdx >= 0 && (
