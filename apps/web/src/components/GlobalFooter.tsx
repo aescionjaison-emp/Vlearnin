@@ -29,7 +29,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
 
   return (
     <>
-      <footer className="bg-[#1D4ED8] text-white border-t-4 border-[#EA580C] pb-20 md:pb-0 rounded-[15px]">
+      <footer className="relative z-0 lg:sticky lg:bottom-0 bg-[#1D4ED8] text-white border-t-4 border-[#EA580C] pb-20 md:pb-0">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
           <div ref={footerGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Column 1 — Brand */}

@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { isMotionDisabled } from "@/lib/motion/presets";
@@ -8,45 +10,90 @@ import { isMotionDisabled } from "@/lib/motion/presets";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Mount Carmel University uses native `scroll-behavior: smooth` (hasLenis: false).
- * Retaining native scrolling avoids artificial inertia while keeping ScrollTrigger
- * synchronized on load and resize, plus driving a sleek global scroll-progress bar.
+ * Single coordinated scroll management system (Lenis + GSAP ScrollTrigger).
+ * - Initializes Lenis once on desktop/motion-enabled browsers.
+ * - Syncs Lenis RAF with gsap.ticker and ScrollTrigger.update.
+ * - Handles resize, font loading, anchor links, and route changes cleanly.
  */
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   const progressRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const t = setTimeout(() => ScrollTrigger.refresh(), 250);
+    const disabled = isMotionDisabled();
+    let lenis: Lenis | null = null;
+    let tickFn: ((time: number) => void) | null = null;
+
+    if (!disabled) {
+      lenis = new Lenis({
+        duration: 1.05,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 1.4,
+      });
+      lenisRef.current = lenis;
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      tickFn = (time: number) => {
+        lenis?.raf(time * 1000);
+      };
+      gsap.ticker.add(tickFn);
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize, { passive: true });
+
+    const t1 = setTimeout(() => ScrollTrigger.refresh(), 250);
+    const t2 = setTimeout(() => ScrollTrigger.refresh(), 900);
     if (typeof document !== "undefined" && document.fonts?.ready) {
       document.fonts.ready.then(() => ScrollTrigger.refresh()).catch(() => {});
     }
 
-    if (!progressRef.current || isMotionDisabled()) {
-      return () => clearTimeout(t);
+    let ctx: gsap.Context | null = null;
+    if (progressRef.current && !disabled) {
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          progressRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: document.documentElement,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.2,
+            },
+          },
+        );
+      });
     }
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        progressRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: document.documentElement,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.25,
-          },
-        },
-      );
-    });
-
     return () => {
-      clearTimeout(t);
-      ctx.revert();
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("resize", onResize);
+      ctx?.revert();
+      if (tickFn) gsap.ticker.remove(tickFn);
+      if (lenis) {
+        lenis.destroy();
+        lenisRef.current = null;
+      }
     };
   }, []);
+
+  // Reset scroll cleanly on route change & refresh ScrollTrigger for new page height
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!window.location.hash) {
+      lenisRef.current?.scrollTo(0, { immediate: true });
+    }
+    const t = setTimeout(() => ScrollTrigger.refresh(), 180);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
   return (
     <>

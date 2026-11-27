@@ -270,28 +270,34 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
         </div>
       </div>
 
-      {/* Desktop Three-Column Programmes Mega Menu */}
+      {/* Desktop Three-Column Programmes Mega Menu (Animation 15: Clip-Path Curtain + Stagger) */}
       <AnimatePresence>
         {megaOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={handleMegaEnter}
             onMouseLeave={handleMegaLeave}
             className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E5E7EB] border-b-4 border-b-[#1D4ED8] shadow-2xl z-50"
           >
           <div className="max-w-[1440px] mx-auto px-10 py-8">
             <div className="grid grid-cols-3 gap-8">
-              {MEGA_COLUMNS.map((col) => (
-                <div key={col.categorySlug} className="space-y-4">
-                  <div className="relative h-32 w-full overflow-hidden border border-[#E5E7EB] rounded-[15px]">
+              {MEGA_COLUMNS.map((col, colIdx) => (
+                <motion.div
+                  key={col.categorySlug}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.28, delay: 0.06 + colIdx * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-4"
+                >
+                  <div className="group/mega relative h-32 w-full overflow-hidden border border-[#E5E7EB] rounded-[15px]">
                     <Image
                       src={col.image}
                       alt={col.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 ease-out group-hover/mega:scale-108"
                       sizes="400px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1D4ED8]/90 via-[#1D4ED8]/30 to-transparent flex items-end p-3.5">
@@ -301,20 +307,25 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                     </div>
                   </div>
                   <ul className="space-y-2.5">
-                    {col.courses.map((course) => (
-                      <li key={course.slug}>
+                    {col.courses.map((course, linkIdx) => (
+                      <motion.li
+                        key={course.slug}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.22, delay: 0.1 + colIdx * 0.04 + linkIdx * 0.03 }}
+                      >
                         <Link
                           href={`/courses/${course.slug}`}
                           onClick={() => setMegaOpen(false)}
                           className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#111827] hover:text-[#1D4ED8] transition-colors"
                         >
-                          <span className="font-medium leading-snug">{course.title}</span>
-                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#EA580C] opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <span className="font-medium leading-snug group-hover:translate-x-1 transition-transform duration-200">{course.title}</span>
+                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#EA580C] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
                         </Link>
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               ))}
             </div>
 
