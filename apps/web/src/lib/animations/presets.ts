@@ -20,59 +20,62 @@ export interface MotionPresetConfig {
 }
 
 /**
- * Progressive-enhancement motion presets:
- * Note that `from.opacity` stays >= 0.92 (or uses transform/clipPath)
- * so essential content is NEVER invisible if ScrollTrigger has not fired.
+ * Premium editorial motion presets — clip-path wipes, momentum slides, skewed entrances.
+ * Note: `from` states use transforms/clipPath so content is never invisible if
+ * ScrollTrigger has not fired (opacity always >= 0.88).
  */
 export const MOTION_PRESETS: Record<MotionPresetName, MotionPresetConfig> = {
   fadeIn: {
     from: { opacity: 0.72 },
-    to: { opacity: 1, duration: 0.7, ease: MOTION_EASING.entrance },
+    to: { opacity: 1, duration: 0.65, ease: "power2.out" },
   },
   fadeUp: {
-    from: { y: 42, opacity: 0.85 },
-    to: { y: 0, opacity: 1, duration: 0.75, ease: MOTION_EASING.entrance },
+    from: { y: 56, opacity: 0.88, skewY: 1.5 },
+    to: { y: 0, opacity: 1, skewY: 0, duration: 0.85, ease: "expo.out" },
   },
   fadeDown: {
-    from: { y: -28, opacity: 0.88 },
-    to: { y: 0, opacity: 1, duration: 0.7, ease: MOTION_EASING.entrance },
+    from: { y: -32, opacity: 0.88 },
+    to: { y: 0, opacity: 1, duration: 0.72, ease: "expo.out" },
   },
   revealLeft: {
-    from: { x: -44, opacity: 0.88 },
-    to: { x: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
+    from: { x: -72, opacity: 0.88, skewX: -3 },
+    to: { x: 0, opacity: 1, skewX: 0, duration: 0.88, ease: "expo.out" },
   },
   revealRight: {
-    from: { x: 44, opacity: 0.88 },
-    to: { x: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
+    from: { x: 72, opacity: 0.88, skewX: 3 },
+    to: { x: 0, opacity: 1, skewX: 0, duration: 0.88, ease: "expo.out" },
   },
   revealFromBottom: {
-    from: { transformPerspective: 1000, y: 52, rotateX: 8, scale: 0.96, opacity: 0.85 },
-    to: { y: 0, rotateX: 0, scale: 1, opacity: 1, duration: 0.8, ease: "power4.out" },
+    from: { clipPath: "inset(100% 0 0 0)", y: 20 },
+    to: { clipPath: "inset(0% 0 0 0)", y: 0, duration: 0.9, ease: "expo.out" },
   },
   headingReveal: {
-    from: { clipPath: "inset(0 0 100% 0)", y: 24, opacity: 0.9 },
-    to: { clipPath: "inset(0 0 0% 0)", y: 0, opacity: 1, duration: 0.78, ease: "power4.out" },
+    // Upward wipe — text is clipped from bottom, slides up into view
+    from: { clipPath: "inset(0 0 100% 0)", y: 32 },
+    to: { clipPath: "inset(0 0 0% 0)", y: 0, duration: 0.95, ease: "expo.out" },
   },
   imageMaskReveal: {
-    from: { clipPath: "inset(8% 8% 12% 8% round 15px)", scale: 1.09 },
+    from: { clipPath: "inset(10% 10% 10% 10% round 12px)", scale: 1.12 },
     to: {
-      clipPath: "inset(0% 0% 0% 0% round 15px)",
+      clipPath: "inset(0% 0% 0% 0% round 12px)",
       scale: 1,
-      duration: 0.88,
-      ease: MOTION_EASING.entrance,
+      duration: 0.95,
+      ease: "expo.out",
     },
   },
   imageScaleReveal: {
-    from: { scale: 1.08 },
-    to: { scale: 1, duration: 0.85, ease: MOTION_EASING.entrance },
+    from: { scale: 1.1, filter: "blur(4px)" },
+    to: { scale: 1, filter: "blur(0px)", duration: 1.0, ease: "expo.out" },
   },
   cardReveal: {
-    from: { transformPerspective: 1000, y: 46, scale: 0.92, rotateX: 10, opacity: 0.85 },
-    to: { y: 0, scale: 1, rotateX: 0, opacity: 1, duration: 0.76, ease: "back.out(1.2)" },
+    // Skewed upward entrance with momentum
+    from: { y: 70, skewY: 3, opacity: 0.88 },
+    to: { y: 0, skewY: 0, opacity: 1, duration: 0.82, ease: "expo.out" },
   },
   sectionReveal: {
-    from: { transformPerspective: 1000, y: 40, rotateX: 4 },
-    to: { y: 0, rotateX: 0, duration: 0.78, ease: "power4.out" },
+    // Diagonal wipe from bottom-left
+    from: { clipPath: "inset(0 100% 0 0)", x: -20 },
+    to: { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.88, ease: "expo.out" },
   },
 };
 
