@@ -43,18 +43,12 @@ export function HeroCarousel() {
   }, [isPaused, isEditMode, nextSlide]);
 
   const banner = banners[activeIdx] || banners[0];
-  const isDarkTheme = banner.theme === "jain-blue" || banner.theme === "deep-navy";
+  const staticMedia = banners[0];
 
   return (
     <section
       aria-label="VLEARNIN Institutional Campaign Showcase"
-      className={`relative w-full overflow-hidden transition-colors duration-500 ${
-        banner.theme === "jain-blue"
-          ? "bg-gradient-to-r from-[#1D4ED8] via-[#1E40AF] to-[#1D4ED8] text-white"
-          : banner.theme === "deep-navy"
-            ? "bg-[#1D4ED8] text-white"
-            : "bg-[#F8FAFC] text-[#111827] border-b border-[#E5E7EB]"
-      }`}
+      className="relative w-full overflow-hidden bg-[#F8FAFC] text-[#111827] border-b border-[#E5E7EB]"
       onTouchStart={(e) => {
         touchStartX.current = e.touches[0].clientX;
       }}
@@ -68,152 +62,110 @@ export function HeroCarousel() {
         touchStartX.current = null;
       }}
     >
-      {/* Subtle JAIN-style decorative ring on dark campaign slides */}
-      {isDarkTheme && (
-        <div
-          aria-hidden="true"
-          className="hidden lg:block absolute right-[24%] -top-24 w-[420px] h-[420px] rounded-full border-[36px] border-white/[0.06] pointer-events-none"
-        />
-      )}
-
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[540px] lg:h-[580px] items-stretch">
-        {/* Left Typography & CTA Column (MCU-04 Coordinated 50ms Stagger Timeline) */}
+        {/* Left Typography & Static CTA Column */}
         <div
           ref={heroTextRef}
-          className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 pt-12 pb-16 lg:pt-14 lg:pb-16 flex flex-col justify-start z-10"
+          className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 pt-12 pb-20 lg:pt-14 lg:pb-20 flex flex-col justify-between z-10"
         >
-          <div className="space-y-4">
-            <span
-              className={`hero-eyebrow block font-nav text-xs font-bold uppercase tracking-[0.18em] ${
-                isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"
-              }`}
-            >
-              <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
-            </span>
-
-            <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.06] tracking-normal">
-              <EditableText
-                path={`heroBanners.${activeIdx}.headlineWhite`}
-                value={banner.headlineWhite}
-                className={isDarkTheme ? "text-white" : "text-[#1D4ED8]"}
-              />{" "}
-              <EditableText
-                path={`heroBanners.${activeIdx}.headlineAccent`}
-                value={banner.headlineAccent}
-                className={isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"}
-              />
-            </h1>
-
-            <EditableText
-              as="p"
-              path={`heroBanners.${activeIdx}.description`}
-              value={banner.description}
-              className={`hero-desc mc-lead max-w-xl ${
-                isDarkTheme ? "text-white/90" : "text-[#4B5563]"
-              }`}
-            />
-
-            {banner.features && (
-              <ul className="space-y-1.5 pt-1">
-                {banner.features.map((f, fIdx) => (
-                  <li
-                    key={fIdx}
-                    className={`text-sm font-nav font-semibold flex items-center gap-2 ${
-                      isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"
-                    }`}
-                  >
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <EditableText path={`heroBanners.${activeIdx}.features.${fIdx}`} value={f} />
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            <div className="hero-ctas flex flex-wrap items-center gap-3.5 pt-2">
-              <Link
-                href={banner.primaryCta.href}
-                className={`${
-                  isDarkTheme ? "btn-gold" : "btn-primary-amber"
-                } mc-icon-btn px-6 py-3.5 text-sm uppercase tracking-wider inline-flex items-center gap-2`}
-              >
-                <EditableText path={`heroBanners.${activeIdx}.primaryCta.label`} value={banner.primaryCta.label} />
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              {banner.secondaryCta &&
-                ("href" in banner.secondaryCta ? (
-                  <Link
-                    href={banner.secondaryCta.href}
-                    className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors ${
-                      isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#1D4ED8]"
-                        : "border-[#1D4ED8] text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white"
-                    }`}
-                  >
-                    <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (banner.secondaryCta && "action" in banner.secondaryCta) {
-                        if (banner.secondaryCta.action === "demo") {
-                          openDemoModal({ sourcePage: "hero-banner" });
-                        } else {
-                          openBrochureModal({ brochureType: "complete" });
-                        }
-                      }
-                    }}
-                    className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
-                      isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#1D4ED8]"
-                        : "border-[#1D4ED8] text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white"
-                    }`}
-                  >
-                    <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
-                  </button>
-                ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right Bright Diagonal-Cut Photographic Panel (Mount Carmel swiper-fade crossfade) */}
-        <div className="lg:col-span-6 relative h-[300px] sm:h-[360px] lg:h-full overflow-hidden">
+          {/* Only this text block transitions when the slide changes */}
           <AnimatePresence mode="wait">
             <motion.div
               key={banner.id}
-              initial={{ opacity: 0.45 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0.45 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0 jain-slant-photo-lg"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="space-y-4"
             >
-              {banner.video || banner.image.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(banner.image) ? (
-                <video
-                  src={banner.video || banner.image}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover object-center"
+              <span className="hero-eyebrow block font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
+                <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
+              </span>
+
+              <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.06] tracking-normal text-[#1D4ED8]">
+                <EditableText
+                  path={`heroBanners.${activeIdx}.headlineWhite`}
+                  value={banner.headlineWhite}
+                />{" "}
+                <EditableText
+                  path={`heroBanners.${activeIdx}.headlineAccent`}
+                  value={banner.headlineAccent}
                 />
-              ) : (
-                <Image
-                  src={banner.image}
-                  alt={banner.imageAlt}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
+              </h1>
+
+              <EditableText
+                as="p"
+                path={`heroBanners.${activeIdx}.description`}
+                value={banner.description}
+                className="hero-desc mc-lead max-w-xl text-[#4B5563]"
+              />
+
+              {banner.features && (
+                <ul className="space-y-1.5 pt-1">
+                  {banner.features.map((f, fIdx) => (
+                    <li
+                      key={fIdx}
+                      className="text-sm font-nav font-semibold flex items-center gap-2 text-[#1D4ED8]"
+                    >
+                      <CheckCircle2 className="w-4 h-4 shrink-0" />
+                      <EditableText path={`heroBanners.${activeIdx}.features.${fIdx}`} value={f} />
+                    </li>
+                  ))}
+                </ul>
               )}
             </motion.div>
           </AnimatePresence>
+
+          {/* Static Hero CTAs */}
+          <div className="hero-ctas flex flex-wrap items-center gap-3.5 pt-6">
+            <Link
+              href={banners[0].primaryCta.href}
+              className="btn-primary-amber mc-icon-btn px-6 py-3.5 text-sm uppercase tracking-wider inline-flex items-center gap-2"
+            >
+              <span>{banners[0].primaryCta.label}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => openDemoModal({ sourcePage: "hero-banner" })}
+              className="px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border border-[#1D4ED8] text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white transition-colors cursor-pointer rounded-[15px]"
+            >
+              Book Free Demo
+            </button>
+          </div>
+        </div>
+
+        {/* Right Static Diagonal-Cut Photographic Panel */}
+        <div className="lg:col-span-6 relative h-[300px] sm:h-[360px] lg:h-full overflow-hidden">
+          <div className="absolute inset-0 jain-slant-photo-lg">
+            {staticMedia.video ||
+            staticMedia.image.startsWith("data:video/") ||
+            /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(staticMedia.image) ? (
+              <video
+                src={staticMedia.video || staticMedia.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover object-center"
+              />
+            ) : (
+              <Image
+                src={staticMedia.image}
+                alt={staticMedia.imageAlt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+            )}
+          </div>
           <EditableImageTrigger
-            path={`heroBanners.${activeIdx}.image`}
-            currentSrc={banner.image}
-            altPath={`heroBanners.${activeIdx}.imageAlt`}
-            currentAlt={banner.imageAlt}
+            path="heroBanners.0.image"
+            currentSrc={staticMedia.image}
+            altPath="heroBanners.0.imageAlt"
+            currentAlt={staticMedia.imageAlt}
           />
         </div>
       </div>
@@ -252,9 +204,7 @@ export function HeroCarousel() {
               className={`h-2 transition-all duration-300 cursor-pointer ${
                 idx === activeIdx
                   ? "w-8 bg-[#EA580C]"
-                  : isDarkTheme
-                    ? "w-3 bg-white/40 hover:bg-white/75"
-                    : "w-3 bg-[#1D4ED8]/30 hover:bg-[#1D4ED8]/60"
+                  : "w-3 bg-[#1D4ED8]/30 hover:bg-[#1D4ED8]/60"
               }`}
             />
           ))}
@@ -263,11 +213,7 @@ export function HeroCarousel() {
           type="button"
           onClick={() => setIsPaused((p) => !p)}
           aria-label={isPaused ? "Resume banner rotation" : "Pause banner rotation"}
-          className={`p-1.5 border text-xs cursor-pointer ${
-            isDarkTheme
-              ? "border-white/40 text-white bg-[#1D4ED8]/60"
-              : "border-[#1D4ED8]/30 text-[#1D4ED8] bg-white/80"
-          }`}
+          className="p-1.5 border text-xs cursor-pointer border-[#1D4ED8]/30 text-[#1D4ED8] bg-white/80"
         >
           {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
         </button>
