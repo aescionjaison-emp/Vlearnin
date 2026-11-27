@@ -44,9 +44,6 @@ export function CourseDetailClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <span className="block font-nav text-[11px] font-bold uppercase tracking-[0.2em] text-[#93C5FD]">
-                {course.categoryName}
-              </span>
               <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight">
                 {course.title}
               </h1>
@@ -258,10 +255,7 @@ export function CourseDetailClient({
           <aside className="lg:col-span-4">
             <div className="sticky top-24 border border-[#E5E7EB] bg-[#F8FAFC] p-6 space-y-5 shadow-md rounded-[15px]">
               <div className="border-b border-[#E5E7EB] pb-4">
-                <p className="font-nav text-[11px] font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
-                  ADMISSIONS &amp; BATCHES
-                </p>
-                <h3 className="text-xl font-bold text-[#1D4ED8] mt-1">
+                <h3 className="text-xl font-bold text-[#1D4ED8]">
                   Enquire About This Programme
                 </h3>
               </div>

@@ -116,10 +116,7 @@ export default function PlacementAssistancePage() {
           {/* Potential Career Pathways */}
           <div className="border border-[#E5E7EB] p-8 bg-white space-y-6 rounded-[15px]">
             <div>
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                POTENTIAL CAREER PATHWAYS
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">
                 Roles Our Graduates Prepare For
               </h2>
               <p className="text-sm text-[#4B5563] mt-2">

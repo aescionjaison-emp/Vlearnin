@@ -67,16 +67,10 @@ export function BrandIntroSection() {
             <div className="split-content lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
               <div>
                 <EditableText
-                  as="p"
-                  path="brandIntro.eyebrow"
-                  value={bi.eyebrow}
-                  className="type-eyebrow text-[#1D4ED8]"
-                />
-                <EditableText
                   as="h2"
                   path="brandIntro.heading"
                   value={bi.heading}
-                  className="type-editorial text-[#1D4ED8] mt-2"
+                  className="type-editorial text-[#1D4ED8]"
                 />
                 <EditableText
                   as="p"

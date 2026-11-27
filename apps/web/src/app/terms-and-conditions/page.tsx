@@ -11,9 +11,6 @@ export default function TermsAndConditionsPage() {
   return (
     <div className="bg-white py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-          LEGAL &amp; GOVERNANCE
-        </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-[#1D4ED8]">Terms &amp; Conditions</h1>
         <p className="text-sm text-[#4B5563]">
           By accessing {BRAND.website} or enrolling in a programme at {BRAND.legalName}, you agree

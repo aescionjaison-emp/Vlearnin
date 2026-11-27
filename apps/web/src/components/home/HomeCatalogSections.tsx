@@ -124,13 +124,7 @@ export function HomeCatalogSections({
       <section className="py-16 lg:py-24 bg-[#F8FAFC] border-b border-[#E5E7EB]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="max-w-3xl mb-12">
-            <EditableText
-              as="p"
-              path="domainsSection.eyebrow"
-              value={content.domainsSection.eyebrow}
-              className="mc-eyebrow text-[#1D4ED8]"
-            />
-            <AnimatedHeading as="h2" className="type-section-heading text-[#1D4ED8] mt-2">
+            <AnimatedHeading as="h2" className="type-section-heading text-[#1D4ED8]">
               <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
             </AnimatedHeading>
             <EditableText
@@ -187,14 +181,11 @@ export function HomeCatalogSections({
                     }`}
                   >
                     <div>
-                      <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
-                        Domain 0{idx + 1}
-                      </span>
                       <EditableText
                         as="h3"
                         path={`categories.${idx}.name`}
                         value={cat.name}
-                        className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1"
+                        className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]"
                       />
                     </div>
 
@@ -257,16 +248,10 @@ export function HomeCatalogSections({
           <div className="discovery-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
             <div>
               <EditableText
-                as="p"
-                path="discoverySection.eyebrow"
-                value={content.discoverySection.eyebrow}
-                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
-              />
-              <EditableText
                 as="h2"
                 path="discoverySection.heading"
                 value={content.discoverySection.heading}
-                className="type-section-heading text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8]"
               />
             </div>
 
@@ -456,16 +441,10 @@ export function HomeCatalogSections({
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
               <EditableText
-                as="p"
-                path="combosSection.eyebrow"
-                value={content.combosSection.eyebrow}
-                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
-              />
-              <EditableText
                 as="h2"
                 path="combosSection.heading"
                 value={content.combosSection.heading}
-                className="type-section-heading text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8]"
               />
               <EditableText
                 as="p"
@@ -521,9 +500,6 @@ export function HomeCatalogSections({
                 </div>
                 <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
-                      Pathway 0{idx + 1}
-                    </span>
                     <EditableText
                       as="h3"
                       path={`combos.${idx}.title`}
@@ -616,16 +592,10 @@ export function HomeCatalogSections({
           <div className="lg:col-span-7 space-y-8">
             <div>
               <EditableText
-                as="p"
-                path="advantagesSection.eyebrow"
-                value={content.advantagesSection.eyebrow}
-                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
-              />
-              <EditableText
                 as="h2"
                 path="advantagesSection.heading"
                 value={content.advantagesSection.heading}
-                className="type-section-heading text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8]"
               />
             </div>
 
@@ -705,16 +675,10 @@ export function HomeCatalogSections({
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <EditableText
-                as="p"
-                path="placementSection.eyebrow"
-                value={content.placementSection.eyebrow}
-                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#93C5FD]"
-              />
-              <EditableText
                 as="h2"
                 path="placementSection.heading"
                 value={content.placementSection.heading}
-                className="type-editorial text-white mt-2"
+                className="type-editorial text-white"
               />
             </div>
             <Link
@@ -798,12 +762,6 @@ export function HomeCatalogSections({
         >
           <div className="split-content lg:col-span-6 space-y-5">
             <EditableText
-              as="p"
-              path="academicSection.eyebrow"
-              value={content.academicSection.eyebrow}
-              className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
-            />
-            <EditableText
               as="h2"
               path="academicSection.heading"
               value={content.academicSection.heading}
@@ -877,16 +835,10 @@ export function HomeCatalogSections({
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <EditableText
-                as="p"
-                path="campusSection.eyebrow"
-                value={content.campusSection.eyebrow}
-                className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]"
-              />
-              <EditableText
                 as="h2"
                 path="campusSection.heading"
                 value={content.campusSection.heading}
-                className="type-section-heading text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8]"
               />
               <EditableText
                 as="p"
@@ -984,15 +936,7 @@ export function HomeCatalogSections({
         >
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-4">
-              <div className="flex items-center gap-3">
-                <EditableText
-                  as="p"
-                  path={`customSections.${sIdx}.eyebrow`}
-                  value={sec.eyebrow}
-                  className={`font-nav text-xs font-bold uppercase tracking-[0.2em] ${
-                    sec.theme === "blue" ? "text-[#93C5FD]" : "text-[#1D4ED8]"
-                  }`}
-                />
+              <div className="flex items-center justify-end">
                 <EditableDeleteButton
                   path="customSections"
                   index={sIdx}

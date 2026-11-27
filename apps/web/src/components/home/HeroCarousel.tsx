@@ -33,10 +33,6 @@ export function HeroCarousel() {
           className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 py-12 lg:py-16 flex flex-col justify-center z-10"
         >
           <div className="space-y-4">
-            <span className="hero-eyebrow block type-eyebrow text-[#1D4ED8]">
-              <EditableText path="heroBanners.0.badge" value={banner.badge} />
-            </span>
-
             <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.08] tracking-[-0.035em] text-[#1D4ED8]">
               <EditableText path="heroBanners.0.headlineWhite" value={banner.headlineWhite} />{" "}
               <EditableText path="heroBanners.0.headlineAccent" value={banner.headlineAccent} />

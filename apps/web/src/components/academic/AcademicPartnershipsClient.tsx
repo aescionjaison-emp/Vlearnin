@@ -234,10 +234,7 @@ export function AcademicPartnershipsClient() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-              CURRICULUM MATRIX
-            </p>
-            <h2 className="text-3xl font-bold text-[#1D4ED8] mt-1">
+            <h2 className="text-3xl font-bold text-[#1D4ED8]">
               Institutional Certification Portfolio
             </h2>
           </div>
@@ -324,10 +321,7 @@ export function AcademicPartnershipsClient() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white border border-[#E5E7EB] shadow-md p-6 sm:p-10 rounded-[15px]">
             <div className="mb-8">
-              <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
-                CAMPUS COLLABORATION
-              </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">
                 Invite VLEARNIN for an Institutional Presentation
               </h2>
               <p className="text-sm text-[#4B5563] mt-2">
