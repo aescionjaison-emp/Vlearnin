@@ -60,41 +60,55 @@ export function runSplitEditorialTimeline(
     });
 
     const imgClipFrom =
-      imageDirection === "left" ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)";
+      imageDirection === "left"
+        ? "inset(8% 100% 8% 0% round 15px)"
+        : "inset(8% 0% 8% 100% round 15px)";
 
     tl.addLabel("media")
       .fromTo(
         ".split-image",
-        { clipPath: imgClipFrom, scale: 1.04 },
+        { clipPath: imgClipFrom, scale: 1.08 },
         {
-          clipPath: "inset(0 0% 0 0%)",
+          clipPath: "inset(0% 0% 0% 0% round 15px)",
           scale: 1,
-          duration: MOTION_TOKENS.imageEntrance,
-          ease: MOTION_EASE.entrance,
+          duration: 0.9,
+          ease: "power4.out",
           clearProps: "transform,clipPath",
         },
         "media",
       )
       .fromTo(
         ".split-content",
-        imageDirection === "left" ? MOTION_PRESETS.revealRight.from : MOTION_PRESETS.revealLeft.from,
         {
-          ...(imageDirection === "left" ? MOTION_PRESETS.revealRight.to : MOTION_PRESETS.revealLeft.to),
+          transformPerspective: 1000,
+          x: imageDirection === "left" ? 44 : -44,
+          rotateY: imageDirection === "left" ? -4 : 4,
+          opacity: 0.85,
+        },
+        {
+          x: 0,
+          rotateY: 0,
+          opacity: 1,
+          duration: 0.82,
+          ease: "power4.out",
           clearProps: "transform",
         },
-        "media+=0.1",
+        "media+=0.08",
       )
       .fromTo(
         ".split-stagger-item",
-        { y: 14 },
+        { transformPerspective: 900, y: 26, rotateX: 10, scale: 0.95, opacity: 0.85 },
         {
           y: 0,
-          duration: 0.45,
-          stagger: MOTION_TOKENS.staggerInterval,
-          ease: MOTION_EASE.default,
+          rotateX: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "back.out(1.25)",
           clearProps: "transform",
         },
-        "media+=0.2",
+        "media+=0.18",
       );
   }, scope);
 
@@ -124,8 +138,16 @@ export function runScrubbedPathwayTimeline(scope: HTMLElement | null) {
       { scaleX: 1, ease: MOTION_EASE.scrub },
     ).fromTo(
       ".pathway-stage-card",
-      { y: 38, scale: 0.94, opacity: 0.85 },
-      { y: 0, scale: 1, opacity: 1, stagger: 0.16, ease: MOTION_EASE.entrance, clearProps: "transform" },
+      { transformPerspective: 1000, y: 50, scale: 0.91, rotateX: 12, opacity: 0.82 },
+      {
+        y: 0,
+        scale: 1,
+        rotateX: 0,
+        opacity: 1,
+        stagger: 0.16,
+        ease: "power3.out",
+        clearProps: "transform",
+      },
       0,
     );
   }, scope);
@@ -161,14 +183,16 @@ export function runAlternatingDomainTimeline(scope: HTMLElement | null) {
         tl.fromTo(
           media,
           {
-            clipPath: fromLeft ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)",
-            scale: 1.06,
+            clipPath: fromLeft
+              ? "polygon(0 0, 0 0, 0 100%, 0 100%)"
+              : "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+            scale: 1.09,
           },
           {
-            clipPath: "inset(0 0% 0 0%)",
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
             scale: 1,
-            duration: 0.85,
-            ease: MOTION_EASE.entrance,
+            duration: 0.92,
+            ease: "power4.out",
             clearProps: "transform,clipPath",
           },
           0,
@@ -178,46 +202,48 @@ export function runAlternatingDomainTimeline(scope: HTMLElement | null) {
       if (body) {
         tl.fromTo(
           body,
-          { x: fromLeft ? 40 : -40, opacity: 0.88 },
+          { transformPerspective: 1000, x: fromLeft ? 48 : -48, rotateY: fromLeft ? -5 : 5, opacity: 0.85 },
           {
             x: 0,
+            rotateY: 0,
             opacity: 1,
-            duration: 0.78,
-            ease: MOTION_EASE.entrance,
+            duration: 0.82,
+            ease: "power4.out",
             clearProps: "transform",
           },
-          0.1,
+          0.08,
         );
       }
 
       if (links.length > 0) {
         tl.fromTo(
           links,
-          { x: 18, opacity: 0.85 },
+          { x: 22, opacity: 0.82 },
           {
             x: 0,
             opacity: 1,
-            duration: 0.5,
-            stagger: 0.07,
-            ease: MOTION_EASE.entrance,
+            duration: 0.55,
+            stagger: 0.075,
+            ease: "back.out(1.2)",
             clearProps: "transform",
           },
-          0.25,
+          0.22,
         );
       }
 
       if (mediaImg) {
         gsap.fromTo(
           mediaImg,
-          { yPercent: -6 },
+          { yPercent: -8, scale: 1.06 },
           {
-            yPercent: 6,
+            yPercent: 8,
+            scale: 1,
             ease: "none",
             scrollTrigger: {
               trigger: panel,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.8,
+              scrub: 0.75,
             },
           },
         );
@@ -278,15 +304,16 @@ export function runAdvantagesTimeline(scope: HTMLElement | null) {
     if (cards.length > 0) {
       gsap.fromTo(
         cards,
-        { y: 40, scale: 0.92, rotateX: 8, opacity: 0.86 },
+        { transformPerspective: 1000, y: 48, scale: 0.91, rotateX: 14, rotateY: -4, opacity: 0.84 },
         {
           y: 0,
           scale: 1,
           rotateX: 0,
+          rotateY: 0,
           opacity: 1,
-          duration: 0.72,
+          duration: 0.78,
           stagger: 0.09,
-          ease: MOTION_EASE.entrance,
+          ease: "back.out(1.2)",
           clearProps: "transform",
           scrollTrigger: {
             trigger: scope,
@@ -316,14 +343,15 @@ export function runSectionCascadeTimeline(
 
     gsap.fromTo(
       items,
-      { y: 38, scale: 0.95, opacity: 0.88 },
+      { transformPerspective: 1000, y: 46, scale: 0.92, rotateX: 10, opacity: 0.85 },
       {
         y: 0,
         scale: 1,
+        rotateX: 0,
         opacity: 1,
-        duration: 0.72,
-        stagger: 0.08,
-        ease: MOTION_EASE.entrance,
+        duration: 0.76,
+        stagger: 0.085,
+        ease: "back.out(1.15)",
         clearProps: "transform",
         scrollTrigger: {
           trigger: scope,

@@ -46,17 +46,17 @@ export const MOTION_PRESETS: Record<MotionPresetName, MotionPresetConfig> = {
     to: { x: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
   },
   revealFromBottom: {
-    from: { y: 48, opacity: 0.85 },
-    to: { y: 0, opacity: 1, duration: 0.78, ease: MOTION_EASING.entrance },
+    from: { transformPerspective: 1000, y: 52, rotateX: 8, scale: 0.96, opacity: 0.85 },
+    to: { y: 0, rotateX: 0, scale: 1, opacity: 1, duration: 0.8, ease: "power4.out" },
   },
   headingReveal: {
-    from: { y: 28, opacity: 0.88 },
-    to: { y: 0, opacity: 1, duration: 0.72, ease: MOTION_EASING.entrance },
+    from: { clipPath: "inset(0 0 100% 0)", y: 24, opacity: 0.9 },
+    to: { clipPath: "inset(0 0 0% 0)", y: 0, opacity: 1, duration: 0.78, ease: "power4.out" },
   },
   imageMaskReveal: {
-    from: { clipPath: "inset(0 0 14% 0)", scale: 1.07 },
+    from: { clipPath: "inset(8% 8% 12% 8% round 15px)", scale: 1.09 },
     to: {
-      clipPath: "inset(0 0 0% 0)",
+      clipPath: "inset(0% 0% 0% 0% round 15px)",
       scale: 1,
       duration: 0.88,
       ease: MOTION_EASING.entrance,
@@ -67,12 +67,12 @@ export const MOTION_PRESETS: Record<MotionPresetName, MotionPresetConfig> = {
     to: { scale: 1, duration: 0.85, ease: MOTION_EASING.entrance },
   },
   cardReveal: {
-    from: { y: 36, scale: 0.94, opacity: 0.88 },
-    to: { y: 0, scale: 1, opacity: 1, duration: 0.72, ease: MOTION_EASING.entrance },
+    from: { transformPerspective: 1000, y: 46, scale: 0.92, rotateX: 10, opacity: 0.85 },
+    to: { y: 0, scale: 1, rotateX: 0, opacity: 1, duration: 0.76, ease: "back.out(1.2)" },
   },
   sectionReveal: {
-    from: { y: 32 },
-    to: { y: 0, duration: 0.75, ease: MOTION_EASING.entrance },
+    from: { transformPerspective: 1000, y: 40, rotateX: 4 },
+    to: { y: 0, rotateX: 0, duration: 0.78, ease: "power4.out" },
   },
 };
 
