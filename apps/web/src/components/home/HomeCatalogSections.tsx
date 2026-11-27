@@ -380,8 +380,7 @@ export function HomeCatalogSections({
       cards.forEach((card, idx) => {
         if (idx < cards.length - 1) {
           gsap.to(card, {
-            scale: 0.95,
-            filter: "brightness(0.97)",
+            scale: 0.96,
             ease: "none",
             scrollTrigger: {
               trigger: cards[idx + 1],
@@ -645,9 +644,10 @@ export function HomeCatalogSections({
                     <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between gap-4">
                       <div className="space-y-2.5">
                         <EditableText
+                          as="p"
                           path={cIdx >= 0 ? `courses.${cIdx}.categoryName` : "discoverySection.eyebrow"}
                           value={course.categoryName}
-                          className="font-nav text-xs font-bold uppercase tracking-wider text-[#EA580C]"
+                          className="block font-nav text-xs font-bold uppercase tracking-wider text-[#EA580C]"
                         />
                         <EditableText
                           as="h3"
