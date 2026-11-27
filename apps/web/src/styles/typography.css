@@ -5,7 +5,7 @@
 
 :root {
   --font-primary: var(--font-manrope), Arial, sans-serif;
-  --font-editorial: var(--font-instrument), Georgia, serif;
+  --font-editorial: var(--font-manrope), Arial, sans-serif;
   --font-secondary: var(--font-primary);
   --font-heading: var(--font-primary);
   --font-body: var(--font-primary);
@@ -63,29 +63,29 @@ p {
 
 /* Semantic Typography Classes */
 .type-display {
-  font-family: var(--font-editorial);
-  font-size: var(--text-display);
-  font-weight: 400;
-  line-height: var(--leading-display);
-  letter-spacing: var(--tracking-display);
+  font-family: var(--font-primary);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
 .type-editorial {
-  font-family: var(--font-editorial);
-  font-size: var(--text-editorial);
-  font-weight: 400;
-  line-height: var(--leading-editorial);
-  letter-spacing: var(--tracking-display);
+  font-family: var(--font-primary);
+  font-size: clamp(1.875rem, 3vw, 2.75rem);
+  font-weight: var(--weight-semibold);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-heading);
   text-wrap: balance;
 }
 
 .type-page-title {
-  font-family: var(--font-editorial);
-  font-size: var(--text-page-title);
-  font-weight: 400;
-  line-height: var(--leading-editorial);
-  letter-spacing: var(--tracking-display);
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 3.6vw, 3.125rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
@@ -140,11 +140,11 @@ p {
 }
 
 .type-statistic {
-  font-family: var(--font-editorial);
-  font-size: clamp(3.25rem, 5.5vw, 5.25rem); /* 52px -> 84px */
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: var(--weight-bold);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .type-navigation {
@@ -174,11 +174,11 @@ p {
 }
 
 .mc-counter {
-  font-family: var(--font-editorial);
-  font-size: clamp(3.25rem, 5.5vw, 5.25rem);
-  font-weight: 400;
+  font-family: var(--font-primary);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: var(--weight-bold);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .mc-footer-heading {

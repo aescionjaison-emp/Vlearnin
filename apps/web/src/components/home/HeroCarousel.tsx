@@ -82,7 +82,7 @@ export function HeroCarousel() {
                 <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
               </span>
 
-              <h1 className="hero-headline font-editorial text-[42px] sm:text-[54px] lg:text-[64px] font-normal leading-[1.03] tracking-[-0.025em] text-[#1D4ED8]">
+              <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.08] tracking-[-0.035em] text-[#1D4ED8]">
                 <EditableText
                   path={`heroBanners.${activeIdx}.headlineWhite`}
                   value={banner.headlineWhite}
@@ -90,7 +90,6 @@ export function HeroCarousel() {
                 <EditableText
                   path={`heroBanners.${activeIdx}.headlineAccent`}
                   value={banner.headlineAccent}
-                  className="italic"
                 />
               </h1>
 
