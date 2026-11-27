@@ -159,18 +159,13 @@ export function AcademicPartnershipsClient() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1E3A8A] text-white py-16 lg:py-22 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            INSTITUTIONAL &amp; ACADEMIC PARTNERSHIPS
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl leading-tight">
             Empowering Colleges to Build Industry-Ready Graduates
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-3xl leading-relaxed">
-            VLEARNIN partners with degree colleges, management institutes, and educational
-            institutions across Karnataka to deliver structured, 30-hour value-added certification
-            programmes that complement university curricula.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl leading-relaxed">
+            30-hour value-added certifications delivered on campus across Karnataka.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -196,16 +191,13 @@ export function AcademicPartnershipsClient() {
       {/* Section 1: Bridging the Campus-to-Corporate Gap */}
       <section className="py-16 bg-[#F8FAFC] border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="max-w-3xl space-y-4">
+          <div className="max-w-3xl space-y-3">
             <h2 className="text-3xl font-bold text-[#1E3A8A]">
               Bridging the Campus-to-Corporate Gap
             </h2>
             <p className="text-base text-[#4B5563] leading-relaxed">
-              Academic degrees build strong theoretical foundations, yet recruiters increasingly
-              evaluate graduates on practical tool mastery, analytical thinking, and project
-              portfolios. Through The V-Way to Learn, Build &amp; Lead, VLEARNIN collaborates with
-              college leadership, HODs and Training &amp; Placement Cells to equip students with
-              hands-on industry capabilities on campus.
+              We partner with college leadership, HODs, and placement cells to build practical tool
+              mastery and job-ready project portfolios on campus.
             </p>
           </div>
 
@@ -285,7 +277,7 @@ export function AcademicPartnershipsClient() {
               <div key={row.programme} className="border border-[#E5E7EB] p-5 bg-[#F8FAFC] space-y-2 rounded-[15px]">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="font-bold text-[#1E3A8A] text-base">{row.programme}</h3>
-                  <span className="font-nav text-xs font-bold bg-[#1E3A8A] text-[#EA580C] px-2.5 py-1 shrink-0">
+                  <span className="font-nav text-xs font-bold bg-[#1E3A8A] text-[#93C5FD] px-2.5 py-1 shrink-0 rounded-[8px]">
                     {row.duration}
                   </span>
                 </div>
@@ -305,10 +297,7 @@ export function AcademicPartnershipsClient() {
       <section ref={timelineRef} className="py-16 bg-[#1E3A8A] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
-            <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-              IMPLEMENTATION TIMELINE
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-bold mt-2">
+            <h2 className="text-3xl sm:text-4xl font-bold">
               Structured Implementation from Orientation to Certification
             </h2>
           </div>
@@ -317,9 +306,9 @@ export function AcademicPartnershipsClient() {
             {DELIVERY_STEPS.map((s) => (
               <div
                 key={s.step}
-                className="timeline-step bg-[#0B234D] border border-white/15 border-t-4 border-t-[#EA580C] p-6 space-y-2.5 rounded-[15px]"
+                className="timeline-step bg-[#0B234D] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
               >
-                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#EA580C]">
+                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#93C5FD]">
                   {s.step}
                 </span>
                 <h3 className="text-lg font-bold text-white">{s.title}</h3>

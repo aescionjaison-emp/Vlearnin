@@ -82,9 +82,8 @@ export function CoursesCatalogClient({
               Industry-Oriented Certification Programmes
             </h1>
             <p className="text-base sm:text-[17px] text-[#4B5563] leading-relaxed">
-              Every programme follows The V-Way to Learn, Build &amp; Lead—combining 30 hours of
-              hands-on instruction, industry tools, real case studies, and a capstone portfolio
-              project.
+              30-hour hands-on certifications built around live tools, real case studies, and an
+              evaluated capstone project.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <button

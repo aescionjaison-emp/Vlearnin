@@ -45,7 +45,7 @@ export default async function CareerComboDetailPage({
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5">
             <nav aria-label="Breadcrumb" className="text-xs font-nav text-white/70 flex items-center gap-2">
@@ -56,7 +56,7 @@ export default async function CareerComboDetailPage({
               <span className="text-[#93C5FD]">{combo.title}</span>
             </nav>
 
-            <span className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-widest text-[#EA580C]">
+            <span className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-widest text-[#93C5FD]">
               <Clock className="w-4 h-4" />
               {combo.durationLabel}
             </span>
@@ -78,7 +78,7 @@ export default async function CareerComboDetailPage({
           </div>
 
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/3] w-full border-2 border-[#EA580C]/60 overflow-hidden shadow-2xl rounded-[15px]">
+            <div className="relative aspect-[4/3] w-full border border-white/20 overflow-hidden shadow-2xl rounded-[15px]">
               <Image
                 src={combo.image}
                 alt={combo.title}

@@ -17,17 +17,13 @@ export default async function CareerCombosPage() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 lg:py-20 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            DUAL-SKILL CAREER ACCELERATOR COMBOS
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Combine Complementary Skills for Stronger Career Outcomes
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-2xl">
-            Structured 45-to-90 hour pathways designed to help students and professionals build a
-            multi-disciplinary portfolio for campus placements and corporate interviews.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
+            45-to-90 hour dual-skill tracks built for stronger portfolios and corporate interviews.
           </p>
         </div>
       </section>
@@ -47,7 +43,7 @@ export default async function CareerCombosPage() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
-                <div className="absolute top-4 left-4 bg-[#1E3A8A] text-[#EA580C] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5">
+                <div className="absolute top-4 left-4 bg-[#1E3A8A] text-[#93C5FD] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-[10px]">
                   Combo 0{index + 1}
                 </div>
               </div>
@@ -69,7 +65,7 @@ export default async function CareerCombosPage() {
                   <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">
                     {combo.summary}
                   </p>
-                  <p className="text-sm text-[#111827] bg-[#F8FAFC] px-4 py-2.5 border-l-4 border-[#EA580C]">
+                  <p className="text-sm text-[#111827] bg-[#F8FAFC] px-4 py-2.5 border-l-4 border-[#1D4ED8]">
                     <strong className="font-nav">Ideal For:</strong> {combo.idealFor}
                   </p>
 

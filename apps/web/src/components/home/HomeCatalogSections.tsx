@@ -187,7 +187,7 @@ export function HomeCatalogSections({
                     }`}
                   >
                     <div>
-                      <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#EA580C]">
+                      <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
                         Domain 0{idx + 1}
                       </span>
                       <EditableText
@@ -521,7 +521,7 @@ export function HomeCatalogSections({
                 </div>
                 <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#EA580C]">
+                    <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
                       Pathway 0{idx + 1}
                     </span>
                     <EditableText

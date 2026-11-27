@@ -145,9 +145,9 @@ function DemoModal({
       aria-labelledby="demo-modal-title"
     >
       <div className="relative w-full max-w-lg bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto rounded-[15px]">
-        <div className="bg-[#1E3A8A] text-white px-6 py-5 border-b-2 border-[#EA580C] flex items-start justify-between gap-4">
+        <div className="bg-[#1E3A8A] text-white px-6 py-5 flex items-start justify-between gap-4">
           <div>
-            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#EA580C] font-semibold">
+            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#93C5FD] font-semibold">
               VLEARNIN Academy • Rajajinagar
             </p>
             <h2 id="demo-modal-title" className="text-xl sm:text-2xl font-bold mt-1">
@@ -386,9 +386,9 @@ function BrochureModal({
       aria-labelledby="brochure-modal-title"
     >
       <div className="relative w-full max-w-md bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden rounded-[15px]">
-        <div className="bg-[#1E3A8A] text-white px-6 py-5 border-b-2 border-[#EA580C] flex items-start justify-between gap-4">
+        <div className="bg-[#1E3A8A] text-white px-6 py-5 flex items-start justify-between gap-4">
           <div>
-            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#EA580C] font-semibold">
+            <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#93C5FD] font-semibold">
               Official PDF Brochure
             </p>
             <h2 id="brochure-modal-title" className="text-xl font-bold mt-1">

@@ -182,13 +182,13 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       id: "brand-campaign",
       theme: "jain-blue",
       badge: "THE V-WAY TO LEARN, BUILD & LEAD.",
-      headlineWhite: "Shaping Future-Ready Talent Through",
-      headlineAccent: "Practical, Industry-Aligned Education",
+      headlineWhite: "Future-Ready Skills Through",
+      headlineAccent: "Practical Education",
       description:
-        "Master high-demand skills in Artificial Intelligence, Business Intelligence, Corporate Finance, and Digital Media through practical, 30-hour certification programmes.",
+        "30-hour hands-on certifications in AI, Business Intelligence, Corporate Finance, and Digital Media.",
       image: "/images/hero-1.jpg",
       imageAlt: "Confident Indian learners in an instructor-led practical training session at VLEARNIN",
-      primaryCta: { label: "Explore All Programmes", href: "/courses" },
+      primaryCta: { label: "Explore Programmes", href: "/courses" },
       secondaryCta: { label: "Book Free Demo", action: "demo" },
     },
     {
@@ -196,12 +196,12 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       theme: "light-split",
       badge: "AI & BUSINESS INTELLIGENCE",
       headlineWhite: "Learn AI. Master Data.",
-      headlineAccent: "Lead Business Transformation.",
+      headlineAccent: "Lead Business.",
       description:
-        "Hands-on 30-hour certifications in generative AI workplace automation, Power Query data cleaning, DAX modeling, and executive Power BI dashboards.",
+        "Practical 30-hour training in AI automation, Power Query, DAX modeling, and Power BI dashboards.",
       features: [
-        "Certified AI Tools for Commerce & Business",
-        "Certified Data Visualization Using Power BI",
+        "AI Tools for Commerce & Business",
+        "Data Visualization Using Power BI",
       ],
       image: "/images/hero-2.jpg",
       imageAlt: "Students analyzing business intelligence dashboards and AI tools in a bright computer lab",
@@ -212,24 +212,24 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       id: "corporate-finance",
       theme: "deep-navy",
       badge: "CORPORATE FINANCE & CAPITAL MARKETS",
-      headlineWhite: "Build the Financial Expertise",
-      headlineAccent: "Tomorrow's Businesses Need.",
+      headlineWhite: "Build Financial",
+      headlineAccent: "Expertise.",
       description:
-        "Construct dynamic 3-statement Excel forecasts, DCF company valuations, M&A deal structures, and investment banking pitchbooks through live case studies.",
+        "Build 3-statement Excel forecasts, DCF valuations, M&A models, and pitchbooks on live cases.",
       features: ["Financial Modelling", "Investment Banking"],
       image: "/images/hero-3.jpg",
       imageAlt: "Corporate finance training classroom featuring financial models and mentor guidance",
-      primaryCta: { label: "Explore Finance Programmes", href: "/courses?category=corporate-finance-capital-markets" },
+      primaryCta: { label: "Explore Finance", href: "/courses?category=corporate-finance-capital-markets" },
       secondaryCta: { label: "View Career Combos", href: "/career-combos" },
     },
     {
       id: "digital-media",
       theme: "studio-light",
       badge: "DIGITAL MARKETING & CREATIVE MEDIA",
-      headlineWhite: "Create. Connect. Grow.",
-      headlineAccent: "Lead the Digital Future.",
+      headlineWhite: "Create. Connect.",
+      headlineAccent: "Grow Digital.",
       description:
-        "Launch performance ad campaigns, build 30-day multi-platform content engines, and produce high-retention commercial Reels and YouTube edits.",
+        "Run performance ad campaigns, build content systems, and edit high-retention Reels and YouTube videos.",
       features: [
         "Digital Marketing",
         "Social Media Marketing",
@@ -256,40 +256,40 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     heading: "Learn With Purpose. Build With Confidence. Lead With Skill.",
     subTagline: "The V-Way to Learn, Build & Lead.",
     description:
-      "VLEARNIN bridges the gap between academic knowledge and real-world professional capabilities through practical certification programmes, personalized mentorship and career-oriented learning.",
+      "VLEARNIN turns classroom knowledge into workplace skill through 30-hour practical certifications and guided mentorship.",
     image: "/images/about-campus.jpg",
     imageAlt: "Practical instructor-led mentorship at VLEARNIN Academy",
-    ctaLabel: "Know More About VLEARNIN",
-    secondaryLinkLabel: "Explore Our Learning Methodology",
+    ctaLabel: "About VLEARNIN",
+    secondaryLinkLabel: "Our Methodology",
     pillars: [
       {
         step: "01",
         title: "LEARN",
-        desc: "Master relevant industry tools and essential concepts.",
+        desc: "Master core industry tools and concepts.",
       },
       {
         step: "02",
         title: "BUILD",
-        desc: "Apply knowledge through practical projects and real business scenarios.",
+        desc: "Work on live projects and real business cases.",
       },
       {
         step: "03",
         title: "LEAD",
-        desc: "Develop professional confidence and career readiness.",
+        desc: "Step into roles with confidence and a verified portfolio.",
       },
     ],
     highlights: [
-      { value: 7, padZero: true, label: "Certification Programmes", sub: "30-Hour Practical Tracks" },
-      { value: 3, padZero: true, label: "Core Learning Domains", sub: "AI/BI, Finance & Digital Media" },
-      { value: 30, padZero: false, label: "Hours Per Standalone Programme", sub: "5 Modules × 6 Hours" },
-      { value: 4, padZero: true, label: "Career Accelerator Combos", sub: "45 to 90 Hours Dual-Skill" },
+      { value: 7, padZero: true, label: "Certifications", sub: "30-Hour Practical Tracks" },
+      { value: 3, padZero: true, label: "Core Domains", sub: "AI/BI, Finance & Digital Media" },
+      { value: 30, padZero: false, label: "Hours Per Track", sub: "5 Modules × 6 Hours" },
+      { value: 4, padZero: true, label: "Career Combos", sub: "45–90 Hour Dual-Skill" },
     ],
   },
   domainsSection: {
-    eyebrow: "EXPLORE OUR LEARNING DOMAINS",
+    eyebrow: "LEARNING DOMAINS",
     heading: "Industry-Aligned Certification Programmes",
     description:
-      "Structured, hands-on tracks designed around real workplace tools, live datasets and practical assessments.",
+      "Hands-on tracks built around real tools, live datasets, and practical capstones.",
   },
   discoverySection: {
     eyebrow: "PROGRAMME DISCOVERY",
@@ -297,10 +297,10 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     exploreAllLabel: "Explore All Programmes",
   },
   combosSection: {
-    eyebrow: "DUAL-SKILL CAREER TRACKS",
+    eyebrow: "DUAL-SKILL TRACKS",
     heading: "Career Accelerator Combos",
     description:
-      "Combine complementary certifications into a deeper 45-to-90 hour career track with integrated capstones.",
+      "Pair two certifications into a 45–90 hour career track with integrated capstones.",
     exploreAllLabel: "View All Career Combos",
   },
   advantagesSection: {
@@ -311,80 +311,80 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
     items: [
       {
         num: "01",
-        title: "100% Practical Pedagogy",
+        title: "100% Practical Learning",
         description:
-          "Every module is driven by live business datasets, real financial models, AI workflows and hands-on capstone projects.",
+          "Live datasets, financial models, AI workflows, and evaluated capstone projects.",
       },
       {
         num: "02",
         title: "Small-Batch Mentorship",
         description:
-          "Focused batch sizes ensure personalized guidance, doubt resolution and portfolio building.",
+          "Personal guidance, doubt clearing, and 1-on-1 portfolio reviews.",
       },
       {
         num: "03",
         title: "QR-Verified Credentials",
         description:
-          "VLEARNIN certificates are verifiable online by employers and institutions.",
+          "Certificates verifiable online by employers and universities.",
       },
       {
         num: "04",
-        title: "Flexible Batch Timings",
+        title: "Flexible Batches",
         description:
-          "Weekday, evening and weekend batches at our Rajajinagar center, plus on-campus college programmes.",
+          "Weekday, evening, and weekend batches at Rajajinagar or on campus.",
       },
     ],
   },
   placementSection: {
-    eyebrow: "STRUCTURED PLACEMENT ASSISTANCE",
+    eyebrow: "PLACEMENT ASSISTANCE",
     heading: "From Classroom to Corporate",
     ctaLabel: "Explore Career Support",
     stages: [
       {
         step: "Step 01",
-        title: "Live Capstone Portfolio",
-        desc: "Graduate with real Power BI dashboards, Excel valuation models, AI workflows or practical marketing campaigns.",
+        title: "Capstone Portfolio",
+        desc: "Graduate with real Power BI dashboards, valuation models, AI workflows, or campaigns.",
       },
       {
         step: "Step 02",
-        title: "ATS Resume & LinkedIn Makeover",
-        desc: "Personalized profile optimization tailored to finance, analytics and digital roles.",
+        title: "Resume & LinkedIn",
+        desc: "ATS resume and LinkedIn optimization tailored to your target role.",
       },
       {
         step: "Step 03",
-        title: "Mock Interviews & Domain Prep",
-        desc: "Practice technical and HR interview rounds with personalized feedback.",
+        title: "Mock Interviews",
+        desc: "Technical and HR interview practice with mentor feedback.",
       },
       {
         step: "Step 04",
-        title: "Curated Hiring Network",
-        desc: "Access to available internship and full-time opportunities through verified employer connections.",
+        title: "Hiring Network",
+        desc: "Access curated internship and full-time openings from verified employers.",
       },
     ],
   },
   academicSection: {
-    eyebrow: "INSTITUTIONAL COLLABORATIONS",
-    heading: "Partnering with Colleges & Educational Institutions",
+    eyebrow: "COLLEGE COLLABORATIONS",
+    heading: "Partnering with Colleges & Institutions",
     description:
-      "VLEARNIN collaborates with degree colleges across Bengaluru and Karnataka to deliver structured value-added certification programmes tailored to B.Com, BBA, BCA, and MBA students.",
+      "We partner with colleges across Karnataka to deliver 30-hour value-added certifications for B.Com, BBA, BCA, and MBA students.",
     bullets: [
-      "30-hour value-added certification programmes",
+      "30-hour value-added certifications",
       "On-campus practical training",
-      "Workshops & orientation seminars",
+      "Workshops & seminars",
       "Capstone assessments",
-      "Curriculum-aligned learning",
-      "Career readiness & portfolios",
+      "Curriculum-aligned delivery",
+      "Career readiness portfolios",
     ],
     primaryCtaLabel: "Explore Academic Partnerships",
-    secondaryCtaLabel: "Request Institutional Proposal",
+    secondaryCtaLabel: "Request Proposal",
     image: "/images/academic-partnership.jpg",
     imageAlt: "Illustrative college seminar and faculty workshop",
   },
   campusSection: {
     eyebrow: "LEARNING ENVIRONMENT",
     heading: "Experience Practical Learning at VLEARNIN",
-    description: "Illustrative classroom, analytics lab, studio, and mentorship environments.",
-    visitLabel: "Visit Our Rajajinagar Center",
+    description: "Classrooms, analytics labs, creative studios, and mentor spaces.",
+    visitLabel: "Visit Rajajinagar Center",
     demoLabel: "Book Free Demo",
     gallery: [
       {
@@ -417,13 +417,13 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
   finalCtaSection: {
     heading: "Your Next Career Chapter Begins Here.",
     description:
-      "Explore practical certification programmes, connect with our academic team and discover the right learning pathway for your goals.",
-    demoLabel: "Book a Free Demo Class",
+      "Explore practical certifications and find the right learning path for your goals.",
+    demoLabel: "Book a Free Demo",
     contactLabel: "Talk to Our Team",
   },
   footer: {
     description:
-      "Practical certification training in Artificial Intelligence, Business Intelligence, Corporate Finance, and Digital Media—built around live datasets, real tools, and dedicated placement assistance.",
+      "Practical 30-hour certifications in AI, Business Intelligence, Corporate Finance, and Digital Media with placement assistance.",
     demoButtonLabel: "Book Free Demo Class",
     programmesHeading: "Programmes",
     quickLinksHeading: "Quick Links",

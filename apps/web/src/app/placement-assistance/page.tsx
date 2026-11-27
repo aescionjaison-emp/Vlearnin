@@ -72,17 +72,13 @@ const STAGES = [
 export default function PlacementAssistancePage() {
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 lg:py-20 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            CAREER &amp; PLACEMENT ASSISTANCE
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Structured Placement Assistance — From Classroom to Corporate
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-3xl">
-            We bridge the gap between certification and employment through portfolio building,
-            interview preparation, and verified employer connections.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
+            Portfolio building, mock interviews, and direct employer connections.
           </p>
         </div>
       </section>

@@ -14,17 +14,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 lg:py-20 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            ABOUT VLEARNIN ACADEMY
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             The V-Way to Learn, Build &amp; Lead.
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-3xl leading-relaxed">
-            VLEARNIN is a Bengaluru-based professional education and practical certification academy
-            dedicated to bridging academic theory with real-world workplace execution.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl leading-relaxed">
+            Practical, mentor-led certification training in Bengaluru built for real workplace execution.
           </p>
         </div>
       </section>
@@ -33,17 +29,11 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Who We Are & Campus Photo */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-5">
+            <div className="lg:col-span-6 space-y-4">
               <h2 className="text-3xl font-bold text-[#1E3A8A]">Who We Are</h2>
               <p className="text-base text-[#4B5563] leading-relaxed">
-                At VLEARNIN Academy in Rajajinagar, Bengaluru, we focus on practical certification
-                training, career readiness, and structured academic collaborations with degree
-                colleges across Karnataka.
-              </p>
-              <p className="text-base text-[#4B5563] leading-relaxed">
-                Every standalone programme is structured as an intensive 30-hour curriculum
-                divided into five 6-hour modules, culminating in an evaluated capstone project so
-                learners graduate with demonstrable skills.
+                Based in Rajajinagar, Bengaluru, VLEARNIN delivers 30-hour hands-on certifications
+                across five structured modules—ending with an evaluated capstone project.
               </p>
             </div>
             <div className="lg:col-span-6 relative aspect-[4/3] border border-[#E5E7EB] overflow-hidden shadow-md rounded-[15px]">
@@ -74,11 +64,11 @@ export default function AboutPage() {
                 industry-aligned capabilities that translate directly into workplace confidence.
               </p>
             </div>
-            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#EA580C] space-y-3">
+            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-3">
               <h3 className="text-xl font-bold text-[#1E3A8A]">Our Mission</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                To deliver focused, mentor-guided 30-hour certifications and institutional value-added
-                courses backed by capstone assessments and QR-verified credentials.
+                Deliver focused 30-hour certifications and campus courses backed by capstone projects
+                and QR-verified credentials.
               </p>
             </div>
           </div>

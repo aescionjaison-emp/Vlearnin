@@ -44,7 +44,7 @@ export function CourseDetailClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <span className="block font-nav text-[11px] font-bold uppercase tracking-[0.2em] text-[#EA580C]">
+              <span className="block font-nav text-[11px] font-bold uppercase tracking-[0.2em] text-[#93C5FD]">
                 {course.categoryName}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight">
@@ -54,11 +54,11 @@ export function CourseDetailClient({
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
                 <div className="bg-white/10 p-3.5 border border-white/15 rounded-[15px]">
-                  <p className="font-nav text-[10px] uppercase tracking-wider text-[#EA580C]">Duration</p>
+                  <p className="font-nav text-[10px] uppercase tracking-wider text-[#93C5FD]">Duration</p>
                   <p className="text-sm font-semibold mt-1">{course.durationHours} Hours (5 Modules)</p>
                 </div>
                 <div className="bg-white/10 p-3.5 border border-white/15 rounded-[15px]">
-                  <p className="font-nav text-[10px] uppercase tracking-wider text-[#EA580C]">Delivery Modes</p>
+                  <p className="font-nav text-[10px] uppercase tracking-wider text-[#93C5FD]">Delivery Modes</p>
                   <p className="text-sm font-semibold mt-1">Rajajinagar / Live / Campus</p>
                 </div>
                 <div className="bg-white/10 p-3.5 border border-white/15 col-span-2 sm:col-span-1 rounded-[15px]">

@@ -67,17 +67,14 @@ export function HireFromVlearninClient() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 lg:py-20 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            CORPORATE &amp; EMPLOYER PARTNERSHIPS
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl leading-tight">
             Hire Pre-Trained, Project-Ready Talent — Zero Recruitment Fee
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-3xl">
-            Connect directly with job-ready graduates trained in Power BI Analytics, Financial
-            Modelling, AI Business Workflows, and Digital Marketing from our Bengaluru campus.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
+            Connect directly with trained graduates in Power BI, Financial Modelling, AI, and
+            Digital Marketing.
           </p>
         </div>
       </section>

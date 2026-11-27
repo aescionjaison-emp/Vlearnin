@@ -91,17 +91,13 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
   return (
     <div className="bg-white min-h-[70vh]">
-      <section className="bg-[#1E3A8A] text-white py-16 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            CREDENTIAL AUTHENTICATION
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
             Verify a VLEARNIN Certificate
           </h1>
-          <p className="text-base text-white/80 mt-4 max-w-2xl mx-auto">
-            Employers, universities and institutions can verify the authenticity of certificates
-            issued by VLEARNIN using the unique Certificate ID printed on the document.
+          <p className="text-base text-white/80 mt-3 max-w-xl mx-auto">
+            Enter the unique Certificate ID to verify authenticity instantly.
           </p>
         </div>
       </section>

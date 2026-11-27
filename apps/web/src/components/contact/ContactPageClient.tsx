@@ -70,17 +70,13 @@ export function ContactPageClient() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1E3A8A] text-white py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#EA580C]">
-            GET IN TOUCH
-          </p>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3 max-w-3xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Start Your Learning Journey with VLEARNIN
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-4 max-w-2xl">
-            Visit our Rajajinagar campus for a free career counseling session, book a live demo
-            class, or connect with us on WhatsApp.
+          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
+            Visit our Rajajinagar campus, book a free demo class, or chat on WhatsApp.
           </p>
         </div>
       </section>
