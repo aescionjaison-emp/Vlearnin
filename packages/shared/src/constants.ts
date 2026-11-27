@@ -78,9 +78,9 @@ export const OFFICIAL_CATEGORIES: OfficialCategorySeed[] = [
     name: "Artificial Intelligence & Business Intelligence",
     shortName: "AI & Analytics",
     description:
-      "Master practical AI productivity workflows, prompt engineering, Power Query data cleaning, DAX modeling, and executive business dashboards.",
+      "AI workflows, Power Query, DAX, and Power BI dashboards.",
     outcomeSummary:
-      "Automate business workflows, clean and analyze datasets, and design executive Power BI dashboards.",
+      "Automate workflows, clean datasets, and build Power BI dashboards.",
     image: "/images/domain-ai-bi.webp",
     displayOrder: 1,
   },
@@ -89,9 +89,9 @@ export const OFFICIAL_CATEGORIES: OfficialCategorySeed[] = [
     name: "Corporate Finance & Capital Markets",
     shortName: "Finance & IB",
     description:
-      "Build institutional-grade Excel financial models, DCF valuations, M&A transaction structures, and investment banking pitchbooks.",
+      "Excel financial models, DCF valuations, M&A, and pitchbooks.",
     outcomeSummary:
-      "Build dynamic Excel financial models, company valuations, M&A deal structures, and capital market analyses.",
+      "Build dynamic Excel models, valuations, and M&A deal structures.",
     image: "/images/domain-finance.webp",
     displayOrder: 2,
   },
@@ -100,9 +100,9 @@ export const OFFICIAL_CATEGORIES: OfficialCategorySeed[] = [
     name: "Digital Marketing & Creative Media",
     shortName: "Digital & Media",
     description:
-      "Plan AI-accelerated performance campaigns, build multi-platform brand content engines, and produce commercial short-form videos.",
+      "Performance ads, brand content systems, and commercial video editing.",
     outcomeSummary:
-      "Launch high-converting ad campaigns, grow social media brands, and produce professional short-form videos.",
+      "Launch ad campaigns, grow social brands, and edit short-form videos.",
     image: "/images/domain-digital-media.webp",
     displayOrder: 3,
   },
@@ -118,7 +118,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "B.Com, BBA, MBA students, working professionals and business owners.",
     summary:
-      "Apply generative AI, prompt engineering, and automated spreadsheet workflows to real commerce, operations, and business reporting tasks.",
+      "Use generative AI and prompt engineering to automate daily business and spreadsheet tasks.",
     overview:
       "Designed specifically for commerce, management, and business professionals, this 30-hour programme transforms how you research markets, draft communications, analyze spreadsheets, and automate repetitive business workflows.",
     capstoneTitle: "Custom Workplace AI Operations Suite",
@@ -212,7 +212,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "B.Com, BBA, BCA, B.Sc graduates and aspiring Data / Business Analysts.",
     summary:
-      "Clean raw business datasets in Power Query, write foundational DAX calculations, and design interactive executive Power BI dashboards.",
+      "Clean data in Power Query, write DAX measures, and build Power BI dashboards.",
     overview:
       "Organizations rely on clear, decision-ready dashboards rather than static spreadsheets. This 30-hour hands-on programme guides you from raw messy CSV/Excel files to polished multi-page Power BI executive reports.",
     capstoneTitle: "Multi-Page Executive Business Intelligence Dashboard",
@@ -306,7 +306,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "B.Com Finance/Accounting, BBA, MBA, M.Com and CA/CMA aspirants.",
     summary:
-      "Construct dynamic three-statement financial forecasts, DCF company valuations, transaction models, and startup projections in Excel.",
+      "Build 3-statement Excel forecasts, DCF valuations, and startup models.",
     overview:
       "Built for finance students and analysts who want to move beyond textbook accounting into live Excel modelling. You will construct audit-ready, dynamically linked financial models from scratch.",
     capstoneTitle: "Integrated 3-Statement Forecast & DCF Valuation Model",
@@ -399,7 +399,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "MBA, M.Com, finance undergraduates and capital market career aspirants.",
     summary:
-      "Analyse IPO/FPO equity capital markets, M&A deal structuring, LBO financing, and debt capital instruments through live case studies.",
+      "Master IPO equity markets, M&A structuring, LBOs, and debt instruments.",
     overview:
       "Gain practical exposure to how investment banks advise corporations on raising capital, executing mergers and acquisitions, structuring leveraged buyouts, and navigating global capital market regulations.",
     capstoneTitle: "M&A / IPO Investment Banking Pitchbook Case",
@@ -491,7 +491,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "Students, job seekers, freelancers and business owners looking to scale online.",
     summary:
-      "Plan, launch, optimize, and measure end-to-end SEO, Google Ads, Meta Ads, and GA4 analytics campaigns using AI-accelerated workflows.",
+      "Run SEO, Google Ads, Meta Ads, and GA4 campaigns with AI workflows.",
     overview:
       "Modern digital marketing blends performance analytics with AI-assisted creative speed. This 30-hour programme walks you through real ad managers, keyword research, landing page conversion, and GA4 tracking.",
     capstoneTitle: "Full-Funnel Performance Campaign & GA4 Measurement Plan",
@@ -585,7 +585,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "Aspiring social media managers, content creators, brand builders and entrepreneurs.",
     summary:
-      "Build a 30-day multi-platform content engine, design brand creatives in Canva, and grow organic engagement on Instagram, YouTube, and LinkedIn.",
+      "Design Canva brand kits and grow organic reach across Instagram, YouTube, and LinkedIn.",
     overview:
       "Brands and creators win attention through consistent storytelling, sharp visual identity, and platform-native formats. Learn how to strategize, script, design, and schedule a complete social media presence.",
     capstoneTitle: "30-Day Multi-Platform Brand Content Engine",
@@ -679,7 +679,7 @@ export const OFFICIAL_COURSES: OfficialCourseSeed[] = [
     durationLabel: "30 Hours (5 Modules × 6 Hours)",
     idealFor: "Aspiring video editors, YouTubers, digital marketers and freelance creators.",
     summary:
-      "Edit high-retention Instagram Reels, YouTube videos, and commercial brand promos with professional pacing, sound design, and color grading.",
+      "Edit high-retention Reels, YouTube videos, and promos with sound and color grading.",
     overview:
       "Short-form and long-form video dominate digital attention. This hands-on studio programme teaches timeline mastery, dynamic pacing, clean voice-over audio, color grading, and export optimization.",
     capstoneTitle: "Commercial & Creator Video Showreel",
@@ -771,14 +771,13 @@ export const OFFICIAL_COMBOS: OfficialComboSeed[] = [
     title: "Smart Office & AI Starter",
     durationHours: 45,
     durationLabel: "45 Hours",
-    includedLabel: "Advanced Excel + Certified AI Tools for Commerce & Business",
-    idealFor: "Students and working professionals upgrading daily office productivity.",
+    includedLabel: "Advanced Excel + AI Tools for Business",
+    idealFor: "Students and working professionals.",
     summary:
-      "Combine spreadsheet mastery with practical generative AI workflows to automate reporting, analysis, and workplace communication.",
+      "Pair Excel mastery with AI workflows to automate reporting and office tasks.",
     outcomes: [
-      "Master lookup, pivot, and reporting workflows in Microsoft Excel",
-      "Automate daily emails, research, and spreadsheet tasks using AI tools",
-      "Build a practical workplace productivity portfolio",
+      "Master Excel lookups, pivots, and reporting",
+      "Automate emails, research, and sheets with AI",
     ],
     courseSlugs: ["ai-tools-for-commerce-business"],
     image: "/images/combo-smart-office.webp",
@@ -789,14 +788,13 @@ export const OFFICIAL_COMBOS: OfficialComboSeed[] = [
     title: "Business Analytics Pro Track",
     durationHours: 60,
     durationLabel: "60 Hours",
-    includedLabel: "Advanced Excel + Certified Data Visualization Using Power BI + AI Reporting",
-    idealFor: "B.Com, BBA, BCA and B.Sc graduates targeting analyst roles.",
+    includedLabel: "Advanced Excel + Power BI + AI Reporting",
+    idealFor: "B.Com, BBA, BCA, and B.Sc graduates.",
     summary:
-      "An end-to-end analytics accelerator covering Excel data prep, Power Query, DAX modeling, interactive Power BI dashboards, and AI-assisted insight reporting.",
+      "Go from raw Excel data to Power Query, DAX, and Power BI dashboards.",
     outcomes: [
-      "Clean and model multi-source business datasets",
-      "Build executive Power BI dashboards backed by DAX",
-      "Accelerate insight summaries with AI reporting workflows",
+      "Clean and model multi-source datasets",
+      "Build executive Power BI dashboards with DAX",
     ],
     courseSlugs: ["data-visualization-power-bi", "ai-tools-for-commerce-business"],
     image: "/images/combo-business-analytics.webp",
@@ -807,15 +805,13 @@ export const OFFICIAL_COMBOS: OfficialComboSeed[] = [
     title: "Corporate Finance & IB Master Track",
     durationHours: 60,
     durationLabel: "60 Hours",
-    includedLabel:
-      "Certified Professional in Financial Modelling + Certified Investment Banking Professional",
-    idealFor: "MBA, M.Com, CA/CMA and finance career aspirants.",
+    includedLabel: "Financial Modelling + Investment Banking",
+    idealFor: "MBA, M.Com, CA/CMA, and finance aspirants.",
     summary:
-      "Pair hands-on 3-statement Excel modelling and DCF valuation with investment banking deal structuring, M&A, and capital markets execution.",
+      "Combine 3-statement Excel modelling and DCF valuation with M&A and IB pitchbooks.",
     outcomes: [
-      "Build dynamic 3-statement forecasts and DCF valuation models",
-      "Analyse IPO, M&A, LBO, and debt capital market transactions",
-      "Present an institutional-grade valuation and deal pitchbook",
+      "Build 3-statement forecasts and DCF models",
+      "Analyze IPO, M&A, and LBO transactions",
     ],
     courseSlugs: ["financial-modelling-for-business", "investment-banking-professional"],
     image: "/images/combo-finance-ib.webp",
@@ -826,15 +822,13 @@ export const OFFICIAL_COMBOS: OfficialComboSeed[] = [
     title: "Digital Creator & Growth Master Track",
     durationHours: 90,
     durationLabel: "90 Hours",
-    includedLabel:
-      "AI-Powered Digital Marketing + Social Media Marketing + Video Editing & Reels Production",
-    idealFor: "Aspiring marketers, creators, freelancers and business owners.",
+    includedLabel: "Digital Marketing + Social Media + Video Editing",
+    idealFor: "Marketers, creators, freelancers, and founders.",
     summary:
-      "Master the complete digital growth stack: performance ads, SEO, analytics, brand storytelling, Canva design, and commercial video editing.",
+      "Master Google & Meta ads, SEO, social content systems, and video editing.",
     outcomes: [
-      "Run ROI-tracked Google Ads & Meta Ads campaigns",
-      "Build a 30-day multi-platform organic content engine",
-      "Edit high-retention Reels, Shorts, and commercial brand videos",
+      "Run ROI-tracked Google & Meta ad campaigns",
+      "Edit high-retention Reels and brand videos",
     ],
     courseSlugs: [
       "ai-powered-digital-marketing",

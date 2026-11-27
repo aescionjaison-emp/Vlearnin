@@ -49,26 +49,22 @@ export default function AboutPage() {
 
           {/* Vision, Mission, Philosophy */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-3">
+            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-2">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Our Educational Philosophy</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                We believe skill mastery comes from doing. Rather than passive slide decks, our
-                sessions emphasize live datasets, real financial models, active ad managers, and
-                hands-on production workflows.
+                Hands-on learning on live datasets, financial models, ad managers, and production tools.
               </p>
             </div>
-            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-3">
+            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-2">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Our Vision</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                To empower students, graduates, and working professionals with practical,
-                industry-aligned capabilities that translate directly into workplace confidence.
+                Equip students and professionals with practical, job-ready capabilities.
               </p>
             </div>
-            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-3">
+            <div className="p-7 bg-[#F8FAFC] border-t-4 border-[#1D4ED8] space-y-2">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Our Mission</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                Deliver focused 30-hour certifications and campus courses backed by capstone projects
-                and QR-verified credentials.
+                Deliver mentor-led 30-hour certifications backed by capstones and QR verification.
               </p>
             </div>
           </div>
@@ -97,29 +93,25 @@ export default function AboutPage() {
             <div className="border border-[#E5E7EB] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Practical Learning Methodology</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                Each module pairs guided instructor demonstrations with hands-on exercises,
-                case studies, and a final capstone project evaluated on real-world clarity.
+                Live demonstrations, hands-on exercises, and an evaluated capstone project.
               </p>
             </div>
             <div className="border border-[#E5E7EB] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Small-Batch Mentorship</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                Focused batch sizes ensure every learner receives individual doubt resolution,
-                tool troubleshooting, and feedback on their capstone portfolio.
+                Focused batches with 1-on-1 doubt resolution and portfolio feedback.
               </p>
             </div>
             <div className="border border-[#E5E7EB] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Career Readiness</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                Learners receive ATS resume structuring, LinkedIn optimization, mock interview
-                practice, and access to curated employer opportunities.
+                ATS resumes, LinkedIn optimization, mock interviews, and employer access.
               </p>
             </div>
             <div className="border border-[#E5E7EB] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#1D4ED8]">Academic Collaboration</h3>
               <p className="text-sm text-[#4B5563] leading-relaxed">
-                We partner with degree colleges and management institutes across Bengaluru and
-                Karnataka to deliver on-campus and hybrid value-added certifications.
+                On-campus and hybrid certifications with degree colleges across Karnataka.
               </p>
             </div>
           </div>

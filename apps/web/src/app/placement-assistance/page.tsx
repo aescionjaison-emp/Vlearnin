@@ -23,12 +23,11 @@ const STAGES = [
     title: "Live Capstone Portfolio",
     icon: Layers,
     summary:
-      "Graduate with tangible, employer-reviewable work rather than just a certificate.",
+      "Graduate with employer-ready projects, not just a certificate.",
     details: [
-      "Interactive multi-page Power BI executive dashboards",
-      "Dynamic 3-statement Excel & DCF valuation models",
-      "Custom workplace AI automation workflows",
-      "Performance ad plans, content calendars & video showreels",
+      "Power BI executive dashboards",
+      "3-statement Excel & DCF valuation models",
+      "AI workflows, ad plans & video showreels",
     ],
   },
   {
@@ -36,11 +35,11 @@ const STAGES = [
     title: "ATS Resume & LinkedIn Makeover",
     icon: FileCheck2,
     summary:
-      "Personalized profile optimization tailored to finance, analytics, and digital marketing recruiters.",
+      "Profile optimization for finance, analytics, and digital roles.",
     details: [
-      "Role-specific keyword alignment for ATS screening",
-      "Structuring capstone projects as measurable portfolio entries",
-      "LinkedIn headline, summary, and featured project setup",
+      "ATS keyword alignment",
+      "Project-led resume entries",
+      "LinkedIn headline & featured projects",
     ],
   },
   {
@@ -48,11 +47,11 @@ const STAGES = [
     title: "Mock Interviews & Domain Prep",
     icon: GraduationCap,
     summary:
-      "Structured practice rounds to build technical clarity and interview confidence.",
+      "Technical and HR practice rounds with mentor feedback.",
     details: [
-      "Domain-specific technical Q&A (DAX, Excel, Finance, Marketing)",
-      "HR & behavioral interview readiness",
-      "Actionable mentor feedback after each mock round",
+      "Domain Q&A (DAX, Excel, Finance, Marketing)",
+      "HR & behavioral interview prep",
+      "Actionable mentor feedback",
     ],
   },
   {
@@ -60,11 +59,11 @@ const STAGES = [
     title: "Curated Hiring Network",
     icon: Briefcase,
     summary:
-      "Access to available internship and full-time openings through verified employer connections.",
+      "Direct access to internships and full-time openings.",
     details: [
-      "Direct sharing of consented candidate portfolios with hiring teams",
-      "Internship and entry-level opportunities across Bengaluru",
-      "Ongoing career guidance during placement drives",
+      "Portfolio sharing with hiring teams",
+      "Bengaluru internships & entry-level roles",
+      "Placement drive guidance",
     ],
   },
 ];

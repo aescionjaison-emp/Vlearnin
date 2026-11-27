@@ -70,32 +70,32 @@ const DELIVERY_STEPS = [
   {
     step: "Step 1",
     title: "Curriculum Consultation",
-    desc: "Align programme selection, batch size and academic calendar with institutional leadership.",
+    desc: "Align courses, batch size, and academic calendar.",
   },
   {
     step: "Step 2",
     title: "Programme Orientation",
-    desc: "Introduce industry demand, software requirements and career pathways.",
+    desc: "Introduce industry demand and career pathways.",
   },
   {
     step: "Step 3",
-    title: "Hands-On Classroom & Lab Sessions",
-    desc: "Deliver 30 hours of practical instructor-led training with guided exercises and live datasets.",
+    title: "Classroom & Lab Sessions",
+    desc: "30 hours of hands-on training on live datasets.",
   },
   {
     step: "Step 4",
     title: "Assignments & Case Studies",
-    desc: "Reinforce learning through practical problem solving.",
+    desc: "Reinforce skills with practical problem solving.",
   },
   {
     step: "Step 5",
-    title: "Capstone Project & Practical Assessment",
-    desc: "Final hands-on project presentation and evaluation.",
+    title: "Capstone Assessment",
+    desc: "Final project presentation and evaluation.",
   },
   {
     step: "Step 6",
-    title: "Certification & Career Readiness",
-    desc: "Issue QR-verified certificates alongside resume and portfolio guidance.",
+    title: "Certification & Career Support",
+    desc: "QR-verified certificates plus resume guidance.",
   },
 ];
 
@@ -204,20 +204,20 @@ export function AcademicPartnershipsClient() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "NEP & Add-On Course Alignment",
-                desc: "Modular 30-hour certification structures designed to fit semester schedules, skill-enhancement electives or pre-placement bootcamps.",
+                title: "NEP & Add-On Alignment",
+                desc: "Modular 30-hour tracks built for semester schedules and electives.",
               },
               {
-                title: "Practical, Capstone-Driven Delivery",
-                desc: "Guided lab exercises, business case studies, assignments and an evaluated capstone project.",
+                title: "Capstone-Driven Delivery",
+                desc: "Guided labs, business cases, and an evaluated capstone.",
               },
               {
-                title: "Flexible Infrastructure Requirements",
-                desc: "Delivery through college computer labs or hybrid live-instructor sessions.",
+                title: "Flexible Infrastructure",
+                desc: "Delivered in college computer labs or live hybrid sessions.",
               },
               {
-                title: "QR-Verified Dual-Branded Certification",
-                desc: "Verifiable certificates upon meeting attendance and assessment criteria, with dual branding where agreed by the institution.",
+                title: "QR-Verified Certification",
+                desc: "Verifiable certificates with optional dual institutional branding.",
               },
             ].map((benefit) => (
               <div key={benefit.title} className="bg-white border border-[#E5E7EB] p-6 border-t-4 border-t-[#1D4ED8] rounded-[15px]">
