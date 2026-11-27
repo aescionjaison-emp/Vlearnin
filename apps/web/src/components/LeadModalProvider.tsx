@@ -139,13 +139,13 @@ function DemoModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E3A8A]/70 backdrop-blur-xs p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1D4ED8]/70 backdrop-blur-xs p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="demo-modal-title"
     >
       <div className="relative w-full max-w-lg bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden max-h-[92vh] overflow-y-auto rounded-[15px]">
-        <div className="bg-[#1E3A8A] text-white px-6 py-5 flex items-start justify-between gap-4">
+        <div className="bg-[#1D4ED8] text-white px-6 py-5 flex items-start justify-between gap-4">
           <div>
             <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#93C5FD] font-semibold">
               VLEARNIN Academy • Rajajinagar
@@ -168,9 +168,9 @@ function DemoModal({
           {successRef ? (
             <div className="text-center py-4 space-y-4">
               <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-              <h3 className="text-xl font-bold text-[#1E3A8A]">Demo Request Confirmed</h3>
+              <h3 className="text-xl font-bold text-[#1D4ED8]">Demo Request Confirmed</h3>
               <p className="text-sm text-[#4B5563]">
-                Reference ID: <strong className="text-[#1E3A8A]">{successRef}</strong>. Our
+                Reference ID: <strong className="text-[#1D4ED8]">{successRef}</strong>. Our
                 admissions counselor will contact you shortly to confirm your slot.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
@@ -206,7 +206,7 @@ function DemoModal({
               )}
 
               <div>
-                <label htmlFor="demo-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="demo-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Full Name *
                 </label>
                 <input
@@ -221,7 +221,7 @@ function DemoModal({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="demo-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Phone / WhatsApp *
                   </label>
                   <input
@@ -235,7 +235,7 @@ function DemoModal({
                 </div>
 
                 <div>
-                  <label htmlFor="demo-qualification" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="demo-qualification" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Qualification *
                   </label>
                   <select
@@ -255,7 +255,7 @@ function DemoModal({
               </div>
 
               <div>
-                <label htmlFor="demo-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="demo-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Course or Combo Interested In *
                 </label>
                 <select
@@ -273,7 +273,7 @@ function DemoModal({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="demo-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="demo-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Preferred Batch Timing *
                   </label>
                   <select
@@ -289,7 +289,7 @@ function DemoModal({
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="demo-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="demo-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Email (Optional)
                   </label>
                   <input
@@ -307,7 +307,7 @@ function DemoModal({
                 <input
                   type="checkbox"
                   {...register("consent")}
-                  className="mt-0.5 accent-[#1E3A8A]"
+                  className="mt-0.5 accent-[#1D4ED8]"
                 />
                 <span>
                   I consent to VLEARNIN Academy contacting me via phone, WhatsApp, or email regarding demo sessions, fee details, and programme updates.
@@ -380,13 +380,13 @@ function BrochureModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E3A8A]/70 backdrop-blur-xs p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1D4ED8]/70 backdrop-blur-xs p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="brochure-modal-title"
     >
       <div className="relative w-full max-w-md bg-white border border-[#E5E7EB] shadow-2xl overflow-hidden rounded-[15px]">
-        <div className="bg-[#1E3A8A] text-white px-6 py-5 flex items-start justify-between gap-4">
+        <div className="bg-[#1D4ED8] text-white px-6 py-5 flex items-start justify-between gap-4">
           <div>
             <p className="font-nav text-[11px] uppercase tracking-[0.18em] text-[#93C5FD] font-semibold">
               Official PDF Brochure
@@ -409,7 +409,7 @@ function BrochureModal({
           {downloadUrl ? (
             <div className="text-center py-3 space-y-4">
               <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-              <h3 className="text-lg font-bold text-[#1E3A8A]">Your Brochure Is Ready</h3>
+              <h3 className="text-lg font-bold text-[#1D4ED8]">Your Brochure Is Ready</h3>
               <p className="text-sm text-[#4B5563]">
                 Click below to download the official VLEARNIN PDF brochure.
               </p>
@@ -441,7 +441,7 @@ function BrochureModal({
               )}
 
               <div>
-                <label htmlFor="bro-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="bro-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Full Name *
                 </label>
                 <input
@@ -455,7 +455,7 @@ function BrochureModal({
               </div>
 
               <div>
-                <label htmlFor="bro-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="bro-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Phone / WhatsApp *
                 </label>
                 <input
@@ -469,7 +469,7 @@ function BrochureModal({
               </div>
 
               <div>
-                <label htmlFor="bro-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="bro-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Qualification *
                 </label>
                 <select
@@ -488,7 +488,7 @@ function BrochureModal({
               </div>
 
               <div>
-                <label htmlFor="bro-prog" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                <label htmlFor="bro-prog" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                   Interested Programme (Optional)
                 </label>
                 <select
@@ -506,7 +506,7 @@ function BrochureModal({
               </div>
 
               <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
-                <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1E3A8A]" />
+                <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1D4ED8]" />
                 <span>
                   I consent to receive the requested VLEARNIN brochure PDF and admissions follow-up via phone or WhatsApp.
                 </span>

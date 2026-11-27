@@ -159,7 +159,7 @@ export function AcademicPartnershipsClient() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
+      <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl leading-tight">
             Empowering Colleges to Build Industry-Ready Graduates
@@ -179,7 +179,7 @@ export function AcademicPartnershipsClient() {
               href={`${apiRoot}/api/brochures/academic`}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/60 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
+              className="border border-white/60 hover:bg-white hover:text-[#1D4ED8] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
             >
               <Download className="w-4 h-4" />
               Download Academic Brochure PDF
@@ -192,7 +192,7 @@ export function AcademicPartnershipsClient() {
       <section className="py-16 bg-[#F8FAFC] border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-3xl space-y-3">
-            <h2 className="text-3xl font-bold text-[#1E3A8A]">
+            <h2 className="text-3xl font-bold text-[#1D4ED8]">
               Bridging the Campus-to-Corporate Gap
             </h2>
             <p className="text-base text-[#4B5563] leading-relaxed">
@@ -222,7 +222,7 @@ export function AcademicPartnershipsClient() {
             ].map((benefit) => (
               <div key={benefit.title} className="bg-white border border-[#E5E7EB] p-6 border-t-4 border-t-[#1D4ED8] rounded-[15px]">
                 <GraduationCap className="w-6 h-6 text-[#EA580C] mb-3" />
-                <h3 className="text-lg font-bold text-[#1E3A8A] mb-2">{benefit.title}</h3>
+                <h3 className="text-lg font-bold text-[#1D4ED8] mb-2">{benefit.title}</h3>
                 <p className="text-sm text-[#4B5563] leading-relaxed">{benefit.desc}</p>
               </div>
             ))}
@@ -237,7 +237,7 @@ export function AcademicPartnershipsClient() {
             <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
               CURRICULUM MATRIX
             </p>
-            <h2 className="text-3xl font-bold text-[#1E3A8A] mt-1">
+            <h2 className="text-3xl font-bold text-[#1D4ED8] mt-1">
               Institutional Certification Portfolio
             </h2>
           </div>
@@ -246,7 +246,7 @@ export function AcademicPartnershipsClient() {
           <div className="hidden md:block overflow-x-auto border border-[#E5E7EB] rounded-[15px]">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#1E3A8A] text-white font-nav text-xs uppercase tracking-wider">
+                <tr className="bg-[#1D4ED8] text-white font-nav text-xs uppercase tracking-wider">
                   <th className="py-4 px-5">Programme</th>
                   <th className="py-4 px-5">Duration</th>
                   <th className="py-4 px-5">Target Student Streams</th>
@@ -259,7 +259,7 @@ export function AcademicPartnershipsClient() {
                     key={row.programme}
                     className={idx % 2 === 0 ? "bg-white" : "bg-[#F8FAFC]/60"}
                   >
-                    <td className="py-4 px-5 font-bold text-[#1E3A8A]">{row.programme}</td>
+                    <td className="py-4 px-5 font-bold text-[#1D4ED8]">{row.programme}</td>
                     <td className="py-4 px-5 font-nav font-semibold text-[#1D4ED8] whitespace-nowrap">
                       {row.duration}
                     </td>
@@ -276,8 +276,8 @@ export function AcademicPartnershipsClient() {
             {PORTFOLIO_ROWS.map((row) => (
               <div key={row.programme} className="border border-[#E5E7EB] p-5 bg-[#F8FAFC] space-y-2 rounded-[15px]">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-bold text-[#1E3A8A] text-base">{row.programme}</h3>
-                  <span className="font-nav text-xs font-bold bg-[#1E3A8A] text-[#93C5FD] px-2.5 py-1 shrink-0 rounded-[8px]">
+                  <h3 className="font-bold text-[#1D4ED8] text-base">{row.programme}</h3>
+                  <span className="font-nav text-xs font-bold bg-[#1D4ED8] text-[#93C5FD] px-2.5 py-1 shrink-0 rounded-[8px]">
                     {row.duration}
                   </span>
                 </div>
@@ -294,7 +294,7 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 3: Six-Step Academic Delivery Framework */}
-      <section ref={timelineRef} className="py-16 bg-[#1E3A8A] text-white">
+      <section ref={timelineRef} className="py-16 bg-[#1D4ED8] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold">
@@ -306,7 +306,7 @@ export function AcademicPartnershipsClient() {
             {DELIVERY_STEPS.map((s) => (
               <div
                 key={s.step}
-                className="timeline-step bg-[#0B234D] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
+                className="timeline-step bg-[#1E40AF] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
               >
                 <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#93C5FD]">
                   {s.step}
@@ -327,7 +327,7 @@ export function AcademicPartnershipsClient() {
               <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 CAMPUS COLLABORATION
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1">
                 Invite VLEARNIN for an Institutional Presentation
               </h2>
               <p className="text-sm text-[#4B5563] mt-2">
@@ -339,11 +339,11 @@ export function AcademicPartnershipsClient() {
             {successRef ? (
               <div className="p-8 bg-[#F8FAFC] border border-emerald-200 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h3 className="text-xl font-bold text-[#1E3A8A]">
+                <h3 className="text-xl font-bold text-[#1D4ED8]">
                   Institutional Proposal Request Received
                 </h3>
                 <p className="text-sm text-[#4B5563]">
-                  Reference ID: <strong className="text-[#1E3A8A]">{successRef}</strong>. Our
+                  Reference ID: <strong className="text-[#1D4ED8]">{successRef}</strong>. Our
                   Academic Partnerships team will contact you shortly.
                 </p>
               </div>
@@ -360,7 +360,7 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Full Name *
                     </label>
                     <input
@@ -373,7 +373,7 @@ export function AcademicPartnershipsClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Designation *
                     </label>
                     <select
@@ -392,7 +392,7 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       College / Institution Name *
                     </label>
                     <input
@@ -405,7 +405,7 @@ export function AcademicPartnershipsClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       City / Area
                     </label>
                     <input
@@ -420,7 +420,7 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Official Email *
                     </label>
                     <input
@@ -433,7 +433,7 @@ export function AcademicPartnershipsClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Phone / WhatsApp *
                     </label>
                     <input
@@ -447,7 +447,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-2">
+                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-2">
                     Interested Programmes * (Select all that apply)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -458,7 +458,7 @@ export function AcademicPartnershipsClient() {
                           key={prog}
                           className={`flex items-start gap-2.5 p-3 border text-xs cursor-pointer transition-colors ${
                             checked
-                              ? "border-[#1E3A8A] bg-[#F8FAFC] font-semibold text-[#1E3A8A]"
+                              ? "border-[#1D4ED8] bg-[#F8FAFC] font-semibold text-[#1D4ED8]"
                               : "border-[#E5E7EB] bg-white text-[#111827]"
                           }`}
                         >
@@ -466,7 +466,7 @@ export function AcademicPartnershipsClient() {
                             type="checkbox"
                             checked={checked}
                             onChange={() => toggleProgramme(prog)}
-                            className="mt-0.5 accent-[#1E3A8A]"
+                            className="mt-0.5 accent-[#1D4ED8]"
                           />
                           <span>{prog}</span>
                         </label>
@@ -479,7 +479,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Estimated Student Batch Size *
                   </label>
                   <select
@@ -494,7 +494,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                     Message / Preferred Timeline
                   </label>
                   <textarea
@@ -507,7 +507,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
-                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1E3A8A]" />
+                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1D4ED8]" />
                   <span>
                     I authorize VLEARNIN Academy to contact our institution regarding this academic
                     partnership proposal.

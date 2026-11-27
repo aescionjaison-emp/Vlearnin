@@ -29,7 +29,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
 
   return (
     <>
-      <footer className="bg-[#1E3A8A] text-white border-t-4 border-[#EA580C] pb-20 md:pb-0 rounded-[15px]">
+      <footer className="bg-[#1D4ED8] text-white border-t-4 border-[#EA580C] pb-20 md:pb-0 rounded-[15px]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
           <div ref={footerGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Column 1 — Brand */}
@@ -208,7 +208,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with VLEARNIN on WhatsApp"
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#1E3A8A] text-white border border-[#93C5FD] px-4 py-3 shadow-xl hover:bg-[#1D4ED8] transition-colors font-nav text-xs font-semibold uppercase tracking-wider rounded-[15px]"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#1D4ED8] text-white border border-[#93C5FD] px-4 py-3 shadow-xl hover:bg-[#1D4ED8] transition-colors font-nav text-xs font-semibold uppercase tracking-wider rounded-[15px]"
       >
         <MessageCircle className="w-4 h-4 text-[#93C5FD]" />
         <span>WhatsApp Us</span>
@@ -216,7 +216,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
 
       {/* Mobile Fixed Bottom Action Bar */}
       <div
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1E3A8A] text-white border-t border-[#93C5FD] grid grid-cols-3 divide-x divide-white/15 rounded-[15px]"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1D4ED8] text-white border-t border-[#93C5FD] grid grid-cols-3 divide-x divide-white/15 rounded-[15px]"
         role="region"
         aria-label="Quick Contact Actions"
       >

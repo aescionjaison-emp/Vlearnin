@@ -51,7 +51,7 @@ export function AdminContentManager() {
   const renderHeader = (title: string, path: string, createItem: () => unknown, btnLabel: string) => (
     <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#E5E7EB]">
       <div>
-        <h2 className="text-2xl font-bold text-[#1E3A8A]">{title}</h2>
+        <h2 className="text-2xl font-bold text-[#1D4ED8]">{title}</h2>
         <p className="text-xs font-nav text-[#4B5563] mt-0.5">
           Add new items, edit any field, or delete existing items. Click Save &amp; Publish when done.
         </p>
@@ -81,8 +81,8 @@ export function AdminContentManager() {
             onClick={() => setSelected(t.key)}
             className={`w-full text-left px-4 py-2.5 text-sm font-nav font-semibold rounded-[15px] transition-colors cursor-pointer ${
               selected === t.key
-                ? "bg-[#1E3A8A] text-white"
-                : "bg-white border border-[#E5E7EB] text-[#1E3A8A] hover:bg-[#EFF6FF]"
+                ? "bg-[#1D4ED8] text-white"
+                : "bg-white border border-[#E5E7EB] text-[#1D4ED8] hover:bg-[#EFF6FF]"
             }`}
           >
             {t.label}
@@ -94,7 +94,7 @@ export function AdminContentManager() {
       <div className="lg:col-span-9 bg-white border border-[#E5E7EB] rounded-[15px] p-6 sm:p-8 space-y-6">
         {selected === "brand" && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+            <h2 className="text-2xl font-bold text-[#1D4ED8] pb-3 border-b border-[#E5E7EB]">
               Brand &amp; Contact Information
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -112,7 +112,7 @@ export function AdminContentManager() {
                 ] as const
               ).map(([path, lbl, val]) => (
                 <div key={path}>
-                  <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+                  <label className="block text-xs font-nav font-semibold uppercase text-[#1D4ED8] mb-1">
                     {lbl}
                   </label>
                   <input
@@ -125,7 +125,7 @@ export function AdminContentManager() {
               ))}
             </div>
             <div>
-              <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+              <label className="block text-xs font-nav font-semibold uppercase text-[#1D4ED8] mb-1">
                 Full Address
               </label>
               <input
@@ -136,7 +136,7 @@ export function AdminContentManager() {
               />
             </div>
             <div>
-              <label className="block text-xs font-nav font-semibold uppercase text-[#1E3A8A] mb-1">
+              <label className="block text-xs font-nav font-semibold uppercase text-[#1D4ED8] mb-1">
                 Placement Assistance Disclaimer
               </label>
               <textarea
@@ -151,7 +151,7 @@ export function AdminContentManager() {
 
         {selected === "brandIntro" && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+            <h2 className="text-2xl font-bold text-[#1D4ED8] pb-3 border-b border-[#E5E7EB]">
               Welcome Section &amp; Campus Photo
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -208,7 +208,7 @@ export function AdminContentManager() {
 
         {selected === "academic" && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+            <h2 className="text-2xl font-bold text-[#1D4ED8] pb-3 border-b border-[#E5E7EB]">
               Academic Partnerships Section
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -254,7 +254,7 @@ export function AdminContentManager() {
 
         {selected === "footer" && (
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] pb-3 border-b border-[#E5E7EB]">
+            <h2 className="text-2xl font-bold text-[#1D4ED8] pb-3 border-b border-[#E5E7EB]">
               Final CTA Banner &amp; Footer
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

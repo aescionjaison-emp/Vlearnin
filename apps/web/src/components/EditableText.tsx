@@ -76,7 +76,7 @@ export function EditableImageTrigger({
           setAltVal(currentAlt || "");
           setOpen((v) => !v);
         }}
-        className="inline-flex items-center gap-1.5 bg-[#1E3A8A]/95 hover:bg-[#EA580C] text-white text-[11px] font-nav font-bold px-2.5 py-1.5 rounded-[10px] shadow-md cursor-pointer transition-colors"
+        className="inline-flex items-center gap-1.5 bg-[#1D4ED8]/95 hover:bg-[#EA580C] text-white text-[11px] font-nav font-bold px-2.5 py-1.5 rounded-[10px] shadow-md cursor-pointer transition-colors"
       >
         <ImageIcon className="w-3.5 h-3.5" />
         <span>Edit Image</span>
@@ -84,7 +84,7 @@ export function EditableImageTrigger({
 
       {open && (
         <div className="mt-2 w-80 bg-white text-[#111827] border border-[#E5E7EB] shadow-xl p-3 rounded-[15px] space-y-2.5">
-          <label className="block text-[11px] font-nav font-bold text-[#1E3A8A]">
+          <label className="block text-[11px] font-nav font-bold text-[#1D4ED8]">
             Upload, Drag &amp; Drop, or Paste Image URL
           </label>
           <ImageDropzoneInput
@@ -97,7 +97,7 @@ export function EditableImageTrigger({
           />
           {altPath && (
             <>
-              <label className="block text-[11px] font-nav font-bold text-[#1E3A8A]">
+              <label className="block text-[11px] font-nav font-bold text-[#1D4ED8]">
                 Alt Text
               </label>
               <input

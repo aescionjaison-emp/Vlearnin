@@ -4,7 +4,7 @@
 @import "../styles/motion.css";
 
 @theme {
-  --color-jain-navy: #1E3A8A;
+  --color-jain-navy: #1D4ED8;
   --color-jain-blue: #1D4ED8;
   --color-jain-amber: #EA580C;
   --color-jain-yellow: #DBEAFE;
@@ -61,7 +61,7 @@ h1, h2, .font-heading {
 
 .btn-gold {
   background-color: #FFFFFF;
-  color: #1E3A8A;
+  color: #1D4ED8;
   border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
@@ -74,7 +74,7 @@ h1, h2, .font-heading {
 }
 
 .btn-navy {
-  background-color: #1E3A8A;
+  background-color: #1D4ED8;
   color: #FFFFFF;
   border-radius: 15px;
   font-family: var(--font-button);
@@ -82,20 +82,20 @@ h1, h2, .font-heading {
   transition: background-color 300ms ease, transform 300ms ease;
 }
 .btn-navy:hover {
-  background-color: #1D4ED8;
+  background-color: #1E40AF;
   transform: translateY(-1px);
 }
 
 .btn-outline-navy {
-  border: 1.5px solid #1E3A8A;
-  color: #1E3A8A;
+  border: 1.5px solid #1D4ED8;
+  color: #1D4ED8;
   border-radius: 15px;
   font-family: var(--font-button);
   font-weight: 600;
   transition: background-color 300ms ease, color 300ms ease;
 }
 .btn-outline-navy:hover {
-  background-color: #1E3A8A;
+  background-color: #1D4ED8;
   color: #FFFFFF;
 }
 

@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
       {/* Matching Public Brand Header Strip */}
-      <div className="bg-[#1E3A8A] text-white border-b-4 border-[#EA580C]">
+      <div className="bg-[#1D4ED8] text-white border-b-4 border-[#EA580C]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-4 flex items-center justify-between">
           <VlearninLogo variant="light" showTagline={false} />
           <span className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#93C5FD]">
@@ -53,13 +53,13 @@ export default function AdminLoginPage() {
       <div className="flex-1 flex items-center justify-center p-4 sm:p-8">
         <div className="w-full max-w-md bg-white border border-[#E5E7EB] border-t-4 border-t-[#1D4ED8] shadow-xl p-8 space-y-6 rounded-[15px]">
           <div className="flex flex-col items-center text-center space-y-2">
-            <div className="w-12 h-12 rounded-[15px] bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E3A8A]">
+            <div className="w-12 h-12 rounded-[15px] bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1D4ED8]">
               <KeyRound className="w-6 h-6" />
             </div>
             <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8] pt-1">
               ADMINISTRATOR ACCESS
             </p>
-            <h1 className="text-3xl font-bold text-[#1E3A8A]">
+            <h1 className="text-3xl font-bold text-[#1D4ED8]">
               Sign In to Website Studio
             </h1>
             <p className="text-sm text-[#4B5563]">
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="admin-id"
-                className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1.5"
+                className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1.5"
               >
                 Admin ID / Email
               </label>
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
             <div>
               <label
                 htmlFor="admin-password"
-                className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1.5"
+                className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1.5"
               >
                 Password
               </label>

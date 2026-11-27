@@ -76,7 +76,7 @@ export function BrandIntroSection() {
                   as="h2"
                   path="brandIntro.heading"
                   value={bi.heading}
-                  className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2 leading-tight"
+                  className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2 leading-tight"
                 />
                 <EditableText
                   as="p"
@@ -112,7 +112,7 @@ export function BrandIntroSection() {
                       <EditableText
                         path={`brandIntro.pillars.${idx}.title`}
                         value={p.title}
-                        className="font-nav text-sm font-bold tracking-wider text-[#1E3A8A]"
+                        className="font-nav text-sm font-bold tracking-wider text-[#1D4ED8]"
                       />
                     </div>
                     <EditableText
@@ -135,7 +135,7 @@ export function BrandIntroSection() {
                 </Link>
                 <Link
                   href="/courses"
-                  className="font-nav text-sm font-semibold text-[#1D4ED8] hover:text-[#1E3A8A] underline underline-offset-4"
+                  className="font-nav text-sm font-semibold text-[#1D4ED8] hover:text-[#1D4ED8] underline underline-offset-4"
                 >
                   <EditableText path="brandIntro.secondaryLinkLabel" value={bi.secondaryLinkLabel} />
                 </Link>
@@ -155,7 +155,7 @@ export function BrandIntroSection() {
       </section>
 
       {/* 12 — FACTUAL INSTITUTIONAL HIGHLIGHTS (CHRIST-style metrics bar) */}
-      <section aria-label="Factual Programme Highlights" className="bg-[#1E3A8A] text-white py-12">
+      <section aria-label="Factual Programme Highlights" className="bg-[#1D4ED8] text-white py-12">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div ref={highlightsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
             {bi.highlights.map((h, idx) => (

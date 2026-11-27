@@ -103,7 +103,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
         {/* Right Two-Tier Navigation Stack */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Tier 1: Diagonal-Slanted Deep Blue Utility Bar */}
-          <div className="relative bg-[#1E3A8A] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
+          <div className="relative bg-[#1D4ED8] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
             {/* Diagonal white slant matching JAIN header */}
             <div
               aria-hidden="true"
@@ -231,7 +231,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
 
       {/* Tablet & Mobile Header */}
       <div className="xl:hidden">
-        <div className="bg-[#1E3A8A] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
+        <div className="bg-[#1D4ED8] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
           <span>{BRAND.shortLocation}</span>
           <a href={BRAND.phoneHref} className="font-semibold text-[#93C5FD]">
             {BRAND.phoneDisplay}
@@ -262,7 +262,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="p-2 border border-[#E5E7EB] text-[#1E3A8A] rounded-[15px]"
+              className="p-2 border border-[#E5E7EB] text-[#1D4ED8] rounded-[15px]"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -280,7 +280,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={handleMegaEnter}
             onMouseLeave={handleMegaLeave}
-            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E5E7EB] border-b-4 border-b-[#1E3A8A] shadow-2xl z-50"
+            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E5E7EB] border-b-4 border-b-[#1D4ED8] shadow-2xl z-50"
           >
           <div className="max-w-[1440px] mx-auto px-10 py-8">
             <div className="grid grid-cols-3 gap-8">
@@ -294,7 +294,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                       className="object-cover"
                       sizes="400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/90 via-[#1E3A8A]/30 to-transparent flex items-end p-3.5">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1D4ED8]/90 via-[#1D4ED8]/30 to-transparent flex items-end p-3.5">
                       <span className="font-nav text-xs font-bold uppercase tracking-wider text-white">
                         {col.title}
                       </span>
@@ -363,7 +363,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               type="button"
               onClick={() => setMobileProgOpen((v) => !v)}
               aria-expanded={mobileProgOpen}
-              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#1E3A8A] bg-[#F8FAFC]"
+              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#1D4ED8] bg-[#F8FAFC]"
             >
               <span>Programmes (7 Courses)</span>
               <ChevronDown

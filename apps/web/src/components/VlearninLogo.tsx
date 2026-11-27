@@ -11,7 +11,7 @@ export function VlearninLogo({
   compact = false,
   showTagline = true,
 }: VlearninLogoProps) {
-  const textColor = variant === "light" ? "text-white" : "text-[#1E3A8A]";
+  const textColor = variant === "light" ? "text-white" : "text-[#1D4ED8]";
   const taglineColor = variant === "light" ? "text-[#93C5FD]" : "text-[#4B5563]";
 
   return (
@@ -32,7 +32,7 @@ export function VlearninLogo({
           width="44"
           height="44"
           rx="4"
-          fill={variant === "light" ? "#0E2954" : "#1E3A8A"}
+          fill={variant === "light" ? "#0E2954" : "#1D4ED8"}
           stroke="#EA580C"
           strokeWidth="1.5"
         />

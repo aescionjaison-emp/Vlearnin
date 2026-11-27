@@ -95,7 +95,7 @@ export function ImageDropzoneInput({
   return (
     <div className="space-y-2">
       {label && (
-        <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A]">
+        <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8]">
           {label}
         </label>
       )}
@@ -154,7 +154,7 @@ export function ImageDropzoneInput({
             />
           ))}
 
-        <div className="flex items-center gap-1.5 text-xs font-nav font-semibold text-[#1E3A8A]">
+        <div className="flex items-center gap-1.5 text-xs font-nav font-semibold text-[#1D4ED8]">
           <UploadCloud className="w-4 h-4 text-[#EA580C]" />
           <span>
             {processing
@@ -175,7 +175,7 @@ export function ImageDropzoneInput({
             e.stopPropagation();
             inputRef.current?.click();
           }}
-          className="inline-flex items-center gap-1.5 bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white font-nav text-[11px] font-semibold px-3 py-1 rounded-[10px] cursor-pointer"
+          className="inline-flex items-center gap-1.5 bg-[#1D4ED8] hover:bg-[#1D4ED8] text-white font-nav text-[11px] font-semibold px-3 py-1 rounded-[10px] cursor-pointer"
         >
           <FolderOpen className="w-3.5 h-3.5" />
           <span>Select from Folder</span>

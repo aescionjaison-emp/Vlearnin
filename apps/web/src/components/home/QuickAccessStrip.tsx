@@ -52,7 +52,7 @@ export function QuickAccessStrip() {
                 <EditableText
                   path={`quickAccess.items.${idx}.label`}
                   value={item.label}
-                  className="font-nav text-[13px] font-semibold text-[#1E3A8A] leading-snug"
+                  className="font-nav text-[13px] font-semibold text-[#1D4ED8] leading-snug"
                 />
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#EA580C] scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
               </Link>
@@ -62,7 +62,7 @@ export function QuickAccessStrip() {
           <button
             type="button"
             onClick={() => openDemoModal({ sourcePage: "quick-access" })}
-            className="group bg-[#1E3A8A] hover:bg-[#1D4ED8] text-white border border-[#1E3A8A] transition-all duration-200 py-4 px-3 flex flex-col items-center text-center gap-2 cursor-pointer rounded-[15px]"
+            className="group bg-[#1D4ED8] hover:bg-[#1D4ED8] text-white border border-[#1D4ED8] transition-all duration-200 py-4 px-3 flex flex-col items-center text-center gap-2 cursor-pointer rounded-[15px]"
           >
             <CalendarCheck className="w-5 h-5 text-[#93C5FD]" />
             <EditableText

@@ -72,7 +72,7 @@ const STAGES = [
 export default function PlacementAssistancePage() {
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
+      <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Structured Placement Assistance — From Classroom to Corporate
@@ -99,7 +99,7 @@ export default function PlacementAssistancePage() {
                     </span>
                     <Icon className="w-6 h-6 text-[#EA580C]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#1E3A8A]">{stage.title}</h2>
+                  <h2 className="text-2xl font-bold text-[#1D4ED8]">{stage.title}</h2>
                   <p className="text-sm text-[#4B5563]">{stage.summary}</p>
                   <ul className="space-y-2 pt-2">
                     {stage.details.map((d) => (
@@ -120,7 +120,7 @@ export default function PlacementAssistancePage() {
               <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 POTENTIAL CAREER PATHWAYS
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1">
                 Roles Our Graduates Prepare For
               </h2>
               <p className="text-sm text-[#4B5563] mt-2">
@@ -133,20 +133,20 @@ export default function PlacementAssistancePage() {
               {CAREER_PATHWAYS.map((role) => (
                 <span
                   key={role}
-                  className="font-nav text-xs font-bold text-[#1E3A8A] bg-[#F8FAFC] border border-[#E5E7EB] px-4 py-2.5 rounded-[15px]"
+                  className="font-nav text-xs font-bold text-[#1D4ED8] bg-[#F8FAFC] border border-[#E5E7EB] px-4 py-2.5 rounded-[15px]"
                 >
                   {role}
                 </span>
               ))}
             </div>
 
-            <div className="p-4 bg-[#F8FAFC] border-l-4 border-[#1E3A8A] text-xs text-[#4B5563] rounded-[15px]">
-              <strong className="text-[#1E3A8A]">Mandatory Placement Disclaimer:</strong>{" "}
+            <div className="p-4 bg-[#F8FAFC] border-l-4 border-[#1D4ED8] text-xs text-[#4B5563] rounded-[15px]">
+              <strong className="text-[#1D4ED8]">Mandatory Placement Disclaimer:</strong>{" "}
               {BRAND.placementDisclaimer}
             </div>
           </div>
 
-          <div className="bg-[#1E3A8A] text-white p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 rounded-[15px]">
+          <div className="bg-[#1D4ED8] text-white p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 rounded-[15px]">
             <div>
               <h3 className="text-2xl font-bold">Looking to Hire VLEARNIN Graduates?</h3>
               <p className="text-sm text-white/75 mt-1">

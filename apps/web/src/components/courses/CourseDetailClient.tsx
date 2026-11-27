@@ -32,7 +32,7 @@ export function CourseDetailClient({
   return (
     <div className="bg-white">
       {/* Course Hero */}
-      <section className="bg-[#1E3A8A] text-white py-14 lg:py-20 border-b-4 border-[#EA580C]">
+      <section className="bg-[#1D4ED8] text-white py-14 lg:py-20 border-b-4 border-[#EA580C]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="text-xs font-nav text-white/70 mb-6 flex items-center gap-2">
             <Link href="/" className="hover:text-white">Home</Link>
@@ -89,7 +89,7 @@ export function CourseDetailClient({
                       brochureSlug: course.slug,
                     })
                   }
-                  className="border border-white/70 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
+                  className="border border-white/70 hover:bg-white hover:text-[#1D4ED8] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
                 >
                   <Download className="w-4 h-4" />
                   Download Syllabus PDF
@@ -120,12 +120,12 @@ export function CourseDetailClient({
           <div className="lg:col-span-8 space-y-12">
             {/* Overview & Ideal Audience */}
             <div className="space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A]">Programme Overview</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">Programme Overview</h2>
               <p className="text-base text-[#4B5563] leading-relaxed">{course.overview}</p>
               <div className="p-5 bg-[#F8FAFC] border-l-4 border-[#1D4ED8] flex items-start gap-3 rounded-[15px]">
                 <GraduationCap className="w-5 h-5 text-[#1D4ED8] shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#1E3A8A]">
+                  <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
                     Ideal For
                   </p>
                   <p className="text-sm text-[#111827] mt-1">{course.idealFor}</p>
@@ -135,7 +135,7 @@ export function CourseDetailClient({
 
             {/* Tools Covered */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-[#1E3A8A] flex items-center gap-2.5">
+              <h2 className="text-2xl font-bold text-[#1D4ED8] flex items-center gap-2.5">
                 <Wrench className="w-5 h-5 text-[#EA580C]" />
                 Tools &amp; Platforms Covered
               </h2>
@@ -143,7 +143,7 @@ export function CourseDetailClient({
                 {course.tools.map((tool) => (
                   <span
                     key={tool}
-                    className="font-nav text-xs font-semibold bg-[#F8FAFC] text-[#1E3A8A] border border-[#E5E7EB] px-4 py-2 rounded-[15px]"
+                    className="font-nav text-xs font-semibold bg-[#F8FAFC] text-[#1D4ED8] border border-[#E5E7EB] px-4 py-2 rounded-[15px]"
                   >
                     {tool}
                   </span>
@@ -154,7 +154,7 @@ export function CourseDetailClient({
             {/* 5-Module Expandable Syllabus */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-[#1E3A8A] flex items-center gap-2.5">
+                <h2 className="text-2xl font-bold text-[#1D4ED8] flex items-center gap-2.5">
                   <BookOpen className="w-5 h-5 text-[#1D4ED8]" />
                   Five-Module Curriculum (30 Hours)
                 </h2>
@@ -177,12 +177,12 @@ export function CourseDetailClient({
                           <span className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
                             Module {mod.moduleNumber} • {mod.durationHours} Hours
                           </span>
-                          <h3 className="text-base sm:text-lg font-bold text-[#1E3A8A] mt-0.5">
+                          <h3 className="text-base sm:text-lg font-bold text-[#1D4ED8] mt-0.5">
                             {mod.title}
                           </h3>
                         </div>
                         <ChevronDown
-                          className={`w-5 h-5 text-[#1E3A8A] shrink-0 transition-transform duration-200 ${
+                          className={`w-5 h-5 text-[#1D4ED8] shrink-0 transition-transform duration-200 ${
                             isOpen ? "rotate-180" : ""
                           }`}
                         />
@@ -211,7 +211,7 @@ export function CourseDetailClient({
 
             {/* Key Learning Outcomes */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-[#1E3A8A]">Key Learning Outcomes</h2>
+              <h2 className="text-2xl font-bold text-[#1D4ED8]">Key Learning Outcomes</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {course.outcomes.map((outcome) => (
                   <div
@@ -226,7 +226,7 @@ export function CourseDetailClient({
             </div>
 
             {/* Capstone Project */}
-            <div className="bg-[#1E3A8A] text-white p-7 border-l-4 border-[#EA580C] space-y-3 rounded-[15px]">
+            <div className="bg-[#1D4ED8] text-white p-7 border-l-4 border-[#EA580C] space-y-3 rounded-[15px]">
               <div className="flex items-center gap-2 text-[#EA580C] font-nav text-xs font-bold uppercase tracking-wider">
                 <Award className="w-4 h-4" />
                 <span>Practical Capstone &amp; Assessment</span>
@@ -237,7 +237,7 @@ export function CourseDetailClient({
 
             {/* Career Pathways */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-[#1E3A8A] flex items-center gap-2.5">
+              <h2 className="text-2xl font-bold text-[#1D4ED8] flex items-center gap-2.5">
                 <Briefcase className="w-5 h-5 text-[#EA580C]" />
                 Potential Career Pathways
               </h2>
@@ -245,7 +245,7 @@ export function CourseDetailClient({
                 {course.careerPathways.map((role) => (
                   <span
                     key={role}
-                    className="font-nav text-xs font-bold text-[#1E3A8A] bg-white border border-[#1E3A8A] px-4 py-2 rounded-[15px]"
+                    className="font-nav text-xs font-bold text-[#1D4ED8] bg-white border border-[#1D4ED8] px-4 py-2 rounded-[15px]"
                   >
                     {role}
                   </span>
@@ -261,7 +261,7 @@ export function CourseDetailClient({
                 <p className="font-nav text-[11px] font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
                   ADMISSIONS &amp; BATCHES
                 </p>
-                <h3 className="text-xl font-bold text-[#1E3A8A] mt-1">
+                <h3 className="text-xl font-bold text-[#1D4ED8] mt-1">
                   Enquire About This Programme
                 </h3>
               </div>
@@ -282,7 +282,7 @@ export function CourseDetailClient({
               </ul>
 
               <div className="p-3.5 bg-white border border-[#E5E7EB] text-xs text-[#4B5563] rounded-[15px]">
-                <strong className="text-[#1E3A8A] block font-nav uppercase tracking-wider mb-1">
+                <strong className="text-[#1D4ED8] block font-nav uppercase tracking-wider mb-1">
                   Fee Structure
                 </strong>
                 Request Fee Details via our admissions desk for current cohort schedules and student offers.
@@ -325,7 +325,7 @@ export function CourseDetailClient({
       {relatedCourses.length > 0 && (
         <section className="py-16 bg-[#F8FAFC] border-t border-[#E5E7EB]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] mb-8">Related Certification Programmes</h2>
+            <h2 className="text-2xl font-bold text-[#1D4ED8] mb-8">Related Certification Programmes</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedCourses.map((rc) => (
                 <Link
@@ -336,7 +336,7 @@ export function CourseDetailClient({
                   <span className="font-nav text-[10px] font-bold uppercase tracking-wider text-[#1D4ED8]">
                     {rc.categoryName}
                   </span>
-                  <h3 className="text-lg font-bold text-[#1E3A8A] mt-2">{rc.title}</h3>
+                  <h3 className="text-lg font-bold text-[#1D4ED8] mt-2">{rc.title}</h3>
                   <p className="text-xs text-[#4B5563] mt-2">{rc.durationLabel}</p>
                 </Link>
               ))}

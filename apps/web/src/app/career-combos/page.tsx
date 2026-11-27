@@ -17,7 +17,7 @@ export default async function CareerCombosPage() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-14 lg:py-16">
+      <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Combine Complementary Skills for Stronger Career Outcomes
@@ -43,7 +43,7 @@ export default async function CareerCombosPage() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
-                <div className="absolute top-4 left-4 bg-[#1E3A8A] text-[#93C5FD] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-[10px]">
+                <div className="absolute top-4 left-4 bg-[#1D4ED8] text-[#93C5FD] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-[10px]">
                   Combo 0{index + 1}
                 </div>
               </div>
@@ -51,7 +51,7 @@ export default async function CareerCombosPage() {
               <div className="lg:col-span-7 p-8 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center gap-4 text-xs font-nav text-[#4B5563]">
-                    <span className="inline-flex items-center gap-1.5 text-[#1E3A8A] font-bold">
+                    <span className="inline-flex items-center gap-1.5 text-[#1D4ED8] font-bold">
                       <Clock className="w-4 h-4 text-[#EA580C]" />
                       {combo.durationLabel}
                     </span>
@@ -61,7 +61,7 @@ export default async function CareerCombosPage() {
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A]">{combo.title}</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">{combo.title}</h2>
                   <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">
                     {combo.summary}
                   </p>
@@ -87,7 +87,7 @@ export default async function CareerCombosPage() {
                   />
                   <Link
                     href={`/career-combos/${combo.slug}`}
-                    className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1E3A8A] inline-flex items-center gap-1.5"
+                    className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1D4ED8] inline-flex items-center gap-1.5"
                   >
                     <span>Full Track Details</span>
                     <ArrowRight className="w-4 h-4" />

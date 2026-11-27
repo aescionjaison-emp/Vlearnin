@@ -134,7 +134,7 @@ export function CoursesCatalogClient({
                   onClick={() => setActiveTab(tab.id)}
                   className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2.5 border transition-colors cursor-pointer ${
                     active
-                      ? "bg-[#1E3A8A] text-white border-[#1E3A8A]"
+                      ? "bg-[#1D4ED8] text-white border-[#1D4ED8]"
                       : "bg-white text-[#111827] border-[#E5E7EB] hover:border-[#1D4ED8]"
                   }`}
                 >
@@ -163,7 +163,7 @@ export function CoursesCatalogClient({
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-16">
           {activeTab !== "combos" && (
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mb-6">
                 Standalone Certification Programmes ({filteredCourses.length})
               </h2>
 
@@ -186,13 +186,13 @@ export function CoursesCatalogClient({
                           sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover mc-image-zoom"
                         />
-                        <div className="absolute top-3 left-3 bg-[#1E3A8A]/90 text-[#93C5FD] font-nav text-[11px] font-bold uppercase tracking-wider px-2.5 py-1">
+                        <div className="absolute top-3 left-3 bg-[#1D4ED8]/90 text-[#93C5FD] font-nav text-[11px] font-bold uppercase tracking-wider px-2.5 py-1">
                           {course.categoryName}
                         </div>
                       </div>
                       <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
                         <div className="space-y-3">
-                          <h3 className="text-xl font-bold text-[#1E3A8A]">{course.title}</h3>
+                          <h3 className="text-xl font-bold text-[#1D4ED8]">{course.title}</h3>
                           <div className="flex flex-wrap gap-3 text-xs font-nav text-[#4B5563]">
                             <span className="inline-flex items-center gap-1">
                               <Clock className="w-3.5 h-3.5 text-[#EA580C]" />
@@ -245,7 +245,7 @@ export function CoursesCatalogClient({
 
           {filteredCombos.length > 0 && (
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mb-6">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mb-6">
                 Dual-Skill Career Accelerator Combos ({filteredCombos.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
@@ -258,7 +258,7 @@ export function CoursesCatalogClient({
                       <span className="block font-nav text-xs font-bold uppercase tracking-[0.16em] text-[#1D4ED8]">
                         {combo.durationLabel}
                       </span>
-                      <h3 className="text-xl font-bold text-[#1E3A8A]">{combo.title}</h3>
+                      <h3 className="text-xl font-bold text-[#1D4ED8]">{combo.title}</h3>
                       <p className="text-sm font-nav font-semibold text-[#1D4ED8]">
                         {combo.includedLabel}
                       </p>
@@ -267,7 +267,7 @@ export function CoursesCatalogClient({
                     <div className="flex items-center justify-between pt-4 border-t border-[#E5E7EB]">
                       <Link
                         href={`/career-combos/${combo.slug}`}
-                        className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1E3A8A] inline-flex items-center gap-1.5"
+                        className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1D4ED8] inline-flex items-center gap-1.5"
                       >
                         <span>View Track</span>
                         <ArrowRight className="w-4 h-4 text-[#EA580C]" />
@@ -294,7 +294,7 @@ export function CoursesCatalogClient({
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-[#1E3A8A] text-white py-16 border-t-4 border-[#EA580C]">
+      <section className="bg-[#1D4ED8] text-white py-16 border-t-4 border-[#EA580C]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
           <h2 className="text-3xl sm:text-4xl font-bold">
             Not Sure Which Track Fits Your Career Goal?
@@ -317,7 +317,7 @@ export function CoursesCatalogClient({
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/60 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
+              className="border border-white/60 hover:bg-white hover:text-[#1D4ED8] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
             >
               <MessageCircle className="w-4 h-4 text-[#93C5FD]" />
               Chat on WhatsApp ({BRAND.phoneDisplay})

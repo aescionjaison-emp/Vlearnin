@@ -70,7 +70,7 @@ export function ContactPageClient() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-14">
+      <section className="bg-[#1D4ED8] text-white py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
             Start Your Learning Journey with VLEARNIN
@@ -87,7 +87,7 @@ export function ContactPageClient() {
             {/* Left Column — Verified Contact Details */}
             <div className="lg:col-span-5 space-y-6">
               <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-7 space-y-5 rounded-[15px]">
-                <h2 className="text-2xl font-bold text-[#1E3A8A]">{BRAND.legalName}</h2>
+                <h2 className="text-2xl font-bold text-[#1D4ED8]">{BRAND.legalName}</h2>
 
                 <div className="space-y-4 text-sm text-[#111827]">
                   <div className="flex items-start gap-3">
@@ -109,7 +109,7 @@ export function ContactPageClient() {
                   <div className="flex items-start gap-3 pt-2 border-t border-[#E5E7EB]">
                     <Clock className="w-5 h-5 text-[#EA580C] shrink-0 mt-0.5" />
                     <div className="space-y-1">
-                      <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#1E3A8A]">
+                      <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
                         Center Timings
                       </p>
                       <p>{BRAND.timings.weekdays}</p>
@@ -143,7 +143,7 @@ export function ContactPageClient() {
 
             {/* Right Column — Student & Demo Inquiry Form */}
             <div className="lg:col-span-7 bg-white border border-[#E5E7EB] p-7 sm:p-9 shadow-sm rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1E3A8A] mb-2">
+              <h2 className="text-2xl font-bold text-[#1D4ED8] mb-2">
                 Book a Free Demo Class or Request Fee Details
               </h2>
               <p className="text-sm text-[#4B5563] mb-6">
@@ -154,9 +154,9 @@ export function ContactPageClient() {
               {successRef ? (
                 <div className="p-8 bg-[#F8FAFC] border border-emerald-200 text-center space-y-3">
                   <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                  <h3 className="text-xl font-bold text-[#1E3A8A]">Callback Request Confirmed</h3>
+                  <h3 className="text-xl font-bold text-[#1D4ED8]">Callback Request Confirmed</h3>
                   <p className="text-sm text-[#4B5563]">
-                    Reference ID: <strong className="text-[#1E3A8A]">{successRef}</strong>. Our
+                    Reference ID: <strong className="text-[#1D4ED8]">{successRef}</strong>. Our
                     team will reach out shortly.
                   </p>
                 </div>
@@ -173,7 +173,7 @@ export function ContactPageClient() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                      <label htmlFor="contact-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                         Full Name *
                       </label>
                       <input
@@ -185,7 +185,7 @@ export function ContactPageClient() {
                       {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
                     </div>
                     <div>
-                      <label htmlFor="contact-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                      <label htmlFor="contact-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                         Phone / WhatsApp *
                       </label>
                       <input
@@ -200,7 +200,7 @@ export function ContactPageClient() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                      <label htmlFor="contact-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                         Current Qualification / Status *
                       </label>
                       <select
@@ -217,7 +217,7 @@ export function ContactPageClient() {
                     </div>
 
                     <div>
-                      <label htmlFor="contact-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                      <label htmlFor="contact-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                         Preferred Batch Timing
                       </label>
                       <select
@@ -233,7 +233,7 @@ export function ContactPageClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="contact-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Course or Combo Interested In
                     </label>
                     <select
@@ -248,7 +248,7 @@ export function ContactPageClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1">
+                    <label htmlFor="contact-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
                       Email (Optional)
                     </label>
                     <input
@@ -261,7 +261,7 @@ export function ContactPageClient() {
                   </div>
 
                   <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
-                    <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1E3A8A]" />
+                    <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1D4ED8]" />
                     <span>
                       I consent to VLEARNIN Academy contacting me regarding my enquiry, demo session,
                       and fee details.

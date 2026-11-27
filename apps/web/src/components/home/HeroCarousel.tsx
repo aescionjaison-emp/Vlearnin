@@ -50,9 +50,9 @@ export function HeroCarousel() {
       aria-label="VLEARNIN Institutional Campaign Showcase"
       className={`relative w-full overflow-hidden transition-colors duration-500 ${
         banner.theme === "jain-blue"
-          ? "bg-gradient-to-r from-[#1E3A8A] via-[#1E40AF] to-[#1D4ED8] text-white"
+          ? "bg-gradient-to-r from-[#1D4ED8] via-[#1E40AF] to-[#1D4ED8] text-white"
           : banner.theme === "deep-navy"
-            ? "bg-[#1E3A8A] text-white"
+            ? "bg-[#1D4ED8] text-white"
             : "bg-[#F8FAFC] text-[#111827] border-b border-[#E5E7EB]"
       }`}
       onTouchStart={(e) => {
@@ -95,7 +95,7 @@ export function HeroCarousel() {
               <EditableText
                 path={`heroBanners.${activeIdx}.headlineWhite`}
                 value={banner.headlineWhite}
-                className={isDarkTheme ? "text-white" : "text-[#1E3A8A]"}
+                className={isDarkTheme ? "text-white" : "text-[#1D4ED8]"}
               />{" "}
               <EditableText
                 path={`heroBanners.${activeIdx}.headlineAccent`}
@@ -119,7 +119,7 @@ export function HeroCarousel() {
                   <li
                     key={fIdx}
                     className={`text-sm font-nav font-semibold flex items-center gap-2 ${
-                      isDarkTheme ? "text-[#93C5FD]" : "text-[#1E3A8A]"
+                      isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"
                     }`}
                   >
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -146,8 +146,8 @@ export function HeroCarousel() {
                     href={banner.secondaryCta.href}
                     className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors ${
                       isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#1E3A8A]"
-                        : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
+                        ? "border-white text-white hover:bg-white hover:text-[#1D4ED8]"
+                        : "border-[#1D4ED8] text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white"
                     }`}
                   >
                     <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
@@ -166,8 +166,8 @@ export function HeroCarousel() {
                     }}
                     className={`px-6 py-3.5 text-sm font-nav font-semibold uppercase tracking-wider border transition-colors cursor-pointer ${
                       isDarkTheme
-                        ? "border-white text-white hover:bg-white hover:text-[#1E3A8A]"
-                        : "border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white"
+                        ? "border-white text-white hover:bg-white hover:text-[#1D4ED8]"
+                        : "border-[#1D4ED8] text-[#1D4ED8] hover:bg-[#1D4ED8] hover:text-white"
                     }`}
                   >
                     <EditableText path={`heroBanners.${activeIdx}.secondaryCta.label`} value={banner.secondaryCta.label} />
@@ -254,7 +254,7 @@ export function HeroCarousel() {
                   ? "w-8 bg-[#EA580C]"
                   : isDarkTheme
                     ? "w-3 bg-white/40 hover:bg-white/75"
-                    : "w-3 bg-[#1E3A8A]/30 hover:bg-[#1E3A8A]/60"
+                    : "w-3 bg-[#1D4ED8]/30 hover:bg-[#1D4ED8]/60"
               }`}
             />
           ))}
@@ -265,8 +265,8 @@ export function HeroCarousel() {
           aria-label={isPaused ? "Resume banner rotation" : "Pause banner rotation"}
           className={`p-1.5 border text-xs cursor-pointer ${
             isDarkTheme
-              ? "border-white/40 text-white bg-[#1E3A8A]/60"
-              : "border-[#1E3A8A]/30 text-[#1E3A8A] bg-white/80"
+              ? "border-white/40 text-white bg-[#1D4ED8]/60"
+              : "border-[#1D4ED8]/30 text-[#1D4ED8] bg-white/80"
           }`}
         >
           {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}

@@ -45,7 +45,7 @@ export default async function CareerComboDetailPage({
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1E3A8A] text-white py-16">
+      <section className="bg-[#1D4ED8] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5">
             <nav aria-label="Breadcrumb" className="text-xs font-nav text-white/70 flex items-center gap-2">
@@ -96,16 +96,16 @@ export default async function CareerComboDetailPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="p-7 bg-[#F8FAFC] border border-[#E5E7EB] space-y-4 rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1E3A8A]">Who Should Enroll</h2>
+              <h2 className="text-2xl font-bold text-[#1D4ED8]">Who Should Enroll</h2>
               <p className="text-base text-[#111827]">{combo.idealFor}</p>
               <p className="text-sm text-[#4B5563]">
-                Fee Structure: <strong className="text-[#1E3A8A]">Request Fee Details</strong> via
+                Fee Structure: <strong className="text-[#1D4ED8]">Request Fee Details</strong> via
                 our Rajajinagar admissions team.
               </p>
             </div>
 
             <div className="p-7 bg-[#F8FAFC] border border-[#E5E7EB] space-y-4 rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1E3A8A]">Key Outcomes</h2>
+              <h2 className="text-2xl font-bold text-[#1D4ED8]">Key Outcomes</h2>
               <ul className="space-y-2.5">
                 {combo.outcomes.map((o) => (
                   <li key={o} className="text-sm text-[#111827] flex items-start gap-2.5">
@@ -118,7 +118,7 @@ export default async function CareerComboDetailPage({
           </div>
 
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-[#1E3A8A] flex items-center gap-2.5">
+            <h2 className="text-2xl font-bold text-[#1D4ED8] flex items-center gap-2.5">
               <Layers className="w-5 h-5 text-[#EA580C]" />
               Included VLEARNIN Certification Modules
             </h2>
@@ -133,10 +133,10 @@ export default async function CareerComboDetailPage({
                     <span className="font-nav text-[10px] font-bold uppercase tracking-wider text-[#1D4ED8]">
                       {course.categoryName}
                     </span>
-                    <h3 className="text-lg font-bold text-[#1E3A8A] mt-2">{course.title}</h3>
+                    <h3 className="text-lg font-bold text-[#1D4ED8] mt-2">{course.title}</h3>
                     <p className="text-sm text-[#4B5563] mt-2">{course.summary}</p>
                   </div>
-                  <span className="font-nav text-xs font-bold text-[#1E3A8A] inline-flex items-center gap-1.5">
+                  <span className="font-nav text-xs font-bold text-[#1D4ED8] inline-flex items-center gap-1.5">
                     View Full Syllabus <ArrowRight className="w-3.5 h-3.5 text-[#EA580C]" />
                   </span>
                 </Link>

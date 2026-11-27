@@ -130,7 +130,7 @@ export function HomeCatalogSections({
               value={content.domainsSection.eyebrow}
               className="mc-eyebrow text-[#1D4ED8]"
             />
-            <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1E3A8A] mt-2 leading-tight">
+            <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1D4ED8] mt-2 leading-tight">
               <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
             </AnimatedHeading>
             <EditableText
@@ -194,7 +194,7 @@ export function HomeCatalogSections({
                         as="h3"
                         path={`categories.${idx}.name`}
                         value={cat.name}
-                        className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1"
+                        className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1"
                       />
                     </div>
 
@@ -210,7 +210,7 @@ export function HomeCatalogSections({
                         <li key={dc.slug} className="domain-course-link">
                           <Link
                             href={`/courses/${dc.slug}`}
-                            className="inline-flex items-center gap-2.5 text-[15px] font-nav font-semibold text-[#1D4ED8] hover:text-[#1E3A8A] transition-colors"
+                            className="inline-flex items-center gap-2.5 text-[15px] font-nav font-semibold text-[#1D4ED8] hover:text-[#1D4ED8] transition-colors"
                           >
                             <ArrowRight className="w-4 h-4 text-[#EA580C] shrink-0" />
                             <span>{dc.title}</span>
@@ -266,7 +266,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="discoverySection.heading"
                 value={content.discoverySection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
               />
             </div>
 
@@ -275,7 +275,7 @@ export function HomeCatalogSections({
                 type="button"
                 onClick={() => scrollCarousel("left")}
                 aria-label="Scroll programmes left"
-                className="w-10 h-10 border border-[#E5E7EB] hover:border-[#1E3A8A] text-[#1E3A8A] flex items-center justify-center cursor-pointer transition-colors rounded-[15px]"
+                className="w-10 h-10 border border-[#E5E7EB] hover:border-[#1D4ED8] text-[#1D4ED8] flex items-center justify-center cursor-pointer transition-colors rounded-[15px]"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -283,7 +283,7 @@ export function HomeCatalogSections({
                 type="button"
                 onClick={() => scrollCarousel("right")}
                 aria-label="Scroll programmes right"
-                className="w-10 h-10 border border-[#E5E7EB] hover:border-[#1E3A8A] text-[#1E3A8A] flex items-center justify-center cursor-pointer transition-colors rounded-[15px]"
+                className="w-10 h-10 border border-[#E5E7EB] hover:border-[#1D4ED8] text-[#1D4ED8] flex items-center justify-center cursor-pointer transition-colors rounded-[15px]"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -314,7 +314,7 @@ export function HomeCatalogSections({
                   onClick={() => setActiveFilter(tab.id)}
                   className={`font-nav text-xs sm:text-sm font-semibold px-5 py-2.5 transition-colors cursor-pointer ${
                     active
-                      ? "bg-[#1E3A8A] text-white"
+                      ? "bg-[#1D4ED8] text-white"
                       : "bg-[#F8FAFC] text-[#111827] hover:bg-[#E5E7EB]"
                   }`}
                 >
@@ -373,7 +373,7 @@ export function HomeCatalogSections({
                       as="h3"
                       path={cIdx >= 0 ? `courses.${cIdx}.title` : "discoverySection.heading"}
                       value={course.title}
-                      className="text-xl font-bold text-[#1E3A8A] leading-snug"
+                      className="text-xl font-bold text-[#1D4ED8] leading-snug"
                     />
                     <div className="flex flex-wrap gap-3 text-xs font-nav text-[#4B5563]">
                       <span className="inline-flex items-center gap-1">
@@ -465,7 +465,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="combosSection.heading"
                 value={content.combosSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
               />
               <EditableText
                 as="p"
@@ -516,7 +516,7 @@ export function HomeCatalogSections({
                   <EditableText
                     path={`combos.${idx}.durationLabel`}
                     value={combo.durationLabel}
-                    className="absolute top-3 left-3 bg-[#1E3A8A] text-[#93C5FD] font-nav text-xs font-bold px-3 py-1"
+                    className="absolute top-3 left-3 bg-[#1D4ED8] text-[#93C5FD] font-nav text-xs font-bold px-3 py-1"
                   />
                 </div>
                 <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
@@ -528,7 +528,7 @@ export function HomeCatalogSections({
                       as="h3"
                       path={`combos.${idx}.title`}
                       value={combo.title}
-                      className="text-xl font-bold text-[#1E3A8A]"
+                      className="text-xl font-bold text-[#1D4ED8]"
                     />
                     <EditableText
                       as="p"
@@ -550,7 +550,7 @@ export function HomeCatalogSections({
                   <div className="flex items-center justify-between pt-3 border-t border-[#E5E7EB]">
                     <Link
                       href={`/career-combos/${combo.slug}`}
-                      className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1E3A8A] inline-flex items-center gap-1"
+                      className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1D4ED8] inline-flex items-center gap-1"
                     >
                       <span>View Track</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -625,7 +625,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="advantagesSection.heading"
                 value={content.advantagesSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
               />
             </div>
 
@@ -649,7 +649,7 @@ export function HomeCatalogSections({
                             <EditableText
                               path={`advantagesSection.items.${advIdx}.num`}
                               value={adv.num}
-                              className="font-editorial text-3xl font-bold text-[#1E3A8A]/35"
+                              className="font-editorial text-3xl font-bold text-[#1D4ED8]/35"
                             />
                           </div>
                           <div>
@@ -657,7 +657,7 @@ export function HomeCatalogSections({
                               as="h3"
                               path={`advantagesSection.items.${advIdx}.title`}
                               value={adv.title}
-                              className="text-xl font-bold text-[#1E3A8A]"
+                              className="text-xl font-bold text-[#1D4ED8]"
                             />
                             <p className="font-nav text-xs font-semibold text-[#1D4ED8] mt-2">
                               Hover or tap for details →
@@ -666,7 +666,7 @@ export function HomeCatalogSections({
                         </div>
                       }
                       back={
-                        <div className="h-full p-6 bg-[#1E3A8A] text-white border-t-4 border-[#93C5FD] flex flex-col justify-center space-y-2 rounded-[15px]">
+                        <div className="h-full p-6 bg-[#1D4ED8] text-white border-t-4 border-[#93C5FD] flex flex-col justify-center space-y-2 rounded-[15px]">
                           <span className="font-nav text-xs font-bold uppercase tracking-wider text-[#93C5FD]">
                             Advantage {adv.num}
                           </span>
@@ -700,7 +700,7 @@ export function HomeCatalogSections({
       </section>
 
       {/* 17 — PLACEMENT ASSISTANCE (Connected Pathway) */}
-      <section className="py-16 lg:py-24 bg-[#1E3A8A] text-white">
+      <section className="py-16 lg:py-24 bg-[#1D4ED8] text-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
@@ -807,7 +807,7 @@ export function HomeCatalogSections({
               as="h2"
               path="academicSection.heading"
               value={content.academicSection.heading}
-              className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] leading-tight"
+              className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] leading-tight"
             />
             <EditableText
               as="p"
@@ -886,7 +886,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="campusSection.heading"
                 value={content.campusSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1E3A8A] mt-2"
+                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
               />
               <EditableText
                 as="p"
@@ -917,7 +917,7 @@ export function HomeCatalogSections({
             {content.campusSection.gallery.map((item, gIdx) => (
               <div
                 key={gIdx}
-                className="campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E5E7EB] bg-[#1E3A8A] rounded-[15px]"
+                className="campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E5E7EB] bg-[#1D4ED8] rounded-[15px]"
               >
                 <EditableDeleteButton
                   path="campusSection.gallery"
@@ -949,7 +949,7 @@ export function HomeCatalogSections({
                   altPath={`campusSection.gallery.${gIdx}.alt`}
                   currentAlt={item.alt}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/90 via-transparent to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1D4ED8]/90 via-transparent to-transparent flex items-end p-4">
                   <EditableText
                     as="p"
                     path={`campusSection.gallery.${gIdx}.title`}
@@ -979,7 +979,7 @@ export function HomeCatalogSections({
         <section
           key={sec.id || sIdx}
           className={`py-16 lg:py-20 border-b border-[#E5E7EB] relative ${
-            sec.theme === "blue" ? "bg-[#1E3A8A] text-white" : "bg-white text-[#111827]"
+            sec.theme === "blue" ? "bg-[#1D4ED8] text-white" : "bg-white text-[#111827]"
           }`}
         >
           <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -1004,7 +1004,7 @@ export function HomeCatalogSections({
                 path={`customSections.${sIdx}.heading`}
                 value={sec.heading}
                 className={`text-3xl sm:text-4xl font-bold leading-tight ${
-                  sec.theme === "blue" ? "text-white" : "text-[#1E3A8A]"
+                  sec.theme === "blue" ? "text-white" : "text-[#1D4ED8]"
                 }`}
               />
               <EditableText
@@ -1079,7 +1079,7 @@ export function HomeCatalogSections({
       {/* 20 — FINAL HOMEPAGE ADMISSIONS ENQUIRY BANNER */}
       <section className="py-16 lg:py-20 bg-white">
         <div ref={finalCtaRef} className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="final-cta-card bg-[#1E3A8A] text-white p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border-l-8 border-[#EA580C] rounded-[15px]">
+          <div className="final-cta-card bg-[#1D4ED8] text-white p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border-l-8 border-[#EA580C] rounded-[15px]">
             <div className="space-y-3 max-w-2xl">
               <EditableText
                 as="h2"
@@ -1105,7 +1105,7 @@ export function HomeCatalogSections({
               </button>
               <Link
                 href="/contact"
-                className="border border-white/70 hover:bg-white hover:text-[#1E3A8A] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider transition-colors rounded-[15px]"
+                className="border border-white/70 hover:bg-white hover:text-[#1D4ED8] text-white font-nav font-semibold px-6 py-3.5 text-xs sm:text-sm uppercase tracking-wider transition-colors rounded-[15px]"
               >
                 <EditableText path="finalCtaSection.contactLabel" value={content.finalCtaSection.contactLabel} />
               </Link>

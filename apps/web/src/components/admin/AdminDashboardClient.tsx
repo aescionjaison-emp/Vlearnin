@@ -247,7 +247,7 @@ export function AdminDashboardClient() {
   if (!session) {
     return (
       <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center">
-        <p className="font-nav text-sm font-semibold text-[#1E3A8A]">
+        <p className="font-nav text-sm font-semibold text-[#1D4ED8]">
           Loading VLEARNIN Admin Studio...
         </p>
       </div>
@@ -257,7 +257,7 @@ export function AdminDashboardClient() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#111827]">
       {/* Sticky Admin Control Toolbar */}
-      <div className="sticky top-0 z-50 bg-[#1E3A8A] text-white border-b-4 border-[#EA580C] shadow-lg">
+      <div className="sticky top-0 z-50 bg-[#1D4ED8] text-white border-b-4 border-[#EA580C] shadow-lg">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <span className="font-nav text-xs font-bold uppercase tracking-[0.18em] bg-[#EA580C] px-2.5 py-1 rounded-[10px]">
@@ -267,7 +267,7 @@ export function AdminDashboardClient() {
               Signed in as <strong>{session.adminId}</strong>
             </span>
             {hasUnsavedChanges && (
-              <span className="font-nav text-[11px] font-bold bg-amber-400 text-[#1E3A8A] px-2.5 py-0.5 rounded-[10px]">
+              <span className="font-nav text-[11px] font-bold bg-amber-400 text-[#1D4ED8] px-2.5 py-0.5 rounded-[10px]">
                 Unsaved Edits
               </span>
             )}
@@ -285,7 +285,7 @@ export function AdminDashboardClient() {
               onClick={() => setActiveTab("visual")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "visual"
-                  ? "bg-white text-[#1E3A8A]"
+                  ? "bg-white text-[#1D4ED8]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
@@ -297,7 +297,7 @@ export function AdminDashboardClient() {
               onClick={() => setActiveTab("manager")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "manager"
-                  ? "bg-white text-[#1E3A8A]"
+                  ? "bg-white text-[#1D4ED8]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
@@ -309,7 +309,7 @@ export function AdminDashboardClient() {
               onClick={() => setActiveTab("inspector")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "inspector"
-                  ? "bg-white text-[#1E3A8A]"
+                  ? "bg-white text-[#1D4ED8]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
@@ -321,7 +321,7 @@ export function AdminDashboardClient() {
               onClick={() => setActiveTab("operations")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "operations"
-                  ? "bg-white text-[#1E3A8A]"
+                  ? "bg-white text-[#1D4ED8]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
@@ -333,7 +333,7 @@ export function AdminDashboardClient() {
               onClick={() => setActiveTab("credentials")}
               className={`px-3 py-1.5 text-xs font-nav font-semibold rounded-[12px] inline-flex items-center gap-1.5 cursor-pointer transition-colors ${
                 activeTab === "credentials"
-                  ? "bg-white text-[#1E3A8A]"
+                  ? "bg-white text-[#1D4ED8]"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
             >
@@ -382,7 +382,7 @@ export function AdminDashboardClient() {
         </div>
 
         {feedback && (
-          <div className="bg-[#EFF6FF] text-[#1E3A8A] border-t border-[#BFDBFE] px-4 sm:px-8 py-2 text-xs font-nav font-semibold flex items-center justify-between">
+          <div className="bg-[#EFF6FF] text-[#1D4ED8] border-t border-[#BFDBFE] px-4 sm:px-8 py-2 text-xs font-nav font-semibold flex items-center justify-between">
             <span className="inline-flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#1D4ED8]" />
               {feedback}
@@ -401,7 +401,7 @@ export function AdminDashboardClient() {
       {/* TAB 1: LIVE VISUAL EDITOR — Exact Public Website UI with Direct Inline Editing */}
       {activeTab === "visual" && (
         <div>
-          <div className="bg-[#EFF6FF] border-b border-[#BFDBFE] py-2 px-4 text-center text-xs font-nav text-[#1E3A8A]">
+          <div className="bg-[#EFF6FF] border-b border-[#BFDBFE] py-2 px-4 text-center text-xs font-nav text-[#1D4ED8]">
             <Pencil className="w-3.5 h-3.5 inline mr-1.5 text-[#EA580C]" />
             <strong>Visual Edit Mode Active ({isEditMode ? "ON" : "OFF"}):</strong> Click any
             heading, paragraph, button label, stat, or &ldquo;Edit Image&rdquo; button below to
@@ -432,7 +432,7 @@ export function AdminDashboardClient() {
               <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 COMPLETE CONTENT INSPECTOR
               </p>
-              <h1 className="text-2xl sm:text-3xl font-bold text-[#1E3A8A] mt-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8] mt-1">
                 Edit Every Single Field &amp; Dot
               </h1>
               <p className="text-sm text-[#4B5563] mt-1">
@@ -475,7 +475,7 @@ export function AdminDashboardClient() {
                 className="p-4 grid grid-cols-1 lg:grid-cols-12 gap-3 items-start hover:bg-[#F8FAFC]"
               >
                 <div className="lg:col-span-4">
-                  <code className="text-xs font-mono font-semibold text-[#1E3A8A] break-all">
+                  <code className="text-xs font-mono font-semibold text-[#1D4ED8] break-all">
                     {field.path}
                   </code>
                 </div>
@@ -527,7 +527,7 @@ export function AdminDashboardClient() {
                 <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                   OPERATIONS &amp; ENQUIRIES
                 </p>
-                <h2 className="text-2xl font-bold text-[#1E3A8A] mt-1">
+                <h2 className="text-2xl font-bold text-[#1D4ED8] mt-1">
                   Backend API Status:{" "}
                   <span className={apiConnected ? "text-emerald-600" : "text-[#EA580C]"}>
                     {apiConnected ? "Connected" : "Static / Offline Mode"}
@@ -547,25 +547,25 @@ export function AdminDashboardClient() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
                 <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-4 rounded-[15px]">
                   <p className="text-xs font-nav text-[#4B5563]">Student Enquiries</p>
-                  <p className="text-2xl font-bold text-[#1E3A8A] mt-1">
+                  <p className="text-2xl font-bold text-[#1D4ED8] mt-1">
                     {metrics.totalStudentEnquiries ?? 0}
                   </p>
                 </div>
                 <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-4 rounded-[15px]">
                   <p className="text-xs font-nav text-[#4B5563]">Demo Bookings</p>
-                  <p className="text-2xl font-bold text-[#1E3A8A] mt-1">
+                  <p className="text-2xl font-bold text-[#1D4ED8] mt-1">
                     {metrics.demoBookingsCount ?? 0}
                   </p>
                 </div>
                 <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-4 rounded-[15px]">
                   <p className="text-xs font-nav text-[#4B5563]">Published Courses</p>
-                  <p className="text-2xl font-bold text-[#1E3A8A] mt-1">
+                  <p className="text-2xl font-bold text-[#1D4ED8] mt-1">
                     {metrics.publishedCoursesCount ?? 0}
                   </p>
                 </div>
                 <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-4 rounded-[15px]">
                   <p className="text-xs font-nav text-[#4B5563]">Active Certificates</p>
-                  <p className="text-2xl font-bold text-[#1E3A8A] mt-1">
+                  <p className="text-2xl font-bold text-[#1D4ED8] mt-1">
                     {metrics.activeCertificatesCount ?? 0}
                   </p>
                 </div>
@@ -629,7 +629,7 @@ export function AdminDashboardClient() {
                       <div className="flex flex-wrap items-start justify-between gap-4">
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="font-mono text-xs font-bold bg-[#1E3A8A] text-white px-2.5 py-0.5 rounded-[8px]">
+                            <span className="font-mono text-xs font-bold bg-[#1D4ED8] text-white px-2.5 py-0.5 rounded-[8px]">
                               {e.referenceCode || e.id}
                             </span>
                             <span className="font-nav text-xs font-bold uppercase bg-[#EFF6FF] text-[#1D4ED8] border border-[#BFDBFE] px-2.5 py-0.5 rounded-[8px]">
@@ -644,7 +644,7 @@ export function AdminDashboardClient() {
                               </span>
                             )}
                           </div>
-                          <h3 className="text-lg font-bold text-[#1E3A8A] mt-2">
+                          <h3 className="text-lg font-bold text-[#1D4ED8] mt-2">
                             {e.fullName}
                           </h3>
                           <div className="flex flex-wrap items-center gap-4 text-sm text-[#4B5563] mt-1">
@@ -707,7 +707,7 @@ export function AdminDashboardClient() {
                                 prev.map((x) => (x.id === e.id ? { ...x, status: "SEEN" } : x)),
                               );
                             }}
-                            className="border border-[#E5E7EB] bg-white hover:bg-[#EFF6FF] text-[#1E3A8A] font-nav text-xs font-semibold px-3 py-2 rounded-[12px] cursor-pointer"
+                            className="border border-[#E5E7EB] bg-white hover:bg-[#EFF6FF] text-[#1D4ED8] font-nav text-xs font-semibold px-3 py-2 rounded-[12px] cursor-pointer"
                           >
                             Mark Seen
                           </button>
@@ -770,7 +770,7 @@ export function AdminDashboardClient() {
               <p className="font-nav text-xs font-bold uppercase tracking-[0.2em] text-[#1D4ED8]">
                 ADMIN SECURITY
               </p>
-              <h2 className="text-2xl font-bold text-[#1E3A8A] mt-1">
+              <h2 className="text-2xl font-bold text-[#1D4ED8] mt-1">
                 Update Admin ID &amp; Password
               </h2>
               <p className="text-sm text-[#4B5563] mt-1">
@@ -780,7 +780,7 @@ export function AdminDashboardClient() {
 
             <form onSubmit={handleUpdateCredentials} className="space-y-4">
               <div>
-                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1.5">
+                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1.5">
                   Admin ID / Email
                 </label>
                 <input
@@ -792,7 +792,7 @@ export function AdminDashboardClient() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1.5">
+                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1.5">
                   New Password
                 </label>
                 <input
@@ -805,7 +805,7 @@ export function AdminDashboardClient() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1E3A8A] mb-1.5">
+                <label className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1.5">
                   Confirm New Password
                 </label>
                 <input
