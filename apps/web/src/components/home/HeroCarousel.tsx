@@ -76,24 +76,22 @@ export function HeroCarousel() {
         />
       )}
 
-      <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[520px] lg:min-h-[580px] items-stretch">
+      <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[540px] lg:h-[580px] items-stretch">
         {/* Left Typography & CTA Column (MCU-04 Coordinated 50ms Stagger Timeline) */}
         <div
           ref={heroTextRef}
-          className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 py-12 lg:py-16 flex flex-col justify-center z-10"
+          className="lg:col-span-6 px-6 sm:px-10 lg:pl-20 lg:pr-10 pt-12 pb-16 lg:pt-14 lg:pb-16 flex flex-col justify-start z-10"
         >
-          <div className="space-y-5">
+          <div className="space-y-4">
             <span
-              className={`hero-eyebrow inline-block font-nav text-xs font-bold uppercase tracking-[0.16em] px-4 py-1.5 ${
-                isDarkTheme
-                  ? "bg-white text-[#1E3A8A]"
-                  : "bg-[#1E3A8A] text-white"
+              className={`hero-eyebrow block font-nav text-xs font-bold uppercase tracking-[0.18em] ${
+                isDarkTheme ? "text-[#93C5FD]" : "text-[#1D4ED8]"
               }`}
             >
               <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
             </span>
 
-            <h1 className="hero-headline font-editorial text-[36.8px] sm:text-[46px] lg:text-[56px] font-bold leading-[1.04] tracking-normal">
+            <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.06] tracking-normal">
               <EditableText
                 path={`heroBanners.${activeIdx}.headlineWhite`}
                 value={banner.headlineWhite}
@@ -180,7 +178,7 @@ export function HeroCarousel() {
         </div>
 
         {/* Right Bright Diagonal-Cut Photographic Panel (Mount Carmel swiper-fade crossfade) */}
-        <div className="lg:col-span-6 relative min-h-[280px] sm:min-h-[360px] lg:min-h-full overflow-hidden">
+        <div className="lg:col-span-6 relative h-[300px] sm:h-[360px] lg:h-full overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={banner.id}

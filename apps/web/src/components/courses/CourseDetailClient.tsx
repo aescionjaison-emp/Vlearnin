@@ -44,7 +44,7 @@ export function CourseDetailClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <span className="inline-block font-nav text-[11px] font-bold uppercase tracking-[0.2em] text-[#EA580C] border border-[#EA580C]/50 px-3 py-1">
+              <span className="block font-nav text-[11px] font-bold uppercase tracking-[0.2em] text-[#EA580C]">
                 {course.categoryName}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight">

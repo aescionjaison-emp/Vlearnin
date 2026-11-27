@@ -256,7 +256,7 @@ export function CoursesCatalogClient({
                     className="border border-[#E5E7EB] bg-[#F8FAFC] p-7 flex flex-col justify-between space-y-5 hover:border-[#1D4ED8] transition-colors rounded-[15px]"
                   >
                     <div className="space-y-3">
-                      <span className="inline-block font-nav text-xs font-bold bg-[#1E3A8A] text-[#93C5FD] px-3 py-1">
+                      <span className="block font-nav text-xs font-bold uppercase tracking-[0.16em] text-[#1D4ED8]">
                         {combo.durationLabel}
                       </span>
                       <h3 className="text-xl font-bold text-[#1E3A8A]">{combo.title}</h3>
