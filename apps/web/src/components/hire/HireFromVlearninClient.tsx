@@ -69,8 +69,8 @@ export function HireFromVlearninClient() {
     <div className="bg-white">
       <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl leading-tight">
-            Hire Pre-Trained, Project-Ready Talent — Zero Recruitment Fee
+          <h1 className="type-page-title max-w-3xl">
+            Hire Pre-Trained, Project-Ready Talent — <span className="italic">Zero Recruitment Fee</span>
           </h1>
           <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
             Connect directly with trained graduates in Power BI, Financial Modelling, AI, and

@@ -93,8 +93,8 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
     <div className="bg-white min-h-[70vh]">
       <section className="bg-[#1D4ED8] text-white py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-            Verify a VLEARNIN Certificate
+          <h1 className="type-page-title">
+            Verify a <span className="italic">VLEARNIN Certificate</span>
           </h1>
           <p className="text-base text-white/80 mt-3 max-w-xl mx-auto">
             Enter the unique Certificate ID to verify authenticity instantly.

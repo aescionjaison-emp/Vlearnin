@@ -72,8 +72,8 @@ export function ContactPageClient() {
     <div className="bg-white">
       <section className="bg-[#1D4ED8] text-white py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
-            Start Your Learning Journey with VLEARNIN
+          <h1 className="type-page-title max-w-3xl">
+            Start Your Learning Journey with <span className="italic">VLEARNIN</span>
           </h1>
           <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
             Visit our Rajajinagar campus, book a free demo class, or chat on WhatsApp.

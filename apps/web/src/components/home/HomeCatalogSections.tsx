@@ -130,7 +130,7 @@ export function HomeCatalogSections({
               value={content.domainsSection.eyebrow}
               className="mc-eyebrow text-[#1D4ED8]"
             />
-            <AnimatedHeading as="h2" className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1D4ED8] mt-2 leading-tight">
+            <AnimatedHeading as="h2" className="type-section-heading text-[#1D4ED8] mt-2">
               <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
             </AnimatedHeading>
             <EditableText
@@ -266,7 +266,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="discoverySection.heading"
                 value={content.discoverySection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8] mt-2"
               />
             </div>
 
@@ -465,7 +465,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="combosSection.heading"
                 value={content.combosSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8] mt-2"
               />
               <EditableText
                 as="p"
@@ -625,7 +625,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="advantagesSection.heading"
                 value={content.advantagesSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8] mt-2"
               />
             </div>
 
@@ -714,7 +714,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="placementSection.heading"
                 value={content.placementSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold mt-2"
+                className="type-editorial text-white mt-2"
               />
             </div>
             <Link
@@ -807,7 +807,7 @@ export function HomeCatalogSections({
               as="h2"
               path="academicSection.heading"
               value={content.academicSection.heading}
-              className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] leading-tight"
+              className="type-section-heading text-[#1D4ED8]"
             />
             <EditableText
               as="p"
@@ -886,7 +886,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="campusSection.heading"
                 value={content.campusSection.heading}
-                className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2"
+                className="type-section-heading text-[#1D4ED8] mt-2"
               />
               <EditableText
                 as="p"
@@ -1085,7 +1085,7 @@ export function HomeCatalogSections({
                 as="h2"
                 path="finalCtaSection.heading"
                 value={content.finalCtaSection.heading}
-                className="text-3xl sm:text-4xl font-bold"
+                className="type-editorial text-white"
               />
               <EditableText
                 as="p"

@@ -70,19 +70,19 @@ export function BrandIntroSection() {
                   as="p"
                   path="brandIntro.eyebrow"
                   value={bi.eyebrow}
-                  className="mc-eyebrow text-[#1D4ED8]"
+                  className="type-eyebrow text-[#1D4ED8]"
                 />
                 <EditableText
                   as="h2"
                   path="brandIntro.heading"
                   value={bi.heading}
-                  className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1D4ED8] mt-2 leading-tight"
+                  className="type-editorial text-[#1D4ED8] mt-2"
                 />
                 <EditableText
                   as="p"
                   path="brandIntro.subTagline"
                   value={bi.subTagline}
-                  className="font-nav text-sm font-semibold text-[#EA580C] mt-2"
+                  className="font-editorial italic text-xl sm:text-2xl text-[#1D4ED8]/80 mt-2"
                 />
               </div>
 
@@ -107,7 +107,7 @@ export function BrandIntroSection() {
                       <EditableText
                         path={`brandIntro.pillars.${idx}.step`}
                         value={p.step}
-                        className="font-editorial text-xl font-bold text-[#EA580C]"
+                        className="font-editorial text-2xl text-[#1D4ED8]"
                       />
                       <EditableText
                         path={`brandIntro.pillars.${idx}.title`}

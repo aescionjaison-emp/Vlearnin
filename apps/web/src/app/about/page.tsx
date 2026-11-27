@@ -16,11 +16,12 @@ export default function AboutPage() {
     <div className="bg-white">
       <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
-            The V-Way to Learn, Build &amp; Lead.
+          <h1 className="type-page-title max-w-3xl">
+            The V-Way to <span className="italic">Learn, Build &amp; Lead.</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl leading-relaxed">
-            Practical, mentor-led certification training in Bengaluru built for real workplace execution.
+          <p className="type-body-large text-white/85 mt-3 max-w-2xl">
+            Practical, mentor-led certification training in Bengaluru built for real workplace
+            execution.
           </p>
         </div>
       </section>

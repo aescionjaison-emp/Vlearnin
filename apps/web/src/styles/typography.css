@@ -1,42 +1,50 @@
 /* ==========================================================================
-   VLEARNIN Typography Design System
-   Exact values derived from https://mountcarmeluniversity.edu.in/
+   VLEARNIN Custom Academic & Editorial Typography Design System
+   80% Manrope (Primary Professional) + 20% Instrument Serif (Editorial Display)
    ========================================================================== */
 
 :root {
-  --font-primary: var(--font-space-grotesk), system-ui, -apple-system, sans-serif;
-  --font-secondary: var(--font-nunito-sans), system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-manrope), Arial, sans-serif;
+  --font-editorial: var(--font-instrument), Georgia, serif;
+  --font-secondary: var(--font-primary);
   --font-heading: var(--font-primary);
-  --font-body: var(--font-secondary);
-  --font-navigation: var(--font-secondary);
-  --font-button: var(--font-secondary);
+  --font-body: var(--font-primary);
+  --font-navigation: var(--font-primary);
+  --font-button: var(--font-primary);
 
-  /* Fluid Responsive Type Scale (Mobile 390px -> Desktop 1440px) */
-  --text-hero: clamp(2.3rem, 3.8vw, 3.5rem);      /* 36.8px -> 56px */
-  --text-h1: clamp(2.1rem, 3.5vw, 3.25rem);       /* 33.6px -> 52px */
-  --text-h2: clamp(1.75rem, 2.5vw, 2.3rem);       /* 28px -> 36.8px */
-  --text-h3: clamp(1.5rem, 1.8vw, 1.75rem);       /* 24px -> 28px */
-  --text-h4: 1.5rem;                              /* 24px */
-  --text-lead: clamp(1rem, 1.35vw, 1.2rem);       /* 16px -> 19.2px */
-  --text-body: 1rem;                              /* 16px */
-  --text-small: 0.875rem;                         /* 14px */
-  --text-caption: 0.75rem;                        /* 12px */
+  /* Semantic Fluid Type Scale (360px Mobile -> 1920px Desktop) */
+  --text-display: clamp(2.75rem, 5.2vw, 4.75rem);      /* 44px -> 76px */
+  --text-page-title: clamp(2.35rem, 4.2vw, 3.75rem);   /* 37.6px -> 60px */
+  --text-editorial: clamp(2.15rem, 3.6vw, 3.25rem);    /* 34.4px -> 52px */
 
-  /* Weights */
+  --text-h2: clamp(1.75rem, 2.8vw, 2.75rem);           /* 28px -> 44px */
+  --text-h3: clamp(1.375rem, 1.8vw, 1.625rem);         /* 22px -> 26px */
+  --text-h4: clamp(1.125rem, 1.4vw, 1.375rem);         /* 18px -> 22px */
+
+  --text-body-large: clamp(1rem, 1.25vw, 1.125rem);    /* 16px -> 18px */
+  --text-body: 1rem;                                   /* 16px */
+  --text-small: 0.875rem;                              /* 14px */
+  --text-caption: 0.8125rem;                           /* 13px */
+  --text-eyebrow: 0.75rem;                             /* 12px */
+
+  --leading-display: 1.03;
+  --leading-editorial: 1.08;
+  --leading-heading: 1.18;
+  --leading-body: 1.7;
+
+  --tracking-display: -0.025em;
+  --tracking-heading: -0.04em;
+  --tracking-body: -0.01em;
+  --tracking-eyebrow: 0.14em;
+
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-
-  /* Line Heights & Tracking */
-  --leading-heading: 1.08;
-  --leading-body: 1.5;
-  --tracking-heading: -0.025em;
-  --tracking-body: 0;
 }
 
 body {
-  font-family: var(--font-body);
+  font-family: var(--font-primary);
   font-size: var(--text-body);
   font-weight: var(--weight-regular);
   line-height: var(--leading-body);
@@ -44,49 +52,146 @@ body {
   font-synthesis-weight: none;
 }
 
-h1, h2, .font-editorial {
-  font-family: var(--font-heading);
-  letter-spacing: var(--tracking-heading);
-  line-height: var(--leading-heading);
+h1, h2, h3, h4 {
+  font-family: var(--font-primary);
+  text-wrap: balance;
 }
 
-h3, h4, .font-nav {
-  font-family: var(--font-navigation);
+p {
+  max-width: 68ch;
 }
 
-.mc-eyebrow {
-  font-family: var(--font-secondary);
-  font-size: clamp(0.9rem, 1vw, 1rem); /* 14.4px mobile -> 16px desktop */
+/* Semantic Typography Classes */
+.type-display {
+  font-family: var(--font-editorial);
+  font-size: var(--text-display);
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.type-editorial {
+  font-family: var(--font-editorial);
+  font-size: var(--text-editorial);
+  font-weight: 400;
+  line-height: var(--leading-editorial);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.type-page-title {
+  font-family: var(--font-editorial);
+  font-size: var(--text-page-title);
+  font-weight: 400;
+  line-height: var(--leading-editorial);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.type-section-heading {
+  font-family: var(--font-primary);
+  font-size: var(--text-h2);
   font-weight: var(--weight-semibold);
-  letter-spacing: 0.08em;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
+}
+
+.type-card-title {
+  font-family: var(--font-primary);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  line-height: 1.32;
+  letter-spacing: -0.03em;
+}
+
+.type-body-large {
+  font-family: var(--font-primary);
+  font-size: var(--text-body-large);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+.type-body {
+  font-family: var(--font-primary);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+.type-caption {
+  font-family: var(--font-primary);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+.type-eyebrow {
+  font-family: var(--font-primary);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  line-height: 1.1;
+}
+
+.type-statistic {
+  font-family: var(--font-editorial);
+  font-size: clamp(3.25rem, 5.5vw, 5.25rem); /* 52px -> 84px */
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.type-navigation {
+  font-family: var(--font-primary);
+  font-size: 0.9375rem; /* 15px */
+  font-weight: var(--weight-semibold);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+/* Legacy-mapped semantic aliases preserved for motion & layout classes */
+.mc-eyebrow {
+  font-family: var(--font-primary);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .mc-lead {
-  font-family: var(--font-secondary);
-  font-size: var(--text-lead);
+  font-family: var(--font-primary);
+  font-size: var(--text-body-large);
   font-weight: var(--weight-regular);
-  line-height: 1.5;
+  line-height: 1.65;
+  letter-spacing: var(--tracking-body);
 }
 
 .mc-counter {
-  font-family: var(--font-secondary);
-  font-size: clamp(2.5rem, 4vw, 3.5rem); /* 40px -> 56px */
-  font-weight: var(--weight-bold);
+  font-family: var(--font-editorial);
+  font-size: clamp(3.25rem, 5.5vw, 5.25rem);
+  font-weight: 400;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .mc-footer-heading {
   font-family: var(--font-primary);
-  font-size: 1.7rem; /* 27.2px */
+  font-size: 1.125rem;
   font-weight: var(--weight-bold);
-  line-height: 1;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .mc-footer-link {
-  font-family: var(--font-secondary);
-  font-size: 1rem; /* 16px */
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
   font-weight: var(--weight-medium);
-  line-height: 1.4; /* 22.4px */
+  line-height: 1.55;
 }

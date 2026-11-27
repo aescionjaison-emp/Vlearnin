@@ -19,8 +19,8 @@ export default async function CareerCombosPage() {
     <div className="bg-white">
       <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold max-w-3xl">
-            Combine Complementary Skills for Stronger Career Outcomes
+          <h1 className="type-page-title max-w-3xl">
+            Combine Complementary Skills for <span className="italic">Stronger Career Outcomes</span>
           </h1>
           <p className="text-base sm:text-lg text-white/80 mt-3 max-w-2xl">
             45-to-90 hour dual-skill tracks built for stronger portfolios and corporate interviews.

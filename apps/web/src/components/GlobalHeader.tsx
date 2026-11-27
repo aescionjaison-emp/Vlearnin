@@ -186,7 +186,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                         onClick={() => setMegaOpen((prev) => !prev)}
                         aria-expanded={megaOpen}
                         aria-haspopup="true"
-                        className={`font-nav text-[14px] font-medium uppercase tracking-wide py-2 inline-flex items-center gap-1 transition-colors relative cursor-pointer ${
+                        className={`type-navigation py-2 inline-flex items-center gap-1 transition-colors relative cursor-pointer ${
                           isActive ? "text-[#1D4ED8] font-bold" : "text-[#111827] hover:text-[#1D4ED8]"
                         }`}
                       >
@@ -208,8 +208,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`mc-underline-link font-nav text-[15px] font-medium tracking-wide py-2 transition-colors duration-300 relative whitespace-nowrap ${
-                      isActive ? "text-[#1D4ED8] font-semibold" : "text-[#111827] hover:text-[#1D4ED8]"
+                    className={`mc-underline-link type-navigation py-2 transition-colors duration-300 relative whitespace-nowrap ${
+                      isActive ? "text-[#1D4ED8] font-bold" : "text-[#111827] hover:text-[#1D4ED8]"
                     }`}
                   >
                     {item.label}

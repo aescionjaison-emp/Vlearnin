@@ -78,11 +78,11 @@ export function HeroCarousel() {
               transition={{ duration: 0.28, ease: "easeOut" }}
               className="space-y-4"
             >
-              <span className="hero-eyebrow block font-nav text-xs font-bold uppercase tracking-[0.18em] text-[#1D4ED8]">
+              <span className="hero-eyebrow block type-eyebrow text-[#1D4ED8]">
                 <EditableText path={`heroBanners.${activeIdx}.badge`} value={banner.badge} />
               </span>
 
-              <h1 className="hero-headline font-editorial text-[34px] sm:text-[42px] lg:text-[48px] font-bold leading-[1.06] tracking-normal text-[#1D4ED8]">
+              <h1 className="hero-headline font-editorial text-[42px] sm:text-[54px] lg:text-[64px] font-normal leading-[1.03] tracking-[-0.025em] text-[#1D4ED8]">
                 <EditableText
                   path={`heroBanners.${activeIdx}.headlineWhite`}
                   value={banner.headlineWhite}
@@ -90,6 +90,7 @@ export function HeroCarousel() {
                 <EditableText
                   path={`heroBanners.${activeIdx}.headlineAccent`}
                   value={banner.headlineAccent}
+                  className="italic"
                 />
               </h1>
 
@@ -97,7 +98,7 @@ export function HeroCarousel() {
                 as="p"
                 path={`heroBanners.${activeIdx}.description`}
                 value={banner.description}
-                className="hero-desc mc-lead max-w-xl text-[#4B5563]"
+                className="hero-desc type-body-large max-w-xl text-[#4B5563]"
               />
 
               {banner.features && (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito_Sans, Space_Grotesk } from "next/font/google";
+import { Manrope, Instrument_Serif } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -9,17 +9,18 @@ import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
 
-const nunitoSans = Nunito_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-nunito-sans",
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-space-grotesk",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
@@ -75,7 +76,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunitoSans.variable} ${spaceGrotesk.variable}`}
+      className={`${manrope.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-white text-[#111827]">
         <script
