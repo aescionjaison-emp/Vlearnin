@@ -1,11 +1,21 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
+import { motion } from "motion/react";
 
-/**
- * Static-First Page Wrapper.
- * Preserves immediate visibility, native scroll restoration, and browser back/forward.
- */
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return <>{children}</>;
+
+  return (
+    <motion.div
+      key={pathname}
+      initial={{ opacity: 0.9, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
 }

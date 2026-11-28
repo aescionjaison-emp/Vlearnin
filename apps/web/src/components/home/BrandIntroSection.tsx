@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { AnimatedCounter } from "@/components/animation/AnimatedCounter";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
 import { gsap, isReducedMotionOrDisabled } from "@/lib/motion/accessibility";
 import { useSiteContent } from "@/components/SiteContentProvider";
 import {
@@ -24,22 +23,73 @@ const PHILOSOPHY_IMAGES = [
 export function BrandIntroSection() {
   const { content } = useSiteContent();
   const bi = content.brandIntro;
+  const welcomeRef = useRef<HTMLDivElement>(null);
   const philosophyRef = useRef<HTMLElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   const [activeStage, setActiveStage] = useState(0);
 
   useEffect(() => {
-    const scope = philosophyRef.current;
-    if (!scope || isReducedMotionOrDisabled()) return;
+    if (isReducedMotionOrDisabled()) return;
 
-    const ctx = gsap.context(() => {
+    // ── 11. ABOUT VLEARNIN: Dual-Direction Editorial Reveal (Single Overlapping Timeline) ──
+    const welcomeCtx = gsap.context(() => {
+      if (!welcomeRef.current) return;
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: welcomeRef.current, start: "top 86%", once: true },
+        defaults: { ease: "power3.out" },
+      });
+
+      tl.fromTo(
+        ".about-photo-frame",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 0.9, ease: "expo.out", clearProps: "clipPath" },
+        0,
+      )
+        .fromTo(
+          ".about-photo-frame img",
+          { scale: 1.1 },
+          { scale: 1, duration: 1.0, clearProps: "transform" },
+          0,
+        )
+        .fromTo(
+          ".about-accent-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.55, clearProps: "transform" },
+          0.16,
+        )
+        .fromTo(
+          ".about-text-col",
+          { x: 32, opacity: 0.4 },
+          { x: 0, opacity: 1, duration: 0.75, clearProps: "transform,opacity" },
+          0.18,
+        )
+        .fromTo(
+          ".about-desc-v3",
+          { y: 18, opacity: 0.45 },
+          { y: 0, opacity: 1, duration: 0.55, clearProps: "transform,opacity" },
+          0.34,
+        )
+        .fromTo(
+          ".about-cta-v3",
+          { y: 14, opacity: 0.5 },
+          { y: 0, opacity: 1, duration: 0.45, clearProps: "transform,opacity" },
+          0.46,
+        );
+    }, welcomeRef);
+
+    // ── 12. LEARN, BUILD & LEAD: Signature Kinetic Typography (3 Distinct Reveals) ──
+    const philCtx = gsap.context(() => {
+      if (!philosophyRef.current) return;
+
+      // Connecting accent line scrubbed with scroll
       gsap.fromTo(
-        ".philosophy-progress-line",
+        ".philosophy-line-v3",
         { scaleX: 0 },
         {
           scaleX: 1,
           ease: "none",
           scrollTrigger: {
-            trigger: scope,
+            trigger: philosophyRef.current,
             start: "top 78%",
             end: "bottom 60%",
             scrub: true,
@@ -51,29 +101,93 @@ export function BrandIntroSection() {
           },
         },
       );
-    }, scope);
 
-    return () => ctx.revert();
+      // Distinct word & photo reveals for LEARN (horizontal), BUILD (vertical), LEAD (bottom mask)
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: philosophyRef.current, start: "top 84%", once: true },
+        defaults: { ease: "expo.out" },
+      });
+
+      tl.fromTo(
+        ".phil-img-0",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 0.85, clearProps: "clipPath" },
+        0,
+      )
+        .fromTo(
+          ".phil-word-0",
+          { clipPath: "inset(0 100% 0 0)", x: -24 },
+          { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.75, clearProps: "clipPath,transform" },
+          0.12,
+        )
+        .fromTo(
+          ".phil-img-1",
+          { clipPath: "inset(100% 0 0 0)" },
+          { clipPath: "inset(0% 0 0 0)", duration: 0.85, clearProps: "clipPath" },
+          0.14,
+        )
+        .fromTo(
+          ".phil-word-1",
+          { clipPath: "inset(0 0 100% 0)", y: 24 },
+          { clipPath: "inset(0 0 0% 0)", y: 0, duration: 0.75, clearProps: "clipPath,transform" },
+          0.26,
+        )
+        .fromTo(
+          ".phil-img-2",
+          { clipPath: "inset(0 0 0 100%)" },
+          { clipPath: "inset(0 0 0 0%)", duration: 0.85, clearProps: "clipPath" },
+          0.28,
+        )
+        .fromTo(
+          ".phil-word-2",
+          { clipPath: "inset(100% 0 0 0)", y: 20 },
+          { clipPath: "inset(0% 0 0 0)", y: 0, duration: 0.75, clearProps: "clipPath,transform" },
+          0.4,
+        );
+    }, philosophyRef);
+
+    // ── 13. INSTITUTIONAL STATISTICS: Accent Lines ──
+    const statsCtx = gsap.context(() => {
+      if (!statsRef.current) return;
+      gsap.fromTo(
+        ".stat-rule-v3",
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "transform",
+          scrollTrigger: { trigger: statsRef.current, start: "top 88%", once: true },
+        },
+      );
+    }, statsRef);
+
+    return () => {
+      welcomeCtx.revert();
+      philCtx.revert();
+      statsCtx.revert();
+    };
   }, []);
 
   const pillars = bi.pillars.slice(0, 3);
 
   return (
     <>
-      {/* 12 — WELCOME TO VLEARNIN (Static-First Text + Gentle 18px Photographic Depth) */}
+      {/* 11 — ABOUT VLEARNIN: Dual-Direction Editorial Reveal */}
       <section className="py-16 lg:py-20 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="border border-[#E1E6EC] bg-white shadow-xs grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-[12px]">
-            <ParallaxImage
-              travelPx={9}
-              className="lg:col-span-5 relative min-h-[300px] lg:min-h-[440px]"
-            >
+          <div
+            ref={welcomeRef}
+            className="border border-[#E1E6EC] bg-white shadow-xs grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-[12px]"
+          >
+            <div className="about-photo-frame lg:col-span-5 relative min-h-[300px] lg:min-h-[440px] overflow-hidden">
               <Image
                 src={bi.image}
                 alt={bi.imageAlt}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
+                className="object-cover mc-image-zoom"
               />
               <EditableImageTrigger
                 path="brandIntro.image"
@@ -81,12 +195,12 @@ export function BrandIntroSection() {
                 altPath="brandIntro.imageAlt"
                 currentAlt={bi.imageAlt}
               />
-            </ParallaxImage>
+            </div>
 
-            <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
+            <div className="about-text-col lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
               <div>
                 <div className="flex items-center gap-2.5 mb-2.5">
-                  <span className="h-[2px] w-7 bg-[#C49A59]" />
+                  <span className="about-accent-line origin-left h-[2px] w-7 bg-[#C49A59]" />
                   <span className="type-eyebrow text-[#526477]">Institutional Overview</span>
                 </div>
                 <EditableText
@@ -107,7 +221,7 @@ export function BrandIntroSection() {
                 as="p"
                 path="brandIntro.description"
                 value={bi.description}
-                className="mc-lead text-[#526477]"
+                className="about-desc-v3 mc-lead text-[#526477]"
               />
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E1E6EC]">
@@ -141,7 +255,7 @@ export function BrandIntroSection() {
                 ))}
               </div>
 
-              <div className="flex flex-wrap items-center gap-5 pt-2">
+              <div className="about-cta-v3 flex flex-wrap items-center gap-5 pt-2">
                 <Link
                   href="/about"
                   className="btn-navy mc-icon-btn px-5 py-2.5 text-sm inline-flex items-center gap-2"
@@ -170,7 +284,7 @@ export function BrandIntroSection() {
         </div>
       </section>
 
-      {/* 13 — LEARN, BUILD & LEAD (All 3 Visible Together + Subtle Scroll Progression Line) */}
+      {/* 12 — LEARN, BUILD & LEAD: Signature Kinetic Typography (Normal Flow) */}
       <section
         ref={philosophyRef}
         aria-label="Learn Build Lead Brand Philosophy"
@@ -193,7 +307,7 @@ export function BrandIntroSection() {
           </div>
 
           <div className="hidden lg:block h-[2px] w-full bg-[#E1E6EC] overflow-hidden">
-            <div className="philosophy-progress-line h-full w-full bg-[#2463A6] origin-left" />
+            <div className="philosophy-line-v3 h-full w-full bg-[#2463A6] origin-left" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -206,7 +320,7 @@ export function BrandIntroSection() {
                     isHighlighted ? "border-[#2463A6]" : "border-[#E1E6EC]"
                   }`}
                 >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <div className={`phil-img-${idx} relative aspect-[16/10] w-full overflow-hidden`}>
                     <Image
                       src={PHILOSOPHY_IMAGES[idx % PHILOSOPHY_IMAGES.length]}
                       alt={`${p.title} at VLEARNIN`}
@@ -226,7 +340,7 @@ export function BrandIntroSection() {
                         }`}
                       />
                     </div>
-                    <h3 className="font-heading text-2xl font-extrabold text-[#10264A]">
+                    <h3 className={`phil-word-${idx} font-heading text-2xl font-extrabold text-[#10264A]`}>
                       {p.title}.
                     </h3>
                     <p className="text-sm sm:text-base text-[#526477] leading-relaxed">
@@ -240,10 +354,10 @@ export function BrandIntroSection() {
         </div>
       </section>
 
-      {/* 14 — INSTITUTIONAL STATISTICS (Immediately Visible, Static-First) */}
+      {/* 13 — INSTITUTIONAL STATISTICS (Masked Number-Roll + Accent Lines) */}
       <section aria-label="Factual Programme Highlights" className="bg-white border-b border-[#E1E6EC] py-12">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-[#E1E6EC]">
+          <div ref={statsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-[#E1E6EC]">
             {bi.highlights.map((h, idx) => (
               <div key={idx} className="pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left relative">
                 <EditableDeleteButton
@@ -257,7 +371,7 @@ export function BrandIntroSection() {
                   padZero={h.padZero}
                   className="mc-counter text-[#10264A]"
                 />
-                <div className="h-[2px] w-10 bg-[#C49A59] my-3 mx-auto lg:mx-0" />
+                <div className="stat-rule-v3 origin-left h-[2px] w-10 bg-[#C49A59] my-3 mx-auto lg:mx-0" />
                 <div>
                   <EditableText
                     as="p"

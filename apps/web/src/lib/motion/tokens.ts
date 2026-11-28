@@ -1,29 +1,18 @@
 /**
- * VLEARNIN — QUIET CONFIDENCE (V2 Motion Tokens)
- * "Make the interface respond, not perform."
+ * VLEARNIN — FLUID EDITORIAL MOTION V3
+ * Three intensity levels:
+ * - Level A (Signature): 850–1200ms, 35–65px, image masks & synchronized text
+ * - Level B (Editorial): 550–850ms, 18–40px, staggered grids & directional reveals
+ * - Level C (Micro):     180–350ms, 3–8px, buttons, links, filters & nav
  */
-export const MOTION_TOKENS = {
-  duration: {
-    button: 0.2,       // 180–220ms
-    nav: 0.25,         // 220–280ms
-    imageHover: 0.35,  // 300–400ms
-    cardBorder: 0.22,  // 220ms
-    filter: 0.32,      // 320ms
-    accordion: 0.26,   // 240–300ms
+export const MOTION_V3 = {
+  levelA: { duration: 0.95, ease: "expo.out", distance: 44 },
+  levelB: { duration: 0.72, ease: "power3.out", distance: 28 },
+  levelC: { duration: 0.24, ease: "power2.out", distance: 5 },
+  stagger: {
+    tight: 0.06,
+    standard: 0.085,
+    relaxed: 0.1,
   },
-  easing: {
-    interaction: "cubic-bezier(0.22, 1, 0.36, 1)",
-    interface: "cubic-bezier(0.2, 0, 0, 1)",
-    linear: "none",
-  },
-  travel: {
-    arrowPx: 4,
-    parallaxHeroPx: 8,       // -8px to +8px (16px total)
-    parallaxLargePx: 10,     // -10px to +10px (20px total)
-    parallaxSupportPx: 5,    // -5px to +5px (10px total)
-  },
-  scale: {
-    parallaxOverscan: 1.06,
-    imageHover: 1.045,
-  },
+  triggerStart: "top 88%",
 } as const;

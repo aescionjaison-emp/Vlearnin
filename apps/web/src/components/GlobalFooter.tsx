@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mail, MapPin, MessageCircle, Phone, Clock, Calendar } from "lucide-react";
@@ -9,15 +9,39 @@ import { VlearninLogo } from "./VlearninLogo";
 import { useLeadModal } from "./LeadModalProvider";
 import { useSiteContent } from "./SiteContentProvider";
 import { EditableText } from "./EditableText";
+import { gsap, isReducedMotionOrDisabled } from "@/lib/motion/accessibility";
 
 /**
- * Normal Document-Flow Institutional Footer.
- * All links and contact details remain immediately accessible with subtle hover underlines.
+ * Normal Document-Flow Institutional Footer with Short Staggered Column Entrances.
  */
 export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
   const pathname = usePathname();
   const { openDemoModal } = useLeadModal();
   const { content } = useSiteContent();
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scope = gridRef.current;
+    if (!scope || isReducedMotionOrDisabled()) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".footer-col-v3",
+        { y: 18, opacity: 0.55 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power3.out",
+          clearProps: "transform,opacity",
+          scrollTrigger: { trigger: scope, start: "top 92%", once: true },
+        },
+      );
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, []);
 
   if (!forceShow && pathname?.startsWith("/admin")) {
     return null;
@@ -29,9 +53,9 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
     <>
       <footer className="bg-[#F8FAFC] text-[#10264A] border-t border-[#E1E6EC] pb-20 md:pb-0">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Column 1 — Brand */}
-            <div className="space-y-4">
+            <div className="footer-col-v3 space-y-4">
               <VlearninLogo variant="dark" />
               <EditableText
                 as="p"
@@ -51,7 +75,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
             </div>
 
             {/* Column 2 — Programmes */}
-            <div>
+            <div className="footer-col-v3">
               <EditableText
                 as="h3"
                 path="footer.programmesHeading"
@@ -93,7 +117,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
             </div>
 
             {/* Column 3 — Institutional Links */}
-            <div>
+            <div className="footer-col-v3">
               <h3 className="mc-footer-heading text-[#10264A] mb-5">
                 Quick Links
               </h3>
@@ -132,7 +156,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
             </div>
 
             {/* Column 4 — Contact */}
-            <div>
+            <div className="footer-col-v3">
               <EditableText
                 as="h3"
                 path="footer.contactHeading"

@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap, isReducedMotionOrDisabled } from "@/lib/motion/accessibility";
 
 /**
- * Static-First Institutional Statistic.
- * Displays the exact verified number immediately from load without rolling or bouncing.
+ * Institutional Statistics — Masked Vertical Number-Roll (750ms, once on enter).
+ * Displays exact numbers with stable tabular-nums width; no cartoon bounce.
  */
 export function AnimatedCounter({
   value,
@@ -15,11 +16,70 @@ export function AnimatedCounter({
   padZero?: boolean;
   className?: string;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const formattedFinal = padZero && value < 10 ? `0${value}` : String(value);
+  const digits = formattedFinal.split("");
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || isReducedMotionOrDisabled()) return;
+
+    const reels = el.querySelectorAll<HTMLElement>(".digit-reel");
+    if (reels.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      reels.forEach((reel, idx) => {
+        const targetDigit = Number(reel.dataset.digit || "0");
+        const targetYPercent = -(targetDigit / 10) * 100;
+        gsap.fromTo(
+          reel,
+          { yPercent: 0 },
+          {
+            yPercent: targetYPercent,
+            duration: 0.75 + idx * 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              once: true,
+            },
+          },
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [formattedFinal]);
 
   return (
-    <p className={`tabular-nums leading-none ${className}`}>
-      {formattedFinal}
-    </p>
+    <div
+      ref={containerRef}
+      aria-label={formattedFinal}
+      className={`inline-flex items-center tabular-nums leading-none ${className}`}
+    >
+      {digits.map((ch, idx) => {
+        const isNum = /\d/.test(ch);
+        if (!isNum) return <span key={idx}>{ch}</span>;
+        return (
+          <span
+            key={idx}
+            className="inline-block overflow-hidden h-[1.05em] relative align-top"
+            style={{ width: "0.62em" }}
+          >
+            <span
+              data-digit={ch}
+              className="digit-reel flex flex-col items-center will-change-transform"
+              style={{ transform: `translateY(-${Number(ch) * 10}%)` }}
+            >
+              {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+                <span key={n} className="block h-[1.05em] leading-[1.05em]">
+                  {n}
+                </span>
+              ))}
+            </span>
+          </span>
+        );
+      })}
+    </div>
   );
 }
