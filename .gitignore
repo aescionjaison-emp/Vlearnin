@@ -9,3 +9,6 @@ test-results/
 uploads/
 .firebase/
 apps/web/out/
+.venv-image/
+scripts/image-processing/.cache/
+tmp-cutout-checks/

@@ -11,6 +11,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^3.10.0",
     "@vlearnin/shared": "workspace:*",
     "firebase": "^13.4.0",
