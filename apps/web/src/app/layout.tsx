@@ -4,8 +4,6 @@ import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { GlobalFooter } from "@/components/GlobalFooter";
-import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
-import { PageTransition } from "@/components/PageTransition";
 import { FirebaseAnalytics } from "@/components/FirebaseAnalytics";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import "./globals.css";
@@ -83,18 +81,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
-        <SmoothScrollProvider>
-          <FirebaseAnalytics />
-          <SiteContentProvider>
-            <LeadModalProvider>
-              <GlobalHeader />
-              <main className="flex-1 relative z-10 bg-white">
-                <PageTransition>{children}</PageTransition>
-              </main>
-              <GlobalFooter />
-            </LeadModalProvider>
-          </SiteContentProvider>
-        </SmoothScrollProvider>
+        <FirebaseAnalytics />
+        <SiteContentProvider>
+          <LeadModalProvider>
+            <GlobalHeader />
+            <main className="flex-1 relative z-10 bg-white">
+              {children}
+            </main>
+            <GlobalFooter />
+          </LeadModalProvider>
+        </SiteContentProvider>
       </body>
     </html>
   );

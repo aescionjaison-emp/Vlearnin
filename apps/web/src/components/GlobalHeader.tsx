@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
 import {
   ChevronDown,
   MapPin,
@@ -207,7 +206,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`mc-underline-link type-navigation py-2 transition-colors duration-300 relative whitespace-nowrap ${
+                    className={`type-navigation py-2 transition-colors duration-200 relative whitespace-nowrap ${
                       isActive ? "text-[#2463A6] font-bold" : "text-[#10264A] hover:text-[#2463A6]"
                     }`}
                   >
@@ -269,34 +268,26 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
         </div>
       </div>
 
-      {/* Desktop Three-Column Programmes Mega Menu (280ms coordinated clip-reveal + staggered links) */}
-      <AnimatePresence>
-        {megaOpen && (
-          <motion.div
-            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
-            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            onMouseEnter={handleMegaEnter}
-            onMouseLeave={handleMegaLeave}
-            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E1E6EC] border-b-2 border-b-[#2463A6] shadow-xl z-50"
-          >
+      {/* Desktop Three-Column Programmes Mega Menu */}
+      {megaOpen && (
+        <div
+          onMouseEnter={handleMegaEnter}
+          onMouseLeave={handleMegaLeave}
+          className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E1E6EC] border-b-2 border-b-[#2463A6] shadow-xl z-50"
+        >
           <div className="max-w-[1440px] mx-auto px-10 py-8">
             <div className="grid grid-cols-3 gap-8">
-              {MEGA_COLUMNS.map((col, colIdx) => (
-                <motion.div
+              {MEGA_COLUMNS.map((col) => (
+                <div
                   key={col.categorySlug}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.26, delay: 0.04 + colIdx * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   className="space-y-4"
                 >
-                  <div className="group/mega relative h-32 w-full overflow-hidden border border-[#E1E6EC] rounded-[10px]">
+                  <div className="relative h-32 w-full overflow-hidden border border-[#E1E6EC] rounded-[10px]">
                     <Image
                       src={col.image}
                       alt={col.title}
                       fill
-                      className="object-cover transition-transform duration-350 ease-out group-hover/mega:scale-106"
+                      className="object-cover"
                       sizes="400px"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-[#10264A]/25 to-transparent flex items-end p-3.5">
@@ -306,25 +297,20 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                     </div>
                   </div>
                   <ul className="space-y-2.5">
-                    {col.courses.map((course, linkIdx) => (
-                      <motion.li
-                        key={course.slug}
-                        initial={{ opacity: 0, x: -6 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2, delay: 0.08 + colIdx * 0.04 + linkIdx * 0.03 }}
-                      >
+                    {col.courses.map((course) => (
+                      <li key={course.slug}>
                         <Link
                           href={`/courses/${course.slug}`}
                           onClick={() => setMegaOpen(false)}
                           className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#526477] hover:text-[#2463A6] transition-colors"
                         >
-                          <span className="font-medium leading-snug group-hover:translate-x-1 transition-transform duration-200">{course.title}</span>
-                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#2463A6] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+                          <span className="font-medium leading-snug">{course.title}</span>
+                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#2463A6]" />
                         </Link>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -354,9 +340,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               </div>
             </div>
           </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
 
       {/* Mobile Navigation Drawer with Expandable Programme Categories */}
       {mobileOpen && (

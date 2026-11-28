@@ -10,6 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { BRAND, CAREER_PATHWAYS } from "@vlearnin/shared";
+import { ScrollPop } from "@/components/motion/ScrollPop";
 
 export const metadata: Metadata = {
   title: "Placement Assistance & Career Support",
@@ -85,11 +86,13 @@ export default function PlacementAssistancePage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {STAGES.map((stage) => {
+            {STAGES.map((stage, idx) => {
               const Icon = stage.icon;
               return (
-                <article
+                <ScrollPop
                   key={stage.number}
+                  as="article"
+                  delayIndex={idx % 2}
                   className="border border-[#E1E6EC] bg-[#FAF9F6] p-8 space-y-4 rounded-[15px]"
                 >
                   <div className="flex items-center justify-between">
@@ -108,7 +111,7 @@ export default function PlacementAssistancePage() {
                       </li>
                     ))}
                   </ul>
-                </article>
+                </ScrollPop>
               );
             })}
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { useStaggerReveal } from "@/hooks/useStaggerReveal";
+import { useScrollPopContainer } from "@/components/motion/ScrollPop";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -142,7 +142,7 @@ export function AcademicPartnershipsClient() {
     setValue("interestedProgrammes", updated, { shouldValidate: true });
   };
 
-  useStaggerReveal(timelineRef, ".timeline-step", "cardReveal", 0.08);
+  useScrollPopContainer(timelineRef, []);
 
   const onSubmit = async (data: InstitutionalEnquiryInput) => {
     setServerError(null);
@@ -300,10 +300,12 @@ export function AcademicPartnershipsClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {DELIVERY_STEPS.map((s) => (
+            {DELIVERY_STEPS.map((s, idx) => (
               <div
                 key={s.step}
-                className="timeline-step bg-[#17324D] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
+                data-scroll-pop="true"
+                data-pop-index={idx % 3}
+                className="bg-[#17324D] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
               >
                 <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#C49A59]">
                   {s.step}

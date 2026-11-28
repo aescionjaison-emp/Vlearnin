@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import { BRAND, OFFICIAL_CATEGORIES } from "@vlearnin/shared";
+import { ScrollPop } from "@/components/motion/ScrollPop";
 
 export const metadata: Metadata = {
   title: "About VLEARNIN Academy | Bengaluru",
@@ -30,14 +31,14 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Who We Are & Campus Photo */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-4">
+            <ScrollPop className="lg:col-span-6 space-y-4">
               <h2 className="text-3xl font-bold text-[#10264A]">Who We Are</h2>
               <p className="text-base text-[#526477] leading-relaxed">
                 Based in Rajajinagar, Bengaluru, VLEARNIN delivers 30-hour hands-on certifications
                 across five structured modules—ending with an evaluated capstone project.
               </p>
-            </div>
-            <div className="lg:col-span-6 relative aspect-[4/3] border border-[#E1E6EC] overflow-hidden shadow-md rounded-[15px]">
+            </ScrollPop>
+            <ScrollPop delayIndex={1} className="lg:col-span-6 relative aspect-[4/3] border border-[#E1E6EC] overflow-hidden shadow-md rounded-[15px]">
               <Image
                 src="/images/about-campus.jpg"
                 alt="Classroom mentorship session at VLEARNIN Academy"
@@ -45,37 +46,37 @@ export default function AboutPage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
-            </div>
+            </ScrollPop>
           </div>
 
           {/* Vision, Mission, Philosophy */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-            <div className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
+            <ScrollPop delayIndex={0} className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
               <h3 className="text-xl font-bold text-[#10264A]">Our Educational Philosophy</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 Hands-on learning on live datasets, financial models, ad managers, and production tools.
               </p>
-            </div>
-            <div className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
+            </ScrollPop>
+            <ScrollPop delayIndex={1} className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
               <h3 className="text-xl font-bold text-[#10264A]">Our Vision</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 Equip students and professionals with practical, job-ready capabilities.
               </p>
-            </div>
-            <div className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
+            </ScrollPop>
+            <ScrollPop delayIndex={2} className="p-7 bg-[#FAF9F6] border-t-4 border-[#10264A] space-y-2">
               <h3 className="text-xl font-bold text-[#10264A]">Our Mission</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 Deliver mentor-led 30-hour certifications backed by capstones and QR verification.
               </p>
-            </div>
+            </ScrollPop>
           </div>
 
           {/* Core Learning Domains */}
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-[#10264A]">Core Learning Domains</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {OFFICIAL_CATEGORIES.map((cat) => (
-                <div key={cat.slug} className="border border-[#E1E6EC] p-6 space-y-3 rounded-[15px]">
+              {OFFICIAL_CATEGORIES.map((cat, idx) => (
+                <ScrollPop key={cat.slug} delayIndex={idx % 3} className="border border-[#E1E6EC] p-6 space-y-3 rounded-[15px]">
                   <h3 className="text-lg font-bold text-[#10264A]">{cat.name}</h3>
                   <p className="text-sm text-[#526477]">{cat.description}</p>
                   <Link
@@ -84,37 +85,37 @@ export default function AboutPage() {
                   >
                     Explore Domain <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
-                </div>
+                </ScrollPop>
               ))}
             </div>
           </div>
 
           {/* Methodology, Mentorship, Career Readiness, Academic Collaboration */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
+            <ScrollPop delayIndex={0} className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#10264A]">Practical Learning Methodology</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 Live demonstrations, hands-on exercises, and an evaluated capstone project.
               </p>
-            </div>
-            <div className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
+            </ScrollPop>
+            <ScrollPop delayIndex={1} className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#10264A]">Small-Batch Mentorship</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 Focused batches with 1-on-1 doubt resolution and portfolio feedback.
               </p>
-            </div>
-            <div className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
+            </ScrollPop>
+            <ScrollPop delayIndex={0} className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#10264A]">Career Readiness</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 ATS resumes, LinkedIn optimization, mock interviews, and employer access.
               </p>
-            </div>
-            <div className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
+            </ScrollPop>
+            <ScrollPop delayIndex={1} className="border border-[#E1E6EC] p-7 space-y-2 rounded-[15px]">
               <h3 className="text-xl font-bold text-[#10264A]">Academic Collaboration</h3>
               <p className="text-sm text-[#526477] leading-relaxed">
                 On-campus and hybrid certifications with degree colleges across Karnataka.
               </p>
-            </div>
+            </ScrollPop>
           </div>
 
           {/* Visit Rajajinagar Center */}

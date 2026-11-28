@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, Clock, Layers } from "lucide-react";
 import { fetchCombos } from "@/lib/api";
 import { ComboActionsClient } from "@/components/combos/ComboActionsClient";
+import { ScrollPop } from "@/components/motion/ScrollPop";
 
 export const metadata: Metadata = {
   title: "Career Accelerator Combos | Dual-Skill Tracks",
@@ -31,8 +32,10 @@ export default async function CareerCombosPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {combos.map((combo, index) => (
-            <article
+            <ScrollPop
               key={combo.slug}
+              as="article"
+              delayIndex={index % 2}
               className="grid grid-cols-1 lg:grid-cols-12 border border-[#E1E6EC] bg-white shadow-xs overflow-hidden rounded-[15px]"
             >
               <div className="lg:col-span-5 relative min-h-[260px]">
@@ -94,7 +97,7 @@ export default async function CareerCombosPage() {
                   </Link>
                 </div>
               </div>
-            </article>
+            </ScrollPop>
           ))}
         </div>
       </section>

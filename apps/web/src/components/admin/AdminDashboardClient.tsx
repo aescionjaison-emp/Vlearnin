@@ -39,7 +39,6 @@ import {
 import { useSiteContent } from "@/components/SiteContentProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
-import { QuickAccessStrip } from "@/components/home/QuickAccessStrip";
 import { BrandIntroSection } from "@/components/home/BrandIntroSection";
 import { HomeCatalogSections } from "@/components/home/HomeCatalogSections";
 import { GlobalFooter } from "@/components/GlobalFooter";
@@ -410,7 +409,6 @@ export function AdminDashboardClient() {
           </div>
           <GlobalHeader forceShow />
           <HeroCarousel />
-          <QuickAccessStrip />
           <BrandIntroSection />
           <HomeCatalogSections
             categories={content.categories}

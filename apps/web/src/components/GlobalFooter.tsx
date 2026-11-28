@@ -56,7 +56,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
                 <button
                   type="button"
                   onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-                  className="btn-navy mc-icon-btn px-5 py-2.5 text-xs tracking-wide cursor-pointer"
+                  className="btn-navy px-5 py-2.5 text-xs tracking-wide cursor-pointer"
                 >
                   <EditableText path="footer.demoButtonLabel" value={content.footer.demoButtonLabel} />
                 </button>
@@ -73,32 +73,32 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
               />
               <ul className="space-y-2.5 mc-footer-link text-[#526477]">
                 <li>
-                  <Link href="/courses?category=ai-business-intelligence" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/courses?category=ai-business-intelligence" className="hover:text-[#2463A6] transition-colors">
                     AI &amp; Business Intelligence
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses/financial-modelling-for-business" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/courses/financial-modelling-for-business" className="hover:text-[#2463A6] transition-colors">
                     Corporate Finance
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses/investment-banking-professional" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/courses/investment-banking-professional" className="hover:text-[#2463A6] transition-colors">
                     Investment Banking
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses/ai-powered-digital-marketing" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/courses/ai-powered-digital-marketing" className="hover:text-[#2463A6] transition-colors">
                     Digital Marketing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/courses/video-editing-reels-production" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/courses/video-editing-reels-production" className="hover:text-[#2463A6] transition-colors">
                     Creative Media &amp; Video Editing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/career-combos" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/career-combos" className="hover:text-[#2463A6] transition-colors">
                     Career Combos
                   </Link>
                 </li>
@@ -112,32 +112,32 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
               </h3>
               <ul className="space-y-2.5 mc-footer-link text-[#526477]">
                 <li>
-                  <Link href="/about" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/about" className="hover:text-[#2463A6] transition-colors">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/placement-assistance" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/placement-assistance" className="hover:text-[#2463A6] transition-colors">
                     Placement Assistance
                   </Link>
                 </li>
                 <li>
-                  <Link href="/academic-partnerships" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/academic-partnerships" className="hover:text-[#2463A6] transition-colors">
                     Academic Partnerships
                   </Link>
                 </li>
                 <li>
-                  <Link href="/verify-certificate" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/verify-certificate" className="hover:text-[#2463A6] transition-colors">
                     Verify Certificate
                   </Link>
                 </li>
                 <li>
-                  <Link href="/hire-from-vlearnin" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/hire-from-vlearnin" className="hover:text-[#2463A6] transition-colors">
                     Hire From VLEARNIN
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                  <Link href="/contact" className="hover:text-[#2463A6] transition-colors">
                     Contact Us
                   </Link>
                 </li>
@@ -201,10 +201,10 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
                 <EditableText path="footer.copyrightSuffix" value={content.footer.copyrightSuffix} />
               </p>
               <div className="flex items-center gap-6">
-                <Link href="/privacy-policy" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                <Link href="/privacy-policy" className="hover:text-[#2463A6] transition-colors">
                   Privacy Policy
                 </Link>
-                <Link href="/terms-and-conditions" className="mc-underline-link hover:text-[#2463A6] transition-colors">
+                <Link href="/terms-and-conditions" className="hover:text-[#2463A6] transition-colors">
                   Terms &amp; Conditions
                 </Link>
               </div>

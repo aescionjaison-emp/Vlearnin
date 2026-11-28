@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
+import { useScrollPopContainer } from "@/components/motion/ScrollPop";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -41,6 +42,7 @@ export function CoursesCatalogClient({
   const [activeTab, setActiveTab] = useState(initialCat);
   const [query, setQuery] = useState("");
   const { openDemoModal, openBrochureModal } = useLeadModal();
+  const catalogRef = useRef<HTMLDivElement>(null);
 
   const filteredCourses = useMemo(() => {
     if (activeTab === "combos") return [];
@@ -66,6 +68,8 @@ export function CoursesCatalogClient({
         c.includedLabel.toLowerCase().includes(q),
     );
   }, [combos, activeTab, query]);
+
+  useScrollPopContainer(catalogRef, [activeTab, query]);
 
   return (
     <div className="bg-white">
@@ -125,7 +129,9 @@ export function CoursesCatalogClient({
           <div className="flex flex-wrap gap-2" role="tablist" aria-label="Course Categories">
             {TABS.map((tab) => {
               const active = activeTab === tab.id;
-              return (
+              useScrollPopContainer(catalogRef, [activeTab, query]);
+
+  return (
                 <button
                   key={tab.id}
                   type="button"
@@ -160,7 +166,7 @@ export function CoursesCatalogClient({
 
       {/* Programmes Grid */}
       <section className="py-16">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-16">
+        <div ref={catalogRef} className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-16">
           {activeTab !== "combos" && (
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-[#10264A] mb-6">
@@ -173,10 +179,12 @@ export function CoursesCatalogClient({
                 </p>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-                  {filteredCourses.map((course) => (
+                  {filteredCourses.map((course, idx) => (
                     <article
                       key={course.slug}
-                      className="mc-card-hover group border border-[#E1E6EC] bg-white hover:border-[#10264A] flex flex-col shadow-xs rounded-[15px]"
+                      data-scroll-pop="true"
+                      data-pop-index={idx % 3}
+                      className="border border-[#E1E6EC] bg-white hover:border-[#10264A] flex flex-col shadow-xs rounded-[15px] transition-colors"
                     >
                       <div className="relative h-52 w-full overflow-hidden">
                         <Image
@@ -184,7 +192,7 @@ export function CoursesCatalogClient({
                           alt={course.title}
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
-                          className="object-cover mc-image-zoom"
+                          className="object-cover"
                         />
                         <div className="absolute top-3 left-3 bg-[#10264A]/90 text-[#C49A59] font-nav text-[11px] font-bold uppercase tracking-wider px-2.5 py-1">
                           {course.categoryName}
@@ -249,9 +257,11 @@ export function CoursesCatalogClient({
                 Dual-Skill Career Accelerator Combos ({filteredCombos.length})
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-                {filteredCombos.map((combo) => (
+                {filteredCombos.map((combo, idx) => (
                   <article
                     key={combo.slug}
+                    data-scroll-pop="true"
+                    data-pop-index={idx % 2}
                     className="border border-[#E1E6EC] bg-[#FAF9F6] p-7 flex flex-col justify-between space-y-5 hover:border-[#10264A] transition-colors rounded-[15px]"
                   >
                     <div className="space-y-3">
