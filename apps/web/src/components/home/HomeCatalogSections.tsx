@@ -25,7 +25,10 @@ import {
   OfficialCourseSeed,
 } from "@vlearnin/shared";
 import { useLeadModal } from "@/components/LeadModalProvider";
-import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { ExpandingPhotograph } from "@/components/motion/ExpandingPhotograph";
+import { PhotographicDepth } from "@/components/motion/PhotographicDepth";
+import { ProgressiveTypography } from "@/components/motion/ProgressiveTypography";
+import { SvgPathway } from "@/components/motion/SvgPathway";
 import {
   ProgrammeCardItem,
   ProgrammeFilterMotion,
@@ -76,6 +79,7 @@ export function HomeCatalogSections({
   const combos = content.combos.length > 0 ? content.combos : (propCombos || []);
 
   const [activeFilter, setActiveFilter] = useState("all");
+  const [activeComboStage, setActiveComboStage] = useState(0);
   const [activePlacementStage, setActivePlacementStage] = useState(0);
 
   const domainsRef = useRef<HTMLElement>(null);
@@ -83,10 +87,6 @@ export function HomeCatalogSections({
   const combosRef = useRef<HTMLElement>(null);
   const advantagesRef = useRef<HTMLElement>(null);
   const placementRef = useRef<HTMLElement>(null);
-  const academicRef = useRef<HTMLElement>(null);
-  const academicFrameRef = useRef<HTMLDivElement>(null);
-  const campusRef = useRef<HTMLElement>(null);
-  const finalCtaRef = useRef<HTMLElement>(null);
 
   const filteredCourses =
     activeFilter === "all"
@@ -96,314 +96,200 @@ export function HomeCatalogSections({
   useEffect(() => {
     if (isReducedMotionOrDisabled()) return;
 
-    // ── 14. LEARNING DOMAINS: Expanding Photographic Panels ──
+    // ── 14. CORE LEARNING DOMAINS: Scroll-Responsive Photographic Panels ──
     const domainsCtx = gsap.context(() => {
       if (!domainsRef.current) return;
-      const photos = gsap.utils.toArray<HTMLElement>(".domain-photo-v3", domainsRef.current);
-      const titles = gsap.utils.toArray<HTMLElement>(".domain-title-v3", domainsRef.current);
+      const panels = gsap.utils.toArray<HTMLElement>(".domain-panel-v4", domainsRef.current);
+      panels.forEach((panel, idx) => {
+        const frame = panel.querySelector(".domain-frame-v4");
+        const img = panel.querySelector(".domain-frame-v4 img");
+        const accent = panel.querySelector(".domain-accent-v4");
 
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: domainsRef.current, start: "top 84%", once: true },
-        defaults: { ease: "expo.out" },
-      });
+        if (frame) {
+          gsap.fromTo(
+            frame,
+            { clipPath: "inset(8% 5% 8% 5% round 10px)" },
+            {
+              clipPath: "inset(0% 0% 0% 0% round 0px)",
+              ease: "none",
+              scrollTrigger: {
+                trigger: panel,
+                start: "top 95%",
+                end: "center 50%",
+                scrub: 0.5,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
+        }
 
-      photos.forEach((p, idx) => {
-        tl.fromTo(
-          p,
-          { clipPath: "inset(12% 12% 12% 12% round 12px)" },
-          { clipPath: "inset(0% 0% 0% 0% round 0px)", duration: 0.85, clearProps: "clipPath" },
-          idx * 0.09,
-        );
-        const img = p.querySelector("img");
         if (img) {
-          tl.fromTo(img, { scale: 1.09 }, { scale: 1, duration: 0.95, clearProps: "transform" }, idx * 0.09);
+          const travel = idx === 1 ? 10 : 16;
+          gsap.fromTo(
+            img,
+            { scale: 1.1, y: -travel },
+            {
+              scale: 1.0,
+              y: travel,
+              ease: "none",
+              scrollTrigger: {
+                trigger: panel,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.55,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
+        }
+
+        if (accent) {
+          gsap.fromTo(
+            accent,
+            { scaleX: 0.25 },
+            {
+              scaleX: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: panel,
+                start: "top 90%",
+                end: "center 50%",
+                scrub: 0.4,
+              },
+            },
+          );
         }
       });
-
-      tl.fromTo(
-        titles,
-        { x: 24, opacity: 0.45 },
-        { x: 0, opacity: 1, duration: 0.65, stagger: 0.09, ease: "power3.out", clearProps: "transform,opacity" },
-        0.15,
-      );
     }, domainsRef);
 
-    // ── 15. CERTIFICATION PROGRAMMES: Creative Staggered Grid ──
+    // ── 18. VLEARNIN ADVANTAGES: Progressive Bento Emphasis (No Slide-In) ──
+    const advCtx = gsap.context(() => {
+      if (!advantagesRef.current) return;
+      const bars = gsap.utils.toArray<HTMLElement>(".bento-accent-v4", advantagesRef.current);
+      const nums = gsap.utils.toArray<HTMLElement>(".bento-num-v4", advantagesRef.current);
+
+      bars.forEach((bar) => {
+        gsap.fromTo(
+          bar,
+          { scaleX: 0.2 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: bar,
+              start: "top 92%",
+              end: "center 55%",
+              scrub: 0.45,
+            },
+          },
+        );
+      });
+
+      nums.forEach((num) => {
+        gsap.fromTo(
+          num,
+          { color: "rgba(36, 99, 166, 0.25)" },
+          {
+            color: "rgba(16, 38, 74, 0.85)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: num,
+              start: "top 90%",
+              end: "center 55%",
+              scrub: 0.45,
+            },
+          },
+        );
+      });
+    }, advantagesRef);
+
+    return () => {
+      domainsCtx.revert();
+      advCtx.revert();
+    };
+  }, []);
+
+  // ── 15. SEVEN CERTIFICATION PROGRAMMES: Per-Card Scroll Progress ──
+  useEffect(() => {
+    if (isReducedMotionOrDisabled()) return;
+
     const coursesCtx = gsap.context(() => {
       if (!coursesGridRef.current) return;
-      const cards = gsap.utils.toArray<HTMLElement>(".course-card-v3", coursesGridRef.current);
-      if (cards.length === 0) return;
-
-      gsap.fromTo(
-        cards,
-        { y: 32, opacity: 0.45 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: "power3.out",
-          clearProps: "transform,opacity",
-          scrollTrigger: { trigger: coursesGridRef.current, start: "top 86%", once: true },
-        },
-      );
+      const cards = gsap.utils.toArray<HTMLElement>(".course-card-v4", coursesGridRef.current);
 
       cards.forEach((card, idx) => {
-        const photo = card.querySelector(".course-photo-v3");
-        if (photo) {
+        const frame = card.querySelector(".course-frame-v4");
+        const img = card.querySelector(".course-frame-v4 img");
+        const accent = card.querySelector(".course-accent-v4");
+
+        const insetStart =
+          idx % 3 === 0
+            ? "inset(8% 4% 8% 4% round 8px)"
+            : idx % 3 === 1
+              ? "inset(4% 8% 4% 8% round 8px)"
+              : "inset(10% 6% 4% 6% round 8px)";
+
+        if (frame) {
           gsap.fromTo(
-            photo,
-            { clipPath: idx % 2 === 0 ? "inset(0 0 100% 0)" : "inset(0 100% 0 0)" },
+            frame,
+            { clipPath: insetStart },
             {
-              clipPath: "inset(0 0 0% 0)",
-              duration: 0.78,
-              delay: (idx % 3) * 0.08,
-              ease: "expo.out",
-              clearProps: "clipPath",
-              scrollTrigger: { trigger: card, start: "top 88%", once: true },
+              clipPath: "inset(0% 0% 0% 0% round 0px)",
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 94%",
+                end: "center 48%",
+                scrub: 0.45,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
+        }
+
+        if (img) {
+          gsap.fromTo(
+            img,
+            { scale: 1.09 },
+            {
+              scale: 1.0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 94%",
+                end: "center 48%",
+                scrub: 0.45,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
+        }
+
+        if (accent) {
+          gsap.fromTo(
+            accent,
+            { scaleX: 0.25 },
+            {
+              scaleX: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 92%",
+                end: "center 50%",
+                scrub: 0.4,
+              },
             },
           );
         }
       });
     }, coursesGridRef);
 
-    // ── 16. CAREER ACCELERATOR COMBOS: Alternating Directional Motion ──
-    const combosCtx = gsap.context(() => {
-      if (!combosRef.current) return;
-      const comboCards = gsap.utils.toArray<HTMLElement>(".combo-card-v3", combosRef.current);
-      const clipDirections = [
-        "inset(0 100% 0 0)",
-        "inset(0 0 0 100%)",
-        "inset(100% 0 0 0)",
-        "inset(12% 10% 12% 10%)",
-      ];
-
-      comboCards.forEach((card, idx) => {
-        const photo = card.querySelector(".combo-photo-v3");
-        const body = card.querySelector(".combo-body-v3");
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: card, start: "top 88%", once: true },
-          defaults: { ease: "power3.out" },
-        });
-
-        if (photo) {
-          tl.fromTo(
-            photo,
-            { clipPath: clipDirections[idx % 4] },
-            { clipPath: "inset(0% 0% 0% 0%)", duration: 0.85, ease: "expo.out", clearProps: "clipPath" },
-            0,
-          );
-        }
-        if (body) {
-          tl.fromTo(
-            body,
-            { x: idx % 2 === 0 ? 26 : -26, opacity: 0.45 },
-            { x: 0, opacity: 1, duration: 0.68, clearProps: "transform,opacity" },
-            0.12,
-          );
-        }
-      });
-    }, combosRef);
-
-    // ── 17. VLEARNIN ADVANTAGES: Animated Bento Grid (4 Varied Entrances) ──
-    const advCtx = gsap.context(() => {
-      if (!advantagesRef.current) return;
-      const bentoCards = gsap.utils.toArray<HTMLElement>(".bento-card-v3", advantagesRef.current);
-      const portrait = advantagesRef.current.querySelector(".adv-portrait-v3");
-
-      if (portrait) {
-        gsap.fromTo(
-          portrait,
-          { clipPath: "inset(0 100% 0 0)" },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.9,
-            ease: "expo.out",
-            clearProps: "clipPath",
-            scrollTrigger: { trigger: advantagesRef.current, start: "top 84%", once: true },
-          },
-        );
-      }
-
-      const variants = [
-        { y: 28, opacity: 0.4 },
-        { x: 28, opacity: 0.4 },
-        { scale: 0.94, opacity: 0.4 },
-        { y: -20, opacity: 0.4 },
-      ];
-
-      bentoCards.forEach((card, idx) => {
-        gsap.fromTo(card, variants[idx % 4], {
-          x: 0,
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.68,
-          delay: idx * 0.08,
-          ease: "power3.out",
-          clearProps: "transform,opacity",
-          scrollTrigger: { trigger: advantagesRef.current, start: "top 84%", once: true },
-        });
-      });
-    }, advantagesRef);
-
-    // ── 18. PLACEMENT ASSISTANCE: Continuous Scroll-Linked Journey ──
-    const placeCtx = gsap.context(() => {
-      if (!placementRef.current) return;
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 1024px)", () => {
-        gsap.fromTo(
-          ".placement-line-h",
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: placementRef.current,
-              start: "top 75%",
-              end: "bottom 60%",
-              scrub: true,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => setActivePlacementStage(Math.min(3, Math.floor(self.progress * 4))),
-            },
-          },
-        );
-      });
-
-      mm.add("(max-width: 1023px)", () => {
-        gsap.fromTo(
-          ".placement-line-v",
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: placementRef.current,
-              start: "top 75%",
-              end: "bottom 60%",
-              scrub: true,
-              invalidateOnRefresh: true,
-              onUpdate: (self) => setActivePlacementStage(Math.min(3, Math.floor(self.progress * 4))),
-            },
-          },
-        );
-      });
-
-      gsap.fromTo(
-        ".placement-card-v3",
-        { y: 24, opacity: 0.45 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.65,
-          stagger: 0.09,
-          ease: "power3.out",
-          clearProps: "transform,opacity",
-          scrollTrigger: { trigger: placementRef.current, start: "top 84%", once: true },
-        },
-      );
-
-      return () => mm.revert();
-    }, placementRef);
-
-    // ── 19. ACADEMIC PARTNERSHIPS: Photographic Expansion Within Container ──
-    const academicCtx = gsap.context(() => {
-      if (!academicRef.current || !academicFrameRef.current) return;
-
-      gsap.fromTo(
-        academicFrameRef.current,
-        { clipPath: "inset(8% 10% 8% 10% round 12px)" },
-        {
-          clipPath: "inset(0% 0% 0% 0% round 12px)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: academicRef.current,
-            start: "top 86%",
-            end: "center 48%",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".academic-text-v3",
-        { x: -26, opacity: 0.45 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.72,
-          stagger: 0.08,
-          ease: "power3.out",
-          clearProps: "transform,opacity",
-          scrollTrigger: { trigger: academicRef.current, start: "top 84%", once: true },
-        },
-      );
-    }, academicRef);
-
-    // ── 20. CAMPUS EXPERIENCE: Photo Masks ──
-    const campusCtx = gsap.context(() => {
-      if (!campusRef.current) return;
-      const tiles = gsap.utils.toArray<HTMLElement>(".campus-tile-v3", campusRef.current);
-      gsap.fromTo(
-        tiles,
-        { clipPath: "inset(14% 0 0 0 round 12px)", opacity: 0.55 },
-        {
-          clipPath: "inset(0% 0 0 0 round 12px)",
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "expo.out",
-          clearProps: "clipPath,opacity",
-          scrollTrigger: { trigger: campusRef.current, start: "top 86%", once: true },
-        },
-      );
-    }, campusRef);
-
-    // ── 21. FINAL ENQUIRY: Split Editorial Reveal (750ms) ──
-    const finalCtx = gsap.context(() => {
-      if (!finalCtaRef.current) return;
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: finalCtaRef.current, start: "top 88%", once: true },
-        defaults: { ease: "power3.out" },
-      });
-
-      tl.fromTo(
-        ".final-accent-v3",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.55, clearProps: "transform" },
-        0,
-      )
-        .fromTo(
-          ".final-left-v3",
-          { y: 22, opacity: 0.4 },
-          { y: 0, opacity: 1, duration: 0.75, stagger: 0.08, clearProps: "transform,opacity" },
-          0.08,
-        )
-        .fromTo(
-          ".final-right-v3",
-          { x: 26, opacity: 0.45 },
-          { x: 0, opacity: 1, duration: 0.7, stagger: 0.07, clearProps: "transform,opacity" },
-          0.18,
-        );
-    }, finalCtaRef);
-
-    return () => {
-      domainsCtx.revert();
-      coursesCtx.revert();
-      combosCtx.revert();
-      advCtx.revert();
-      placeCtx.revert();
-      academicCtx.revert();
-      campusCtx.revert();
-      finalCtx.revert();
-    };
-  }, []);
+    return () => coursesCtx.revert();
+  }, [activeFilter, filteredCourses.length]);
 
   return (
     <div>
-      {/* 14 — LEARNING DOMAINS: Expanding Photographic Panels */}
+      {/* 14 — CORE LEARNING DOMAINS: Scroll-Responsive Photographic Panels */}
       <section ref={domainsRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
           <div className="max-w-3xl">
@@ -440,7 +326,7 @@ export function HomeCatalogSections({
                 <article
                   key={cat.slug}
                   style={{ backgroundColor: cardBg }}
-                  className="mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
+                  className="domain-panel-v4 mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
                 >
                   <EditableDeleteButton
                     path="categories"
@@ -449,13 +335,13 @@ export function HomeCatalogSections({
                     className="absolute top-3 left-3 z-30"
                   />
                   <div>
-                    <div className="domain-photo-v3 relative aspect-[16/10] w-full overflow-hidden">
+                    <div className="domain-frame-v4 relative aspect-[16/10] w-full overflow-hidden">
                       <Image
                         src={cat.image}
                         alt={cat.name}
                         fill
                         sizes="(max-width: 1024px) 100vw, 33vw"
-                        className="object-cover mc-image-zoom"
+                        className="object-cover transition-transform duration-350 group-hover:scale-105"
                       />
                       <EditableImageTrigger path={`categories.${idx}.image`} currentSrc={cat.image} />
                       <span className="absolute top-3 left-3 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]">
@@ -465,12 +351,12 @@ export function HomeCatalogSections({
 
                     <div className="p-6 sm:p-7 space-y-4">
                       <div>
-                        <span className="block h-[2px] w-8 bg-[#C49A59] mb-2.5" />
+                        <span className="domain-accent-v4 origin-left block h-[2px] w-10 bg-[#C49A59] mb-2.5" />
                         <EditableText
                           as="h3"
                           path={`categories.${idx}.name`}
                           value={cat.name}
-                          className="domain-title-v3 font-heading text-xl sm:text-2xl font-extrabold text-[#10264A] tracking-[-0.025em]"
+                          className="font-heading text-xl sm:text-2xl font-extrabold text-[#10264A] tracking-[-0.025em]"
                         />
                       </div>
                       <EditableText
@@ -527,7 +413,7 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 15 — CERTIFICATION PROGRAMMES: Creative Staggered Grid */}
+      {/* 15 & 16 — SEVEN CERTIFICATION PROGRAMMES: Living Gallery + Layout Filters */}
       <section className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
@@ -567,7 +453,7 @@ export function HomeCatalogSections({
                   role="tab"
                   aria-selected={active}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2 rounded-[6px] transition-colors duration-200 cursor-pointer ${
+                  className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2 rounded-[6px] transition-colors duration-250 cursor-pointer ${
                     active
                       ? "bg-[#2463A6] text-white"
                       : "bg-white border border-[#E1E6EC] text-[#10264A] hover:border-[#2463A6]"
@@ -589,10 +475,10 @@ export function HomeCatalogSections({
                     key={course.slug}
                     layoutKey={course.slug}
                     style={{ backgroundColor: cardSurface }}
-                    className="course-card-v3 mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
+                    className="course-card-v4 mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
                   >
                     <div>
-                      <div className="course-photo-v3 relative h-52 w-full overflow-hidden">
+                      <div className="course-frame-v4 relative h-52 w-full overflow-hidden">
                         {cIdx >= 0 && (
                           <EditableDeleteButton
                             path="courses"
@@ -606,7 +492,7 @@ export function HomeCatalogSections({
                           alt={course.title}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover mc-image-zoom"
+                          className="object-cover transition-transform duration-350 group-hover:scale-105"
                         />
                         {cIdx >= 0 && (
                           <EditableImageTrigger path={`courses.${cIdx}.image`} currentSrc={course.image} />
@@ -617,7 +503,7 @@ export function HomeCatalogSections({
                       </div>
 
                       <div className="p-6 space-y-3">
-                        <span className="block h-[2px] w-7 bg-[#C49A59]" />
+                        <span className="course-accent-v4 origin-left block h-[2px] w-10 bg-[#C49A59]" />
                         <EditableText
                           as="p"
                           path={cIdx >= 0 ? `courses.${cIdx}.categoryName` : "discoverySection.eyebrow"}
@@ -706,7 +592,7 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 16 — CAREER ACCELERATOR COMBOS: Alternating Directional Motion */}
+      {/* 17 — CAREER ACCELERATOR COMBOS: Connected Skill Pathways */}
       <section ref={combosRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -743,86 +629,107 @@ export function HomeCatalogSections({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
-            {combos.map((combo, idx) => (
-              <article
-                key={combo.slug}
-                className="combo-card-v3 mc-card-hover bg-[#FAF9F6] border border-[#E1E6EC] hover:border-[#2463A6] hover:bg-white rounded-[12px] overflow-hidden grid grid-cols-1 sm:grid-cols-12 relative group"
-              >
-                <EditableDeleteButton
-                  path="combos"
-                  index={idx}
-                  label="Delete"
-                  className="absolute top-3 right-3 z-30"
-                />
-                <div className="combo-photo-v3 sm:col-span-5 relative min-h-[220px] overflow-hidden">
-                  <Image
-                    src={combo.image}
-                    alt={combo.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 260px"
-                    className="object-cover mc-image-zoom"
-                  />
-                  <EditableImageTrigger path={`combos.${idx}.image`} currentSrc={combo.image} />
-                  <EditableText
-                    path={`combos.${idx}.durationLabel`}
-                    value={combo.durationLabel}
-                    className="absolute top-3 left-3 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]"
-                  />
-                </div>
+          {/* Scroll-Controlled SVG Career Pathway */}
+          <div className="hidden lg:block">
+            <SvgPathway
+              orientation="horizontal"
+              triggerRef={combosRef}
+              onProgress={(p) => {
+                const count = Math.max(1, combos.length);
+                setActiveComboStage(Math.min(count - 1, Math.floor(p * count)));
+              }}
+            />
+          </div>
 
-                <div className="combo-body-v3 sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <span className="font-heading text-xs font-extrabold text-[#2463A6]">
-                      Track 0{idx + 1}
-                    </span>
-                    <EditableText
-                      as="h3"
-                      path={`combos.${idx}.title`}
-                      value={combo.title}
-                      className="font-heading text-xl font-bold text-[#10264A]"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+            {combos.map((combo, idx) => {
+              const reached = idx <= activeComboStage;
+              return (
+                <article
+                  key={combo.slug}
+                  className={`mc-card-hover bg-[#FAF9F6] border rounded-[12px] overflow-hidden grid grid-cols-1 sm:grid-cols-12 relative group transition-colors duration-250 ${
+                    reached ? "border-[#2463A6] bg-white" : "border-[#E1E6EC]"
+                  }`}
+                >
+                  <EditableDeleteButton
+                    path="combos"
+                    index={idx}
+                    label="Delete"
+                    className="absolute top-3 right-3 z-30"
+                  />
+                  <PhotographicDepth
+                    travelPx={12 + (idx % 2) * 6}
+                    scaleFrom={1.08}
+                    className="sm:col-span-5 relative min-h-[220px]"
+                  >
+                    <Image
+                      src={combo.image}
+                      alt={combo.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 260px"
+                      className="object-cover"
                     />
+                    <EditableImageTrigger path={`combos.${idx}.image`} currentSrc={combo.image} />
                     <EditableText
-                      as="p"
-                      path={`combos.${idx}.includedLabel`}
-                      value={combo.includedLabel}
-                      className="text-xs font-nav font-semibold text-[#2463A6]"
+                      path={`combos.${idx}.durationLabel`}
+                      value={combo.durationLabel}
+                      className="absolute top-3 left-3 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]"
                     />
-                    <EditableText
-                      as="p"
-                      path={`combos.${idx}.summary`}
-                      value={combo.summary}
-                      className="text-sm text-[#526477]"
-                    />
-                    <p className="text-xs text-[#526477]">
-                      <strong className="text-[#10264A]">Ideal For:</strong>{" "}
-                      <EditableText path={`combos.${idx}.idealFor`} value={combo.idealFor} />
-                    </p>
+                  </PhotographicDepth>
+
+                  <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <span className="font-heading text-xs font-extrabold text-[#2463A6]">
+                        Track 0{idx + 1}
+                      </span>
+                      <EditableText
+                        as="h3"
+                        path={`combos.${idx}.title`}
+                        value={combo.title}
+                        className="font-heading text-xl font-bold text-[#10264A]"
+                      />
+                      <EditableText
+                        as="p"
+                        path={`combos.${idx}.includedLabel`}
+                        value={combo.includedLabel}
+                        className="text-xs font-nav font-semibold text-[#2463A6]"
+                      />
+                      <EditableText
+                        as="p"
+                        path={`combos.${idx}.summary`}
+                        value={combo.summary}
+                        className="text-sm text-[#526477]"
+                      />
+                      <p className="text-xs text-[#526477]">
+                        <strong className="text-[#10264A]">Ideal For:</strong>{" "}
+                        <EditableText path={`combos.${idx}.idealFor`} value={combo.idealFor} />
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between pt-3 border-t border-[#E1E6EC]">
+                      <Link
+                        href={`/career-combos/${combo.slug}`}
+                        className="motion-link font-nav text-xs font-semibold uppercase tracking-wider text-[#2463A6] hover:text-[#10264A]"
+                      >
+                        <span>View Track</span>
+                        <ArrowRight className="arrow w-3.5 h-3.5" />
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openDemoModal({
+                            preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
+                            sourcePage: "homepage-combo",
+                          })
+                        }
+                        className="font-nav text-xs font-semibold text-[#10264A] hover:text-[#2463A6] hover:underline cursor-pointer"
+                      >
+                        Book Free Demo →
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between pt-3 border-t border-[#E1E6EC]">
-                    <Link
-                      href={`/career-combos/${combo.slug}`}
-                      className="motion-link font-nav text-xs font-semibold uppercase tracking-wider text-[#2463A6] hover:text-[#10264A]"
-                    >
-                      <span>View Track</span>
-                      <ArrowRight className="arrow w-3.5 h-3.5" />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        openDemoModal({
-                          preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
-                          sourcePage: "homepage-combo",
-                        })
-                      }
-                      className="font-nav text-xs font-semibold text-[#10264A] hover:text-[#2463A6] hover:underline cursor-pointer"
-                    >
-                      Book Free Demo →
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
 
           <div className="flex justify-end">
@@ -847,16 +754,20 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 17 — VLEARNIN ADVANTAGES: Animated Bento Grid */}
+      {/* 18 — VLEARNIN ADVANTAGES: Progressive Bento Emphasis */}
       <section ref={advantagesRef} className="py-16 lg:py-24 bg-[#F7F8FA] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="adv-portrait-v3 lg:col-span-5 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E1E6EC] rounded-[12px] shadow-xs bg-white overflow-hidden group">
+          <ExpandingPhotograph
+            insetPercent={8}
+            scaleFrom={1.09}
+            className="lg:col-span-5 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E1E6EC] rounded-[12px] shadow-xs bg-white"
+          >
             <Image
               src={content.advantagesSection.image}
               alt={content.advantagesSection.imageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
-              className="object-cover mc-image-zoom"
+              className="object-cover"
             />
             <EditableImageTrigger
               path="advantagesSection.image"
@@ -864,7 +775,7 @@ export function HomeCatalogSections({
               altPath="advantagesSection.imageAlt"
               currentAlt={content.advantagesSection.imageAlt}
             />
-          </div>
+          </ExpandingPhotograph>
 
           <div className="lg:col-span-7 space-y-8">
             <div>
@@ -884,7 +795,7 @@ export function HomeCatalogSections({
               {content.advantagesSection.items.map((adv, advIdx) => {
                 const Icon = ADVANTAGE_ICONS[advIdx % ADVANTAGE_ICONS.length];
                 return (
-                  <div key={advIdx} className="bento-card-v3 relative">
+                  <div key={advIdx} className="relative">
                     <EditableDeleteButton
                       path="advantagesSection.items"
                       index={advIdx}
@@ -900,10 +811,11 @@ export function HomeCatalogSections({
                             <EditableText
                               path={`advantagesSection.items.${advIdx}.num`}
                               value={adv.num}
-                              className="font-heading text-2xl font-extrabold text-[#2463A6]/40"
+                              className="bento-num-v4 font-heading text-2xl font-extrabold"
                             />
                           </div>
                           <div>
+                            <span className="bento-accent-v4 origin-left block h-[2px] w-10 bg-[#C49A59] mb-2" />
                             <EditableText
                               as="h3"
                               path={`advantagesSection.items.${advIdx}.title`}
@@ -950,7 +862,7 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 18 — PLACEMENT ASSISTANCE: Creative Scroll-Linked Journey */}
+      {/* 19 — PLACEMENT ASSISTANCE: Animated SVG Career Journey */}
       <section ref={placementRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -976,13 +888,21 @@ export function HomeCatalogSections({
           </div>
 
           <div className="relative space-y-5">
-            <div className="hidden lg:block h-[3px] w-full bg-[#E1E6EC] rounded-full overflow-hidden">
-              <div className="placement-line-h h-full w-full bg-[#2463A6] origin-left" />
+            <div className="hidden lg:block">
+              <SvgPathway
+                orientation="horizontal"
+                triggerRef={placementRef}
+                onProgress={(p) => setActivePlacementStage(Math.min(3, Math.floor(p * 4)))}
+              />
             </div>
 
-            <div className="relative pl-5 lg:pl-0">
-              <div className="lg:hidden absolute left-1 top-2 bottom-2 w-[3px] bg-[#E1E6EC] rounded-full overflow-hidden">
-                <div className="placement-line-v w-full h-full bg-[#2463A6] origin-top" />
+            <div className="relative pl-6 lg:pl-0">
+              <div className="lg:hidden absolute left-0 top-2 bottom-2">
+                <SvgPathway
+                  orientation="vertical"
+                  triggerRef={placementRef}
+                  onProgress={(p) => setActivePlacementStage(Math.min(3, Math.floor(p * 4)))}
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -992,7 +912,7 @@ export function HomeCatalogSections({
                   return (
                     <div
                       key={sIdx}
-                      className={`placement-card-v3 border border-t-4 p-6 space-y-3 transition-colors duration-250 rounded-[12px] relative ${
+                      className={`border border-t-4 p-6 space-y-3 transition-colors duration-250 rounded-[12px] relative ${
                         reached
                           ? "bg-[#F1F6FB] border-[#E1E6EC] border-t-[#2463A6]"
                           : "bg-[#F7F8FA] border-[#E1E6EC] border-t-[#E1E6EC]"
@@ -1012,7 +932,7 @@ export function HomeCatalogSections({
                             reached ? "text-[#2463A6]" : "text-[#718096]"
                           }`}
                         />
-                        <Icon className="w-5 h-5 text-[#10264A]" />
+                        <Icon className={`w-5 h-5 transition-colors ${reached ? "text-[#2463A6]" : "text-[#10264A]"}`} />
                       </div>
                       <EditableText
                         as="h3"
@@ -1054,11 +974,11 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 19 — ACADEMIC PARTNERSHIPS: Photographic Expansion Within Container */}
-      <section ref={academicRef} className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
+      {/* 20 — ACADEMIC PARTNERSHIPS: Editorial Image Expansion */}
+      <section className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-5">
-            <div className="academic-text-v3 flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5">
               <span className="h-[2px] w-7 bg-[#C49A59]" />
               <span className="type-eyebrow text-[#526477]">Institutional Collaborations</span>
             </div>
@@ -1066,15 +986,15 @@ export function HomeCatalogSections({
               as="h2"
               path="academicSection.heading"
               value={content.academicSection.heading}
-              className="academic-text-v3 type-section-heading text-[#10264A]"
+              className="type-section-heading text-[#10264A]"
             />
             <EditableText
               as="p"
               path="academicSection.description"
               value={content.academicSection.description}
-              className="academic-text-v3 text-base text-[#526477] leading-relaxed"
+              className="text-base text-[#526477] leading-relaxed"
             />
-            <div className="academic-text-v3 grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {content.academicSection.bullets.map((item, bIdx) => (
                 <div key={bIdx} className="flex items-start gap-2 text-sm text-[#10264A] justify-between">
                   <div className="flex items-start gap-2">
@@ -1090,7 +1010,7 @@ export function HomeCatalogSections({
                 </div>
               ))}
             </div>
-            <div className="academic-text-v3 flex flex-wrap gap-3.5 pt-3 items-center">
+            <div className="flex flex-wrap gap-3.5 pt-3 items-center">
               <EditableAddButton
                 path="academicSection.bullets"
                 label="Add Bullet"
@@ -1105,31 +1025,30 @@ export function HomeCatalogSections({
             </div>
           </div>
 
-          <div
-            ref={academicFrameRef}
-            className="lg:col-span-6 relative aspect-[16/10] border border-[#E1E6EC] shadow-sm rounded-[12px] overflow-hidden"
+          <ExpandingPhotograph
+            insetPercent={10}
+            scaleFrom={1.1}
+            className="lg:col-span-6 relative aspect-[16/10] border border-[#E1E6EC] shadow-sm rounded-[12px]"
           >
-            <ParallaxImage travelPx={10} className="relative w-full h-full">
-              <Image
-                src={content.academicSection.image}
-                alt={content.academicSection.imageAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </ParallaxImage>
+            <Image
+              src={content.academicSection.image}
+              alt={content.academicSection.imageAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
             <EditableImageTrigger
               path="academicSection.image"
               currentSrc={content.academicSection.image}
               altPath="academicSection.imageAlt"
               currentAlt={content.academicSection.imageAlt}
             />
-          </div>
+          </ExpandingPhotograph>
         </div>
       </section>
 
-      {/* 20 — CAMPUS EXPERIENCE: Multi-Layer Parallax + Masks */}
-      <section ref={campusRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
+      {/* 21 — CAMPUS EXPERIENCE: Organic Photo Layers */}
+      <section className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
@@ -1168,7 +1087,7 @@ export function HomeCatalogSections({
             {content.campusSection.gallery.map((item, gIdx) => (
               <div
                 key={gIdx}
-                className="campus-tile-v3 group relative aspect-[4/5] border border-[#E1E6EC] bg-[#FAF9F6] rounded-[12px] overflow-hidden"
+                className="group relative aspect-[4/5] border border-[#E1E6EC] bg-[#FAF9F6] rounded-[12px] overflow-hidden"
               >
                 <EditableDeleteButton
                   path="campusSection.gallery"
@@ -1176,7 +1095,11 @@ export function HomeCatalogSections({
                   label="Delete"
                   className="absolute top-3 left-3 z-30"
                 />
-                <ParallaxImage travelPx={gIdx % 2 === 0 ? 18 : 10} className="relative w-full h-full">
+                <PhotographicDepth
+                  travelPx={gIdx % 2 === 0 ? 22 : 12}
+                  scaleFrom={1.09}
+                  className="relative w-full h-full"
+                >
                   {item.video || item.src.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(item.src) ? (
                     <video
                       src={item.video || item.src}
@@ -1195,7 +1118,7 @@ export function HomeCatalogSections({
                       className="object-cover"
                     />
                   )}
-                </ParallaxImage>
+                </PhotographicDepth>
                 <EditableImageTrigger
                   path={`campusSection.gallery.${gIdx}.src`}
                   currentSrc={item.src}
@@ -1264,7 +1187,11 @@ export function HomeCatalogSections({
                 </div>
               )}
             </div>
-            <div className="lg:col-span-5 relative aspect-[16/10] rounded-[12px] border border-[#E1E6EC] overflow-hidden">
+            <ExpandingPhotograph
+              insetPercent={8}
+              scaleFrom={1.08}
+              className="lg:col-span-5 relative aspect-[16/10] rounded-[12px] border border-[#E1E6EC]"
+            >
               {sec.video || (sec.image && (sec.image.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(sec.image))) ? (
                 <video
                   src={sec.video || sec.image}
@@ -1284,7 +1211,7 @@ export function HomeCatalogSections({
                 />
               )}
               <EditableImageTrigger path={`customSections.${sIdx}.image`} currentSrc={sec.image || "/images/hero-1.jpg"} />
-            </div>
+            </ExpandingPhotograph>
           </div>
         </section>
       ))}
@@ -1305,26 +1232,26 @@ export function HomeCatalogSections({
         />
       </div>
 
-      {/* 21 — FINAL ENQUIRY: Split Editorial Reveal */}
-      <section ref={finalCtaRef} className="py-16 lg:py-20 bg-[#F1F6FB] border-b border-[#E1E6EC]">
+      {/* 23 — FINAL ENQUIRY SECTION: Progressive Headline Illumination */}
+      <section className="py-16 lg:py-20 bg-[#F1F6FB] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="bg-white text-[#10264A] p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border border-[#E1E6EC] border-l-4 border-l-[#C49A59] rounded-[12px] shadow-xs">
             <div className="space-y-3 max-w-2xl">
               <div className="flex items-center gap-2.5">
-                <span className="final-accent-v3 origin-left h-[2px] w-7 bg-[#C49A59]" />
+                <span className="h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">Admissions &amp; Career Guidance</span>
               </div>
-              <EditableText
-                as="h2"
-                path="finalCtaSection.heading"
-                value={content.finalCtaSection.heading}
-                className="final-left-v3 type-section-heading text-[#10264A]"
+              <ProgressiveTypography
+                segments={[
+                  { text: content.finalCtaSection.heading, accent: false },
+                ]}
+                className="type-section-heading"
               />
               <EditableText
                 as="p"
                 path="finalCtaSection.description"
                 value={content.finalCtaSection.description}
-                className="final-left-v3 text-base text-[#526477] leading-relaxed"
+                className="text-base text-[#526477] leading-relaxed"
               />
             </div>
 
@@ -1332,16 +1259,16 @@ export function HomeCatalogSections({
               <button
                 type="button"
                 onClick={() => openDemoModal({ sourcePage: "homepage-final-cta" })}
-                className="final-right-v3 btn-navy mc-icon-btn px-5 py-3 text-sm cursor-pointer"
+                className="btn-navy mc-icon-btn px-5 py-3 text-sm cursor-pointer"
               >
                 <EditableText path="finalCtaSection.demoLabel" value={content.finalCtaSection.demoLabel} />
               </button>
-              <Link href="/contact" className="final-right-v3 btn-outline-navy mc-icon-btn px-5 py-3 text-sm">
+              <Link href="/contact" className="btn-outline-navy mc-icon-btn px-5 py-3 text-sm">
                 <EditableText path="finalCtaSection.contactLabel" value={content.finalCtaSection.contactLabel} />
               </Link>
               <a
                 href={content.brand.phoneHref}
-                className="final-right-v3 motion-link font-nav text-sm font-semibold text-[#2463A6] hover:text-[#10264A] px-2"
+                className="motion-link font-nav text-sm font-semibold text-[#2463A6] hover:text-[#10264A] px-2"
               >
                 <Phone className="w-4 h-4" />
                 <EditableText path="brand.phoneDisplay" value={content.brand.phoneDisplay} />
