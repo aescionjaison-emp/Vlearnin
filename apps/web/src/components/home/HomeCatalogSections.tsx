@@ -3,9 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
   BookOpen,
@@ -28,9 +25,18 @@ import {
   OfficialCourseSeed,
 } from "@vlearnin/shared";
 import { useLeadModal } from "@/components/LeadModalProvider";
-import { AnimatedHeading } from "@/components/animation/AnimatedHeading";
+import { EditorialHeading } from "@/components/motion/EditorialHeading";
+import { PhotographicReveal } from "@/components/motion/PhotographicReveal";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
+import { ProgressivePathway } from "@/components/motion/ProgressivePathway";
+import {
+  ProgrammeCardItem,
+  ProgrammeFilterMotion,
+} from "@/components/motion/ProgrammeFilterMotion";
 import { FlipCard } from "@/components/motion/FlipCard";
-import { isMotionDisabled } from "@/lib/motion/presets";
+import { gsap, ScrollTrigger, isEditorialMotionDisabled } from "@/lib/motion/motion-provider";
+import { EDITORIAL_EASE } from "@/lib/motion/motion-easing";
+import { MOTION_TOKENS } from "@/lib/motion/motion-tokens";
 import { useSiteContent } from "@/components/SiteContentProvider";
 import {
   EditableAddButton,
@@ -38,8 +44,6 @@ import {
   EditableImageTrigger,
   EditableText,
 } from "@/components/EditableText";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const FILTER_TABS = [
   { id: "all", label: "All Programmes" },
@@ -49,12 +53,6 @@ const FILTER_TABS = [
 ];
 
 const ADVANTAGE_ICONS = [Sparkles, Users, ShieldCheck, Clock] as const;
-const ADVANTAGE_IMAGES = [
-  "/images/about-campus.jpg",
-  "/images/hero-1.jpg",
-  "/images/domain-analytics.jpg",
-  "/images/hero-4.jpg",
-] as const;
 const PLACEMENT_ICONS = [Layers, FileCheck2, GraduationCap, Briefcase] as const;
 const DOMAIN_SURFACES = ["#F8F5EE", "#F1F5FB", "#FBF4F1"] as const;
 const COURSE_SURFACES = [
@@ -83,435 +81,229 @@ export function HomeCatalogSections({
   const combos = content.combos.length > 0 ? content.combos : (propCombos || []);
 
   const [activeFilter, setActiveFilter] = useState("all");
-  const [activeDomainIdx, setActiveDomainIdx] = useState(0);
-  const [activeComboIdx, setActiveComboIdx] = useState(0);
-  const [activeAdvantageIdx, setActiveAdvantageIdx] = useState(0);
-  const [activeStageIdx, setActiveStageIdx] = useState(0);
+  const [activeComboStage, setActiveComboStage] = useState(0);
+  const [activePlacementStage, setActivePlacementStage] = useState(0);
 
-  // Section refs for dedicated section-specific timelines
-  const domainsSectionRef = useRef<HTMLElement>(null);
-  const domainsViewportRef = useRef<HTMLDivElement>(null);
-  const domainsTrackRef = useRef<HTMLDivElement>(null);
-  const domainsProgressRef = useRef<HTMLDivElement>(null);
-
-  const stackedSectionRef = useRef<HTMLElement>(null);
-  const combosSectionRef = useRef<HTMLElement>(null);
-  const advantagesSectionRef = useRef<HTMLElement>(null);
-  const pathwaySectionRef = useRef<HTMLElement>(null);
-  const academicSectionRef = useRef<HTMLElement>(null);
-  const academicFrameRef = useRef<HTMLDivElement>(null);
-  const campusSectionRef = useRef<HTMLElement>(null);
-  const finalCtaSectionRef = useRef<HTMLElement>(null);
+  const domainsRef = useRef<HTMLElement>(null);
+  const combosRef = useRef<HTMLElement>(null);
+  const advantagesRef = useRef<HTMLElement>(null);
+  const placementRef = useRef<HTMLElement>(null);
+  const academicRef = useRef<HTMLElement>(null);
+  const finalCtaRef = useRef<HTMLElement>(null);
 
   const filteredCourses =
     activeFilter === "all"
       ? courses
       : courses.filter((c) => c.categorySlug === activeFilter);
 
-  // Animations 05, 07, 08, 09, 10, 11, 12
   useEffect(() => {
-    if (isMotionDisabled()) return;
+    if (isEditorialMotionDisabled()) return;
 
-    const mm = gsap.matchMedia();
-
-    // ── ANIMATION 05: Horizontal Scroll Learning Domains (Desktop Pinned) ──
-    mm.add("(min-width: 1024px)", () => {
-      const section = domainsSectionRef.current;
-      const viewport = domainsViewportRef.current;
-      const track = domainsTrackRef.current;
-      if (!section || !viewport || !track) return;
-
-      const getDistance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
-
-      const tween = gsap.to(track, {
-        x: () => -getDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${Math.max(900, getDistance() + 300)}`,
-          pin: true,
-          scrub: 0.65,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (domainsProgressRef.current) {
-              domainsProgressRef.current.style.transform = `scaleX(${self.progress})`;
-            }
-            const count = Math.max(1, categories.length);
-            const idx = Math.min(count - 1, Math.floor(self.progress * count));
-            setActiveDomainIdx(idx);
-          },
+    // ── Domains: accent line draws ──
+    const domainsCtx = gsap.context(() => {
+      if (!domainsRef.current) return;
+      gsap.fromTo(
+        ".domain-accent-line",
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 0.5,
+          stagger: MOTION_TOKENS.stagger.standard,
+          ease: EDITORIAL_EASE.editorial,
+          clearProps: "transform",
+          scrollTrigger: { trigger: domainsRef.current, start: MOTION_TOKENS.triggerStart, once: true },
         },
-      });
+      );
+    }, domainsRef);
 
-      return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
-      };
-    });
-
-    // ── ANIMATION 07: Career Combo Sticky Storytelling ──
+    // ── Career Combos: continuous pathway progression ──
     const combosCtx = gsap.context(() => {
-      const items = gsap.utils.toArray<HTMLElement>(".combo-story-step", combosSectionRef.current);
-      items.forEach((step, idx) => {
-        ScrollTrigger.create({
-          trigger: step,
-          start: "top 58%",
-          end: "bottom 42%",
-          onEnter: () => setActiveComboIdx(idx),
-          onEnterBack: () => setActiveComboIdx(idx),
-        });
-
-        gsap.fromTo(
-          step,
-          { y: 30, opacity: 0.85 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.65,
-            ease: "expo.out",
-            clearProps: "transform,opacity",
-            scrollTrigger: {
-              trigger: step,
-              start: "top 85%",
-              once: true,
-            },
-          },
-        );
+      if (!combosRef.current) return;
+      ScrollTrigger.create({
+        trigger: combosRef.current,
+        start: "top 75%",
+        end: "bottom 60%",
+        scrub: true,
+        onUpdate: (self) => {
+          const count = Math.max(1, combos.length);
+          setActiveComboStage(Math.min(count - 1, Math.floor(self.progress * count)));
+        },
       });
-    }, combosSectionRef);
+    }, combosRef);
 
-    // ── ANIMATION 08: VLEARNIN Advantage Scroll Image Switcher ──
+    // ── Advantages: subtle icon & decorative line drawing ──
     const advCtx = gsap.context(() => {
-      const advItems = gsap.utils.toArray<HTMLElement>(".vway-adv-step", advantagesSectionRef.current);
-      advItems.forEach((item, idx) => {
-        ScrollTrigger.create({
-          trigger: item,
-          start: "top 62%",
-          end: "bottom 38%",
-          onEnter: () => setActiveAdvantageIdx(idx),
-          onEnterBack: () => setActiveAdvantageIdx(idx),
-        });
-      });
-    }, advantagesSectionRef);
-
-    // ── ANIMATION 09: Placement Assistance Career Journey ──
-    const pathwayCtx = gsap.context(() => {
-      const scope = pathwaySectionRef.current;
-      if (!scope) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: scope,
-          start: "top 75%",
-          end: "bottom 65%",
-          scrub: 0.55,
-          onUpdate: (self) => {
-            const idx = Math.min(3, Math.floor(self.progress * 4));
-            setActiveStageIdx(idx);
-          },
-        },
-      });
-
-      tl.fromTo(".pathway-progress-bar", { scaleX: 0 }, { scaleX: 1, ease: "none" }, 0);
-
+      if (!advantagesRef.current) return;
       gsap.fromTo(
-        ".pathway-stage-card",
-        { x: 48, clipPath: "inset(0 0 0 15%)", opacity: 0.86 },
+        ".adv-accent-bar",
+        { scaleX: 0 },
         {
-          x: 0,
-          clipPath: "inset(0 0 0 0%)",
-          opacity: 1,
-          duration: 0.75,
-          stagger: 0.12,
-          ease: "expo.out",
-          clearProps: "transform,clipPath,opacity",
-          scrollTrigger: {
-            trigger: scope,
-            start: "top 80%",
-            once: true,
-          },
+          scaleX: 1,
+          duration: 0.55,
+          stagger: 0.07,
+          ease: EDITORIAL_EASE.editorial,
+          clearProps: "transform",
+          scrollTrigger: { trigger: advantagesRef.current, start: MOTION_TOKENS.triggerStart, once: true },
         },
       );
-    }, pathwaySectionRef);
-
-    // ── ANIMATION 10: Academic Partnerships Scroll Image Expansion ──
-    const academicCtx = gsap.context(() => {
-      const scope = academicSectionRef.current;
-      const frame = academicFrameRef.current;
-      if (!scope || !frame) return;
-
       gsap.fromTo(
-        frame,
-        { scale: 0.86, clipPath: "inset(6% 8% 6% 8% round 22px)" },
-        {
-          scale: 1,
-          clipPath: "inset(0% 0% 0% 0% round 15px)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: scope,
-            start: "top 85%",
-            end: "center 45%",
-            scrub: 0.65,
-            invalidateOnRefresh: true,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".academic-reveal-item",
-        { y: 24, opacity: 0.85 },
+        ".adv-icon",
+        { y: 6, opacity: 0.85 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.08,
-          ease: "expo.out",
+          duration: 0.4,
+          stagger: 0.07,
+          ease: EDITORIAL_EASE.out,
           clearProps: "transform,opacity",
-          scrollTrigger: {
-            trigger: scope,
-            start: "top 78%",
-            once: true,
-          },
+          scrollTrigger: { trigger: advantagesRef.current, start: MOTION_TOKENS.triggerStart, once: true },
         },
       );
-    }, academicSectionRef);
+    }, advantagesRef);
 
-    // ── ANIMATION 11: Campus Experience Multi-Layer Parallax ──
-    const campusCtx = gsap.context(() => {
-      const tiles = gsap.utils.toArray<HTMLElement>(".campus-tile", campusSectionRef.current);
-      tiles.forEach((tile, idx) => {
-        const isForeground = idx % 2 === 0;
-        gsap.fromTo(
-          tile,
-          { clipPath: "inset(12% 0 0 0 round 15px)", opacity: 0.88 },
-          {
-            clipPath: "inset(0% 0 0 0 round 15px)",
-            opacity: 1,
-            duration: 0.8,
-            delay: idx * 0.06,
-            ease: "expo.out",
-            clearProps: "clipPath,opacity",
-            scrollTrigger: {
-              trigger: campusSectionRef.current,
-              start: "top 82%",
-              once: true,
-            },
-          },
-        );
-
-        gsap.fromTo(
-          tile,
-          { yPercent: isForeground ? -6 : 4 },
-          {
-            yPercent: isForeground ? 6 : -4,
-            ease: "none",
-            scrollTrigger: {
-              trigger: campusSectionRef.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.7,
-            },
-          },
-        );
-      });
-    }, campusSectionRef);
-
-    // ── ANIMATION 12: Final Enquiry Cinematic Curtain ──
-    const finalCtx = gsap.context(() => {
-      const scope = finalCtaSectionRef.current;
-      if (!scope) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: scope,
-          start: "top 82%",
-          once: true,
+    // ── Placement Journey: continuous stage highlight ──
+    const placeCtx = gsap.context(() => {
+      if (!placementRef.current) return;
+      ScrollTrigger.create({
+        trigger: placementRef.current,
+        start: "top 75%",
+        end: "bottom 60%",
+        scrub: true,
+        onUpdate: (self) => {
+          setActivePlacementStage(Math.min(3, Math.floor(self.progress * 4)));
         },
+      });
+    }, placementRef);
+
+    // ── Academic Partnerships: coordinated heading entrance ──
+    const academicCtx = gsap.context(() => {
+      if (!academicRef.current) return;
+      gsap.fromTo(
+        ".academic-editorial-item",
+        { y: 16, opacity: 0.88 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: EDITORIAL_EASE.editorial,
+          clearProps: "transform,opacity",
+          scrollTrigger: { trigger: academicRef.current, start: MOTION_TOKENS.triggerStart, once: true },
+        },
+      );
+    }, academicRef);
+
+    // ── Final Enquiry: clean compact editorial entrance (550ms) ──
+    const finalCtx = gsap.context(() => {
+      if (!finalCtaRef.current) return;
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: finalCtaRef.current, start: MOTION_TOKENS.triggerStart, once: true },
       });
 
       tl.fromTo(
-        ".final-curtain-frame",
-        { clipPath: "inset(0 100% 0 0 round 15px)" },
-        {
-          clipPath: "inset(0 0% 0 0 round 15px)",
-          duration: 1.0,
-          ease: "expo.out",
-          clearProps: "clipPath",
-        },
+        ".final-accent-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.5, ease: EDITORIAL_EASE.editorial, clearProps: "transform" },
         0,
       )
         .fromTo(
-          ".final-cta-text-mask",
-          { clipPath: "inset(0 0 100% 0)", y: 20 },
-          {
-            clipPath: "inset(0 0 0% 0)",
-            y: 0,
-            duration: 0.75,
-            stagger: 0.1,
-            ease: "expo.out",
-            clearProps: "clipPath,transform",
-          },
-          0.25,
-        )
-        .fromTo(
-          ".final-cta-action",
-          { y: 16, opacity: 0.85 },
+          ".final-editorial-text",
+          { y: 14, opacity: 0.88 },
           {
             y: 0,
             opacity: 1,
             duration: 0.55,
             stagger: 0.08,
-            ease: "expo.out",
+            ease: EDITORIAL_EASE.editorial,
             clearProps: "transform,opacity",
           },
-          0.42,
+          0.08,
         );
-    }, finalCtaSectionRef);
+    }, finalCtaRef);
 
     return () => {
-      mm.revert();
+      domainsCtx.revert();
       combosCtx.revert();
       advCtx.revert();
-      pathwayCtx.revert();
+      placeCtx.revert();
       academicCtx.revert();
-      campusCtx.revert();
       finalCtx.revert();
     };
-  }, [categories.length]);
-
-  // ── ANIMATION 06: Stacked Programme Cards (re-runs smoothly when filter changes) ──
-  useEffect(() => {
-    if (isMotionDisabled()) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px)", () => {
-      const cards = gsap.utils.toArray<HTMLElement>(".stacked-course-card", stackedSectionRef.current);
-      cards.forEach((card, idx) => {
-        if (idx < cards.length - 1) {
-          gsap.to(card, {
-            scale: 0.96,
-            ease: "none",
-            scrollTrigger: {
-              trigger: cards[idx + 1],
-              start: "top 80%",
-              end: "top 25%",
-              scrub: 0.5,
-            },
-          });
-        }
-
-        const photo = card.querySelector(".stacked-course-photo");
-        if (photo) {
-          gsap.fromTo(
-            photo,
-            { clipPath: "inset(10% 0 10% 0 round 12px)", scale: 1.06 },
-            {
-              clipPath: "inset(0% 0 0% 0 round 12px)",
-              scale: 1,
-              duration: 0.8,
-              ease: "expo.out",
-              clearProps: "clipPath,transform",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 86%",
-                once: true,
-              },
-            },
-          );
-        }
-      });
-    });
-
-    return () => mm.revert();
-  }, [activeFilter, filteredCourses.length]);
+  }, [combos.length]);
 
   return (
     <div>
-      {/* 13 — EXPLORE OUR LEARNING DOMAINS (Animation 05: Horizontal Scroll Showcase) */}
-      <section
-        ref={domainsSectionRef}
-        className="py-14 lg:py-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-center bg-white border-b border-[#E1E6EC] overflow-hidden"
-      >
-        <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
-            <div className="max-w-3xl">
-              <div className="flex items-center gap-2.5 mb-2">
-                <span className="h-[2px] w-7 bg-[#C49A59]" />
-                <span className="type-eyebrow text-[#526477]">Academic Pathways</span>
-              </div>
-              <AnimatedHeading as="h2" className="type-section-heading text-[#10264A]">
-                <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
-              </AnimatedHeading>
-              <EditableText
-                as="p"
-                path="domainsSection.description"
-                value={content.domainsSection.description}
-                className="mc-lead text-[#526477] mt-2"
-              />
+      {/* 16 — CORE LEARNING DOMAINS (Stable Photographic Showcase) */}
+      <section ref={domainsRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className="domain-accent-line origin-left h-[2px] w-7 bg-[#C49A59]" />
+              <span className="type-eyebrow text-[#526477]">Academic Pathways</span>
             </div>
-            {/* Desktop Horizontal Progress Indicator */}
-            <div className="hidden lg:flex items-center gap-4 shrink-0">
-              <span className="font-heading text-sm font-extrabold text-[#10264A] tabular-nums">
-                0{activeDomainIdx + 1} / 0{categories.length}
-              </span>
-              <div className="w-40 h-1.5 bg-[#E1E6EC] rounded-full overflow-hidden">
-                <div
-                  ref={domainsProgressRef}
-                  className="h-full w-full bg-[#2463A6] origin-left scale-x-0"
-                />
-              </div>
-            </div>
+            <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+              <EditableText path="domainsSection.heading" value={content.domainsSection.heading} />
+            </EditorialHeading>
+            <EditableText
+              as="p"
+              path="domainsSection.description"
+              value={content.domainsSection.description}
+              className="mc-lead text-[#526477] mt-2"
+            />
           </div>
 
-          <div ref={domainsViewportRef} className="overflow-x-auto lg:overflow-hidden pb-4 lg:pb-0">
-            <div
-              ref={domainsTrackRef}
-              className="flex gap-6 lg:gap-8 w-max lg:w-max snap-x snap-mandatory lg:snap-none"
-            >
-              {categories.map((cat, idx) => {
-                const domainCourses = courses.filter((c) => c.categorySlug === cat.slug);
-                const ctaLabel =
-                  cat.slug === "ai-business-intelligence"
-                    ? "Explore AI & Analytics"
-                    : cat.slug === "corporate-finance-capital-markets"
-                      ? "Explore Finance & Investment Banking"
-                      : "Explore Digital & Media";
-                const cardBg = DOMAIN_SURFACES[idx % DOMAIN_SURFACES.length];
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-7">
+            {categories.map((cat, idx) => {
+              const domainCourses = courses.filter((c) => c.categorySlug === cat.slug);
+              const ctaLabel =
+                cat.slug === "ai-business-intelligence"
+                  ? "Explore AI & Analytics"
+                  : cat.slug === "corporate-finance-capital-markets"
+                    ? "Explore Finance & IB"
+                    : "Explore Digital & Media";
+              const cardBg = DOMAIN_SURFACES[idx % DOMAIN_SURFACES.length];
 
-                return (
-                  <article
-                    key={cat.slug}
-                    style={{ backgroundColor: cardBg }}
-                    className="domain-panel snap-start shrink-0 w-[86vw] sm:w-[75vw] lg:w-[78vw] max-w-[1060px] mc-card-hover border border-[#E1E6EC] shadow-xs grid grid-cols-1 lg:grid-cols-12 overflow-hidden group rounded-[12px] relative"
-                  >
-                    <EditableDeleteButton
-                      path="categories"
-                      index={idx}
-                      label="Delete Domain"
-                      className="absolute top-3 left-3 z-30"
-                    />
-                    <div className="domain-media lg:col-span-6 relative min-h-[240px] lg:min-h-[400px] overflow-hidden">
+              return (
+                <article
+                  key={cat.slug}
+                  style={{ backgroundColor: cardBg }}
+                  className="mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
+                >
+                  <EditableDeleteButton
+                    path="categories"
+                    index={idx}
+                    label="Delete Domain"
+                    className="absolute top-3 left-3 z-30"
+                  />
+                  <div>
+                    <PhotographicReveal
+                      direction="bottom"
+                      delay={idx * 0.085}
+                      className="relative aspect-[16/10] w-full"
+                    >
                       <Image
                         src={cat.image}
                         alt={cat.name}
                         fill
-                        sizes="(max-width: 1024px) 90vw, 45vw"
+                        sizes="(max-width: 1024px) 100vw, 33vw"
                         className="object-cover mc-image-zoom"
                       />
                       <EditableImageTrigger path={`categories.${idx}.image`} currentSrc={cat.image} />
-                      <span className="absolute top-4 left-4 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]">
+                      <span className="absolute top-3 left-3 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]">
                         Domain 0{idx + 1}
                       </span>
-                    </div>
+                    </PhotographicReveal>
 
-                    <div className="domain-body lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center space-y-4">
-                      <EditableText
-                        as="h3"
-                        path={`categories.${idx}.name`}
-                        value={cat.name}
-                        className="vl-mask-title font-heading text-2xl sm:text-3xl font-extrabold text-[#10264A] tracking-[-0.03em]"
-                      />
+                    <div className="p-6 sm:p-7 space-y-4">
+                      <div>
+                        <span className="domain-accent-line origin-left block h-[2px] w-8 bg-[#C49A59] mb-2.5" />
+                        <EditableText
+                          as="h3"
+                          path={`categories.${idx}.name`}
+                          value={cat.name}
+                          className="font-heading text-xl sm:text-2xl font-extrabold text-[#10264A] tracking-[-0.025em]"
+                        />
+                      </div>
                       <EditableText
                         as="p"
                         path={`categories.${idx}.outcomeSummary`}
@@ -523,31 +315,32 @@ export function HomeCatalogSections({
                           <li key={dc.slug}>
                             <Link
                               href={`/courses/${dc.slug}`}
-                              className="inline-flex items-center gap-2.5 text-sm sm:text-[15px] font-nav font-semibold text-[#2463A6] hover:text-[#10264A] transition-colors"
+                              className="group/link inline-flex items-center gap-2 text-sm font-nav font-semibold text-[#2463A6] hover:text-[#10264A] transition-colors"
                             >
-                              <ArrowRight className="w-4 h-4 text-[#C49A59] shrink-0" />
-                              <span>{dc.title}</span>
+                              <ArrowRight className="w-3.5 h-3.5 text-[#C49A59] shrink-0 transition-transform duration-250 group-hover/link:translate-x-1" />
+                              <span className="mc-underline-link">{dc.title}</span>
                             </Link>
                           </li>
                         ))}
                       </ul>
-                      <div>
-                        <Link
-                          href={`/courses?category=${cat.slug}`}
-                          className="btn-navy mc-icon-btn px-5 py-2.5 text-sm inline-flex items-center gap-2"
-                        >
-                          <span>{ctaLabel}</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </Link>
-                      </div>
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                  </div>
+
+                  <div className="px-6 sm:px-7 pb-6">
+                    <Link
+                      href={`/courses?category=${cat.slug}`}
+                      className="btn-navy mc-icon-btn w-full justify-center px-5 py-2.5 text-sm inline-flex items-center gap-2"
+                    >
+                      <span>{ctaLabel}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
-          <div className="mt-4 flex justify-end">
+          <div className="flex justify-end">
             <EditableAddButton
               path="categories"
               label="Add Domain"
@@ -565,8 +358,8 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 14 — CERTIFICATION PROGRAMME DISCOVERY (Animation 06: Stacked Programme Cards) */}
-      <section ref={stackedSectionRef} className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
+      {/* 17 — ALL SEVEN CERTIFICATION PROGRAMMES (Stable Editorial Grid + FLIP Filter) */}
+      <section className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
             <div>
@@ -574,12 +367,9 @@ export function HomeCatalogSections({
                 <span className="h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">Certification Catalogue</span>
               </div>
-              <EditableText
-                as="h2"
-                path="discoverySection.heading"
-                value={content.discoverySection.heading}
-                className="type-section-heading text-[#10264A]"
-              />
+              <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+                <EditableText path="discoverySection.heading" value={content.discoverySection.heading} />
+              </EditorialHeading>
             </div>
 
             <Link
@@ -606,7 +396,7 @@ export function HomeCatalogSections({
                   role="tab"
                   aria-selected={active}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2 rounded-[6px] transition-colors cursor-pointer ${
+                  className={`font-nav text-xs sm:text-sm font-semibold px-4 py-2 rounded-[6px] transition-colors duration-250 cursor-pointer ${
                     active
                       ? "bg-[#2463A6] text-white"
                       : "bg-white border border-[#E1E6EC] text-[#10264A] hover:border-[#2463A6]"
@@ -618,28 +408,24 @@ export function HomeCatalogSections({
             })}
           </div>
 
-          {/* Sequential Stacked Cards (Alternating Pastel Surfaces) */}
-          <div className="space-y-6 lg:space-y-8">
-            <AnimatePresence mode="popLayout">
-              {filteredCourses.map((course, idx) => {
-                const cIdx = courses.findIndex((c) => c.slug === course.slug);
-                const cardSurface = COURSE_SURFACES[(cIdx >= 0 ? cIdx : idx) % COURSE_SURFACES.length];
-                return (
-                  <motion.article
-                    key={course.slug}
-                    layout
-                    initial={{ opacity: 1, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.25 }}
-                    style={{
-                      top: `${114 + Math.min(idx, 5) * 14}px`,
-                      zIndex: idx + 10,
-                      backgroundColor: cardSurface,
-                    }}
-                    className="stacked-course-card lg:sticky border border-[#E1E6EC] hover:border-[#2463A6] shadow-[0_8px_24px_rgba(16,38,74,0.06)] rounded-[12px] overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch group"
-                  >
-                    <div className="stacked-course-photo lg:col-span-5 relative min-h-[220px] lg:min-h-[280px] overflow-hidden">
+          {/* Stable Grid with Smooth 320ms Layout Filter Transitions */}
+          <ProgrammeFilterMotion className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {filteredCourses.map((course, idx) => {
+              const cIdx = courses.findIndex((c) => c.slug === course.slug);
+              const cardSurface = COURSE_SURFACES[(cIdx >= 0 ? cIdx : idx) % COURSE_SURFACES.length];
+              return (
+                <ProgrammeCardItem
+                  key={course.slug}
+                  layoutKey={course.slug}
+                  style={{ backgroundColor: cardSurface }}
+                  className="mc-card-hover border border-[#E1E6EC] hover:border-[#2463A6] rounded-[12px] overflow-hidden flex flex-col justify-between group relative"
+                >
+                  <div>
+                    <PhotographicReveal
+                      direction="bottom"
+                      delay={(idx % 3) * 0.07}
+                      className="relative h-52 w-full"
+                    >
                       {cIdx >= 0 && (
                         <EditableDeleteButton
                           path="courses"
@@ -652,7 +438,7 @@ export function HomeCatalogSections({
                         src={course.image}
                         alt={course.title}
                         fill
-                        sizes="(max-width: 1024px) 100vw, 42vw"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover mc-image-zoom"
                       />
                       {cIdx >= 0 && (
@@ -661,69 +447,68 @@ export function HomeCatalogSections({
                       <span className="absolute bottom-3 left-3 bg-[#10264A]/95 text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]">
                         Programme 0{idx + 1}
                       </span>
-                    </div>
+                    </PhotographicReveal>
 
-                    <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between gap-4">
-                      <div className="space-y-2.5">
-                        <EditableText
-                          as="p"
-                          path={cIdx >= 0 ? `courses.${cIdx}.categoryName` : "discoverySection.eyebrow"}
-                          value={course.categoryName}
-                          className="block font-heading text-xs font-extrabold uppercase tracking-wider text-[#C49A59]"
-                        />
-                        <EditableText
-                          as="h3"
-                          path={cIdx >= 0 ? `courses.${cIdx}.title` : "discoverySection.heading"}
-                          value={course.title}
-                          className="vl-mask-title font-heading text-xl sm:text-2xl font-bold text-[#10264A] leading-snug tracking-[-0.025em]"
-                        />
-                        <div className="flex flex-wrap gap-4 text-xs font-nav text-[#526477]">
-                          <span className="inline-flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-[#C49A59]" />
-                            {course.durationHours} Hours
-                          </span>
-                          <span className="inline-flex items-center gap-1.5">
-                            <BookOpen className="w-3.5 h-3.5 text-[#2463A6]" />
-                            5 Modules + Capstone
-                          </span>
-                        </div>
-                        <EditableText
-                          as="p"
-                          path={cIdx >= 0 ? `courses.${cIdx}.summary` : "discoverySection.heading"}
-                          value={course.summary}
-                          className="text-sm sm:text-base text-[#526477] leading-relaxed"
-                        />
-                        <p className="text-xs font-nav text-[#526477]">
-                          <strong className="text-[#10264A]">Modes:</strong> {course.learningModes.join(" • ")}
-                        </p>
+                    <div className="p-6 space-y-3">
+                      <span className="block h-[2px] w-7 bg-[#C49A59]" />
+                      <EditableText
+                        as="p"
+                        path={cIdx >= 0 ? `courses.${cIdx}.categoryName` : "discoverySection.eyebrow"}
+                        value={course.categoryName}
+                        className="block font-heading text-xs font-extrabold uppercase tracking-wider text-[#C49A59]"
+                      />
+                      <EditableText
+                        as="h3"
+                        path={cIdx >= 0 ? `courses.${cIdx}.title` : "discoverySection.heading"}
+                        value={course.title}
+                        className="font-heading text-xl font-bold text-[#10264A] leading-snug tracking-[-0.025em]"
+                      />
+                      <div className="flex flex-wrap gap-4 text-xs font-nav text-[#526477]">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5 text-[#C49A59]" />
+                          {course.durationHours} Hours
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <BookOpen className="w-3.5 h-3.5 text-[#2463A6]" />
+                          5 Modules + Capstone
+                        </span>
                       </div>
-
-                      <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#E1E6EC]">
-                        <Link
-                          href={`/courses/${course.slug}`}
-                          className="btn-outline-navy px-4 py-2 text-xs"
-                        >
-                          View Programme
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            openDemoModal({
-                              preselectedProgramme: course.title,
-                              sourcePage: "homepage-programme-stack",
-                            })
-                          }
-                          className="btn-primary-amber px-4 py-2 text-xs cursor-pointer"
-                        >
-                          Enquire Now
-                        </button>
-                      </div>
+                      <EditableText
+                        as="p"
+                        path={cIdx >= 0 ? `courses.${cIdx}.summary` : "discoverySection.heading"}
+                        value={course.summary}
+                        className="text-sm text-[#526477] leading-relaxed"
+                      />
+                      <p className="text-xs font-nav text-[#526477]">
+                        <strong className="text-[#10264A]">Modes:</strong> {course.learningModes.join(" • ")}
+                      </p>
                     </div>
-                  </motion.article>
-                );
-              })}
-            </AnimatePresence>
-          </div>
+                  </div>
+
+                  <div className="px-6 pb-6 pt-3 border-t border-[#E1E6EC] grid grid-cols-2 gap-3">
+                    <Link
+                      href={`/courses/${course.slug}`}
+                      className="btn-outline-navy py-2.5 text-xs text-center"
+                    >
+                      View Programme
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openDemoModal({
+                          preselectedProgramme: course.title,
+                          sourcePage: "homepage-programme-grid",
+                        })
+                      }
+                      className="btn-primary-amber py-2.5 text-xs cursor-pointer"
+                    >
+                      Enquire Now
+                    </button>
+                  </div>
+                </ProgrammeCardItem>
+              );
+            })}
+          </ProgrammeFilterMotion>
 
           <div className="mt-6 flex justify-end">
             <EditableAddButton
@@ -753,21 +538,18 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 15 — CAREER ACCELERATOR COMBOS (Animation 07: Sticky Two-Column Storytelling) */}
-      <section ref={combosSectionRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+      {/* 18 — CAREER ACCELERATOR COMBOS (Continuous Career Pathway Presentation) */}
+      <section ref={combosRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="max-w-2xl">
               <div className="flex items-center gap-2.5 mb-2">
                 <span className="h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">Dual-Skill Tracks</span>
               </div>
-              <EditableText
-                as="h2"
-                path="combosSection.heading"
-                value={content.combosSection.heading}
-                className="type-section-heading text-[#10264A]"
-              />
+              <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+                <EditableText path="combosSection.heading" value={content.combosSection.heading} />
+              </EditorialHeading>
               <EditableText
                 as="p"
                 path="combosSection.description"
@@ -776,10 +558,7 @@ export function HomeCatalogSections({
               />
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/career-combos"
-                className="btn-navy px-5 py-2.5 text-sm"
-              >
+              <Link href="/career-combos" className="btn-navy px-5 py-2.5 text-sm">
                 Explore Career Combos
               </Link>
               <button
@@ -793,82 +572,54 @@ export function HomeCatalogSections({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Sticky Left Photographic Frame with Cinematic Mask Switching */}
-            <div className="hidden lg:block lg:col-span-5 lg:sticky lg:top-28">
-              <div className="relative aspect-[4/4.3] rounded-[12px] overflow-hidden border border-[#E1E6EC] shadow-sm bg-[#FAF9F6]">
-                {combos.map((combo, idx) => {
-                  const isActive = idx === activeComboIdx;
-                  return (
-                    <div
-                      key={combo.slug}
-                      className="absolute inset-0 transition-all duration-700 ease-out"
-                      style={{
-                        clipPath: isActive ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)",
-                        zIndex: isActive ? 2 : 1,
-                      }}
-                    >
-                      <Image
-                        src={combo.image}
-                        alt={combo.title}
-                        fill
-                        sizes="40vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
-                        <span className="font-nav text-xs font-semibold uppercase tracking-wider text-[#C49A59]">
-                          Track 0{idx + 1} / 0{combos.length} · {combo.durationLabel}
-                        </span>
-                        <p className="font-heading text-xl font-bold mt-1">{combo.title}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+          <ProgressivePathway className="hidden lg:block" />
 
-            {/* Right 4 Scroll Storytelling Phases */}
-            <div className="lg:col-span-7 space-y-6">
-              {combos.map((combo, idx) => {
-                const isActive = idx === activeComboIdx;
-                return (
-                  <article
-                    key={combo.slug}
-                    className={`combo-story-step bg-[#FAF9F6] border transition-colors duration-300 rounded-[12px] overflow-hidden relative ${
-                      isActive ? "border-[#2463A6] bg-white shadow-sm" : "border-[#E1E6EC]"
-                    }`}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+            {combos.map((combo, idx) => {
+              const isReached = idx <= activeComboStage;
+              return (
+                <article
+                  key={combo.slug}
+                  className={`mc-card-hover bg-[#FAF9F6] border rounded-[12px] overflow-hidden grid grid-cols-1 sm:grid-cols-12 relative transition-colors duration-300 group ${
+                    isReached ? "border-[#2463A6] bg-white" : "border-[#E1E6EC]"
+                  }`}
+                >
+                  <EditableDeleteButton
+                    path="combos"
+                    index={idx}
+                    label="Delete"
+                    className="absolute top-3 right-3 z-30"
+                  />
+                  <PhotographicReveal
+                    direction="left"
+                    delay={(idx % 2) * 0.08}
+                    className="sm:col-span-5 relative min-h-[220px]"
                   >
-                    <EditableDeleteButton
-                      path="combos"
-                      index={idx}
-                      label="Delete"
-                      className="absolute top-3 right-3 z-30"
+                    <Image
+                      src={combo.image}
+                      alt={combo.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 260px"
+                      className="object-cover mc-image-zoom"
                     />
-                    <div className="lg:hidden relative h-52 w-full">
-                      <Image
-                        src={combo.image}
-                        alt={combo.title}
-                        fill
-                        sizes="100vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-6 sm:p-8 space-y-3">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <EditableText
-                          path={`combos.${idx}.durationLabel`}
-                          value={combo.durationLabel}
-                          className="bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]"
-                        />
-                        <span className="font-heading text-xs font-extrabold text-[#526477]">
-                          0{idx + 1} / 0{combos.length}
-                        </span>
-                      </div>
+                    <EditableImageTrigger path={`combos.${idx}.image`} currentSrc={combo.image} />
+                    <EditableText
+                      path={`combos.${idx}.durationLabel`}
+                      value={combo.durationLabel}
+                      className="absolute top-3 left-3 bg-[#10264A] text-white font-nav text-xs font-semibold px-3 py-1 rounded-[6px]"
+                    />
+                  </PhotographicReveal>
+
+                  <div className="sm:col-span-7 p-6 flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <span className="font-heading text-xs font-extrabold text-[#2463A6]">
+                        Track 0{idx + 1}
+                      </span>
                       <EditableText
                         as="h3"
                         path={`combos.${idx}.title`}
                         value={combo.title}
-                        className="font-heading text-xl sm:text-2xl font-bold text-[#10264A]"
+                        className="font-heading text-xl font-bold text-[#10264A]"
                       />
                       <EditableText
                         as="p"
@@ -880,41 +631,41 @@ export function HomeCatalogSections({
                         as="p"
                         path={`combos.${idx}.summary`}
                         value={combo.summary}
-                        className="text-sm sm:text-base text-[#526477]"
+                        className="text-sm text-[#526477]"
                       />
                       <p className="text-xs text-[#526477]">
                         <strong className="text-[#10264A]">Ideal For:</strong>{" "}
                         <EditableText path={`combos.${idx}.idealFor`} value={combo.idealFor} />
                       </p>
-                      <div className="flex items-center justify-between pt-3 border-t border-[#E1E6EC]">
-                        <Link
-                          href={`/career-combos/${combo.slug}`}
-                          className="font-nav text-xs font-semibold uppercase tracking-wider text-[#2463A6] hover:text-[#10264A] inline-flex items-center gap-1"
-                        >
-                          <span>View Track</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            openDemoModal({
-                              preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
-                              sourcePage: "homepage-combo",
-                            })
-                          }
-                          className="font-nav text-xs font-semibold text-[#10264A] hover:text-[#2463A6] hover:underline cursor-pointer"
-                        >
-                          Book Free Demo →
-                        </button>
-                      </div>
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                    <div className="flex items-center justify-between pt-3 border-t border-[#E1E6EC]">
+                      <Link
+                        href={`/career-combos/${combo.slug}`}
+                        className="group/link font-nav text-xs font-semibold uppercase tracking-wider text-[#2463A6] hover:text-[#10264A] inline-flex items-center gap-1"
+                      >
+                        <span className="mc-underline-link">View Track</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-250 group-hover/link:translate-x-1" />
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openDemoModal({
+                            preselectedProgramme: `${combo.title} (${combo.durationLabel})`,
+                            sourcePage: "homepage-combo",
+                          })
+                        }
+                        className="font-nav text-xs font-semibold text-[#10264A] hover:text-[#2463A6] hover:underline cursor-pointer"
+                      >
+                        Book Free Demo →
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
-          <div className="mt-6 flex justify-end">
+          <div className="flex justify-end">
             <EditableAddButton
               path="combos"
               label="Add Career Combo"
@@ -936,75 +687,44 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 16 — WHY LEARNERS CHOOSE THE V-WAY (Soft Academic Grey #F7F8FA) */}
-      <section ref={advantagesSectionRef} className="py-16 lg:py-24 bg-[#F7F8FA] border-b border-[#E1E6EC]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Sticky Synchronized Photographic Switcher */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E1E6EC] overflow-hidden rounded-[12px] shadow-xs bg-white">
-            {content.advantagesSection.items.map((adv, idx) => {
-              const isActive = idx === activeAdvantageIdx;
-              const imgSrc = idx === 0 ? content.advantagesSection.image : ADVANTAGE_IMAGES[idx % ADVANTAGE_IMAGES.length];
-              return (
-                <div
-                  key={idx}
-                  className="absolute inset-0 transition-all duration-700 ease-out"
-                  style={{
-                    clipPath: isActive ? "inset(0% 0% 0% 0%)" : "inset(0% 100% 0% 0%)",
-                    zIndex: isActive ? 2 : 1,
-                  }}
-                >
-                  <Image
-                    src={imgSrc}
-                    alt={adv.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-transparent to-transparent flex items-end p-5">
-                    <div className="text-white">
-                      <span className="font-nav text-xs font-semibold uppercase tracking-wider text-[#C49A59]">
-                        Advantage {adv.num}
-                      </span>
-                      <p className="font-heading text-lg font-bold">{adv.title}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+      {/* 19 — THE VLEARNIN ADVANTAGE (Clean Editorial Layout, All 4 Readable) */}
+      <section ref={advantagesRef} className="py-16 lg:py-24 bg-[#F7F8FA] border-b border-[#E1E6EC]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <PhotographicReveal
+            direction="left"
+            className="lg:col-span-5 relative aspect-[4/3] lg:aspect-[4/5] border border-[#E1E6EC] rounded-[12px] shadow-xs bg-white group"
+          >
+            <Image
+              src={content.advantagesSection.image}
+              alt={content.advantagesSection.imageAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover mc-image-zoom"
+            />
             <EditableImageTrigger
               path="advantagesSection.image"
               currentSrc={content.advantagesSection.image}
               altPath="advantagesSection.imageAlt"
               currentAlt={content.advantagesSection.imageAlt}
             />
-          </div>
+          </PhotographicReveal>
 
           <div className="lg:col-span-7 space-y-8">
             <div>
               <div className="flex items-center gap-2.5 mb-2">
-                <span className="h-[2px] w-7 bg-[#C49A59]" />
+                <span className="adv-accent-bar origin-left h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">The VLEARNIN Advantage</span>
               </div>
-              <EditableText
-                as="h2"
-                path="advantagesSection.heading"
-                value={content.advantagesSection.heading}
-                className="type-section-heading text-[#10264A]"
-              />
+              <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+                <EditableText path="advantagesSection.heading" value={content.advantagesSection.heading} />
+              </EditorialHeading>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {content.advantagesSection.items.map((adv, advIdx) => {
                 const Icon = ADVANTAGE_ICONS[advIdx % ADVANTAGE_ICONS.length];
-                const isActive = advIdx === activeAdvantageIdx;
                 return (
-                  <div
-                    key={advIdx}
-                    className={`vway-adv-step relative rounded-[12px] transition-all duration-300 ${
-                      isActive ? "ring-2 ring-[#2463A6] ring-offset-2" : ""
-                    }`}
-                    onMouseEnter={() => setActiveAdvantageIdx(advIdx)}
-                  >
+                  <div key={advIdx} className="relative">
                     <EditableDeleteButton
                       path="advantagesSection.items"
                       index={advIdx}
@@ -1016,7 +736,7 @@ export function HomeCatalogSections({
                       front={
                         <div className="h-full p-6 bg-white border border-[#E1E6EC] border-l-4 border-l-[#2463A6] flex flex-col justify-between rounded-[12px]">
                           <div className="flex items-center justify-between">
-                            <Icon className="w-6 h-6 text-[#2463A6]" />
+                            <Icon className="adv-icon w-6 h-6 text-[#2463A6]" />
                             <EditableText
                               path={`advantagesSection.items.${advIdx}.num`}
                               value={adv.num}
@@ -1070,8 +790,8 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 17 — PLACEMENT ASSISTANCE (Clean White + Muted Blue Journey) */}
-      <section ref={pathwaySectionRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
+      {/* 20 — PLACEMENT ASSISTANCE (Continuous Scroll-Driven Career Journey) */}
+      <section ref={placementRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
@@ -1079,12 +799,9 @@ export function HomeCatalogSections({
                 <span className="h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">Career Readiness</span>
               </div>
-              <EditableText
-                as="h2"
-                path="placementSection.heading"
-                value={content.placementSection.heading}
-                className="type-section-heading text-[#10264A]"
-              />
+              <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+                <EditableText path="placementSection.heading" value={content.placementSection.heading} />
+              </EditorialHeading>
             </div>
             <Link
               href="/placement-assistance"
@@ -1095,18 +812,16 @@ export function HomeCatalogSections({
             </Link>
           </div>
 
-          <div className="relative space-y-5">
-            <div className="hidden lg:block h-1.5 bg-[#E1E6EC] rounded-full overflow-hidden">
-              <div className="pathway-progress-bar h-full bg-[#2463A6] origin-left" />
-            </div>
+          <div className="space-y-5">
+            <ProgressivePathway className="hidden lg:block" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {content.placementSection.stages.map((item, sIdx) => {
                 const Icon = PLACEMENT_ICONS[sIdx % PLACEMENT_ICONS.length];
-                const reached = sIdx <= activeStageIdx;
+                const reached = sIdx <= activePlacementStage;
                 return (
                   <div
                     key={sIdx}
-                    className={`pathway-stage-card border border-t-4 p-6 space-y-3 transition-colors duration-300 rounded-[12px] relative ${
+                    className={`border border-t-4 p-6 space-y-3 transition-colors duration-300 rounded-[12px] relative ${
                       reached
                         ? "bg-[#F1F6FB] border-[#E1E6EC] border-t-[#2463A6]"
                         : "bg-[#F7F8FA] border-[#E1E6EC] border-t-[#E1E6EC]"
@@ -1122,7 +837,9 @@ export function HomeCatalogSections({
                       <EditableText
                         path={`placementSection.stages.${sIdx}.step`}
                         value={item.step}
-                        className="font-heading text-xs font-extrabold uppercase tracking-wider text-[#2463A6]"
+                        className={`font-heading text-xs font-extrabold uppercase tracking-wider transition-colors ${
+                          reached ? "text-[#2463A6]" : "text-[#718096]"
+                        }`}
                       />
                       <Icon className="w-5 h-5 text-[#10264A]" />
                     </div>
@@ -1164,9 +881,9 @@ export function HomeCatalogSections({
         </div>
       </section>
 
-      {/* 18 — ACADEMIC PARTNERSHIPS (Warm Ivory #FAF9F6) */}
-      <section ref={academicSectionRef} className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center overflow-hidden">
+      {/* 21 — ACADEMIC PARTNERSHIPS (Directional Reveal + 4% Frame Parallax) */}
+      <section ref={academicRef} className="py-16 lg:py-24 bg-[#FAF9F6] border-b border-[#E1E6EC]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-5">
             <div className="flex items-center gap-2.5">
               <span className="h-[2px] w-7 bg-[#C49A59]" />
@@ -1176,15 +893,15 @@ export function HomeCatalogSections({
               as="h2"
               path="academicSection.heading"
               value={content.academicSection.heading}
-              className="academic-reveal-item type-section-heading text-[#10264A]"
+              className="academic-editorial-item type-section-heading text-[#10264A]"
             />
             <EditableText
               as="p"
               path="academicSection.description"
               value={content.academicSection.description}
-              className="academic-reveal-item text-base text-[#526477] leading-relaxed"
+              className="academic-editorial-item text-base text-[#526477] leading-relaxed"
             />
-            <div className="academic-reveal-item grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div className="academic-editorial-item grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {content.academicSection.bullets.map((item, bIdx) => (
                 <div key={bIdx} className="flex items-start gap-2 text-sm text-[#10264A] justify-between">
                   <div className="flex items-start gap-2">
@@ -1200,59 +917,52 @@ export function HomeCatalogSections({
                 </div>
               ))}
             </div>
-            <div className="academic-reveal-item flex flex-wrap gap-3.5 pt-3 items-center">
+            <div className="academic-editorial-item flex flex-wrap gap-3.5 pt-3 items-center">
               <EditableAddButton
                 path="academicSection.bullets"
                 label="Add Bullet"
                 createItem={() => "New academic partnership highlight"}
               />
-              <Link
-                href="/academic-partnerships"
-                className="btn-primary-amber px-5 py-2.5 text-sm"
-              >
+              <Link href="/academic-partnerships" className="btn-primary-amber px-5 py-2.5 text-sm">
                 <EditableText path="academicSection.primaryCtaLabel" value={content.academicSection.primaryCtaLabel} />
               </Link>
-              <Link
-                href="/academic-partnerships#institutional-form"
-                className="btn-outline-navy px-5 py-2.5 text-sm"
-              >
+              <Link href="/academic-partnerships#institutional-form" className="btn-outline-navy px-5 py-2.5 text-sm">
                 <EditableText path="academicSection.secondaryCtaLabel" value={content.academicSection.secondaryCtaLabel} />
               </Link>
             </div>
           </div>
 
-          <div
-            ref={academicFrameRef}
-            className="lg:col-span-6 relative aspect-[16/10] border border-[#E1E6EC] overflow-hidden shadow-sm rounded-[12px] origin-center"
+          <PhotographicReveal
+            direction="right"
+            className="lg:col-span-6 relative aspect-[16/10] border border-[#E1E6EC] shadow-sm rounded-[12px] group"
           >
-            <Image
-              src={content.academicSection.image}
-              alt={content.academicSection.imageAlt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover mc-image-zoom"
-            />
+            <ParallaxImage rangePercent={4} className="relative w-full h-full">
+              <Image
+                src={content.academicSection.image}
+                alt={content.academicSection.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </ParallaxImage>
             <EditableImageTrigger
               path="academicSection.image"
               currentSrc={content.academicSection.image}
               altPath="academicSection.imageAlt"
               currentAlt={content.academicSection.imageAlt}
             />
-          </div>
+          </PhotographicReveal>
         </div>
       </section>
 
-      {/* 19 — CAMPUS AND LEARNING EXPERIENCE (Animation 11: Multi-Layer Parallax Gallery) */}
-      <section ref={campusSectionRef} className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC] overflow-hidden">
+      {/* 22 — CAMPUS AND LEARNING EXPERIENCE (Restrained Multi-Layer Parallax) */}
+      <section className="py-16 lg:py-24 bg-white border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 space-y-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
-              <EditableText
-                as="h2"
-                path="campusSection.heading"
-                value={content.campusSection.heading}
-                className="type-section-heading text-[#10264A]"
-              />
+              <EditorialHeading as="h2" className="type-section-heading text-[#10264A]">
+                <EditableText path="campusSection.heading" value={content.campusSection.heading} />
+              </EditorialHeading>
               <EditableText
                 as="p"
                 path="campusSection.description"
@@ -1278,13 +988,13 @@ export function HomeCatalogSections({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {content.campusSection.gallery.map((item, gIdx) => (
-              <div
+              <PhotographicReveal
                 key={gIdx}
-                className={`campus-tile group relative aspect-[4/5] overflow-hidden border border-[#E1E6EC] bg-[#FAF9F6] rounded-[12px] ${
-                  gIdx % 2 === 1 ? "lg:mt-6" : ""
-                }`}
+                direction="bottom"
+                delay={gIdx * 0.06}
+                className="group relative aspect-[4/5] border border-[#E1E6EC] bg-[#FAF9F6] rounded-[12px]"
               >
                 <EditableDeleteButton
                   path="campusSection.gallery"
@@ -1292,39 +1002,41 @@ export function HomeCatalogSections({
                   label="Delete"
                   className="absolute top-3 left-3 z-30"
                 />
-                {item.video || item.src.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(item.src) ? (
-                  <video
-                    src={item.video || item.src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover mc-image-zoom"
-                  />
-                ) : (
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 280px"
-                    className="object-cover mc-image-zoom"
-                  />
-                )}
+                <ParallaxImage rangePercent={gIdx % 2 === 0 ? 5 : 3} className="relative w-full h-full">
+                  {item.video || item.src.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(item.src) ? (
+                    <video
+                      src={item.video || item.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 280px"
+                      className="object-cover"
+                    />
+                  )}
+                </ParallaxImage>
                 <EditableImageTrigger
                   path={`campusSection.gallery.${gIdx}.src`}
                   currentSrc={item.src}
                   altPath={`campusSection.gallery.${gIdx}.alt`}
                   currentAlt={item.alt}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-transparent to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-transparent to-transparent flex items-end p-4 pointer-events-none">
                   <EditableText
                     as="p"
                     path={`campusSection.gallery.${gIdx}.title`}
                     value={item.title}
-                    className="vl-mask-title font-nav text-xs sm:text-sm font-semibold text-white leading-snug"
+                    className="font-nav text-xs sm:text-sm font-semibold text-white leading-snug"
                   />
                 </div>
-              </div>
+              </PhotographicReveal>
             ))}
           </div>
           <div className="mt-6 flex justify-end">
@@ -1370,7 +1082,7 @@ export function HomeCatalogSections({
                 <div className="pt-2">
                   <Link
                     href={sec.ctaHref || "/contact"}
-                    className="btn-navy px-5 py-2.5 text-sm inline-flex items-center gap-2"
+                    className="btn-navy mc-icon-btn px-5 py-2.5 text-sm inline-flex items-center gap-2"
                   >
                     <EditableText path={`customSections.${sIdx}.ctaLabel`} value={sec.ctaLabel} />
                     <ArrowRight className="w-4 h-4" />
@@ -1378,7 +1090,10 @@ export function HomeCatalogSections({
                 </div>
               )}
             </div>
-            <div className="lg:col-span-5 relative aspect-[16/10] overflow-hidden rounded-[12px] border border-[#E1E6EC]">
+            <PhotographicReveal
+              direction="right"
+              className="lg:col-span-5 relative aspect-[16/10] rounded-[12px] border border-[#E1E6EC]"
+            >
               {sec.video || (sec.image && (sec.image.startsWith("data:video/") || /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(sec.image))) ? (
                 <video
                   src={sec.video || sec.image}
@@ -1398,7 +1113,7 @@ export function HomeCatalogSections({
                 />
               )}
               <EditableImageTrigger path={`customSections.${sIdx}.image`} currentSrc={sec.image || "/images/hero-1.jpg"} />
-            </div>
+            </PhotographicReveal>
           </div>
         </section>
       ))}
@@ -1419,50 +1134,43 @@ export function HomeCatalogSections({
         />
       </div>
 
-      {/* 20 — FINAL HOMEPAGE ADMISSIONS ENQUIRY BANNER (Ice Blue #F1F6FB + White Surface #FFFFFF) */}
-      <section ref={finalCtaSectionRef} className="py-16 lg:py-20 bg-[#F1F6FB] border-b border-[#E1E6EC]">
+      {/* 23 — FINAL ENQUIRY SECTION (Clean Compact Editorial Entrance, 550ms) */}
+      <section ref={finalCtaRef} className="py-16 lg:py-20 bg-[#F1F6FB] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div className="final-curtain-frame relative overflow-hidden bg-white text-[#10264A] p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border border-[#E1E6EC] border-l-4 border-l-[#C49A59] rounded-[12px] shadow-xs">
-            <div className="relative z-10 space-y-3 max-w-2xl">
+          <div className="bg-white text-[#10264A] p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 border border-[#E1E6EC] border-l-4 border-l-[#C49A59] rounded-[12px] shadow-xs">
+            <div className="space-y-3 max-w-2xl">
               <div className="flex items-center gap-2.5">
-                <span className="h-[2px] w-7 bg-[#C49A59]" />
+                <span className="final-accent-line origin-left h-[2px] w-7 bg-[#C49A59]" />
                 <span className="type-eyebrow text-[#526477]">Admissions &amp; Career Guidance</span>
               </div>
-              <div className="final-cta-text-mask">
-                <EditableText
-                  as="h2"
-                  path="finalCtaSection.heading"
-                  value={content.finalCtaSection.heading}
-                  className="type-section-heading text-[#10264A]"
-                />
-              </div>
-              <div className="final-cta-text-mask">
-                <EditableText
-                  as="p"
-                  path="finalCtaSection.description"
-                  value={content.finalCtaSection.description}
-                  className="text-base text-[#526477] leading-relaxed"
-                />
-              </div>
+              <EditableText
+                as="h2"
+                path="finalCtaSection.heading"
+                value={content.finalCtaSection.heading}
+                className="final-editorial-text type-section-heading text-[#10264A]"
+              />
+              <EditableText
+                as="p"
+                path="finalCtaSection.description"
+                value={content.finalCtaSection.description}
+                className="final-editorial-text text-base text-[#526477] leading-relaxed"
+              />
             </div>
 
-            <div className="relative z-10 flex flex-wrap items-center gap-3.5 shrink-0">
+            <div className="final-editorial-text flex flex-wrap items-center gap-3.5 shrink-0">
               <button
                 type="button"
                 onClick={() => openDemoModal({ sourcePage: "homepage-final-cta" })}
-                className="final-cta-action btn-navy px-5 py-3 text-sm cursor-pointer"
+                className="btn-navy px-5 py-3 text-sm cursor-pointer"
               >
                 <EditableText path="finalCtaSection.demoLabel" value={content.finalCtaSection.demoLabel} />
               </button>
-              <Link
-                href="/contact"
-                className="final-cta-action btn-outline-navy px-5 py-3 text-sm"
-              >
+              <Link href="/contact" className="btn-outline-navy px-5 py-3 text-sm">
                 <EditableText path="finalCtaSection.contactLabel" value={content.finalCtaSection.contactLabel} />
               </Link>
               <a
                 href={content.brand.phoneHref}
-                className="final-cta-action inline-flex items-center gap-2 font-nav text-sm font-semibold text-[#2463A6] hover:text-[#10264A] hover:underline px-2"
+                className="inline-flex items-center gap-2 font-nav text-sm font-semibold text-[#2463A6] hover:text-[#10264A] hover:underline px-2"
               >
                 <Phone className="w-4 h-4" />
                 <EditableText path="brand.phoneDisplay" value={content.brand.phoneDisplay} />

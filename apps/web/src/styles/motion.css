@@ -1,17 +1,13 @@
 /* ==========================================================================
-   VLEARNIN Editorial Motion & Hover Interaction System
-   Animation 14 — Advanced Image Hover Effects (no excessive 3D tilt or glow)
+   VLEARNIN Professional Editorial Microinteractions
+   Continuous, restrained, institutional — 180–250ms transitions.
    ========================================================================== */
 
 :root {
-  --motion-micro: 150ms;
-  --motion-hover: 320ms;
-  --motion-dropdown: 260ms;
-  --motion-entrance: 600ms;
-  --motion-carousel: 500ms;
-  --motion-counter: 1000ms;
-  --ease-default: ease;
-  --ease-entrance: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 180ms;
+  --motion-hover: 250ms;
+  --motion-dropdown: 280ms;
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Refined animated link underline */
@@ -24,74 +20,59 @@
   left: 0;
   bottom: -2px;
   width: 100%;
-  height: 2px;
+  height: 1.5px;
   background-color: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--motion-hover) var(--ease-entrance);
+  transition: transform var(--motion-hover) var(--ease-editorial);
 }
 .mc-underline-link:hover::after,
 .mc-underline-link:focus-visible::after {
   transform: scaleX(1);
 }
 
-/* Controlled photographic zoom + directional mask feel */
+/* Controlled photographic hover scale (1 -> 1.04) */
 .mc-image-zoom {
-  transition: transform 650ms var(--ease-entrance), filter 450ms var(--ease-entrance);
+  transition: transform 350ms var(--ease-editorial);
   will-change: transform;
 }
 .group:hover .mc-image-zoom {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
-/* Photographic overlay curtain reveal on hover */
-.vl-photo-overlay {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 380ms var(--ease-entrance), transform 380ms var(--ease-entrance);
+/* Subtle border & shadow change on cards (no 3D tilt, no glow) */
+.mc-card-hover {
+  transition:
+    border-color var(--motion-hover) ease,
+    box-shadow var(--motion-hover) var(--ease-editorial);
 }
-.group:hover .vl-photo-overlay {
-  opacity: 1;
-  transform: translateY(0);
+.mc-card-hover:hover {
+  box-shadow: 0 10px 24px rgba(16, 38, 74, 0.06);
 }
 
-/* Typography micro-shift inside clipping masks */
-.vl-mask-title {
-  display: inline-block;
-  transition: transform 360ms var(--ease-entrance), color 260ms ease;
+/* Directional arrow movement (3–4px) */
+.mc-icon-btn svg {
+  transition: transform var(--motion-hover) var(--ease-editorial);
 }
-.group:hover .vl-mask-title {
+.mc-icon-btn:hover svg {
   transform: translateX(4px);
 }
 
-/* Smooth border & restrained lift (no excessive 3D tilt or glow) */
-.mc-card-hover {
-  transition:
-    transform 380ms var(--ease-entrance),
-    border-color var(--motion-hover) var(--ease-default),
-    box-shadow 380ms var(--ease-entrance);
-}
-.mc-card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08);
+/* Accessible focus-visible ring */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #2463A6;
+  outline-offset: 2px;
 }
 
-/* Animated arrow movement */
-.mc-icon-btn svg {
-  transition: transform var(--motion-hover) var(--ease-entrance);
-}
-.mc-icon-btn:hover svg {
-  transform: translateX(5px);
-}
-
-/* 3D perspective card flip for interactive advantage cards */
+/* 3D perspective card flip for interactive advantage details */
 .mc-flip-perspective {
   perspective: 1200px;
   cursor: pointer;
 }
 .mc-flip-inner {
   transform-style: preserve-3d;
-  transition: transform 600ms var(--ease-entrance);
+  transition: transform 480ms var(--ease-editorial);
 }
 .mc-flip-perspective:hover .mc-flip-inner,
 .mc-flip-perspective.is-flipped .mc-flip-inner {
@@ -110,8 +91,6 @@
 @media (prefers-reduced-motion: reduce) {
   .mc-underline-link::after,
   .mc-image-zoom,
-  .vl-photo-overlay,
-  .vl-mask-title,
   .mc-card-hover,
   .mc-icon-btn svg,
   .mc-flip-inner {

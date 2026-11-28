@@ -2,8 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   BookOpen,
   Layers,
@@ -11,6 +9,7 @@ import {
   Building2,
   ShieldCheck,
   CalendarCheck,
+  ArrowRight,
 } from "lucide-react";
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { useSiteContent } from "@/components/SiteContentProvider";
@@ -19,9 +18,9 @@ import {
   EditableDeleteButton,
   EditableText,
 } from "@/components/EditableText";
-import { isMotionDisabled } from "@/lib/motion/presets";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, isEditorialMotionDisabled } from "@/lib/motion/motion-provider";
+import { EDITORIAL_EASE } from "@/lib/motion/motion-easing";
+import { MOTION_TOKENS } from "@/lib/motion/motion-tokens";
 
 const QUICK_ICONS = [BookOpen, Layers, Briefcase, Building2, ShieldCheck] as const;
 
@@ -32,7 +31,7 @@ export function QuickAccessStrip() {
 
   useEffect(() => {
     const scope = sectionRef.current;
-    if (!scope || isMotionDisabled()) return;
+    if (!scope || isEditorialMotionDisabled()) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -44,43 +43,23 @@ export function QuickAccessStrip() {
       });
 
       tl.fromTo(
-        ".qa-mask-bar",
-        { clipPath: "inset(0 100% 0 0)" },
-        { clipPath: "inset(0 0% 0 0)", duration: 0.75, ease: "expo.out", clearProps: "clipPath" },
+        ".qa-divider-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.65, ease: EDITORIAL_EASE.editorial, clearProps: "transform" },
         0,
       )
         .fromTo(
-          ".qa-divider-line",
-          { scaleX: 0 },
-          { scaleX: 1, duration: 0.8, ease: "expo.out", clearProps: "transform" },
-          0.08,
-        )
-        .fromTo(
           ".qa-icon",
-          { scale: 0.55, y: 10, opacity: 0.4 },
+          { y: 8, opacity: 0.85 },
           {
-            scale: 1,
             y: 0,
             opacity: 1,
-            duration: 0.45,
-            stagger: 0.05,
-            ease: "back.out(1.6)",
+            duration: 0.4,
+            stagger: MOTION_TOKENS.stagger.tight,
+            ease: EDITORIAL_EASE.out,
             clearProps: "transform,opacity",
           },
-          0.14,
-        )
-        .fromTo(
-          ".qa-label",
-          { x: -10, opacity: 0.6 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.45,
-            stagger: 0.05,
-            ease: "expo.out",
-            clearProps: "transform,opacity",
-          },
-          0.18,
+          0.08,
         );
     }, scope);
 
@@ -94,7 +73,7 @@ export function QuickAccessStrip() {
       className="bg-white border-b border-[#E1E6EC] relative"
     >
       <div className="qa-divider-line origin-left h-[2px] w-full bg-gradient-to-r from-[#10264A] via-[#2463A6] to-[#C49A59]" />
-      <div className="qa-mask-bar max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {content.quickAccess.items.map((item, idx) => {
             const Icon = QUICK_ICONS[idx % QUICK_ICONS.length];
@@ -110,13 +89,16 @@ export function QuickAccessStrip() {
                   label="×"
                   className="absolute top-1.5 right-1.5 px-1.5 py-0.5 text-[10px]"
                 />
-                <Icon className="qa-icon w-5 h-5 text-[#2463A6] group-hover:text-[#10264A] transition-colors" />
-                <EditableText
-                  path={`quickAccess.items.${idx}.label`}
-                  value={item.label}
-                  className="qa-label font-nav text-[13px] font-semibold text-[#10264A] leading-snug"
-                />
-                <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#C49A59] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                <Icon className="qa-icon w-5 h-5 text-[#2463A6] group-hover:text-[#10264A] transition-colors duration-250" />
+                <span className="inline-flex items-center gap-1">
+                  <EditableText
+                    path={`quickAccess.items.${idx}.label`}
+                    value={item.label}
+                    className="font-nav text-[13px] font-semibold text-[#10264A] leading-snug"
+                  />
+                  <ArrowRight className="w-3 h-3 text-[#2463A6] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-[3px] transition-all duration-250" />
+                </span>
+                <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#C49A59] scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-250 ease-out" />
               </Link>
             );
           })}
@@ -124,13 +106,13 @@ export function QuickAccessStrip() {
           <button
             type="button"
             onClick={() => openDemoModal({ sourcePage: "quick-access" })}
-            className="group bg-[#10264A] hover:bg-[#17324D] text-white border border-[#10264A] transition-all duration-200 py-4 px-3 flex flex-col items-center text-center gap-2 cursor-pointer rounded-[10px] relative overflow-hidden"
+            className="group bg-[#10264A] hover:bg-[#17324D] text-white border border-[#10264A] transition-colors duration-250 py-4 px-3 flex flex-col items-center text-center gap-2 cursor-pointer rounded-[10px] relative"
           >
-            <CalendarCheck className="qa-icon w-5 h-5 text-[#C49A59] group-hover:scale-110 transition-transform" />
+            <CalendarCheck className="qa-icon w-5 h-5 text-[#C49A59]" />
             <EditableText
               path="quickAccess.demoLabel"
               value={content.quickAccess.demoLabel}
-              className="qa-label font-nav text-[13px] font-semibold leading-snug"
+              className="font-nav text-[13px] font-semibold leading-snug"
             />
           </button>
         </div>

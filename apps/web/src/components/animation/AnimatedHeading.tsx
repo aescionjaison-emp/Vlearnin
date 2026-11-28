@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useRef } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import React from "react";
+import { EditorialHeading } from "@/components/motion/EditorialHeading";
 
 export function AnimatedHeading({
-  as: Tag = "h2",
+  as = "h2",
   children,
   className = "",
   delay = 0,
@@ -14,12 +14,9 @@ export function AnimatedHeading({
   className?: string;
   delay?: number;
 }) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  useScrollAnimation(ref, "headingReveal", { delay });
-
   return (
-    <Tag ref={ref} className={className}>
+    <EditorialHeading as={as} className={className} delay={delay}>
       {children}
-    </Tag>
+    </EditorialHeading>
   );
 }

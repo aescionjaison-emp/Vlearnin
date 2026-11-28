@@ -2,15 +2,13 @@
 
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useLeadModal } from "@/components/LeadModalProvider";
 import { useSiteContent } from "@/components/SiteContentProvider";
 import { EditableText } from "@/components/EditableText";
-import { isMotionDisabled } from "@/lib/motion/presets";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, isEditorialMotionDisabled } from "@/lib/motion/motion-provider";
+import { EDITORIAL_EASE } from "@/lib/motion/motion-easing";
+import { MOTION_TOKENS } from "@/lib/motion/motion-tokens";
 
 export function HeroCarousel() {
   const { openDemoModal } = useLeadModal();
@@ -18,116 +16,99 @@ export function HeroCarousel() {
   const banner = content.heroBanners[0];
   const sectionRef = useRef<HTMLElement>(null);
   const mediaFrameRef = useRef<HTMLDivElement>(null);
-  const mediaImgRef = useRef<HTMLPictureElement>(null);
-  const textColRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const scope = sectionRef.current;
-    if (!scope || isMotionDisabled()) return;
+    if (!scope || isEditorialMotionDisabled()) return;
 
     const ctx = gsap.context(() => {
-      // ── ANIMATION 01A: Coordinated 6-Phase Cinematic Hero Entrance ──
-      const introTl = gsap.timeline({ defaults: { ease: "expo.out" } });
+      // Coordinated Editorial Photographic Entrance (no preloader, settles quickly)
+      const introTl = gsap.timeline({ defaults: { ease: EDITORIAL_EASE.editorial } });
 
-      // Phase 1 & 2: Panoramic artwork horizontal curtain reveal + subtle scale settle
       introTl
         .fromTo(
           mediaFrameRef.current,
           { clipPath: "inset(0 100% 0 0)" },
-          { clipPath: "inset(0 0% 0 0)", duration: 1.15, clearProps: "clipPath" },
+          {
+            clipPath: "inset(0 0% 0 0)",
+            duration: MOTION_TOKENS.duration.heroImage,
+            clearProps: "clipPath",
+          },
           0,
         )
         .fromTo(
           ".hero-bg-img",
           { scale: 1.05 },
-          { scale: 1, duration: 1.25, clearProps: "transform" },
-          0,
-        )
-        // Phase 3: Headline line-by-line overflow-hidden mask reveal
-        .fromTo(
-          ".hero-line-inner",
-          { yPercent: 110 },
           {
-            yPercent: 0,
-            duration: 0.85,
-            stagger: 0.1,
+            scale: 1,
+            duration: MOTION_TOKENS.duration.heroImage,
+            ease: EDITORIAL_EASE.out,
             clearProps: "transform",
           },
-          0.22,
+          0,
         )
-        // Phase 4: Supporting description restrained vertical reveal
+        .fromTo(
+          ".hero-line-inner",
+          { yPercent: 105 },
+          {
+            yPercent: 0,
+            duration: 0.7,
+            stagger: 0.08,
+            clearProps: "transform",
+          },
+          0.16,
+        )
         .fromTo(
           ".hero-desc",
-          { y: 20, opacity: 0.85 },
-          { y: 0, opacity: 1, duration: 0.55, clearProps: "transform,opacity" },
-          0.45,
-        )
-        // Features list stagger (if present)
-        .fromTo(
-          ".hero-features-item",
-          { x: -20, opacity: 0.85 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.06,
-            clearProps: "transform,opacity",
-          },
-          0.52,
-        )
-        // Phase 5: CTA buttons sequential stagger
-        .fromTo(
-          ".hero-cta-btn",
-          { y: 18, opacity: 0.85 },
+          { y: 14, opacity: 0.85 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.55,
-            stagger: 0.08,
+            duration: MOTION_TOKENS.duration.paragraph,
             clearProps: "transform,opacity",
           },
-          0.58,
+          0.32,
+        )
+        .fromTo(
+          ".hero-features-item",
+          { y: 10, opacity: 0.85 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.35,
+            stagger: 0.06,
+            clearProps: "transform,opacity",
+          },
+          0.38,
+        )
+        .fromTo(
+          ".hero-cta-btn",
+          { y: 12, opacity: 0.85 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
+            stagger: MOTION_TOKENS.stagger.tight,
+            clearProps: "transform,opacity",
+          },
+          0.44,
         );
 
-      // ── ANIMATION 01B: Real Scroll-Scrubbed Hero Transformation ──
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: scope,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.65,
-          invalidateOnRefresh: true,
+      // Restrained scroll-linked photographic depth (3–5% inside frame, normal page flow)
+      gsap.fromTo(
+        ".hero-bg-img",
+        { yPercent: 0 },
+        {
+          yPercent: 4,
+          ease: EDITORIAL_EASE.linear,
+          scrollTrigger: {
+            trigger: scope,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
         },
-      });
-
-      scrollTl
-        .to(
-          mediaFrameRef.current,
-          {
-            scale: 0.93,
-            clipPath: "inset(3% 3% 3% 3% round 22px)",
-            ease: "none",
-          },
-          0,
-        )
-        .to(
-          ".hero-bg-img",
-          {
-            scale: 1.06,
-            yPercent: 6,
-            ease: "none",
-          },
-          0,
-        )
-        .to(
-          textColRef.current,
-          {
-            y: -48,
-            opacity: 0.18,
-            ease: "none",
-          },
-          0,
-        );
+      );
     }, scope);
 
     return () => ctx.revert();
@@ -139,18 +120,13 @@ export function HeroCarousel() {
     <section
       ref={sectionRef}
       aria-label="VLEARNIN Institutional Campaign Showcase"
-      className="relative w-full overflow-hidden bg-white text-[#111827] border-b border-[#E5E7EB]"
+      className="relative w-full overflow-hidden bg-[#FAF9F6] text-[#10264A] border-b border-[#E1E6EC]"
     >
-      {/* Full-Width Seamless Panoramic Photographic Artwork Container */}
       <div
         ref={mediaFrameRef}
-        className="relative w-full min-h-[680px] sm:min-h-[720px] lg:min-h-[580px] lg:h-[calc(100vh-110px)] lg:max-h-[760px] flex items-start lg:items-center overflow-hidden origin-center"
+        className="relative w-full min-h-[680px] sm:min-h-[720px] lg:min-h-[580px] lg:h-[calc(100vh-110px)] lg:max-h-[760px] flex items-start lg:items-center overflow-hidden"
       >
-        {/* Responsive Generated Panoramic Photography (Desktop 16:9 & Mobile 3:4) */}
-        <picture
-          ref={mediaImgRef}
-          className="absolute inset-0 w-full h-full pointer-events-none select-none"
-        >
+        <picture className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
           <source
             media="(max-width: 1023px)"
             srcSet="/images/hero/vlearnin-main-mobile.webp"
@@ -164,9 +140,8 @@ export function HeroCarousel() {
           />
         </picture>
 
-        {/* Editorial HTML Content Layer Positioned Over Naturally Bright Architectural Area */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 pb-64 sm:pb-72 lg:py-16">
-          <div ref={textColRef} className="max-w-2xl lg:max-w-[650px] space-y-6">
+          <div className="max-w-2xl lg:max-w-[650px] space-y-6">
             <h1 className="hero-headline font-heading text-[36px] sm:text-[48px] lg:text-[62px] xl:text-[66px] font-extrabold leading-[1.06] tracking-[-0.045em] text-[#10264A]">
               <span className="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
                 <span className="hero-line-inner block">

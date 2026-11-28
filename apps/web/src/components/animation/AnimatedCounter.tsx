@@ -1,17 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotionOrDisabled } from "@/lib/animations/presets";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, isEditorialMotionDisabled } from "@/lib/motion/motion-provider";
+import { EDITORIAL_EASE } from "@/lib/motion/motion-easing";
+import { MOTION_TOKENS } from "@/lib/motion/motion-tokens";
 
 /**
- * Animation 04 — Vertical Number-Roll Reveal.
- * Splits multi-digit numbers into individual vertical rolling digit reels inside
- * overflow-hidden clipping masks, preserving stable tabular-nums width and
- * showing exact final digits if animations are disabled.
+ * Refined Masked Numerical Roll (650ms, 80ms stagger, once on enter).
+ * No bouncing, rotating, or dramatic scaling; stable tabular-nums width.
  */
 export function AnimatedCounter({
   value,
@@ -28,7 +24,7 @@ export function AnimatedCounter({
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el || prefersReducedMotionOrDisabled()) return;
+    if (!el || isEditorialMotionDisabled()) return;
 
     const reels = el.querySelectorAll<HTMLElement>(".digit-reel");
     if (reels.length === 0) return;
@@ -36,18 +32,17 @@ export function AnimatedCounter({
     const ctx = gsap.context(() => {
       reels.forEach((reel, idx) => {
         const targetDigit = Number(reel.dataset.digit || "0");
-        // Roll from 0 down to targetDigit (or through a full 10-step reel for drama)
         const targetYPercent = -(targetDigit / 10) * 100;
         gsap.fromTo(
           reel,
           { yPercent: 0 },
           {
             yPercent: targetYPercent,
-            duration: 1.05 + idx * 0.14,
-            ease: "expo.out",
+            duration: MOTION_TOKENS.duration.statistic + idx * 0.08,
+            ease: EDITORIAL_EASE.editorial,
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: MOTION_TOKENS.triggerStart,
               once: true,
             },
           },
