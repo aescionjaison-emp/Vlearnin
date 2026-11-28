@@ -166,8 +166,8 @@ export function HeroCarousel() {
 
         {/* Editorial HTML Content Layer Positioned Over Naturally Bright Architectural Area */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 pb-64 sm:pb-72 lg:py-16">
-          <div ref={textColRef} className="max-w-xl lg:max-w-[560px] space-y-5">
-            <h1 className="hero-headline font-heading text-[34px] sm:text-[44px] lg:text-[56px] font-extrabold leading-[1.06] tracking-[-0.045em] text-[#10264A]">
+          <div ref={textColRef} className="max-w-2xl lg:max-w-[650px] space-y-6">
+            <h1 className="hero-headline font-heading text-[36px] sm:text-[48px] lg:text-[62px] xl:text-[66px] font-extrabold leading-[1.05] tracking-[-0.045em] text-[#10264A]">
               <span className="block overflow-hidden">
                 <span className="hero-line-inner block">
                   <EditableText path="heroBanners.0.headlineWhite" value={banner.headlineWhite} />
@@ -184,15 +184,15 @@ export function HeroCarousel() {
               as="p"
               path="heroBanners.0.description"
               value={banner.description}
-              className="hero-desc type-body-large max-w-lg text-[#526477] font-normal"
+              className="hero-desc text-base sm:text-lg lg:text-[19px] leading-[1.65] max-w-xl text-[#526477] font-normal"
             />
 
             {banner.features && (
-              <ul className="space-y-1.5 pt-1">
+              <ul className="space-y-2 pt-1">
                 {banner.features.map((f, fIdx) => (
                   <li
                     key={fIdx}
-                    className="hero-features-item text-sm font-nav font-semibold flex items-center gap-2 text-[#10264A]"
+                    className="hero-features-item text-sm sm:text-base font-nav font-semibold flex items-center gap-2 text-[#10264A]"
                   >
                     <CheckCircle2 className="w-4 h-4 shrink-0 text-[#2463A6]" />
                     <EditableText path={`heroBanners.0.features.${fIdx}`} value={f} />
@@ -201,10 +201,10 @@ export function HeroCarousel() {
               </ul>
             )}
 
-            <div className="hero-ctas flex flex-wrap items-center gap-3.5 pt-3">
+            <div className="hero-ctas flex flex-wrap items-center gap-4 pt-3">
               <Link
                 href={banner.primaryCta.href}
-                className="hero-cta-btn btn-primary-amber mc-icon-btn px-5 py-3 text-sm inline-flex items-center gap-2 shadow-xs"
+                className="hero-cta-btn btn-primary-amber mc-icon-btn px-6 py-3.5 text-[15px] inline-flex items-center gap-2 shadow-xs"
               >
                 <EditableText path="heroBanners.0.primaryCta.label" value={banner.primaryCta.label} />
                 <ArrowRight className="w-4 h-4" />
@@ -213,7 +213,7 @@ export function HeroCarousel() {
               <button
                 type="button"
                 onClick={() => openDemoModal({ sourcePage: "hero-banner" })}
-                className="hero-cta-btn px-5 py-3 text-sm font-nav font-semibold bg-white/95 border border-[#E1E6EC] text-[#10264A] hover:border-[#10264A] hover:bg-[#FAF9F6] transition-colors cursor-pointer rounded-[6px]"
+                className="hero-cta-btn px-6 py-3.5 text-[15px] font-nav font-semibold bg-white/95 border border-[#E1E6EC] text-[#10264A] hover:border-[#10264A] hover:bg-[#FAF9F6] transition-colors cursor-pointer rounded-[6px]"
               >
                 Book Free Demo
               </button>
