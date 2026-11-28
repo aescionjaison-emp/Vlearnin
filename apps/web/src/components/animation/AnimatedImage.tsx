@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
-import { PhotographicReveal } from "@/components/motion/PhotographicReveal";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 
+/**
+ * Static-First Image Frame — immediately visible with subtle scroll depth.
+ */
 export function AnimatedImage({
   children,
   className = "",
@@ -12,8 +15,8 @@ export function AnimatedImage({
   preset?: "imageMaskReveal" | "imageScaleReveal";
 }) {
   return (
-    <PhotographicReveal direction="bottom" className={className}>
+    <ParallaxImage travelPx={6} className={className}>
       {children}
-    </PhotographicReveal>
+    </ParallaxImage>
   );
 }

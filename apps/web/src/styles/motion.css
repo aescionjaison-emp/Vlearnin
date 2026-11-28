@@ -1,19 +1,32 @@
 /* ==========================================================================
-   VLEARNIN Professional Editorial Microinteractions
-   Continuous, restrained, institutional — 180–250ms transitions.
+   VLEARNIN — QUIET CONFIDENCE (V2 Microinteractions)
+   Make the interface respond, not perform.
    ========================================================================== */
 
 :root {
-  --motion-micro: 180ms;
-  --motion-hover: 250ms;
-  --motion-dropdown: 280ms;
-  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-btn: 200ms;
+  --motion-nav: 240ms;
+  --motion-img: 340ms;
+  --motion-card: 220ms;
+  --ease-interaction: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-interface: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Refined animated link underline */
+/* Professional Link Interaction (Underline + 4px Arrow) */
+.motion-link,
 .mc-underline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   position: relative;
+  transition: color var(--motion-btn) var(--ease-interaction);
 }
+
+.motion-link .arrow {
+  transition: transform 220ms var(--ease-interaction);
+}
+
+.motion-link::after,
 .mc-underline-link::after {
   content: "";
   position: absolute;
@@ -24,55 +37,75 @@
   background-color: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform var(--motion-hover) var(--ease-editorial);
+  transition: transform 220ms var(--ease-interaction);
 }
+
+.motion-link:hover .arrow,
+.motion-link:focus-visible .arrow {
+  transform: translateX(4px);
+}
+
+.motion-link:hover::after,
+.motion-link:focus-visible::after,
 .mc-underline-link:hover::after,
 .mc-underline-link:focus-visible::after {
   transform: scaleX(1);
 }
 
-/* Controlled photographic hover scale (1 -> 1.04) */
+/* Internal Photo Hover Scale (1 -> 1.045, 340ms) */
 .mc-image-zoom {
-  transition: transform 350ms var(--ease-editorial);
+  transition: transform var(--motion-img) var(--ease-interaction);
   will-change: transform;
 }
 .group:hover .mc-image-zoom {
-  transform: scale(1.04);
+  transform: scale(1.045);
 }
 
-/* Subtle border & shadow change on cards (no 3D tilt, no glow) */
+/* Restrained Card Hover (max 2px vertical, border & subtle shadow, 220ms) */
 .mc-card-hover {
   transition:
-    border-color var(--motion-hover) ease,
-    box-shadow var(--motion-hover) var(--ease-editorial);
+    transform var(--motion-card) var(--ease-interface),
+    border-color var(--motion-card) var(--ease-interface),
+    box-shadow var(--motion-card) var(--ease-interface);
 }
 .mc-card-hover:hover {
-  box-shadow: 0 10px 24px rgba(16, 38, 74, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 38, 74, 0.05);
 }
 
-/* Directional arrow movement (3–4px) */
-.mc-icon-btn svg {
-  transition: transform var(--motion-hover) var(--ease-editorial);
+/* Button Directional Arrow (4px) & Subtle Press (0.98) */
+.mc-icon-btn {
+  transition:
+    background-color var(--motion-btn) var(--ease-interaction),
+    border-color var(--motion-btn) var(--ease-interaction),
+    transform 140ms var(--ease-interface);
 }
-.mc-icon-btn:hover svg {
+.mc-icon-btn:active {
+  transform: scale(0.98);
+}
+.mc-icon-btn svg {
+  transition: transform var(--motion-btn) var(--ease-interaction);
+}
+.mc-icon-btn:hover svg,
+.mc-icon-btn:focus-visible svg {
   transform: translateX(4px);
 }
 
-/* Accessible focus-visible ring */
+/* Accessible focus ring */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid #2463A6;
   outline-offset: 2px;
 }
 
-/* 3D perspective card flip for interactive advantage details */
+/* Interactive Advantage Flip Card */
 .mc-flip-perspective {
   perspective: 1200px;
   cursor: pointer;
 }
 .mc-flip-inner {
   transform-style: preserve-3d;
-  transition: transform 480ms var(--ease-editorial);
+  transition: transform 420ms var(--ease-interaction);
 }
 .mc-flip-perspective:hover .mc-flip-inner,
 .mc-flip-perspective.is-flipped .mc-flip-inner {
@@ -89,9 +122,12 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .motion-link .arrow,
+  .motion-link::after,
   .mc-underline-link::after,
   .mc-image-zoom,
   .mc-card-hover,
+  .mc-icon-btn,
   .mc-icon-btn svg,
   .mc-flip-inner {
     transition: none !important;

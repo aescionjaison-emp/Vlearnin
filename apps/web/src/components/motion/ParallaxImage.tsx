@@ -1,70 +1,76 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { gsap, isEditorialMotionDisabled } from "@/lib/motion/motion-provider";
-import { EDITORIAL_EASE } from "@/lib/motion/motion-easing";
+import { gsap, isReducedMotionOrDisabled } from "@/lib/motion/accessibility";
 
+/**
+ * Static-First Photographic Parallax.
+ * Image is 100% visible at load; moves subtly inside a fixed overflow-hidden frame.
+ */
 export function ParallaxImage({
   children,
-  rangePercent = 4,
+  travelPx = 8,
   className = "",
 }: {
   children: React.ReactNode;
-  rangePercent?: number;
+  travelPx?: number;
   className?: string;
 }) {
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap || isEditorialMotionDisabled()) return;
+    const frame = frameRef.current;
+    if (!frame || isReducedMotionOrDisabled()) return;
 
-    const target = wrap.querySelector("img, video");
-    if (!target) return;
+    const image = frame.querySelector("img, video");
+    if (!image) return;
 
     const mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px)", () => {
+
+    mm.add("(min-width: 769px)", () => {
       gsap.fromTo(
-        target,
-        { yPercent: -rangePercent, scale: 1.06 },
+        image,
+        { y: -travelPx, scale: 1.06 },
         {
-          yPercent: rangePercent,
+          y: travelPx,
           scale: 1.06,
-          ease: EDITORIAL_EASE.linear,
+          ease: "none",
           scrollTrigger: {
-            trigger: wrap,
+            trigger: frame,
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         },
       );
     });
 
-    mm.add("(max-width: 1023px)", () => {
-      const mobileRange = Math.max(2, Math.round(rangePercent / 2));
+    mm.add("(max-width: 768px)", () => {
+      const mobileTravel = Math.max(4, Math.round(travelPx * 0.5));
       gsap.fromTo(
-        target,
-        { yPercent: -mobileRange, scale: 1.04 },
+        image,
+        { y: -mobileTravel, scale: 1.04 },
         {
-          yPercent: mobileRange,
+          y: mobileTravel,
           scale: 1.04,
-          ease: EDITORIAL_EASE.linear,
+          ease: "none",
           scrollTrigger: {
-            trigger: wrap,
+            trigger: frame,
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         },
       );
     });
 
     return () => mm.revert();
-  }, [rangePercent]);
+  }, [travelPx]);
 
   return (
-    <div ref={wrapRef} className={`overflow-hidden ${className}`}>
+    <div ref={frameRef} className={`overflow-hidden ${className}`}>
       {children}
     </div>
   );
