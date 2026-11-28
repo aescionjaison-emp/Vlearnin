@@ -167,13 +167,13 @@ export function HeroCarousel() {
         {/* Editorial HTML Content Layer Positioned Over Naturally Bright Architectural Area */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 pb-64 sm:pb-72 lg:py-16">
           <div ref={textColRef} className="max-w-2xl lg:max-w-[650px] space-y-6">
-            <h1 className="hero-headline font-heading text-[36px] sm:text-[48px] lg:text-[62px] xl:text-[66px] font-extrabold leading-[1.05] tracking-[-0.045em] text-[#10264A]">
-              <span className="block overflow-hidden">
+            <h1 className="hero-headline font-heading text-[36px] sm:text-[48px] lg:text-[62px] xl:text-[66px] font-extrabold leading-[1.06] tracking-[-0.045em] text-[#10264A]">
+              <span className="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
                 <span className="hero-line-inner block">
                   <EditableText path="heroBanners.0.headlineWhite" value={banner.headlineWhite} />
                 </span>
               </span>
-              <span className="block overflow-hidden">
+              <span className="block overflow-hidden pb-[0.14em] -mb-[0.14em]">
                 <span className="hero-line-inner block">
                   <EditableText path="heroBanners.0.headlineAccent" value={banner.headlineAccent} />
                 </span>
