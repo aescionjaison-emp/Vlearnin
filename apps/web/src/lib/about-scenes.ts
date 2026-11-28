@@ -49,6 +49,8 @@ export function resolveSceneManifest(
   const cutoutPath = firstExisting([
     `${dirRel}/student-cutout.webp`,
     `${dirRel}/student-cutout.png`,
+    `${dirRel}/student-mentor-cutout.webp`,
+    `${dirRel}/student-mentor-cutout.png`,
   ]);
   const shadowPath = firstExisting([`${dirRel}/shadow.webp`, `${dirRel}/shadow.png`]);
   const mobilePath = firstExisting([`${dirRel}/mobile.webp`, `${dirRel}/mobile.png`]);
