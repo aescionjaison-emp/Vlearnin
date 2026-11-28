@@ -11,63 +11,26 @@ export function VlearninLogo({
   compact = false,
   showTagline = true,
 }: VlearninLogoProps) {
-  const textColor = variant === "light" ? "text-white" : "text-[#1D4ED8]";
-  const taglineColor = variant === "light" ? "text-[#93C5FD]" : "text-[#4B5563]";
+  const taglineColor = variant === "light" ? "text-[#93C5FD]" : "text-[#526477]";
+  const wordmarkSrc =
+    variant === "light"
+      ? "/images/brand/vlearnin-wordmark-light.png"
+      : "/images/brand/vlearnin-wordmark-dark.png";
 
   return (
-    <div className="inline-flex items-center gap-3 select-none">
-      {/* Official VLEARNIN V-Mark Emblem */}
-      <svg
-        width={compact ? 36 : 42}
-        height={compact ? 36 : 42}
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        className="shrink-0"
-      >
-        <rect
-          x="2"
-          y="2"
-          width="44"
-          height="44"
-          rx="4"
-          fill={variant === "light" ? "#0E2954" : "#1D4ED8"}
-          stroke="#EA580C"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M12.5 14L24 35L35.5 14"
-          stroke="#FFFFFF"
-          strokeWidth="3.6"
-          strokeLinecap="square"
-          strokeLinejoin="miter"
-        />
-        <path
-          d="M18.5 14L24 24.5L29.5 14"
-          stroke="#EA580C"
-          strokeWidth="2.4"
-          strokeLinecap="square"
-          strokeLinejoin="miter"
-        />
-      </svg>
-
-      <div className="flex flex-col">
+    <div className="inline-flex flex-col items-start select-none">
+      <img
+        src={wordmarkSrc}
+        alt="VLEARNIN — The V-Way to Learn, Build & Lead"
+        className={`${compact ? "h-7 sm:h-8" : "h-9 sm:h-10"} w-auto object-contain`}
+      />
+      {showTagline && !compact && (
         <span
-          className={`font-nav font-extrabold tracking-[0.14em] leading-none ${
-            compact ? "text-lg" : "text-xl"
-          } ${textColor}`}
+          className={`font-nav text-[9.5px] font-semibold tracking-[0.14em] uppercase mt-1 leading-none ${taglineColor}`}
         >
-          VLEARNIN
+          The V-Way to Learn, Build &amp; Lead.
         </span>
-        {showTagline && !compact && (
-          <span
-            className={`font-nav text-[10px] font-semibold tracking-[0.12em] uppercase mt-1 leading-none ${taglineColor}`}
-          >
-            The V-Way to Learn, Build &amp; Lead.
-          </span>
-        )}
-      </div>
+      )}
     </div>
   );
 }
