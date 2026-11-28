@@ -1,36 +1,43 @@
-# VLEARNIN About Us — 3D CGI Asset Manifest
+# VLEARNIN — BEYOND THE CLASSROOM V2
+## Asset Manifest, Missing Capability Report & Cutout Quality Specification
 
-## Generated 3D CGI Assets (Ready in Production)
+### 1. Unavailable Capabilities Reported (Section 62)
+- **Gemini Image Generation (`generate_image`)**: Exhausted (`HTTP 429 RESOURCE_EXHAUSTED`, quota resets in ~3h50m).
+- **Veo AI Video Generation**: Unavailable in the current toolset.
+- **Figma Integration**: No Figma MCP server or plugin connected in the current environment.
+- **AI Alpha Matting (`rembg` / SAM)**: Not installed in the local Python environment.
 
-| Scene | Layer | Asset Path | Status |
-|---|---|---|---|
-| 01 Hero | Background Plate | `/images/about/hero/hero-background.webp` | Generated 3D CGI |
-| 01 Hero | Architectural Cutout | `/images/about/hero/hero-architecture.png` | Generated 3D CGI + Transparent PNG |
-| 02 Who We Are | Classroom Plate | `/images/about/who-we-are/who-we-are-background.webp` | Generated 3D CGI |
-| 03 Philosophy | Ivory Plinth Plate | `/images/about/philosophy/philosophy-background.webp` | Generated 3D CGI |
-| 03 Philosophy | Open Book Cutout | `/images/about/philosophy/philosophy-book.png` | Generated 3D CGI + Transparent PNG |
-| 04 Vision | Sunlit Hall Plate | `/images/about/vision/vision-background.webp` | Generated 3D CGI |
-| 05 Mission | Studio Desk Plate | `/images/about/mission/mission-background.webp` | Generated 3D CGI |
-| 06 Domain 01 (AI & BI) | Studio Plate | `/images/about/domains/ai/ai-background.webp` | Generated 3D CGI |
-| 06 Domain 01 (AI & BI) | Analytics Cutout | `/images/about/domains/ai/ai-workspace.png` | Generated 3D CGI + Transparent PNG |
-| 06 Domain 02 (Finance) | Executive Plate | `/images/about/domains/finance/finance-background.webp` | Generated 3D CGI |
-| 07 Practical Learning | Studio Plate | `/images/about/practical-learning/practical-background.webp` | Generated 3D CGI |
-| 08 Small-Batch Mentorship | Classroom Plate | `/images/about/mentorship/mentorship-background.webp` | Generated 3D CGI |
-| 09 Career Readiness | Corridor Plate | `/images/about/career-readiness/career-background.webp` | Generated 3D CGI |
+### 2. Rejected Assets Deleted (Section 09 & 67)
+The following miniature-object / threshold-cutout PNGs were **deleted** and are not used in production:
+- `hero/hero-architecture.png` (miniature building concept rejected; student-centric direction required)
+- `philosophy/philosophy-book.png` (visible white edge halo)
+- `domains/ai/ai-workspace.png` (visible white edge halo & object-centric concept)
 
-## Genuine Existing Centre Photography (Used Intentionally)
-- Scene 02 (`Who We Are` foreground mentor/students): `/images/about-campus.jpg`
-- Scene 10 (`Academic Collaboration`): `/images/academic-partnership.jpg`
-- Scene 11 (`Visit Our Rajajinagar Centre`): `/images/about-campus.jpg`, `/images/hero-1.jpg`, `/images/hero-2.jpg`
+### 3. Current Production Visuals (Cutout Fallback Rule — Section 21)
+In accordance with **Section 21 (Cutout Fallback Rule)**, clean complete student photographs from VLEARNIN's verified photography library are composited inside art-directed editorial frames over the clean generated architectural background plates — with **zero forced cutouts, zero white halos, and zero cropped heads/hands**:
 
-## Temporary Photographic Placeholders (Pending Gemini Quota Reset — HTTP 429 `RESOURCE_EXHAUSTED`)
-The following cutout layers could not be generated in this session due to image-generation model quota exhaustion (HTTP 429, resets in ~5 hours). Cleanly framed existing photographic assets are used temporarily and can be swapped 1:1 when generated:
+| Scene | Educational Topic | Foreground Student Photograph | Architectural Background Plate | Status |
+|---|---|---|---|---|
+| 01 Hero | The V-Way to Learn, Build & Lead | `/images/hero/vlearnin-main-desktop.webp` & `vlearnin-main-mobile.webp` | `/images/about/hero/hero-background.webp` | Active (Complete Photo) |
+| 02 Who We Are | 30-Hour Practical Certifications | `/images/about-campus.jpg` | `/images/about/who-we-are/who-we-are-background.webp` | Active (Complete Photo) |
+| 03 Our Vision | Student Imagining Future | `/images/hero-4.jpg` | `/images/about/vision/vision-background.webp` | Temporary Photo (Pending Vision AI Portrait) |
+| 04 Our Mission | Mentor Guiding Student Project | `/images/hero-3.jpg` | `/images/about/mission/mission-background.webp` | Active (Complete Photo) |
+| 05 Educational Philosophy | Learning Beyond Textbooks | `/images/course-ai-commerce.jpg` | `/images/about/philosophy/philosophy-background.webp` | Temporary Photo (Pending Philosophy AI Montage) |
+| 06 Domain 01 (AI & BI) | AI & Business Intelligence | `/images/domain-analytics.jpg` | `/images/about/domains/ai/ai-background.webp` | Active (Complete Photo) |
+| 06 Domain 02 (Finance) | Corporate Finance & Capital Markets | `/images/course-investment-banking.jpg` | `/images/about/domains/finance/finance-background.webp` | Active (Complete Photo) |
+| 06 Domain 03 (Media) | Digital Marketing & Creative Media | `/images/domain-creative.jpg` & `/images/course-video-editing.jpg` | Warm `#FBF4F1` editorial frame | Active (Complete Photo) |
+| 07 Practical Learning | Collaborative Capstone Execution | `/images/hero-2.jpg` | `/images/about/practical-learning/practical-background.webp` | Active (Complete Photo) |
+| 08 Small-Batch Mentorship | 1-on-1 Doubt Resolution | `/images/hero-1.jpg` | `/images/about/mentorship/mentorship-background.webp` | Active (Complete Photo) |
+| 09 Career Readiness | From Classroom to Corporate | `/images/hero-3.jpg` | `/images/about/career-readiness/career-background.webp` | Active (Complete Photo) |
+| 10 Academic Collaboration | College Workshops in Karnataka | `/images/academic-partnership.jpg` | `/images/academic-partnership.jpg` | Active (Complete Photo) |
+| 11 Rajajinagar Centre | Visit Our Rajajinagar Center | `/images/about-campus.jpg` | `/images/about-campus.jpg` | Genuine Campus Photo |
 
-1. `hero/hero-mobile.webp` — Vertical 9:16 3D CGI cutaway academy in warm ivory/navy.
-2. `hero/hero-foreground-details.png` — Transparent PNG cutout of open notebook, gold pen, and indoor leaf edge.
-3. `philosophy/philosophy-laptop.png` & `philosophy/philosophy-tools.png` — Transparent PNG cutouts of laptop, analytics tablet, and camera emerging from the open book.
-4. `vision/vision-staircase.png` & `vision/vision-doorway.png` — Transparent PNG cutouts of ivory stone staircase and sunlit glass doorway.
-5. `mission/mission-laptop.png` & `mission/mission-certificate.png` — Transparent PNG cutouts of laptop, notebooks, and generic certificate with muted-gold seal.
-6. `domains/finance/finance-workspace.png` — Transparent PNG cutout of financial modelling laptop, spreadsheets, and bound reports.
-7. `domains/creative-media/creative-background.webp` & `creative-workspace.png` — Contemporary editing studio backdrop + cinema camera & editing monitor cutout.
-8. `practical-learning/practical-foreground.png`, `mentorship/mentorship-foreground.png`, `career-readiness/career-foreground.png`, `academic-collaboration/academic-background.webp`, `academic-collaboration/academic-foreground.png`.
+### 4. Ready-to-Run Gemini & Veo Prompts (Once Quota Resets)
+1. **Our Vision (`vision/master.webp`, `vision/subject-cutout.png`, `vision/mobile.webp` + Veo 6s video):**
+   - *Prompt:* Ultra-photorealistic commercial educational advertising photograph of a thoughtful Indian college-age student standing in a sunlit warm-ivory and navy academic hallway holding an open hardcover book, looking optimistically toward a bright modern workspace horizon. Complete head, hair, shoulders, hands, fingers, and open book intact with 10% margin.
+2. **Our Educational Philosophy (`philosophy/master.webp`, `philosophy/subject-cutout.png` + Veo 6s video):**
+   - *Prompt:* Conceptual educational advertising photograph of a focused Indian college-age student reading an open academic book at a contemporary learning desk, surrounded coherently by applied analytics screens, financial documents, and creative media tools in soft natural daylight.
+3. **Hero Student Trio (`hero/master.webp`, `hero/subject-cutout.png`, `hero/mobile.webp` + Veo 6s video):**
+   - *Prompt:* Three confident Indian college-age students (holding books, laptop, and project materials) positioned on the right side of a sunlit contemporary ivory-and-navy academy interior, leaving clean left-side negative space for typography.
+4. **Domain 03 Creative Media (`domains/media/master.webp`, `domains/media/subject-cutout.png`):**
+   - *Prompt:* Confident Indian college-age creative media student holding a professional cinema camera inside a contemporary production studio with editing workstation and soft daylight.
