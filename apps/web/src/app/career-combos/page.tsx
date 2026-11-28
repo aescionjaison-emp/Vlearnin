@@ -17,7 +17,7 @@ export default async function CareerCombosPage() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
+      <section className="bg-[#10264A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="type-page-title max-w-3xl">
             Combine Complementary Skills for <span className="italic">Stronger Career Outcomes</span>
@@ -33,7 +33,7 @@ export default async function CareerCombosPage() {
           {combos.map((combo, index) => (
             <article
               key={combo.slug}
-              className="grid grid-cols-1 lg:grid-cols-12 border border-[#E5E7EB] bg-white shadow-xs overflow-hidden rounded-[15px]"
+              className="grid grid-cols-1 lg:grid-cols-12 border border-[#E1E6EC] bg-white shadow-xs overflow-hidden rounded-[15px]"
             >
               <div className="lg:col-span-5 relative min-h-[260px]">
                 <Image
@@ -43,43 +43,43 @@ export default async function CareerCombosPage() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />
-                <div className="absolute top-4 left-4 bg-[#1D4ED8] text-[#93C5FD] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-[10px]">
+                <div className="absolute top-4 left-4 bg-[#10264A] text-[#C49A59] font-nav text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-[10px]">
                   Combo 0{index + 1}
                 </div>
               </div>
 
               <div className="lg:col-span-7 p-8 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
-                  <div className="flex flex-wrap items-center gap-4 text-xs font-nav text-[#4B5563]">
-                    <span className="inline-flex items-center gap-1.5 text-[#1D4ED8] font-bold">
-                      <Clock className="w-4 h-4 text-[#EA580C]" />
+                  <div className="flex flex-wrap items-center gap-4 text-xs font-nav text-[#526477]">
+                    <span className="inline-flex items-center gap-1.5 text-[#10264A] font-bold">
+                      <Clock className="w-4 h-4 text-[#C49A59]" />
                       {combo.durationLabel}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Layers className="w-4 h-4 text-[#1D4ED8]" />
+                      <Layers className="w-4 h-4 text-[#10264A]" />
                       {combo.includedLabel}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">{combo.title}</h2>
-                  <p className="text-sm sm:text-base text-[#4B5563] leading-relaxed">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#10264A]">{combo.title}</h2>
+                  <p className="text-sm sm:text-base text-[#526477] leading-relaxed">
                     {combo.summary}
                   </p>
-                  <p className="text-sm text-[#111827] bg-[#F8FAFC] px-4 py-2.5 border-l-4 border-[#1D4ED8]">
+                  <p className="text-sm text-[#10264A] bg-[#FAF9F6] px-4 py-2.5 border-l-4 border-[#10264A]">
                     <strong className="font-nav">Ideal For:</strong> {combo.idealFor}
                   </p>
 
                   <ul className="space-y-2 pt-1">
                     {combo.outcomes.map((o) => (
-                      <li key={o} className="text-sm text-[#111827] flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
+                      <li key={o} className="text-sm text-[#10264A] flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#10264A] shrink-0 mt-0.5" />
                         <span>{o}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E5E7EB]">
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E1E6EC]">
                   <ComboActionsClient
                     comboTitle={combo.title}
                     comboDuration={combo.durationLabel}
@@ -87,7 +87,7 @@ export default async function CareerCombosPage() {
                   />
                   <Link
                     href={`/career-combos/${combo.slug}`}
-                    className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8] hover:text-[#1D4ED8] inline-flex items-center gap-1.5"
+                    className="font-nav text-xs font-bold uppercase tracking-wider text-[#10264A] hover:text-[#10264A] inline-flex items-center gap-1.5"
                   >
                     <span>Full Track Details</span>
                     <ArrowRight className="w-4 h-4" />

@@ -3,19 +3,50 @@
 @import "../styles/typography.css";
 @import "../styles/motion.css";
 
-@theme {
-  --color-jain-navy: #1D4ED8;
-  --color-jain-blue: #1D4ED8;
-  --color-jain-amber: #EA580C;
-  --color-jain-yellow: #DBEAFE;
-  --color-ink: #111827;
-  --color-muted: #4B5563;
-  --color-surface: #F8FAFC;
-  --color-border: #E5E7EB;
+:root {
+  --brand-primary: #10264A;
+  --brand-secondary: #17324D;
+  --brand-blue: #2463A6;
+  --brand-blue-hover: #1D528B;
+  --brand-accent: #C49A59;
 
-  --font-serif: var(--font-manrope), Arial, sans-serif;
-  --font-nav: var(--font-manrope), Arial, sans-serif;
-  --font-sans: var(--font-manrope), Arial, sans-serif;
+  --background: #FFFFFF;
+  --background-warm: #FAF9F6;
+  --background-soft: #F7F8FA;
+  --background-slate: #F8FAFC;
+  --background-ice: #F1F6FB;
+
+  --surface-white: #FFFFFF;
+  --surface-cream: #F8F5EE;
+  --surface-blue: #F1F5FB;
+  --surface-beige: #FBF4F1;
+
+  --text-primary: #10264A;
+  --text-secondary: #526477;
+  --text-muted: #718096;
+
+  --border-default: #E1E6EC;
+  --border-subtle: #EDF0F3;
+
+  --button-primary: #10264A;
+  --button-primary-hover: #17324D;
+  --button-secondary: #FFFFFF;
+  --button-secondary-text: #10264A;
+}
+
+@theme {
+  --color-jain-navy: #10264A;
+  --color-jain-blue: #2463A6;
+  --color-jain-amber: #C49A59;
+  --color-jain-yellow: #F1F6FB;
+  --color-ink: #10264A;
+  --color-muted: #526477;
+  --color-surface: #F7F8FA;
+  --color-border: #E1E6EC;
+
+  --font-serif: var(--font-heading), Arial, sans-serif;
+  --font-nav: var(--font-body), Arial, sans-serif;
+  --font-sans: var(--font-body), Arial, sans-serif;
 }
 
 html {
@@ -23,9 +54,9 @@ html {
 }
 
 body {
-  background-color: #ffffff;
-  color: #111827;
-  font-family: var(--font-manrope), Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
   font-size: 16px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -33,89 +64,84 @@ body {
 }
 
 h1, h2, h3, h4, .font-heading {
-  font-family: var(--font-manrope), Arial, sans-serif;
+  font-family: var(--font-primary);
 }
 
 .font-editorial {
-  font-family: var(--font-manrope), Arial, sans-serif;
-  font-weight: 700;
+  font-family: var(--font-primary);
+  font-weight: 800;
 }
 
 .font-nav {
-  font-family: var(--font-manrope), Arial, sans-serif;
+  font-family: var(--font-secondary);
 }
 
-/* Clean, High-Trust Academic Royal Blue & Crisp Coral Buttons with 15px curve */
+/* Compact, Refined Academic Buttons (6px radius) */
 .btn-primary-amber {
-  background-color: #1D4ED8;
+  background-color: var(--brand-blue);
   color: #FFFFFF;
-  border-radius: 15px;
+  border-radius: 6px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  font-size: 0.875rem;
+  transition: background-color 260ms ease, transform 260ms ease, box-shadow 260ms ease;
 }
 .btn-primary-amber:hover {
-  background-color: #1E40AF;
+  background-color: var(--brand-blue-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(29, 78, 216, 0.22);
+  box-shadow: 0 6px 16px rgba(16, 38, 74, 0.14);
 }
 
 .btn-gold {
   background-color: #FFFFFF;
-  color: #1D4ED8;
-  border-radius: 15px;
+  color: var(--brand-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  font-size: 0.875rem;
+  transition: background-color 260ms ease, border-color 260ms ease, transform 260ms ease;
 }
 .btn-gold:hover {
-  background-color: #EFF6FF;
+  background-color: var(--background-ice);
+  border-color: var(--brand-blue);
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 .btn-navy {
-  background-color: #1D4ED8;
+  background-color: var(--button-primary);
   color: #FFFFFF;
-  border-radius: 15px;
+  border-radius: 6px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, transform 300ms ease;
+  font-size: 0.875rem;
+  transition: background-color 260ms ease, transform 260ms ease, box-shadow 260ms ease;
 }
 .btn-navy:hover {
-  background-color: #1E40AF;
+  background-color: var(--button-primary-hover);
   transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 38, 74, 0.14);
 }
 
 .btn-outline-navy {
-  border: 1.5px solid #1D4ED8;
-  color: #1D4ED8;
-  border-radius: 15px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--brand-primary);
+  color: var(--brand-primary);
+  border-radius: 6px;
   font-family: var(--font-button);
   font-weight: 600;
-  transition: background-color 300ms ease, color 300ms ease;
+  font-size: 0.875rem;
+  transition: background-color 260ms ease, color 260ms ease;
 }
 .btn-outline-navy:hover {
-  background-color: #1D4ED8;
+  background-color: var(--brand-primary);
   color: #FFFFFF;
 }
 
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 select,
 textarea {
-  border-radius: 15px;
-}
-
-.jain-slant-left {
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 0% 100%);
-}
-.jain-slant-photo {
-  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-}
-@media (min-width: 1024px) {
-  .jain-slant-photo-lg {
-    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-  }
+  border-radius: 8px;
 }
 
 @media (prefers-reduced-motion: reduce) {

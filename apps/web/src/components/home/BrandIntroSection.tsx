@@ -48,7 +48,6 @@ export function BrandIntroSection() {
       };
     }
 
-    // ── ANIMATION 03: Kinetic Brand Typography (LEARN -> BUILD -> LEAD) ──
     const mm = gsap.matchMedia();
     const kineticScope = kineticRef.current;
 
@@ -60,7 +59,6 @@ export function BrandIntroSection() {
 
         if (phases.length < 3 || photos.length < 3) return;
 
-        // Initial positions: Phase 0 visible, Phase 1 & 2 masked off
         gsap.set(phases.slice(1), { yPercent: 105, opacity: 0 });
         gsap.set(descs.slice(1), { y: 24, opacity: 0 });
         gsap.set(photos.slice(1), { clipPath: "inset(100% 0 0 0)" });
@@ -80,14 +78,12 @@ export function BrandIntroSection() {
           },
         });
 
-        // Transition 0 -> 1 (LEARN -> BUILD)
         tl.to(phases[0], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.inOut" }, 0.28)
           .to(descs[0], { y: -16, opacity: 0, duration: 0.25 }, 0.28)
           .fromTo(phases[1], { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.32, ease: "power3.out" }, 0.34)
           .fromTo(descs[1], { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28 }, 0.36)
           .to(photos[1], { clipPath: "inset(0% 0 0 0)", duration: 0.35, ease: "power2.inOut" }, 0.32)
 
-          // Transition 1 -> 2 (BUILD -> LEAD)
           .to(phases[1], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.inOut" }, 0.66)
           .to(descs[1], { y: -16, opacity: 0, duration: 0.25 }, 0.66)
           .fromTo(phases[2], { yPercent: 105, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.32, ease: "power3.out" }, 0.72)
@@ -95,7 +91,6 @@ export function BrandIntroSection() {
           .to(photos[2], { clipPath: "inset(0% 0 0 0)", duration: 0.35, ease: "power2.inOut" }, 0.7);
       });
 
-      // Mobile: lightweight sequential masked reveals without scroll trapping
       mm.add("(max-width: 1023px)", () => {
         const mobileCards = gsap.utils.toArray<HTMLElement>(".kinetic-mobile-card", kineticScope);
         mobileCards.forEach((card) => {
@@ -120,7 +115,6 @@ export function BrandIntroSection() {
       });
     }
 
-    // ── ANIMATION 04: Institutional Statistics Labels & Dividing Lines ──
     const statsCtx = gsap.context(() => {
       if (!highlightsRef.current) return;
       gsap.fromTo(
@@ -170,12 +164,12 @@ export function BrandIntroSection() {
 
   return (
     <>
-      {/* 11 — WELCOME TO VLEARNIN (Coordinated Split Curtain Timeline) */}
-      <section className="py-16 lg:py-20 bg-white">
+      {/* 11 — WELCOME TO VLEARNIN (Warm Ivory #FAF9F6) */}
+      <section className="py-16 lg:py-20 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
           <div
             ref={splitRef}
-            className="border border-[#E5E7EB] bg-white shadow-sm grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-[15px]"
+            className="border border-[#E1E6EC] bg-white shadow-xs grid grid-cols-1 lg:grid-cols-12 items-stretch overflow-hidden rounded-[12px]"
           >
             <div className="split-image lg:col-span-5 relative min-h-[300px] lg:min-h-[440px] overflow-hidden">
               <Image
@@ -196,17 +190,21 @@ export function BrandIntroSection() {
 
             <div className="split-content lg:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-center space-y-6">
               <div>
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <span className="h-[2px] w-7 bg-[#C49A59]" />
+                  <span className="type-eyebrow text-[#526477]">Institutional Overview</span>
+                </div>
                 <EditableText
                   as="h2"
                   path="brandIntro.heading"
                   value={bi.heading}
-                  className="type-editorial text-[#1D4ED8]"
+                  className="type-section-heading text-[#10264A]"
                 />
                 <EditableText
                   as="p"
                   path="brandIntro.subTagline"
                   value={bi.subTagline}
-                  className="font-editorial italic text-xl sm:text-2xl text-[#1D4ED8]/80 mt-2"
+                  className="font-heading font-semibold text-lg sm:text-xl text-[#2463A6] mt-2"
                 />
               </div>
 
@@ -214,10 +212,10 @@ export function BrandIntroSection() {
                 as="p"
                 path="brandIntro.description"
                 value={bi.description}
-                className="mc-lead text-[#4B5563]"
+                className="mc-lead text-[#526477]"
               />
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E5E7EB]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-[#E1E6EC]">
                 {bi.pillars.map((p, idx) => (
                   <div key={idx} className="split-stagger-item pt-3 space-y-1.5 relative">
                     <EditableDeleteButton
@@ -230,19 +228,19 @@ export function BrandIntroSection() {
                       <EditableText
                         path={`brandIntro.pillars.${idx}.step`}
                         value={p.step}
-                        className="font-editorial text-2xl text-[#1D4ED8]"
+                        className="font-heading font-extrabold text-xl text-[#2463A6]"
                       />
                       <EditableText
                         path={`brandIntro.pillars.${idx}.title`}
                         value={p.title}
-                        className="font-nav text-sm font-bold tracking-wider text-[#1D4ED8]"
+                        className="font-heading text-sm font-bold tracking-wider text-[#10264A]"
                       />
                     </div>
                     <EditableText
                       as="p"
                       path={`brandIntro.pillars.${idx}.desc`}
                       value={p.desc}
-                      className="text-sm text-[#4B5563] leading-snug"
+                      className="text-sm text-[#526477] leading-snug"
                     />
                   </div>
                 ))}
@@ -251,14 +249,14 @@ export function BrandIntroSection() {
               <div className="flex flex-wrap items-center gap-5 pt-2">
                 <Link
                   href="/about"
-                  className="btn-navy px-6 py-3 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2"
+                  className="btn-navy px-5 py-2.5 text-sm inline-flex items-center gap-2"
                 >
                   <EditableText path="brandIntro.ctaLabel" value={bi.ctaLabel} />
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/courses"
-                  className="font-nav text-sm font-semibold text-[#1D4ED8] hover:text-[#1D4ED8] underline underline-offset-4"
+                  className="font-nav text-sm font-semibold text-[#2463A6] hover:text-[#10264A] underline underline-offset-4"
                 >
                   <EditableText path="brandIntro.secondaryLinkLabel" value={bi.secondaryLinkLabel} />
                 </Link>
@@ -281,9 +279,8 @@ export function BrandIntroSection() {
       <section
         ref={kineticRef}
         aria-label="Learn Build Lead Kinetic Journey"
-        className="bg-[#F8FAFC] border-y border-[#E5E7EB] overflow-hidden"
+        className="bg-[#FAF9F6] border-b border-[#E1E6EC] overflow-hidden"
       >
-        {/* Desktop Pinned 3-Phase Scrubbed Storytelling */}
         <div className="hidden lg:flex max-w-[1440px] mx-auto px-16 min-h-screen items-center">
           <div className="w-full grid grid-cols-12 gap-12 items-center">
             <div className="col-span-6 space-y-6">
@@ -291,10 +288,10 @@ export function BrandIntroSection() {
                 {pillars.map((p, idx) => (
                   <div
                     key={idx}
-                    className={`px-3 py-1 rounded-full font-nav text-xs font-bold tracking-wider transition-colors duration-300 ${
+                    className={`px-3.5 py-1.5 rounded-[6px] font-nav text-xs font-semibold tracking-wide transition-colors duration-300 ${
                       activePhase === idx
-                        ? "bg-[#1D4ED8] text-white"
-                        : "bg-white text-[#4B5563] border border-[#E5E7EB]"
+                        ? "bg-[#10264A] text-white"
+                        : "bg-white text-[#526477] border border-[#E1E6EC]"
                     }`}
                   >
                     {p.step} — {p.title}
@@ -308,7 +305,7 @@ export function BrandIntroSection() {
                     key={idx}
                     className="kinetic-word-block absolute inset-0 flex items-center"
                   >
-                    <span className="font-editorial text-7xl font-extrabold tracking-[-0.04em] text-[#1D4ED8]">
+                    <span className="font-heading text-7xl font-extrabold tracking-[-0.045em] text-[#10264A]">
                       {p.title}.
                     </span>
                   </div>
@@ -319,7 +316,7 @@ export function BrandIntroSection() {
                 {pillars.map((p, idx) => (
                   <p
                     key={idx}
-                    className="kinetic-desc-block absolute inset-0 text-xl text-[#374151] leading-relaxed max-w-lg"
+                    className="kinetic-desc-block absolute inset-0 text-xl text-[#526477] leading-relaxed max-w-lg"
                   >
                     {p.desc}
                   </p>
@@ -328,7 +325,7 @@ export function BrandIntroSection() {
             </div>
 
             <div className="col-span-6">
-              <div className="relative aspect-[16/11] w-full rounded-[15px] overflow-hidden border border-[#E5E7EB] shadow-md bg-white">
+              <div className="relative aspect-[16/11] w-full rounded-[12px] overflow-hidden border border-[#E1E6EC] shadow-sm bg-white">
                 {pillars.map((p, idx) => (
                   <div key={idx} className="kinetic-photo-frame absolute inset-0">
                     <Image
@@ -345,12 +342,11 @@ export function BrandIntroSection() {
           </div>
         </div>
 
-        {/* Mobile Lightweight Sequential Masked Version (No Scroll Trapping) */}
         <div className="lg:hidden max-w-[1440px] mx-auto px-4 sm:px-8 py-12 space-y-6">
           {pillars.map((p, idx) => (
             <div
               key={idx}
-              className="kinetic-mobile-card bg-white border border-[#E5E7EB] rounded-[15px] overflow-hidden shadow-xs"
+              className="kinetic-mobile-card bg-white border border-[#E1E6EC] rounded-[12px] overflow-hidden shadow-xs"
             >
               <div className="relative aspect-[16/10] w-full">
                 <Image
@@ -362,20 +358,20 @@ export function BrandIntroSection() {
                 />
               </div>
               <div className="p-5 space-y-1.5">
-                <p className="font-editorial text-3xl font-extrabold text-[#1D4ED8]">
+                <p className="font-heading text-2xl font-extrabold text-[#10264A]">
                   {p.step} · {p.title}.
                 </p>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{p.desc}</p>
+                <p className="text-sm text-[#526477] leading-relaxed">{p.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 12 — FACTUAL INSTITUTIONAL HIGHLIGHTS (Animation 04: Vertical Number-Roll) */}
-      <section aria-label="Factual Programme Highlights" className="bg-[#1D4ED8] text-white py-12">
+      {/* 12 — FACTUAL INSTITUTIONAL HIGHLIGHTS (Clean Light Stats Bar) */}
+      <section aria-label="Factual Programme Highlights" className="bg-white border-b border-[#E1E6EC] py-12">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-          <div ref={highlightsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-white/15">
+          <div ref={highlightsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y sm:divide-y-0 lg:divide-x divide-[#E1E6EC]">
             {bi.highlights.map((h, idx) => (
               <div key={idx} className="highlight-stat pt-4 sm:pt-0 lg:pl-8 first:pl-0 text-center lg:text-left relative">
                 <EditableDeleteButton
@@ -387,21 +383,21 @@ export function BrandIntroSection() {
                 <AnimatedCounter
                   value={h.value}
                   padZero={h.padZero}
-                  className="mc-counter text-[#93C5FD]"
+                  className="mc-counter text-[#10264A]"
                 />
-                <div className="stat-rule origin-left h-px w-12 bg-white/30 my-2.5 mx-auto lg:mx-0" />
+                <div className="stat-rule origin-left h-[2px] w-10 bg-[#C49A59] my-3 mx-auto lg:mx-0" />
                 <div className="stat-label-mask">
                   <EditableText
                     as="p"
                     path={`brandIntro.highlights.${idx}.label`}
                     value={h.label}
-                    className="font-nav text-sm sm:text-base font-bold text-white"
+                    className="font-heading text-sm sm:text-base font-bold text-[#10264A]"
                   />
                   <EditableText
                     as="p"
                     path={`brandIntro.highlights.${idx}.sub`}
                     value={h.sub}
-                    className="text-xs sm:text-sm text-white/70 mt-0.5"
+                    className="text-xs sm:text-sm text-[#526477] mt-0.5"
                   />
                 </div>
               </div>

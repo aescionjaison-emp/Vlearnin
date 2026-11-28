@@ -45,7 +45,7 @@ export default async function CareerComboDetailPage({
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1D4ED8] text-white py-16">
+      <section className="bg-[#10264A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5">
             <nav aria-label="Breadcrumb" className="text-xs font-nav text-white/70 flex items-center gap-2">
@@ -53,10 +53,10 @@ export default async function CareerComboDetailPage({
               <span>/</span>
               <Link href="/career-combos" className="hover:text-white">Career Combos</Link>
               <span>/</span>
-              <span className="text-[#93C5FD]">{combo.title}</span>
+              <span className="text-[#C49A59]">{combo.title}</span>
             </nav>
 
-            <span className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-widest text-[#93C5FD]">
+            <span className="inline-flex items-center gap-2 font-nav text-xs font-bold uppercase tracking-widest text-[#C49A59]">
               <Clock className="w-4 h-4" />
               {combo.durationLabel}
             </span>
@@ -64,7 +64,7 @@ export default async function CareerComboDetailPage({
             <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight">
               {combo.title}
             </h1>
-            <p className="text-base font-nav font-semibold text-[#93C5FD]">
+            <p className="text-base font-nav font-semibold text-[#C49A59]">
               {combo.includedLabel}
             </p>
             <p className="text-base text-white/85 leading-relaxed">{combo.summary}</p>
@@ -95,21 +95,21 @@ export default async function CareerComboDetailPage({
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="p-7 bg-[#F8FAFC] border border-[#E5E7EB] space-y-4 rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1D4ED8]">Who Should Enroll</h2>
-              <p className="text-base text-[#111827]">{combo.idealFor}</p>
-              <p className="text-sm text-[#4B5563]">
-                Fee Structure: <strong className="text-[#1D4ED8]">Request Fee Details</strong> via
+            <div className="p-7 bg-[#FAF9F6] border border-[#E1E6EC] space-y-4 rounded-[15px]">
+              <h2 className="text-2xl font-bold text-[#10264A]">Who Should Enroll</h2>
+              <p className="text-base text-[#10264A]">{combo.idealFor}</p>
+              <p className="text-sm text-[#526477]">
+                Fee Structure: <strong className="text-[#10264A]">Request Fee Details</strong> via
                 our Rajajinagar admissions team.
               </p>
             </div>
 
-            <div className="p-7 bg-[#F8FAFC] border border-[#E5E7EB] space-y-4 rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1D4ED8]">Key Outcomes</h2>
+            <div className="p-7 bg-[#FAF9F6] border border-[#E1E6EC] space-y-4 rounded-[15px]">
+              <h2 className="text-2xl font-bold text-[#10264A]">Key Outcomes</h2>
               <ul className="space-y-2.5">
                 {combo.outcomes.map((o) => (
-                  <li key={o} className="text-sm text-[#111827] flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" />
+                  <li key={o} className="text-sm text-[#10264A] flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#10264A] shrink-0 mt-0.5" />
                     <span>{o}</span>
                   </li>
                 ))}
@@ -118,8 +118,8 @@ export default async function CareerComboDetailPage({
           </div>
 
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-[#1D4ED8] flex items-center gap-2.5">
-              <Layers className="w-5 h-5 text-[#EA580C]" />
+            <h2 className="text-2xl font-bold text-[#10264A] flex items-center gap-2.5">
+              <Layers className="w-5 h-5 text-[#C49A59]" />
               Included VLEARNIN Certification Modules
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -127,17 +127,17 @@ export default async function CareerComboDetailPage({
                 <Link
                   key={course.slug}
                   href={`/courses/${course.slug}`}
-                  className="border border-[#E5E7EB] p-6 hover:border-[#1D4ED8] transition-colors flex flex-col justify-between space-y-4 rounded-[15px]"
+                  className="border border-[#E1E6EC] p-6 hover:border-[#10264A] transition-colors flex flex-col justify-between space-y-4 rounded-[15px]"
                 >
                   <div>
-                    <span className="font-nav text-[10px] font-bold uppercase tracking-wider text-[#1D4ED8]">
+                    <span className="font-nav text-[10px] font-bold uppercase tracking-wider text-[#10264A]">
                       {course.categoryName}
                     </span>
-                    <h3 className="text-lg font-bold text-[#1D4ED8] mt-2">{course.title}</h3>
-                    <p className="text-sm text-[#4B5563] mt-2">{course.summary}</p>
+                    <h3 className="text-lg font-bold text-[#10264A] mt-2">{course.title}</h3>
+                    <p className="text-sm text-[#526477] mt-2">{course.summary}</p>
                   </div>
-                  <span className="font-nav text-xs font-bold text-[#1D4ED8] inline-flex items-center gap-1.5">
-                    View Full Syllabus <ArrowRight className="w-3.5 h-3.5 text-[#EA580C]" />
+                  <span className="font-nav text-xs font-bold text-[#10264A] inline-flex items-center gap-1.5">
+                    View Full Syllabus <ArrowRight className="w-3.5 h-3.5 text-[#C49A59]" />
                   </span>
                 </Link>
               ))}

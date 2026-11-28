@@ -159,7 +159,7 @@ export function AcademicPartnershipsClient() {
   return (
     <div className="bg-white">
       {/* Hero */}
-      <section className="bg-[#1D4ED8] text-white py-14 lg:py-16">
+      <section className="bg-[#10264A] text-white py-14 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="type-page-title max-w-3xl">
             Empowering Colleges to Build <span className="italic">Industry-Ready Graduates</span>
@@ -179,7 +179,7 @@ export function AcademicPartnershipsClient() {
               href={`${apiRoot}/api/brochures/academic`}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-white/60 hover:bg-white hover:text-[#1D4ED8] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
+              className="border border-white/60 hover:bg-white hover:text-[#10264A] text-white font-nav font-semibold px-7 py-3.5 text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 transition-colors rounded-[15px]"
             >
               <Download className="w-4 h-4" />
               Download Academic Brochure PDF
@@ -189,13 +189,13 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 1: Bridging the Campus-to-Corporate Gap */}
-      <section className="py-16 bg-[#F8FAFC] border-b border-[#E5E7EB]">
+      <section className="py-16 bg-[#FAF9F6] border-b border-[#E1E6EC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="max-w-3xl space-y-3">
-            <h2 className="text-3xl font-bold text-[#1D4ED8]">
+            <h2 className="text-3xl font-bold text-[#10264A]">
               Bridging the Campus-to-Corporate Gap
             </h2>
-            <p className="text-base text-[#4B5563] leading-relaxed">
+            <p className="text-base text-[#526477] leading-relaxed">
               We partner with college leadership, HODs, and placement cells to build practical tool
               mastery and job-ready project portfolios on campus.
             </p>
@@ -220,10 +220,10 @@ export function AcademicPartnershipsClient() {
                 desc: "Verifiable certificates with optional dual institutional branding.",
               },
             ].map((benefit) => (
-              <div key={benefit.title} className="bg-white border border-[#E5E7EB] p-6 border-t-4 border-t-[#1D4ED8] rounded-[15px]">
-                <GraduationCap className="w-6 h-6 text-[#EA580C] mb-3" />
-                <h3 className="text-lg font-bold text-[#1D4ED8] mb-2">{benefit.title}</h3>
-                <p className="text-sm text-[#4B5563] leading-relaxed">{benefit.desc}</p>
+              <div key={benefit.title} className="bg-white border border-[#E1E6EC] p-6 border-t-4 border-t-[#10264A] rounded-[15px]">
+                <GraduationCap className="w-6 h-6 text-[#C49A59] mb-3" />
+                <h3 className="text-lg font-bold text-[#10264A] mb-2">{benefit.title}</h3>
+                <p className="text-sm text-[#526477] leading-relaxed">{benefit.desc}</p>
               </div>
             ))}
           </div>
@@ -234,34 +234,34 @@ export function AcademicPartnershipsClient() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-[#1D4ED8]">
+            <h2 className="text-3xl font-bold text-[#10264A]">
               Institutional Certification Portfolio
             </h2>
           </div>
 
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto border border-[#E5E7EB] rounded-[15px]">
+          <div className="hidden md:block overflow-x-auto border border-[#E1E6EC] rounded-[15px]">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-[#1D4ED8] text-white font-nav text-xs uppercase tracking-wider">
+                <tr className="bg-[#10264A] text-white font-nav text-xs uppercase tracking-wider">
                   <th className="py-4 px-5">Programme</th>
                   <th className="py-4 px-5">Duration</th>
                   <th className="py-4 px-5">Target Student Streams</th>
                   <th className="py-4 px-5">Core Industry Skill Area</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E5E7EB] text-sm">
+              <tbody className="divide-y divide-[#E1E6EC] text-sm">
                 {PORTFOLIO_ROWS.map((row, idx) => (
                   <tr
                     key={row.programme}
-                    className={idx % 2 === 0 ? "bg-white" : "bg-[#F8FAFC]/60"}
+                    className={idx % 2 === 0 ? "bg-white" : "bg-[#FAF9F6]/60"}
                   >
-                    <td className="py-4 px-5 font-bold text-[#1D4ED8]">{row.programme}</td>
-                    <td className="py-4 px-5 font-nav font-semibold text-[#1D4ED8] whitespace-nowrap">
+                    <td className="py-4 px-5 font-bold text-[#10264A]">{row.programme}</td>
+                    <td className="py-4 px-5 font-nav font-semibold text-[#10264A] whitespace-nowrap">
                       {row.duration}
                     </td>
-                    <td className="py-4 px-5 text-[#111827]">{row.streams}</td>
-                    <td className="py-4 px-5 text-[#4B5563]">{row.skillArea}</td>
+                    <td className="py-4 px-5 text-[#10264A]">{row.streams}</td>
+                    <td className="py-4 px-5 text-[#526477]">{row.skillArea}</td>
                   </tr>
                 ))}
               </tbody>
@@ -271,17 +271,17 @@ export function AcademicPartnershipsClient() {
           {/* Mobile Stacked Cards */}
           <div className="md:hidden space-y-4">
             {PORTFOLIO_ROWS.map((row) => (
-              <div key={row.programme} className="border border-[#E5E7EB] p-5 bg-[#F8FAFC] space-y-2 rounded-[15px]">
+              <div key={row.programme} className="border border-[#E1E6EC] p-5 bg-[#FAF9F6] space-y-2 rounded-[15px]">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-bold text-[#1D4ED8] text-base">{row.programme}</h3>
-                  <span className="font-nav text-xs font-bold bg-[#1D4ED8] text-[#93C5FD] px-2.5 py-1 shrink-0 rounded-[8px]">
+                  <h3 className="font-bold text-[#10264A] text-base">{row.programme}</h3>
+                  <span className="font-nav text-xs font-bold bg-[#10264A] text-[#C49A59] px-2.5 py-1 shrink-0 rounded-[8px]">
                     {row.duration}
                   </span>
                 </div>
-                <p className="text-xs text-[#111827]">
+                <p className="text-xs text-[#10264A]">
                   <strong>Streams:</strong> {row.streams}
                 </p>
-                <p className="text-xs text-[#4B5563]">
+                <p className="text-xs text-[#526477]">
                   <strong>Skill Area:</strong> {row.skillArea}
                 </p>
               </div>
@@ -291,7 +291,7 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 3: Six-Step Academic Delivery Framework */}
-      <section ref={timelineRef} className="py-16 bg-[#1D4ED8] text-white">
+      <section ref={timelineRef} className="py-16 bg-[#10264A] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold">
@@ -303,9 +303,9 @@ export function AcademicPartnershipsClient() {
             {DELIVERY_STEPS.map((s) => (
               <div
                 key={s.step}
-                className="timeline-step bg-[#1E40AF] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
+                className="timeline-step bg-[#17324D] border border-white/15 border-t-4 border-t-[#3B82F6] p-6 space-y-2.5 rounded-[15px]"
               >
-                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#93C5FD]">
+                <span className="font-nav text-xs font-bold uppercase tracking-widest text-[#C49A59]">
                   {s.step}
                 </span>
                 <h3 className="text-lg font-bold text-white">{s.title}</h3>
@@ -317,27 +317,27 @@ export function AcademicPartnershipsClient() {
       </section>
 
       {/* Section 4: Institutional Partnership Inquiry Form */}
-      <section id="institutional-form" className="py-16 bg-[#F8FAFC]">
+      <section id="institutional-form" className="py-16 bg-[#FAF9F6]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white border border-[#E5E7EB] shadow-md p-6 sm:p-10 rounded-[15px]">
+          <div className="bg-white border border-[#E1E6EC] shadow-md p-6 sm:p-10 rounded-[15px]">
             <div className="mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#1D4ED8]">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#10264A]">
                 Invite VLEARNIN for an Institutional Presentation
               </h2>
-              <p className="text-sm text-[#4B5563] mt-2">
+              <p className="text-sm text-[#526477] mt-2">
                 Share your institution&apos;s details below, and our Academic Partnerships team will
                 connect with you to customize a programme proposal.
               </p>
             </div>
 
             {successRef ? (
-              <div className="p-8 bg-[#F8FAFC] border border-emerald-200 text-center space-y-3">
+              <div className="p-8 bg-[#FAF9F6] border border-emerald-200 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h3 className="text-xl font-bold text-[#1D4ED8]">
+                <h3 className="text-xl font-bold text-[#10264A]">
                   Institutional Proposal Request Received
                 </h3>
-                <p className="text-sm text-[#4B5563]">
-                  Reference ID: <strong className="text-[#1D4ED8]">{successRef}</strong>. Our
+                <p className="text-sm text-[#526477]">
+                  Reference ID: <strong className="text-[#10264A]">{successRef}</strong>. Our
                   Academic Partnerships team will contact you shortly.
                 </p>
               </div>
@@ -354,26 +354,26 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-fullName" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Full Name *
                     </label>
                     <input
                       id="inst-fullName"
                       type="text"
                       {...register("fullName")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                     {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-designation" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Designation *
                     </label>
                     <select
                       id="inst-designation"
                       {...register("designation")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     >
                       <option value="">Select designation</option>
                       {INSTITUTIONAL_DESIGNATIONS.map((d) => (
@@ -386,20 +386,20 @@ export function AcademicPartnershipsClient() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       College / Institution Name *
                     </label>
                     <input
                       id="inst-name"
                       type="text"
                       {...register("institutionName")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                     {errors.institutionName && <p className="text-xs text-red-600 mt-1">{errors.institutionName.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-city" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       City / Area
                     </label>
                     <input
@@ -407,41 +407,41 @@ export function AcademicPartnershipsClient() {
                       type="text"
                       {...register("cityArea")}
                       placeholder="e.g., Bengaluru / Mysuru / Tumakuru"
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Official Email *
                     </label>
                     <input
                       id="inst-email"
                       type="email"
                       {...register("officialEmail")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                     {errors.officialEmail && <p className="text-xs text-red-600 mt-1">{errors.officialEmail.message}</p>}
                   </div>
 
                   <div>
-                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="inst-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Phone / WhatsApp *
                     </label>
                     <input
                       id="inst-phone"
                       type="tel"
                       {...register("phone")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                     {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-2">
+                  <span className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-2">
                     Interested Programmes * (Select all that apply)
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -452,15 +452,15 @@ export function AcademicPartnershipsClient() {
                           key={prog}
                           className={`flex items-start gap-2.5 p-3 border text-xs cursor-pointer transition-colors ${
                             checked
-                              ? "border-[#1D4ED8] bg-[#F8FAFC] font-semibold text-[#1D4ED8]"
-                              : "border-[#E5E7EB] bg-white text-[#111827]"
+                              ? "border-[#10264A] bg-[#FAF9F6] font-semibold text-[#10264A]"
+                              : "border-[#E1E6EC] bg-white text-[#10264A]"
                           }`}
                         >
                           <input
                             type="checkbox"
                             checked={checked}
                             onChange={() => toggleProgramme(prog)}
-                            className="mt-0.5 accent-[#1D4ED8]"
+                            className="mt-0.5 accent-[#10264A]"
                           />
                           <span>{prog}</span>
                         </label>
@@ -473,13 +473,13 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                  <label htmlFor="inst-batchSize" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                     Estimated Student Batch Size *
                   </label>
                   <select
                     id="inst-batchSize"
                     {...register("estimatedBatchSize")}
-                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                    className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#10264A] rounded-[15px]"
                   >
                     {BATCH_SIZE_OPTIONS.map((b) => (
                       <option key={b} value={b}>{b}</option>
@@ -488,7 +488,7 @@ export function AcademicPartnershipsClient() {
                 </div>
 
                 <div>
-                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                  <label htmlFor="inst-message" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                     Message / Preferred Timeline
                   </label>
                   <textarea
@@ -496,12 +496,12 @@ export function AcademicPartnershipsClient() {
                     rows={3}
                     {...register("message")}
                     placeholder="Share preferred semester dates, student streams, or lab availability..."
-                    className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                    className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                   />
                 </div>
 
-                <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
-                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1D4ED8]" />
+                <label className="flex items-start gap-2.5 text-xs text-[#526477] cursor-pointer">
+                  <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#10264A]" />
                   <span>
                     I authorize VLEARNIN Academy to contact our institution regarding this academic
                     partnership proposal.

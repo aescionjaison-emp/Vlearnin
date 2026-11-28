@@ -70,7 +70,7 @@ export function ContactPageClient() {
 
   return (
     <div className="bg-white">
-      <section className="bg-[#1D4ED8] text-white py-14">
+      <section className="bg-[#10264A] text-white py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="type-page-title max-w-3xl">
             Start Your Learning Journey with <span className="italic">VLEARNIN</span>
@@ -86,30 +86,30 @@ export function ContactPageClient() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left Column — Verified Contact Details */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-[#F8FAFC] border border-[#E5E7EB] p-7 space-y-5 rounded-[15px]">
-                <h2 className="text-2xl font-bold text-[#1D4ED8]">{BRAND.legalName}</h2>
+              <div className="bg-[#FAF9F6] border border-[#E1E6EC] p-7 space-y-5 rounded-[15px]">
+                <h2 className="text-2xl font-bold text-[#10264A]">{BRAND.legalName}</h2>
 
-                <div className="space-y-4 text-sm text-[#111827]">
+                <div className="space-y-4 text-sm text-[#10264A]">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-[#EA580C] shrink-0 mt-0.5" />
+                    <MapPin className="w-5 h-5 text-[#C49A59] shrink-0 mt-0.5" />
                     <p>{BRAND.address}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Phone className="w-5 h-5 text-[#1D4ED8] shrink-0" />
-                    <a href={BRAND.phoneHref} className="font-semibold hover:text-[#1D4ED8]">
+                    <Phone className="w-5 h-5 text-[#10264A] shrink-0" />
+                    <a href={BRAND.phoneHref} className="font-semibold hover:text-[#10264A]">
                       {BRAND.phoneDisplay}
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-[#1D4ED8] shrink-0" />
-                    <a href={`mailto:${BRAND.email}`} className="font-semibold hover:text-[#1D4ED8]">
+                    <Mail className="w-5 h-5 text-[#10264A] shrink-0" />
+                    <a href={`mailto:${BRAND.email}`} className="font-semibold hover:text-[#10264A]">
                       {BRAND.email}
                     </a>
                   </div>
-                  <div className="flex items-start gap-3 pt-2 border-t border-[#E5E7EB]">
-                    <Clock className="w-5 h-5 text-[#EA580C] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 pt-2 border-t border-[#E1E6EC]">
+                    <Clock className="w-5 h-5 text-[#C49A59] shrink-0 mt-0.5" />
                     <div className="space-y-1">
-                      <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
+                      <p className="font-nav text-xs font-bold uppercase tracking-wider text-[#10264A]">
                         Center Timings
                       </p>
                       <p>{BRAND.timings.weekdays}</p>
@@ -125,7 +125,7 @@ export function ContactPageClient() {
                     rel="noopener noreferrer"
                     className="btn-navy px-5 py-3 text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2"
                   >
-                    <MessageCircle className="w-4 h-4 text-[#EA580C]" />
+                    <MessageCircle className="w-4 h-4 text-[#C49A59]" />
                     Chat on WhatsApp
                   </a>
                   <a
@@ -142,21 +142,21 @@ export function ContactPageClient() {
             </div>
 
             {/* Right Column — Student & Demo Inquiry Form */}
-            <div className="lg:col-span-7 bg-white border border-[#E5E7EB] p-7 sm:p-9 shadow-sm rounded-[15px]">
-              <h2 className="text-2xl font-bold text-[#1D4ED8] mb-2">
+            <div className="lg:col-span-7 bg-white border border-[#E1E6EC] p-7 sm:p-9 shadow-sm rounded-[15px]">
+              <h2 className="text-2xl font-bold text-[#10264A] mb-2">
                 Book a Free Demo Class or Request Fee Details
               </h2>
-              <p className="text-sm text-[#4B5563] mb-6">
+              <p className="text-sm text-[#526477] mb-6">
                 Fill out the form below and our academic counselor will call you back with batch
                 timings, fee structure, and brochure details.
               </p>
 
               {successRef ? (
-                <div className="p-8 bg-[#F8FAFC] border border-emerald-200 text-center space-y-3">
+                <div className="p-8 bg-[#FAF9F6] border border-emerald-200 text-center space-y-3">
                   <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                  <h3 className="text-xl font-bold text-[#1D4ED8]">Callback Request Confirmed</h3>
-                  <p className="text-sm text-[#4B5563]">
-                    Reference ID: <strong className="text-[#1D4ED8]">{successRef}</strong>. Our
+                  <h3 className="text-xl font-bold text-[#10264A]">Callback Request Confirmed</h3>
+                  <p className="text-sm text-[#526477]">
+                    Reference ID: <strong className="text-[#10264A]">{successRef}</strong>. Our
                     team will reach out shortly.
                   </p>
                 </div>
@@ -173,26 +173,26 @@ export function ContactPageClient() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                      <label htmlFor="contact-name" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                         Full Name *
                       </label>
                       <input
                         id="contact-name"
                         type="text"
                         {...register("fullName")}
-                        className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                        className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                       />
                       {errors.fullName && <p className="text-xs text-red-600 mt-1">{errors.fullName.message}</p>}
                     </div>
                     <div>
-                      <label htmlFor="contact-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                      <label htmlFor="contact-phone" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                         Phone / WhatsApp *
                       </label>
                       <input
                         id="contact-phone"
                         type="tel"
                         {...register("phone")}
-                        className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                        className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                       />
                       {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone.message}</p>}
                     </div>
@@ -200,13 +200,13 @@ export function ContactPageClient() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="contact-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                      <label htmlFor="contact-qual" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                         Current Qualification / Status *
                       </label>
                       <select
                         id="contact-qual"
                         {...register("qualification")}
-                        className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                        className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#10264A] rounded-[15px]"
                       >
                         <option value="">Select qualification</option>
                         {QUALIFICATION_OPTIONS.map((q) => (
@@ -217,13 +217,13 @@ export function ContactPageClient() {
                     </div>
 
                     <div>
-                      <label htmlFor="contact-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                      <label htmlFor="contact-batch" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                         Preferred Batch Timing
                       </label>
                       <select
                         id="contact-batch"
                         {...register("preferredBatch")}
-                        className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                        className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#10264A] rounded-[15px]"
                       >
                         {BATCH_TIMING_OPTIONS.map((b) => (
                           <option key={b} value={b}>{b}</option>
@@ -233,13 +233,13 @@ export function ContactPageClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="contact-programme" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Course or Combo Interested In
                     </label>
                     <select
                       id="contact-programme"
                       {...register("interestedProgramme")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     >
                       {ALL_COURSE_COMBO_OPTIONS.map((opt) => (
                         <option key={opt} value={opt}>{opt}</option>
@@ -248,20 +248,20 @@ export function ContactPageClient() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#1D4ED8] mb-1">
+                    <label htmlFor="contact-email" className="block text-xs font-nav font-semibold uppercase tracking-wider text-[#10264A] mb-1">
                       Email (Optional)
                     </label>
                     <input
                       id="contact-email"
                       type="email"
                       {...register("email")}
-                      className="w-full border border-[#E5E7EB] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                      className="w-full border border-[#E1E6EC] px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#10264A] rounded-[15px]"
                     />
                     {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email.message}</p>}
                   </div>
 
-                  <label className="flex items-start gap-2.5 text-xs text-[#4B5563] cursor-pointer">
-                    <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#1D4ED8]" />
+                  <label className="flex items-start gap-2.5 text-xs text-[#526477] cursor-pointer">
+                    <input type="checkbox" {...register("consent")} className="mt-0.5 accent-[#10264A]" />
                     <span>
                       I consent to VLEARNIN Academy contacting me regarding my enquiry, demo session,
                       and fee details.
@@ -283,7 +283,7 @@ export function ContactPageClient() {
           </div>
 
           {/* Google Map Embed using Verified Business Location */}
-          <div className="border border-[#E5E7EB] overflow-hidden h-[360px] bg-[#F8FAFC] rounded-[15px]">
+          <div className="border border-[#E1E6EC] overflow-hidden h-[360px] bg-[#FAF9F6] rounded-[15px]">
             <iframe
               title="VLEARNIN Academy Rajajinagar Bengaluru Location Map"
               src={`https://maps.google.com/maps?q=${mapsQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}

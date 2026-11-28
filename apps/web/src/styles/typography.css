@@ -1,54 +1,50 @@
 /* ==========================================================================
-   VLEARNIN Custom Academic & Editorial Typography Design System
-   80% Manrope (Primary Professional) + 20% Instrument Serif (Editorial Display)
+   VLEARNIN Professional Academic Typography Design System
+   Primary Heading Font: Manrope (800/700)
+   Secondary Body & UI Font: DM Sans (400/500/600)
    ========================================================================== */
 
 :root {
-  --font-primary: var(--font-manrope), Arial, sans-serif;
-  --font-editorial: var(--font-manrope), Arial, sans-serif;
-  --font-secondary: var(--font-primary);
-  --font-heading: var(--font-primary);
-  --font-body: var(--font-primary);
-  --font-navigation: var(--font-primary);
-  --font-button: var(--font-primary);
+  --font-primary: var(--font-heading), Arial, sans-serif;
+  --font-secondary: var(--font-body), Arial, sans-serif;
+  --font-editorial: var(--font-primary);
+  --font-navigation: var(--font-secondary);
+  --font-button: var(--font-secondary);
 
-  /* Semantic Fluid Type Scale (360px Mobile -> 1920px Desktop) */
-  --text-display: clamp(2.75rem, 5.2vw, 4.75rem);      /* 44px -> 76px */
-  --text-page-title: clamp(2.35rem, 4.2vw, 3.75rem);   /* 37.6px -> 60px */
-  --text-editorial: clamp(2.15rem, 3.6vw, 3.25rem);    /* 34.4px -> 52px */
+  /* Fluid Typography Scale (360px Mobile -> 1920px Desktop) */
+  --type-hero: clamp(2.125rem, 4.7vw, 4.25rem);        /* 34px -> 68px */
+  --type-h1: clamp(2rem, 4.2vw, 3.75rem);             /* 32px -> 60px */
+  --type-h2: clamp(1.75rem, 3.2vw, 2.75rem);          /* 28px -> 44px */
+  --type-h3: clamp(1.375rem, 2.2vw, 2rem);            /* 22px -> 32px */
+  --type-card-title: clamp(1.25rem, 1.8vw, 1.625rem); /* 20px -> 26px */
 
-  --text-h2: clamp(1.75rem, 2.8vw, 2.75rem);           /* 28px -> 44px */
-  --text-h3: clamp(1.375rem, 1.8vw, 1.625rem);         /* 22px -> 26px */
-  --text-h4: clamp(1.125rem, 1.4vw, 1.375rem);         /* 18px -> 22px */
+  --type-body: 1rem;                                  /* 16px */
+  --type-body-large: clamp(1rem, 1.15vw, 1.125rem);   /* 16px -> 18px */
+  --type-small: 0.875rem;                             /* 14px */
+  --type-caption: 0.8125rem;                          /* 13px */
+  --type-eyebrow: 0.75rem;                            /* 12px */
 
-  --text-body-large: clamp(1rem, 1.25vw, 1.125rem);    /* 16px -> 18px */
-  --text-body: 1rem;                                   /* 16px */
-  --text-small: 0.875rem;                              /* 14px */
-  --text-caption: 0.8125rem;                           /* 13px */
-  --text-eyebrow: 0.75rem;                             /* 12px */
+  --heading-weight: 800;
+  --subheading-weight: 700;
+  --body-weight: 400;
 
-  --leading-display: 1.03;
-  --leading-editorial: 1.08;
-  --leading-heading: 1.18;
+  --leading-hero: 1.06;
+  --leading-heading: 1.15;
   --leading-body: 1.7;
 
-  --tracking-display: -0.025em;
-  --tracking-heading: -0.04em;
-  --tracking-body: -0.01em;
+  --tracking-hero: -0.045em;
+  --tracking-heading: -0.035em;
+  --tracking-body: -0.005em;
   --tracking-eyebrow: 0.14em;
-
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
 }
 
 body {
-  font-family: var(--font-primary);
-  font-size: var(--text-body);
-  font-weight: var(--weight-regular);
+  font-family: var(--font-secondary);
+  font-size: var(--type-body);
+  font-weight: var(--body-weight);
   line-height: var(--leading-body);
   letter-spacing: var(--tracking-body);
+  color: var(--text-secondary, #526477);
   font-synthesis-weight: none;
 }
 
@@ -64,76 +60,75 @@ p {
 /* Semantic Typography Classes */
 .type-display {
   font-family: var(--font-primary);
-  font-size: clamp(2.25rem, 4vw, 3.5rem);
-  font-weight: var(--weight-bold);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  font-size: var(--type-hero);
+  font-weight: var(--heading-weight);
+  line-height: var(--leading-hero);
+  letter-spacing: var(--tracking-hero);
   text-wrap: balance;
 }
 
 .type-editorial {
   font-family: var(--font-primary);
-  font-size: clamp(1.875rem, 3vw, 2.75rem);
-  font-weight: var(--weight-semibold);
-  line-height: 1.15;
+  font-size: var(--type-h2);
+  font-weight: var(--heading-weight);
+  line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
   text-wrap: balance;
 }
 
 .type-page-title {
   font-family: var(--font-primary);
-  font-size: clamp(2rem, 3.6vw, 3.125rem);
-  font-weight: var(--weight-bold);
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  font-size: var(--type-h1);
+  font-weight: var(--heading-weight);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .type-section-heading {
   font-family: var(--font-primary);
-  font-size: var(--text-h2);
-  font-weight: var(--weight-semibold);
+  font-size: var(--type-h2);
+  font-weight: var(--heading-weight);
   line-height: var(--leading-heading);
-  letter-spacing: var(--tracking-heading);
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .type-card-title {
   font-family: var(--font-primary);
-  font-size: var(--text-h3);
-  font-weight: var(--weight-bold);
-  line-height: 1.32;
-  letter-spacing: -0.03em;
+  font-size: var(--type-card-title);
+  font-weight: var(--subheading-weight);
+  line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
 .type-body-large {
-  font-family: var(--font-primary);
-  font-size: var(--text-body-large);
-  font-weight: var(--weight-regular);
+  font-family: var(--font-secondary);
+  font-size: var(--type-body-large);
+  font-weight: var(--body-weight);
   line-height: var(--leading-body);
   letter-spacing: var(--tracking-body);
 }
 
 .type-body {
-  font-family: var(--font-primary);
-  font-size: var(--text-body);
-  font-weight: var(--weight-regular);
+  font-family: var(--font-secondary);
+  font-size: var(--type-body);
+  font-weight: var(--body-weight);
   line-height: var(--leading-body);
   letter-spacing: var(--tracking-body);
 }
 
 .type-caption {
-  font-family: var(--font-primary);
-  font-size: var(--text-caption);
-  font-weight: var(--weight-medium);
+  font-family: var(--font-secondary);
+  font-size: var(--type-caption);
+  font-weight: 500;
   line-height: 1.5;
-  letter-spacing: -0.005em;
 }
 
 .type-eyebrow {
   font-family: var(--font-primary);
-  font-size: var(--text-eyebrow);
-  font-weight: var(--weight-bold);
+  font-size: var(--type-eyebrow);
+  font-weight: var(--heading-weight);
   line-height: 1.2;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
@@ -141,57 +136,57 @@ p {
 
 .type-statistic {
   font-family: var(--font-primary);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: var(--weight-bold);
+  font-size: clamp(2.25rem, 3.6vw, 3rem);
+  font-weight: var(--heading-weight);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .type-navigation {
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-size: 0.9375rem; /* 15px */
-  font-weight: var(--weight-semibold);
+  font-weight: 600;
   line-height: 1.5;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
-/* Legacy-mapped semantic aliases preserved for motion & layout classes */
+/* Semantic Layout & Component Aliases */
 .mc-eyebrow {
   font-family: var(--font-primary);
-  font-size: var(--text-eyebrow);
-  font-weight: var(--weight-bold);
+  font-size: var(--type-eyebrow);
+  font-weight: var(--heading-weight);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   line-height: 1.2;
 }
 
 .mc-lead {
-  font-family: var(--font-primary);
-  font-size: var(--text-body-large);
-  font-weight: var(--weight-regular);
-  line-height: 1.65;
+  font-family: var(--font-secondary);
+  font-size: var(--type-body-large);
+  font-weight: var(--body-weight);
+  line-height: 1.68;
   letter-spacing: var(--tracking-body);
 }
 
 .mc-counter {
   font-family: var(--font-primary);
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: var(--weight-bold);
+  font-size: clamp(2.25rem, 3.6vw, 3rem);
+  font-weight: var(--heading-weight);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .mc-footer-heading {
   font-family: var(--font-primary);
-  font-size: 1.125rem;
-  font-weight: var(--weight-bold);
+  font-size: 1.0625rem;
+  font-weight: var(--subheading-weight);
   line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
 .mc-footer-link {
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-size: 0.9375rem;
-  font-weight: var(--weight-medium);
-  line-height: 1.55;
+  font-weight: 500;
+  line-height: 1.6;
 }

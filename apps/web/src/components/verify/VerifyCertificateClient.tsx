@@ -91,7 +91,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
   return (
     <div className="bg-white min-h-[70vh]">
-      <section className="bg-[#1D4ED8] text-white py-14">
+      <section className="bg-[#10264A] text-white py-14">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="type-page-title">
             Verify a <span className="italic">VLEARNIN Certificate</span>
@@ -106,17 +106,17 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <form
             onSubmit={handleVerify}
-            className="bg-[#F8FAFC] border border-[#E5E7EB] p-6 sm:p-8 space-y-4 shadow-xs rounded-[15px]"
+            className="bg-[#FAF9F6] border border-[#E1E6EC] p-6 sm:p-8 space-y-4 shadow-xs rounded-[15px]"
           >
             <label
               htmlFor="certificate-id-input"
-              className="block font-nav text-xs font-bold uppercase tracking-wider text-[#1D4ED8]"
+              className="block font-nav text-xs font-bold uppercase tracking-wider text-[#10264A]"
             >
               Enter Certificate ID
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Search className="w-4 h-4 text-[#4B5563] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-[#526477] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   id="certificate-id-input"
                   type="text"
@@ -124,7 +124,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                   onChange={(e) => setCertInput(e.target.value)}
                   placeholder="Example: VLN-2026-XXXX"
                   required
-                  className="w-full bg-white border border-[#E5E7EB] pl-10 pr-4 py-3 text-sm uppercase tracking-wider focus:outline-none focus:border-[#1D4ED8] rounded-[15px]"
+                  className="w-full bg-white border border-[#E1E6EC] pl-10 pr-4 py-3 text-sm uppercase tracking-wider focus:outline-none focus:border-[#10264A] rounded-[15px]"
                 />
               </div>
               <button
@@ -136,7 +136,7 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                 {loading ? "Verifying..." : "Verify Credential"}
               </button>
             </div>
-            <p className="text-xs text-[#4B5563]">
+            <p className="text-xs text-[#526477]">
               Public verification displays only credential status and programme completion details.
               Private learner records are never exposed.
             </p>
@@ -151,13 +151,13 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
           {result?.status === "VALID" && result.certificate && (
             <div className="border-2 border-emerald-600 bg-white p-7 shadow-md space-y-5 rounded-[15px]">
-              <div className="flex items-center gap-3 pb-4 border-b border-[#E5E7EB]">
+              <div className="flex items-center gap-3 pb-4 border-b border-[#E1E6EC]">
                 <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0" />
                 <div>
                   <span className="font-nav text-xs font-bold uppercase tracking-widest text-emerald-700">
                     Status: Verified Authentic Credential
                   </span>
-                  <h2 className="text-2xl font-bold text-[#1D4ED8] mt-0.5">
+                  <h2 className="text-2xl font-bold text-[#10264A] mt-0.5">
                     {result.certificate.recipientName}
                   </h2>
                 </div>
@@ -165,41 +165,41 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
 
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Certificate ID
                   </dt>
-                  <dd className="font-bold text-[#1D4ED8] mt-0.5">
+                  <dd className="font-bold text-[#10264A] mt-0.5">
                     {result.certificate.certificateId}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Programme Completed
                   </dt>
-                  <dd className="font-bold text-[#1D4ED8] mt-0.5">
+                  <dd className="font-bold text-[#10264A] mt-0.5">
                     {result.certificate.programmeTitle}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Programme Duration
                   </dt>
-                  <dd className="text-[#111827] mt-0.5">{result.certificate.programmeDuration}</dd>
+                  <dd className="text-[#10264A] mt-0.5">{result.certificate.programmeDuration}</dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Capstone / Grade
                   </dt>
-                  <dd className="text-[#111827] mt-0.5">
+                  <dd className="text-[#10264A] mt-0.5">
                     {result.certificate.capstoneStatus}
                     {result.certificate.grade ? ` • ${result.certificate.grade}` : ""}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Issue Date
                   </dt>
-                  <dd className="text-[#111827] mt-0.5">
+                  <dd className="text-[#10264A] mt-0.5">
                     {result.certificate.issueDate
                       ? new Date(result.certificate.issueDate).toLocaleDateString("en-IN", {
                           year: "numeric",
@@ -210,11 +210,11 @@ export function VerifyCertificateClient({ initialTokenOrId }: { initialTokenOrId
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-nav text-xs uppercase tracking-wider text-[#4B5563]">
+                  <dt className="font-nav text-xs uppercase tracking-wider text-[#526477]">
                     Issuing Authority
                   </dt>
-                  <dd className="text-[#111827] mt-0.5 flex items-center gap-1.5">
-                    <Award className="w-4 h-4 text-[#EA580C]" />
+                  <dd className="text-[#10264A] mt-0.5 flex items-center gap-1.5">
+                    <Award className="w-4 h-4 text-[#C49A59]" />
                     <span>{result.certificate.issuingAuthority}</span>
                   </dd>
                 </div>

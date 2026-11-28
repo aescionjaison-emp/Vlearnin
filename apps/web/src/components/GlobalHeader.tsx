@@ -90,8 +90,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E5E7EB] shadow-xs">
-      {/* Desktop Two-Level JAIN-Inspired Institutional Header */}
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-[#E1E6EC] shadow-xs">
+      {/* Desktop Two-Level Institutional Header */}
       <div className="hidden xl:flex max-w-[1440px] mx-auto items-stretch">
         {/* Left Brand Logo Block */}
         <div className="bg-white pl-8 pr-6 py-3 flex items-center shrink-0 z-20">
@@ -102,9 +102,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
 
         {/* Right Two-Tier Navigation Stack */}
         <div className="flex-1 flex flex-col min-w-0">
-          {/* Tier 1: Diagonal-Slanted Deep Blue Utility Bar */}
-          <div className="relative bg-[#1D4ED8] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
-            {/* Diagonal white slant matching JAIN header */}
+          {/* Tier 1: Institutional Navy Utility Bar (#17324D) */}
+          <div className="relative bg-[#17324D] text-white h-10 flex items-center justify-between pl-10 pr-8 text-[13px] font-nav">
             <div
               aria-hidden="true"
               className="absolute left-0 top-0 bottom-0 w-7 bg-white"
@@ -113,45 +112,45 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
 
             <div className="flex items-center gap-4 text-white/90">
               <span className="inline-flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#93C5FD]" />
+                <MapPin className="w-3.5 h-3.5 text-[#C49A59]" />
                 <span>{BRAND.shortLocation}</span>
               </span>
               <span className="text-white/30">|</span>
               <a
                 href={BRAND.phoneHref}
-                className="inline-flex items-center gap-1.5 hover:text-[#93C5FD] transition-colors font-medium"
+                className="inline-flex items-center gap-1.5 hover:text-[#C49A59] transition-colors font-medium"
               >
-                <Phone className="w-3.5 h-3.5 text-[#93C5FD]" />
+                <Phone className="w-3.5 h-3.5 text-[#C49A59]" />
                 <span>{BRAND.phoneDisplay}</span>
               </a>
             </div>
 
             <nav aria-label="Institutional Utility Links" className="flex items-center gap-4 text-white/90">
-              <Link href="/contact" className="hover:text-[#93C5FD] transition-colors">
+              <Link href="/contact" className="hover:text-[#C49A59] transition-colors">
                 Student Enquiries
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/academic-partnerships"
-                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#C49A59] transition-colors inline-flex items-center gap-1"
               >
-                <Building2 className="w-3.5 h-3.5 text-[#93C5FD]" />
+                <Building2 className="w-3.5 h-3.5 text-[#C49A59]" />
                 <span>Academic Partnerships</span>
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/verify-certificate"
-                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#C49A59] transition-colors inline-flex items-center gap-1"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#93C5FD]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#C49A59]" />
                 <span>Verify Certificate</span>
               </Link>
               <span className="text-white/25">|</span>
               <Link
                 href="/hire-from-vlearnin"
-                className="hover:text-[#93C5FD] transition-colors inline-flex items-center gap-1"
+                className="hover:text-[#C49A59] transition-colors inline-flex items-center gap-1"
               >
-                <Briefcase className="w-3.5 h-3.5 text-[#93C5FD]" />
+                <Briefcase className="w-3.5 h-3.5 text-[#C49A59]" />
                 <span>Hire From VLEARNIN</span>
               </Link>
             </nav>
@@ -164,7 +163,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                 href="/"
                 aria-label="Home"
                 className={`p-1.5 transition-colors ${
-                  pathname === "/" ? "text-[#1D4ED8]" : "text-[#111827] hover:text-[#1D4ED8]"
+                  pathname === "/" ? "text-[#2463A6]" : "text-[#10264A] hover:text-[#2463A6]"
                 }`}
               >
                 <Home className="w-4 h-4" />
@@ -187,7 +186,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                         aria-expanded={megaOpen}
                         aria-haspopup="true"
                         className={`type-navigation py-2 inline-flex items-center gap-1 transition-colors relative cursor-pointer ${
-                          isActive ? "text-[#1D4ED8] font-bold" : "text-[#111827] hover:text-[#1D4ED8]"
+                          isActive ? "text-[#2463A6] font-bold" : "text-[#10264A] hover:text-[#2463A6]"
                         }`}
                       >
                         <span>{item.label}</span>
@@ -197,7 +196,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                           }`}
                         />
                         {isActive && (
-                          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#1D4ED8]" />
+                          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2463A6]" />
                         )}
                       </button>
                     </div>
@@ -209,7 +208,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                     key={item.href}
                     href={item.href}
                     className={`mc-underline-link type-navigation py-2 transition-colors duration-300 relative whitespace-nowrap ${
-                      isActive ? "text-[#1D4ED8] font-bold" : "text-[#111827] hover:text-[#1D4ED8]"
+                      isActive ? "text-[#2463A6] font-bold" : "text-[#10264A] hover:text-[#2463A6]"
                     }`}
                   >
                     {item.label}
@@ -221,7 +220,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
             <button
               type="button"
               onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-              className="btn-primary-amber px-5 py-2.5 text-[13px] uppercase tracking-wider shrink-0 cursor-pointer"
+              className="btn-primary-amber px-5 py-2.5 text-[13px] tracking-wide shrink-0 cursor-pointer"
             >
               Book Free Demo
             </button>
@@ -231,9 +230,9 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
 
       {/* Tablet & Mobile Header */}
       <div className="xl:hidden">
-        <div className="bg-[#1D4ED8] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
+        <div className="bg-[#17324D] text-white px-4 py-1.5 flex items-center justify-between text-xs font-nav">
           <span>{BRAND.shortLocation}</span>
-          <a href={BRAND.phoneHref} className="font-semibold text-[#93C5FD]">
+          <a href={BRAND.phoneHref} className="font-semibold text-[#C49A59]">
             {BRAND.phoneDisplay}
           </a>
         </div>
@@ -246,14 +245,14 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
             <button
               type="button"
               onClick={() => openDemoModal({ sourcePage: pathname || "/" })}
-              className="btn-primary-amber hidden sm:inline-flex px-4 py-2 text-xs uppercase tracking-wider"
+              className="btn-primary-amber hidden sm:inline-flex px-4 py-2 text-xs tracking-wide"
             >
               Book Free Demo
             </button>
             <Link
               href="/verify-certificate"
               aria-label="Verify Certificate"
-              className="p-2 border border-[#E5E7EB] text-[#1D4ED8] rounded-[15px]"
+              className="p-2 border border-[#E1E6EC] text-[#10264A] rounded-[6px]"
             >
               <ShieldCheck className="w-5 h-5" />
             </Link>
@@ -262,7 +261,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               onClick={() => setMobileOpen((prev) => !prev)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="p-2 border border-[#E5E7EB] text-[#1D4ED8] rounded-[15px]"
+              className="p-2 border border-[#E1E6EC] text-[#10264A] rounded-[6px]"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -280,7 +279,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
             onMouseEnter={handleMegaEnter}
             onMouseLeave={handleMegaLeave}
-            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E5E7EB] border-b-4 border-b-[#1D4ED8] shadow-2xl z-50"
+            className="hidden xl:block absolute left-0 right-0 bg-white border-t border-[#E1E6EC] border-b-2 border-b-[#2463A6] shadow-2xl z-50"
           >
           <div className="max-w-[1440px] mx-auto px-10 py-8">
             <div className="grid grid-cols-3 gap-8">
@@ -292,7 +291,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                   transition={{ duration: 0.28, delay: 0.06 + colIdx * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   className="space-y-4"
                 >
-                  <div className="group/mega relative h-32 w-full overflow-hidden border border-[#E5E7EB] rounded-[15px]">
+                  <div className="group/mega relative h-32 w-full overflow-hidden border border-[#E1E6EC] rounded-[10px]">
                     <Image
                       src={col.image}
                       alt={col.title}
@@ -300,8 +299,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                       className="object-cover transition-transform duration-500 ease-out group-hover/mega:scale-108"
                       sizes="400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1D4ED8]/90 via-[#1D4ED8]/30 to-transparent flex items-end p-3.5">
-                      <span className="font-nav text-xs font-bold uppercase tracking-wider text-white">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#10264A]/85 via-[#10264A]/25 to-transparent flex items-end p-3.5">
+                      <span className="font-heading text-xs font-bold uppercase tracking-wider text-white">
                         {col.title}
                       </span>
                     </div>
@@ -317,10 +316,10 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                         <Link
                           href={`/courses/${course.slug}`}
                           onClick={() => setMegaOpen(false)}
-                          className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#111827] hover:text-[#1D4ED8] transition-colors"
+                          className="group flex items-start justify-between gap-2 py-1 text-[15px] text-[#526477] hover:text-[#2463A6] transition-colors"
                         >
                           <span className="font-medium leading-snug group-hover:translate-x-1 transition-transform duration-200">{course.title}</span>
-                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#EA580C] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+                          <ArrowRight className="w-4 h-4 shrink-0 mt-1 text-[#2463A6] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
                         </Link>
                       </motion.li>
                     ))}
@@ -329,8 +328,8 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               ))}
             </div>
 
-            <div className="mt-6 pt-5 border-t border-[#E5E7EB] flex items-center justify-between">
-              <p className="text-sm text-[#4B5563]">
+            <div className="mt-6 pt-5 border-t border-[#E1E6EC] flex items-center justify-between">
+              <p className="text-sm text-[#526477]">
                 All 7 standalone certifications run 30 hours (5 modules × 6 hours) with live capstone evaluation.
               </p>
               <div className="flex items-center gap-3">
@@ -340,14 +339,14 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                     setMegaOpen(false);
                     openDemoModal({ sourcePage: "mega-menu" });
                   }}
-                  className="btn-primary-amber px-5 py-2 text-xs uppercase tracking-wider cursor-pointer"
+                  className="btn-primary-amber px-5 py-2 text-xs tracking-wide cursor-pointer"
                 >
                   Book Free Demo
                 </button>
                 <Link
                   href="/courses"
                   onClick={() => setMegaOpen(false)}
-                  className="btn-navy px-5 py-2 text-xs uppercase tracking-wider inline-flex items-center gap-2"
+                  className="btn-navy px-5 py-2 text-xs tracking-wide inline-flex items-center gap-2"
                 >
                   Explore All Programmes
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -361,11 +360,11 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
 
       {/* Mobile Navigation Drawer with Expandable Programme Categories */}
       {mobileOpen && (
-        <div className="xl:hidden bg-white border-b border-[#E5E7EB] max-h-[82vh] overflow-y-auto">
+        <div className="xl:hidden bg-white border-b border-[#E1E6EC] max-h-[82vh] overflow-y-auto">
           <nav aria-label="Mobile Navigation" className="px-4 py-4 space-y-1">
             <Link
               href="/"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#10264A] hover:bg-[#FAF9F6]"
             >
               Home
             </Link>
@@ -374,7 +373,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               type="button"
               onClick={() => setMobileProgOpen((v) => !v)}
               aria-expanded={mobileProgOpen}
-              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#1D4ED8] bg-[#F8FAFC]"
+              className="w-full flex items-center justify-between px-3 py-2.5 font-nav text-sm font-semibold text-[#10264A] bg-[#FAF9F6]"
             >
               <span>Programmes (7 Courses)</span>
               <ChevronDown
@@ -382,17 +381,17 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               />
             </button>
             {mobileProgOpen && (
-              <div className="pl-4 py-2 space-y-3 border-l-2 border-[#1D4ED8] ml-3">
+              <div className="pl-4 py-2 space-y-3 border-l-2 border-[#2463A6] ml-3">
                 {MEGA_COLUMNS.map((col) => (
                   <div key={col.categorySlug} className="space-y-1">
-                    <p className="font-nav text-[11px] font-bold uppercase tracking-wider text-[#1D4ED8]">
+                    <p className="font-heading text-[11px] font-extrabold uppercase tracking-wider text-[#10264A]">
                       {col.title}
                     </p>
                     {col.courses.map((c) => (
                       <Link
                         key={c.slug}
                         href={`/courses/${c.slug}`}
-                        className="block py-1 text-sm text-[#111827]"
+                        className="block py-1 text-sm text-[#526477] hover:text-[#2463A6]"
                       >
                         {c.title}
                       </Link>
@@ -401,7 +400,7 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
                 ))}
                 <Link
                   href="/courses"
-                  className="inline-block font-nav text-xs font-bold text-[#EA580C] uppercase pt-1"
+                  className="inline-block font-nav text-xs font-bold text-[#2463A6] uppercase pt-1"
                 >
                   View All Programmes →
                 </Link>
@@ -412,25 +411,25 @@ export function GlobalHeader({ forceShow = false }: { forceShow?: boolean }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
+                className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#10264A] hover:bg-[#FAF9F6]"
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/verify-certificate"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#10264A] hover:bg-[#FAF9F6]"
             >
               Verify Certificate
             </Link>
             <Link
               href="/hire-from-vlearnin"
-              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#111827] hover:bg-[#F8FAFC]"
+              className="block px-3 py-2.5 font-nav text-sm font-semibold text-[#10264A] hover:bg-[#FAF9F6]"
             >
               Hire From VLEARNIN
             </Link>
 
-            <div className="pt-3 border-t border-[#E5E7EB] flex flex-col gap-2">
+            <div className="pt-3 border-t border-[#E1E6EC] flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, DM_Sans } from "next/font/google";
 import { BRAND } from "@vlearnin/shared";
 import { LeadModalProvider } from "@/components/LeadModalProvider";
 import { GlobalHeader } from "@/components/GlobalHeader";
@@ -13,7 +13,14 @@ import "./globals.css";
 const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-manrope",
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
   display: "swap",
 });
 
@@ -69,9 +76,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={manrope.variable}
+      className={`${manrope.variable} ${dmSans.variable}`}
     >
-      <body className="min-h-screen flex flex-col bg-white text-[#111827]">
+      <body className="min-h-screen flex flex-col bg-white text-[#10264A]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}

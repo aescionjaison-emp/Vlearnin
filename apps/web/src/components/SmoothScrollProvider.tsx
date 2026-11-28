@@ -103,7 +103,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       >
         <div
           ref={progressRef}
-          className="h-full w-full origin-left bg-gradient-to-r from-[#1D4ED8] via-[#3B82F6] to-[#EA580C] scale-x-0"
+          className="h-full w-full origin-left bg-gradient-to-r from-[#10264A] via-[#2463A6] to-[#C49A59] scale-x-0"
         />
       </div>
       {children}
