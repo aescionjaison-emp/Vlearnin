@@ -3,7 +3,20 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, MapPin, MessageCircle, Phone, Clock, Calendar } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, Calendar } from "lucide-react";
+
+function WhatsAppGlyph({ className = "w-7 h-7" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M16.004 3.2C8.944 3.2 3.2 8.942 3.2 16c0 2.256.59 4.458 1.71 6.4L3.09 29.04l6.8-1.784A12.76 12.76 0 0 0 16.004 28.8C23.06 28.8 28.8 23.058 28.8 16c0-7.058-5.74-12.8-12.796-12.8Zm0 23.434a10.6 10.6 0 0 1-5.402-1.476l-.388-.23-4.036 1.058 1.078-3.936-.252-.404a10.58 10.58 0 0 1-1.628-5.646c0-5.862 4.77-10.632 10.632-10.632 5.86 0 10.63 4.77 10.63 10.632 0 5.864-4.77 10.634-10.634 10.634Zm5.834-7.964c-.32-.16-1.894-.934-2.188-1.04-.294-.108-.508-.16-.72.16-.214.32-.826 1.04-1.014 1.254-.186.214-.374.24-.694.08-.32-.16-1.35-.498-2.572-1.586-.95-.848-1.592-1.894-1.778-2.214-.186-.32-.02-.494.14-.654.144-.144.32-.374.48-.56.16-.186.214-.32.32-.534.108-.214.054-.4-.026-.56-.08-.16-.72-1.734-.988-2.374-.26-.624-.524-.54-.72-.55-.186-.01-.4-.01-.614-.01-.214 0-.56.08-.854.4-.294.32-1.12 1.094-1.12 2.668 0 1.574 1.146 3.094 1.306 3.308.16.214 2.256 3.444 5.464 4.83.764.33 1.36.526 1.824.674.766.244 1.464.21 2.014.128.614-.092 1.894-.774 2.16-1.522.268-.748.268-1.388.188-1.522-.08-.134-.294-.214-.614-.374Z" />
+    </svg>
+  );
+}
 import { BRAND, buildWhatsAppUrl } from "@vlearnin/shared";
 import { VlearninLogo } from "./VlearninLogo";
 import { useLeadModal } from "./LeadModalProvider";
@@ -205,10 +218,10 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with VLEARNIN on WhatsApp"
-        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 items-center gap-2 bg-[#10264A] text-white border border-[#17324D] px-4 py-2.5 shadow-lg hover:bg-[#17324D] transition-colors font-nav text-xs font-semibold tracking-wide rounded-[6px]"
+        title="Chat on WhatsApp"
+        className="hidden md:inline-flex fixed bottom-6 right-6 z-40 w-14 h-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_28px_rgba(37,211,102,0.38)] hover:bg-[#20BD5A] hover:scale-105 active:scale-95 transition-all duration-200"
       >
-        <MessageCircle className="w-4 h-4 text-[#C49A59]" />
-        <span>WhatsApp Us</span>
+        <WhatsAppGlyph className="w-8 h-8" />
       </a>
 
       <div
@@ -229,7 +242,7 @@ export function GlobalFooter({ forceShow = false }: { forceShow?: boolean }) {
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-2.5 text-[11px] font-nav font-semibold hover:bg-white/10"
         >
-          <MessageCircle className="w-4 h-4 text-[#C49A59] mb-0.5" />
+          <WhatsAppGlyph className="w-4 h-4 text-[#25D366] mb-0.5" />
           <span>WhatsApp Us</span>
         </a>
         <button
